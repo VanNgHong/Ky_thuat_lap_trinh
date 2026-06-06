@@ -54,8 +54,8 @@ void showWelcomeBanner() {
     clearScreen();
     std::cout << Color::CYAN << Color::BOLD;
     printLine('=');
-    printCentered("HE THONG THI TRAC NGHIEM C++");
-    printCentered("Nhom 8  |  Mon: Cau Truc Du Lieu");
+    printCentered("HE THONG THI TRAC NGHIEM");
+    printCentered("Mon Tieng Anh");
     printLine('=');
     std::cout << Color::RESET << "\n";
 }
@@ -301,10 +301,10 @@ void showStudentMenu(LoginSession& session) {
                 int timeSec = getValidInt("  Thoi gian lam bai (phut)", 1, 120) * 60;
 
                 std::cout << Color::YELLOW
-                          << "\n  San sang lam bai " << numQ << " cau, thoi gian "
-                          << timeSec / 60 << " phut.\n" << Color::RESET;
+                          << "\n  San sang lam bai? (" << numQ << " cau hoi, thoi gian "
+                          << timeSec / 60 << " phut).\n" << Color::RESET;
 
-                if (getYesNo("  Bat dau thi ngay?")) {
+                if (getYesNo("  Bat dau lam bai?")) {
                     // Khởi tạo engine và chạy bài thi
                     ExamEngine engine(qBank, session.username, numQ, timeSec);
                     TestRecord record = engine.run();
@@ -342,7 +342,7 @@ void showStudentMenu(LoginSession& session) {
             }
             case 2: {
                 clearScreen();
-                std::cout << Color::BOLD << "\n  KET QUA CUA TOI  |  " 
+                std::cout << Color::BOLD << "\n  KET QUA BAI LAM  |  " 
                           << session.username << ":\n" << Color::RESET;
                 printLine('-');
                 histMgr.loadFromFile("data/history.txt");

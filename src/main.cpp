@@ -44,8 +44,7 @@ int main() {
     clearScreen();
     std::cout << Color::CYAN << Color::BOLD;
     printLine('=');
-    printCentered("Cam on ban da su dung he thong!");
-    printCentered("Nhom 8  |  Chuc ban hoc tot!");
+    printCentered("Chuc mung ban hoan thanh bai kiem tra!");
     printLine('=');
     std::cout << Color::RESET << "\n";
 
