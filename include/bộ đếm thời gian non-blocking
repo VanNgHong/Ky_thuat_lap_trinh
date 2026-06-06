@@ -1,0 +1,29 @@
+PROCEDURE RunTimedQuestion(question, timeLimit):
+    startTime  ← time(0)
+    inputBuf   ← ""
+    timedOut   ← FALSE
+
+    DisplayQuestion(question)
+
+    LOOP:
+        elapsed ← time(0) - startTime
+        remaining ← timeLimit - elapsed
+
+        // Ghi đè dòng timer bằng \r (carriage return)
+        Print("\r  Thời gian còn lại: " + remaining + "s   ")
+
+        IF elapsed >= timeLimit THEN
+            timedOut ← TRUE
+            BREAK
+            END IF
+
+        IF KeyAvailable() THEN         // kbhit() / select() — non-blocking
+            ch ← ReadChar()
+            IF ch == ENTER THEN BREAK  // người dùng xác nhận
+            ELSE Append(inputBuf, ch)
+        END IF
+
+        Sleep(100ms)                      // tránh busy-wait, giảm CPU
+    END LOOP
+
+    RETURN { answer: inputBuf, timedOut: timedOut }
