@@ -1,0 +1,52 @@
+\babel@toc {vietnamese}{}\relax 
+\contentsline {chapter}{Lời mở đầu}{1}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Giới thiệu}{1}{chapter*.3}%
+\contentsline {section}{\numberline {1.1}Mô tả bài toán}{1}{section*.4}%
+\contentsline {section}{\numberline {1.2}Mục tiêu của chương trình}{1}{section*.5}%
+\contentsline {section}{\numberline {1.3}Phạm vi thực hiện}{1}{section*.6}%
+\contentsline {section}{\numberline {1.4}Công nghệ và ngôn ngữ lập trình sử dụng}{1}{section*.7}%
+\contentsline {section}{\numberline {1.5}Phân công công việc}{1}{section*.8}%
+\contentsline {subsection}{\numberline {1.5.1}Thành viên thực hiện}{1}{subsection*.9}%
+\contentsline {subsection}{\numberline {1.5.2}Nội dung phân công}{1}{subsection*.10}%
+\contentsline {chapter}{\numberline {2}Phân tích Yêu cầu hệ thống}{2}{chapter*.11}%
+\contentsline {section}{\numberline {2.1}Khảo sát bài toán}{2}{section*.12}%
+\contentsline {section}{\numberline {2.2}Yêu cầu chức năng}{2}{section*.13}%
+\contentsline {subsection}{\numberline {2.2.1}Đăng nhập hệ thống}{2}{subsection*.14}%
+\contentsline {subsection}{\numberline {2.2.2}Tổ chức thi trắc nghiệm}{2}{subsection*.15}%
+\contentsline {subsection}{\numberline {2.2.3}Chẩm điểm tự động}{2}{subsection*.16}%
+\contentsline {subsection}{\numberline {2.2.4}Lưu lịch sử thi}{2}{subsection*.17}%
+\contentsline {subsection}{\numberline {2.2.5}Thống kê và báo cáo kết quả}{2}{subsection*.18}%
+\contentsline {section}{\numberline {2.3}Yêu cầu phi chức năng}{2}{section*.19}%
+\contentsline {section}{\numberline {2.4}Mô tả luồng hoạt động của chương trình}{2}{section*.20}%
+\contentsline {chapter}{\numberline {3}Thiết kế hệ thống}{3}{chapter*.21}%
+\contentsline {section}{\numberline {3.1}Kiến trúc tổng thể chương trình}{3}{section*.22}%
+\contentsline {section}{\numberline {3.2}Thiết kế các module chức năng}{3}{section*.23}%
+\contentsline {subsection}{\numberline {3.2.1}Module QuestionBank}{3}{subsection*.24}%
+\contentsline {subsection}{\numberline {3.2.2}Module Exam}{3}{subsection*.25}%
+\contentsline {subsection}{\numberline {3.2.3}Module History}{3}{subsection*.26}%
+\contentsline {subsection}{\numberline {3.2.4}Module Menu}{3}{subsection*.27}%
+\contentsline {section}{\numberline {3.3}Thiết kế cấu trúc dữ liệu}{3}{section*.28}%
+\contentsline {subsection}{\numberline {3.3.1}Cấu trúc đề thi}{3}{subsection*.29}%
+\contentsline {subsection}{\numberline {3.3.2}Cấu trúc lịch sử thi}{3}{subsection*.30}%
+\contentsline {subsection}{\numberline {3.3.3}Cấu trúc tài khoản người dùng}{3}{subsection*.31}%
+\contentsline {section}{\numberline {3.4}Thiết kế lưu dữ liệu}{3}{section*.32}%
+\contentsline {subsection}{\numberline {3.4.1}File question.txt}{3}{subsection*.33}%
+\contentsline {subsection}{\numberline {3.4.2}File history.txt}{3}{subsection*.34}%
+\contentsline {subsection}{\numberline {3.4.3}Đọc và ghi dữ liệu}{3}{subsection*.35}%
+\contentsline {section}{\numberline {3.5}Thiết kế thuật toán}{3}{section*.36}%
+\contentsline {chapter}{\numberline {4}Cài đặt và xây dựng chương trình}{4}{chapter*.37}%
+\contentsline {section}{\numberline {4.1}Cấu trúc thư mục chương trình}{4}{section*.38}%
+\contentsline {chapter}{\numberline {5}Kiểm thử và Đánh giá kết quả}{5}{chapter*.39}%
+\contentsline {section}{\numberline {5.1}Mục tiêu kiểm thử}{5}{section*.40}%
+\contentsline {section}{\numberline {5.2}Kịch bản kiểm thử}{5}{section*.41}%
+\contentsline {section}{\numberline {5.3}Kết quả kiểm thử}{5}{section*.42}%
+\contentsline {section}{\numberline {5.4}Đánh giá chương trình}{5}{section*.43}%
+\contentsline {chapter}{\numberline {6}Kết luận và hướng phát triển}{6}{chapter*.44}%
+\contentsline {section}{\numberline {6.1}Kết quả đạt được}{6}{section*.45}%
+\contentsline {section}{\numberline {6.2}Tổng kết các kỹ thuật đã được vận dụng}{6}{section*.46}%
+\contentsline {section}{\numberline {6.3}Đánh giá ưu điểm và hạn chế của chương trình}{6}{section*.47}%
+\contentsline {section}{\numberline {6.4}Hướng phát triển và Nâng cấp tương lai}{6}{section*.48}%
+\contentsline {chapter}{\numberline {A}Mã nguồn hàm main()}{8}{chapter*.50}%
+\contentsline {chapter}{\numberline {B}Mô tả các hàm xử lý chính}{9}{chapter*.51}%
+\contentsline {chapter}{\numberline {C}Cấu trúc dữ liệu và file dữ liệu}{10}{chapter*.52}%
+\contentsline {chapter}{\numberline {D}Hướng dẫn cài đặt và sử dụng chương trình}{11}{chapter*.53}%
