@@ -2,8 +2,8 @@
 
 ## Cấu trúc thư mục
 
-```
-TracNghiem/
+```text
+KY_THUAT_LAP_TRINH/
 ├── include/        ← Header files (interface)
 │   ├── QuestionBank.h
 │   ├── Exam.h
@@ -23,46 +23,49 @@ TracNghiem/
 
 ## Biên dịch (MinGW / g++)
 
-Chạy từ thư mục gốc `TracNghiem/`:
+Chạy từ thư mục gốc `KY_THUAT_LAP_TRINH/`:
 
 ```bash
 g++ -std=c++17 -Wall -Wextra -I./include \
     src/main.cpp src/Menu.cpp src/QuestionBank.cpp \
     src/Exam.cpp src/History.cpp \
-    -o TracNghiem
+    -o KY_THUAT_LAP_TRINH
 ```
 
 Chạy chương trình:
+
 ```bash
-./TracNghiem        # Linux/Mac
-TracNghiem.exe      # Windows
+./KY_THUAT_LAP_TRINH        # Linux/Mac
+KY_THUAT_LAP_TRINH.exe      # Windows
 ```
 
 ## Tài khoản mặc định
 
-| Vai trò | Username | Password |
-|---------|----------|----------|
-| Admin   | admin    | admin123 |
-| Sinh viên | (bất kỳ) | sv + username |
+| Vai trò    | Username  | Password      |
+|------------|-----------|---------------|
+| Admin      | admin     | admin123      |
+| Sinh viên  | (bất kỳ)  | sv + username |
 
 **Ví dụ:** username = `hung`, password = `svhung`
 
 ## Định dạng file dữ liệu
 
 **questions.txt:**
-```
+
+```text
 ID|NoiDung|DapAnA|DapAnB|DapAnC|DapAnD|DapAnDung
 ```
 
 **history.txt:**
-```
+
+```text
 Username|Subject|SoCauDung|TongSoCau|Diem|ThoiGianLam|Timestamp
 ```
 
 ## Phân công
 
 | Module | File | Thành viên |
-|--------|------|-----------|
+| -------- | ------ | ----------- |
 | Giao diện & Main | Menu.h/cpp, main.cpp | **Thành** |
 | Thuật toán thi | Exam.h/cpp | **Hùng** |
 | Dữ liệu & File I/O | QuestionBank.h/cpp, History.h/cpp | **Vân** |

@@ -1,0 +1,174 @@
+\documentclass[12pt]{report}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{tikz}
+\usepackage[vietnamese]{babel}
+\usepackage[most]{tcolorbox}
+\usepackage{parskip}
+\usepackage{eso-pic}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{cite}
+\usepackage{caption}
+\usepackage{etoolbox}
+\usepackage{tabularx}
+\usepackage{authblk}
+\patchcmd{\tableofcontents}{\thispagestyle{plain}}{\thispagestyle{empty}}{}{}
+\usepackage[colorlinks=true, allcolors=blue, hypertexnames=false]{hyperref}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=2cm,marginparwidth=1.75cm,headheight=16pt]{geometry}
+
+% ============================================================
+\newcommand{\vekhung}{
+    \begin{tikzpicture}[remember picture, overlay]
+        \draw[line width=1.5pt] 
+            ([shift={(3.0cm,-2.0cm)}]current page.north west) 
+            rectangle ([shift={(-2.0cm,2.0cm)}]current page.south east);
+        \draw[line width=0.5pt] 
+            ([shift={(3.15cm,-2.15cm)}]current page.north west) 
+            rectangle ([shift={(-2.15cm,2.15cm)}]current page.south east);
+    \end{tikzpicture}
+}
+
+% ============================================================
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{
+    \fancyhf{} % Xóa hết thiết lập mặc định của plain
+    \lhead{\footnotesize Khoa Toán - Tin | Đại học Bách khoa Hà Nội}
+    %\rhead{\footnotesize Nguyễn Đức Thành - 202419099}
+    \lfoot{\footnotesize Xây dựng chương trình hỗ trợ thi trắc nghiệm đơn giản}
+    \rfoot{\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% ============================================================
+\begin{document}
+\begin{titlepage}
+    \AddToShipoutPicture*{\vekhung} 
+\begin{center}
+    \vspace*{6pt}
+    \textbf{\Large ĐẠI HỌC BÁCH KHOA HÀ NỘI} \\
+    \vspace{6pt}
+    \textbf{\large Khoa Toán - Tin} \\ 
+    \vspace{18pt}
+    \includegraphics[width=0.3\textwidth]{LogoHUST.png} \\
+    \vspace{30pt}
+    \textbf{\huge Báo cáo Bài tập lớn} \\
+    \vspace{12pt}
+    \textbf{\huge KỸ THUẬT LẬP TRÌNH} \\
+    \vspace{12pt}
+    \textbf{\huge (MI3310)} \\
+    \vspace{12pt}
+    \textbf{\huge Đề tài:} \\
+    \vspace{6pt}
+    \textbf{\huge Xây dựng chương trình \\ hỗ trợ thi trắc nghiệm đơn giản} \\
+    \vspace{18pt}
+    \begin{tabular}{ll}
+        \textbf{Giảng viên hướng dẫn:} & TS. Vũ Thành Nam \\
+        \textbf{Mã lớp học:} & 169312 \\
+        \textbf{Nhóm sinh viên thực hiện:} \\
+    \end{tabular} \\
+    \begin{tabular}{llll}
+        1 & Nguyễn Mạnh Hùng & 202419063 & Hệ thống thông tin quản lý 02 \\
+        2 & Nguyễn Đức Thành & 202419099 & Hệ thống thông tin quản lý 02 \\
+        3 & Nguyễn Hồng Vân & 202419119 & Hệ thống thông tin quản lý 02 \\
+    \end{tabular} \\
+    \vspace{72pt}
+    \textbf{\large Hà Nội, Tháng 6 2026}
+\end{center}
+\end{titlepage}
+
+% ============================================================
+\newpage
+\chapter*{Lời mở đầu}
+\thispagestyle{empty}
+\addcontentsline{toc}{chapter}{Lời mở đầu}
+
+% ============================================================
+\clearpage
+\tableofcontents     
+\clearpage
+
+% ============================================================
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+\newpage
+\chapter{Giới thiệu}
+\label{chap:gioithieu}
+\section{Mô tả bài toán}
+\section{Mục tiêu của chương trình}
+\section{Phạm vi thực hiện}
+\section{Công nghệ và ngôn ngữ lập trình sử dụng}
+\section{Phân công công việc}
+\subsection{Thành viên thực hiện}
+\subsection{Nội dung phân công}
+
+% ============================================================
+\chapter{Phân tích Yêu cầu hệ thống}
+\label{chap:phantich}
+\section{Khảo sát bài toán}
+\section{Yêu cầu chức năng}
+\subsection{Đăng nhập hệ thống}
+\subsection{Tổ chức thi trắc nghiệm}
+\subsection{Chẩm điểm tự động}
+\subsection{Lưu lịch sử thi}
+\subsection{Thống kê và báo cáo kết quả}
+\section{Yêu cầu phi chức năng}
+\section{Mô tả luồng hoạt động của chương trình}
+
+% ============================================================
+\chapter{Thiết kế hệ thống}
+\label{chap:thietke}
+\section{Kiến trúc tổng thể chương trình}
+\section{Thiết kế các module chức năng}
+\subsection{Module QuestionBank}
+\subsection{Module Exam}
+\subsection{Module History}
+\subsection{Module Menu}
+\section{Thiết kế cấu trúc dữ liệu}
+\subsection{Cấu trúc đề thi}
+\subsection{Cấu trúc lịch sử thi}
+\subsection{Cấu trúc tài khoản người dùng}
+\section{Thiết kế lưu dữ liệu}
+\subsection{File question.txt}
+\subsection{File history.txt}
+\subsection{Đọc và ghi dữ liệu}
+\section{Thiết kế thuật toán}
+
+% ============================================================
+\chapter{Cài đặt và xây dựng chương trình}
+\label{chap:caidat}
+\section{Cấu trúc thư mục chương trình}
+
+% ============================================================
+\chapter{Kiểm thử và Đánh giá kết quả}
+\label{chap:kiemthu}
+\section{Mục tiêu kiểm thử}
+\section{Kịch bản kiểm thử}
+\section{Kết quả kiểm thử}
+\section{Đánh giá chương trình}
+
+% ============================================================
+\chapter{Kết luận và hướng phát triển}
+\label{ketluan}
+\section{Kết quả đạt được}
+\section{Tổng kết các kỹ thuật đã được vận dụng}
+\section{Đánh giá ưu điểm và hạn chế của chương trình}
+\section{Hướng phát triển và Nâng cấp tương lai}
+
+% ============================================================
+\cleardoublepage
+\nocite{*}
+\bibliographystyle{ieeetr}
+\bibliography{references}  % Gọi file references.bib
+
+% ============================================================
+\appendix
+\chapter{Mã nguồn hàm main()}
+\chapter{Mô tả các hàm xử lý chính}
+\chapter{Cấu trúc dữ liệu và file dữ liệu}
+\chapter{Hướng dẫn cài đặt và sử dụng chương trình}
+\end{document}
