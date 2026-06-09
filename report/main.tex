@@ -1,6 +1,9 @@
 \documentclass[12pt]{report}
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
+%\setmainfont{Latin Modern Roman}
+%\setsansfont{Latin Modern Sans}
+%\setmonofont{Latin Modern Mono}
 \usepackage{tikz}
 \usepackage[vietnamese]{babel}
 \usepackage[most]{tcolorbox}
@@ -55,28 +58,29 @@
     \vspace{18pt}
     \includegraphics[width=0.3\textwidth]{LogoHUST.png} \\
     \vspace{30pt}
-    \textbf{\huge Báo cáo Bài tập lớn} \\
+    \textbf{\Large BÁO CÁO BÀI TẬP LỚN} \\
     \vspace{12pt}
-    \textbf{\huge KỸ THUẬT LẬP TRÌNH} \\
+    \textbf{\Huge KỸ THUẬT LẬP TRÌNH} \\
     \vspace{12pt}
     \textbf{\huge (MI3310)} \\
     \vspace{12pt}
-    \textbf{\huge Đề tài:} \\
+    \textbf{\large Đề tài:} \\
     \vspace{6pt}
-    \textbf{\huge Xây dựng chương trình \\ hỗ trợ thi trắc nghiệm đơn giản} \\
+    \textbf{\LARGE Xây dựng chương trình \\ hỗ trợ thi trắc nghiệm đơn giản} \\
     \vspace{18pt}
     \begin{tabular}{ll}
         \textbf{Giảng viên hướng dẫn:} & TS. Vũ Thành Nam \\
         \textbf{Mã lớp học:} & 169312 \\
         \textbf{Nhóm sinh viên thực hiện:} \\
     \end{tabular} \\
+    \vspace{6pt}
     \begin{tabular}{llll}
         1 & Nguyễn Mạnh Hùng & 202419063 & Hệ thống thông tin quản lý 02 \\
         2 & Nguyễn Đức Thành & 202419099 & Hệ thống thông tin quản lý 02 \\
         3 & Nguyễn Hồng Vân & 202419119 & Hệ thống thông tin quản lý 02 \\
     \end{tabular} \\
-    \vspace{72pt}
-    \textbf{\large Hà Nội, Tháng 6 2026}
+    \vspace{81pt}
+    \textbf{Hà Nội, Tháng 6 2026}
 \end{center}
 \end{titlepage}
 
@@ -98,65 +102,123 @@
 \newpage
 \chapter{Giới thiệu}
 \label{chap:gioithieu}
+
 \section{Mô tả bài toán}
+
 \section{Mục tiêu của chương trình}
+
 \section{Phạm vi thực hiện}
+
 \section{Công nghệ và ngôn ngữ lập trình sử dụng}
+
 \section{Phân công công việc}
 \subsection{Thành viên thực hiện}
-\subsection{Nội dung phân công}
+\subsection{Phân công chi tiết nhiệm vụ}
 
 % ============================================================
 \chapter{Phân tích Yêu cầu hệ thống}
 \label{chap:phantich}
+
 \section{Khảo sát bài toán}
+
 \section{Yêu cầu chức năng}
-\subsection{Đăng nhập hệ thống}
-\subsection{Tổ chức thi trắc nghiệm}
-\subsection{Chẩm điểm tự động}
-\subsection{Lưu lịch sử thi}
-\subsection{Thống kê và báo cáo kết quả}
+\subsection{Quản lý ngân hàng câu hỏi}
+\subsection{Cấu hình và sinh đề thi}
+\subsection{Tiến hành thi và đếm giờ thời gian thực}
+\subsection{Chấm điểm tự động và hiển thị kết quả}
+\subsection{Xem lịch sử thi}
+
 \section{Yêu cầu phi chức năng}
 \section{Mô tả luồng hoạt động của chương trình}
 
 % ============================================================
 \chapter{Thiết kế hệ thống}
 \label{chap:thietke}
+
 \section{Kiến trúc tổng thể chương trình}
-\section{Thiết kế các module chức năng}
-\subsection{Module QuestionBank}
-\subsection{Module Exam}
-\subsection{Module History}
-\subsection{Module Menu}
+\subsection{Sơ đồ phân chia module} %(Header – Source – Data)
+\subsection{Luồng dữ liệu giữa các module}
+\subsection{Sơ đồ luồng điều hướng Menu} %(Admin / Sinh viên)
+
 \section{Thiết kế cấu trúc dữ liệu}
-\subsection{Cấu trúc đề thi}
-\subsection{Cấu trúc lịch sử thi}
-\subsection{Cấu trúc tài khoản người dùng}
-\section{Thiết kế lưu dữ liệu}
-\subsection{File question.txt}
-\subsection{File history.txt}
-\subsection{Đọc và ghi dữ liệu}
-\section{Thiết kế thuật toán}
+\subsection{Cấu trúc file questions.txt}
+\subsection{Cấu trúc file history.txt}
+\subsection{Quy tắc định dạng và tách trường dữ liệu}
+
+\section{Thiết kế các module chức năng}
+\subsection{Module Menu} %Menu.h/Menu.cpp
+\subsubsection{Giao diện đăng nhập và xác thực người dùng}
+\subsubsection{Menu Admin: quản lý câu hỏi, xem thống kê}
+\subsubsection{Menu Sinh viên: vào thi, xem lịch sử}
+\subsubsection{Cơ chế validate input và bẫy lỗi}
+
+\subsection{Module Ngân hàng câu hỏi} %(QuestionBank.h / QuestionBank.cpp)
+\subsubsection{Struct Question và các thuộc tính}
+\subsubsection{Danh sách liên kết đơn lưu câu hỏi}
+\subsubsection{Đọc/ghi file questions.txt}
+\subsubsection{Thêm, sửa, xoá câu hỏi}
+
+\subsection{Module Thi} %(Exam.h / Exam.cpp)
+\subsubsection{Thuật toán sinh đề: xáo trộn Fisher-Yates}
+\subsubsection{Xáo trộn thứ tự đáp án A/B/C/D}
+\subsubsection{Module đếm giờ đếm ngược thời gian thực}
+\subsubsection{Thu bài tự động khi hết giờ}
+\subsubsection{Logic tính điểm và tổng hợp kết quả}
+
+\subsection{Module Lịch sử thi} %(History.h / History.cpp)
+\subsubsection{Struct TestRecord và các thuộc tính}
+\subsubsection{Danh sách liên kết đơn lưu lịch sử}
+\subsubsection{Ghi kết quả vào file history.txt}
+\subsubsection{Truy vấn và hiển thị lịch sử theo username}
+
+\subsection{Hàm main} %(main.cpp)
+
 
 % ============================================================
 \chapter{Cài đặt và xây dựng chương trình}
 \label{chap:caidat}
+
 \section{Cấu trúc thư mục chương trình}
 
 % ============================================================
 \chapter{Kiểm thử và Đánh giá kết quả}
+
 \label{chap:kiemthu}
-\section{Mục tiêu kiểm thử}
-\section{Kịch bản kiểm thử}
-\section{Kết quả kiểm thử}
-\section{Đánh giá chương trình}
+\section{Chiến lược kiểm thử} %(Test Strategy)
+\section{Tình huống kiểm thử} %(Test Cases)
+\subsection{Test Case-01: Đăng nhập đúng – Admin}
+\subsection{Test Case-02: Đăng nhập đúng – Sinh viên}
+\subsection{Test Case-03: Đăng nhập sai mật khẩu}
+\subsection{Test Case-04: Thêm câu hỏi mới}
+\subsection{Test Case-05: Sinh đề và xáo trộn câu hỏi/đáp án}
+\subsection{Test Case-06: Làm bài và chấm điểm chính xác}
+\subsection{Test Case-07: Tự động thu bài khi hết giờ}
+\subsection{Test Case-08: Xem lịch sử thi nhiều lần}
+\subsection{Test Case-09: Nhập sai định dạng (bẫy lỗi)}
+\subsection{Test Case-10: Kiểm thử rò rỉ bộ nhớ (Valgrind / địa chỉ)}
+
+\section{Hình ảnh chụp kết quả thực thi} %(Screenshots)
+\section{Đánh giá kết quả kiểm thử}
+
 
 % ============================================================
 \chapter{Kết luận và hướng phát triển}
 \label{ketluan}
+
 \section{Kết quả đạt được}
 \section{Tổng kết các kỹ thuật đã được vận dụng}
+\subsection{Cấu trúc dữ liệu: Danh sách liên kết đơn} %(Singly Linked List)
+\subsection{Quản lý bộ nhớ động: con trỏ, new/delete, tránh Memory Leak}
+\subsection{Xử lý File I/O: đọc/ghi file text với ký tự phân tách '|'}
+\subsection{Thuật toán xáo trộn Fisher-Yates}
+\subsection{Lập trình hướng module: tách Header – Source – Data}
+\subsection{Lập trình hướng đối tượng (OOP): Class, Constructor, Destructor}
+\subsection{Xử lý luồng thời gian thực với <thread> / <chrono>}
+\subsection{Validate input và xử lý ngoại lệ trên Terminal}
+\subsection{Quy chuẩn lập trình: Naming Convention, No Global Variables}
+
 \section{Đánh giá ưu điểm và hạn chế của chương trình}
+
 \section{Hướng phát triển và Nâng cấp tương lai}
 
 % ============================================================
@@ -169,6 +231,5 @@
 \appendix
 \chapter{Mã nguồn hàm main()}
 \chapter{Mô tả các hàm xử lý chính}
-\chapter{Cấu trúc dữ liệu và file dữ liệu}
 \chapter{Hướng dẫn cài đặt và sử dụng chương trình}
 \end{document}
