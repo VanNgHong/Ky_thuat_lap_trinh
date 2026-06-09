@@ -1,59 +1,47 @@
-#pragma once
+#ifndef QUESTIONBANK_H
+#define QUESTIONBANK_H
+
 #include <string>
+using namespace std;
 
-// ============================================================
-//  QuestionBank.h  –  Khai báo cấu trúc câu hỏi & ngân hàng
-//  Tác giả: VÂN  |  Role: Kỹ sư Dữ liệu
-//  Thành phụ thuộc vào file này – KHÔNG được thay đổi
-//  tên field mà không báo trước cho Thành và Hùng!
-// ============================================================
-
-// Cấu trúc 1 câu hỏi – ĐÂY LÀ HỢP ĐỒNG CHUNG CỦA NHÓM
+// Struct lưu thông tin một câu hỏi trắc nghiệm
 struct Question {
-    int         id;
-    std::string content;
-    std::string optA;
-    std::string optB;
-    std::string optC;
-    std::string optD;
-    char        correctAns;  // 'A', 'B', 'C', hoặc 'D'
+    int id;                  
+    string content;     
+    string answers[4];  
+    char correct;            // Ký tự đáp án đúng: 'A', 'B', 'C', hoặc 'D'
 };
 
-// Node của Danh sách liên kết đơn
+// Node của danh sách liên kết đơn chứa một câu hỏi
 struct QuestionNode {
-    Question     data;
-    QuestionNode* next;
+    Question data;        
+    QuestionNode* next;   
 };
 
-// Class quản lý Ngân hàng câu hỏi (Singly Linked List)
+// Class quản lý ngân hàng câu hỏi bằng danh sách liên kết đơn
 class QuestionBank {
+private:
+    QuestionNode* head;   
+    QuestionNode* tail;   
+    
 public:
+    // Constructor: khởi tạo danh sách rỗng
     QuestionBank();
+
+    // Destructor: giải phóng toàn bộ bộ nhớ động
     ~QuestionBank();
 
-    // File I/O
-    void loadFromFile(const std::string& filename);
-    void saveToFile(const std::string& filename) const;
+    // Thêm câu hỏi vào cuối danh sách
+    void addQuestion(Question q);
 
-    // CRUD
-    void addQuestion(const Question& q);
-    bool removeQuestion(int id);
-    Question* findById(int id);
+    // Xóa câu hỏi theo id
+    void removeQuestion(int id);
 
-    // Tiện ích
-    int  getCount() const;
-    int  getNextId() const;
-    void printAll() const;
+    // Đếm tổng số câu hỏi hiện có
+    int getQuestionCount();
 
-    // Cho ExamEngine dùng – lấy mảng câu hỏi ngẫu nhiên
-    // Caller chịu trách nhiệm delete[] sau khi dùng
-    Question* getRandomSubset(int count) const;
-
-private:
-    QuestionNode* head;
-    int           size;
-
-    // Cấm copy (tránh shallow copy con trỏ)
-    QuestionBank(const QuestionBank&) = delete;
-    QuestionBank& operator=(const QuestionBank&) = delete;
+    // Lấy con trỏ Question tại vị trí index (0-indexed)
+    Question* getQuestionAt(int index);
 };
+
+#endif // QUESTIONBANK_H
