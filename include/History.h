@@ -1,52 +1,42 @@
-#pragma once
+#ifndef HISTORY_H
+#define HISTORY_H
+
 #include <string>
+using namespace std;
 
-// ============================================================
-//  History.h  –  Khai báo struct TestRecord & HistoryManager
-//  Tác giả: VÂN  |  Role: Kỹ sư Dữ liệu
-// ============================================================
-
-// Cấu trúc 1 bản ghi kết quả thi – HỢP ĐỒNG CHUNG
+// Struct lưu thông tin một lần thi của thí sinh
 struct TestRecord {
-    std::string username;
-    std::string subject;
-    int         correctCount;
-    int         totalQuestions;
-    double      score;          // 0.0 – 10.0
-    int         timeTakenSec;   // thời gian thực tế làm bài (giây)
-    std::string timestamp;      // "YYYY-MM-DD HH:MM"
+    string studentName;  
+    int correctCount;         
+    int totalCount;           
+    double score;             
+    string datetime;     // Ngày giờ thi (dạng chuỗi, ví dụ: "2025-06-09 14:30:00")
 };
 
-// Node danh sách liên kết lịch sử thi
+// Node của danh sách liên kết đơn chứa một bản ghi lịch sử
 struct HistoryNode {
-    TestRecord  data;
-    HistoryNode* next;
+    TestRecord data;      
+    HistoryNode* next;   
 };
 
-// Class quản lý lịch sử thi
+// Class quản lý lịch sử thi bằng danh sách liên kết đơn
 class HistoryManager {
+private:
+    HistoryNode* head;  
+    HistoryNode* tail;  
+
 public:
+    // Constructor: khởi tạo danh sách rỗng
     HistoryManager();
+
+    // Destructor: giải phóng toàn bộ bộ nhớ động
     ~HistoryManager();
 
-    // File I/O
-    void loadFromFile(const std::string& filename);
-    void saveToFile(const std::string& filename) const;
+    // Thêm một bản ghi lịch sử vào cuối danh sách
+    void addRecord(TestRecord r);
 
-    // Thêm 1 bản ghi
-    void addRecord(const TestRecord& record);
-
-    // In toàn bộ / theo user
-    void printAll() const;
-    void printByUser(const std::string& username) const;
-
-    // Thống kê
-    void printStats() const;
-
-private:
-    HistoryNode* head;
-    int          size;
-
-    HistoryManager(const HistoryManager&) = delete;
-    HistoryManager& operator=(const HistoryManager&) = delete;
+    // Ghi toàn bộ danh sách ra file 
+    void saveToFile(const string& filename);
 };
+
+#endif // HISTORY_H
