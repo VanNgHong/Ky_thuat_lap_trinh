@@ -19,6 +19,7 @@
 \usepackage{tabularx}
 \usepackage{authblk}
 \usepackage{float}
+\usepackage{fancyhdr}
 \patchcmd{\tableofcontents}{\thispagestyle{plain}}{\thispagestyle{empty}}{}{}
 \usepackage[colorlinks=true, allcolors=blue, hypertexnames=false]{hyperref}
 \usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=2cm,marginparwidth=1.75cm,headheight=18pt]{geometry}
@@ -36,7 +37,6 @@
 }
 
 % ============================================================
-\usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{\footnotesize Khoa Toán - Tin | Đại học Bách khoa Hà Nội}
@@ -64,7 +64,7 @@
     \vspace{12pt}
     \textbf{\Huge KỸ THUẬT LẬP TRÌNH} \\
     \vspace{12pt}
-    \textbf{\huge (MI3310)} \\
+    \textbf{\Huge (MI3310)} \\
     \vspace{12pt}
     \textbf{\large Đề tài:} \\
     \vspace{6pt}
@@ -111,22 +111,41 @@ Nhóm xin gửi lời cảm ơn chân thành đến \textbf{TS. Vũ Thành Nam} 
 
 % ============================================================
 \clearpage
+\makeatletter
+\let\ps@plain\ps@empty
+\makeatother
 \addcontentsline{toc}{chapter}{Danh sách hình vẽ}
 \listoffigures
+\makeatletter
+\let\ps@plain\ps@empty
+\makeatother
 \clearpage
 
 % ============================================================
 \clearpage
+\makeatletter
+\let\ps@plain\ps@empty
+\makeatother
 \addcontentsline{toc}{chapter}{Danh sách bảng}
 \listoftables
+\makeatletter
+\let\ps@plain\ps@empty
+\makeatother
 \clearpage
 
 % ============================================================
-{
+\clearpage
+\makeatletter
+\let\ps@plain\ps@empty
+\makeatother
 \pagestyle{empty}
 \tableofcontents
+\thispagestyle{empty}
+\makeatletter
+\let\ps@plain\ps@fancy
+\makeatother
+
 \clearpage
-}
 
 % ============================================================
 \pagestyle{fancy}
