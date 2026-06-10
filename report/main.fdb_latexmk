@@ -1,20 +1,20 @@
 # Fdb version 4
-["bibtex main"] 1781024689.05268 "main.aux" "main.bbl" "main" 1781024698.37772 0
+["bibtex main"] 1781067590.05407 "main.aux" "main.bbl" "main" 1781067808.60767 0
   "./references.bib" 1780999241 0 d41d8cd98f00b204e9800998ecf8427e ""
   "c:/texlive/2026/texmf-dist/bibtex/bst/base/ieeetr.bst" 1780666449 18361 1a00e58565e7f19bf2b3e1bfb82254ae ""
-  "main.aux" 1781024693 13653 05aded35db308b672ca33a64c6ba490e "xelatex"
+  "main.aux" 1781067804 14764 18cb432fff014c99659353725c090ef0 "xelatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["xdvipdfmx"] 1781024695.02986 "main.xdv" "main.pdf" "main" 1781024698.39195 0
-  "main.xdv" 1781024693 160056 362427c5c93d0480bc479c0794c41fb6 "xelatex"
+["xdvipdfmx"] 1781067806.08281 "main.xdv" "main.pdf" "main" 1781067808.61566 0
+  "main.xdv" 1781067804 244804 3f745f00cfc597942f275eb836f6cd0b "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1781024690.03128 "c:/Users/nguye/.vscode/Projects/designing a multiple-choice test program/Ky_thuat_lap_trinh/report/main.tex" "main.xdv" "main" 1781024698.37831 0
+["xelatex"] 1781067802.1058 "c:/Users/nguye/.vscode/Projects/designing a multiple-choice test program/Ky_thuat_lap_trinh/report/main.tex" "main.xdv" "main" 1781067808.60801 0
   "LogoHUST.png" 1780743458 216255 8ac965c618d5c711c7e64885a30ae9fc ""
-  "c:/Users/nguye/.vscode/Projects/designing a multiple-choice test program/Ky_thuat_lap_trinh/report/main.tex" 1781024683 9273 5ecfe14d02abd52d86adf7eb807c6e12 ""
+  "c:/Users/nguye/.vscode/Projects/designing a multiple-choice test program/Ky_thuat_lap_trinh/report/main.tex" 1781067801 21257 4ca6668fbeb834709f03472f79d74c86 ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1780669088 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1780677460 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1780665645 1004 54797486969f23fa377b128694d548df ""
@@ -118,6 +118,7 @@
   "c:/texlive/2026/texmf-dist/tex/latex/eso-pic/eso-pic.sty" 1780668568 12026 69122f61f5f226a39624c40c33a6cfa5 ""
   "c:/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1780668608 46885 8953c67ffba03252c6090aa19568b8ba ""
   "c:/texlive/2026/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty" 1780668774 31715 19e60610b63819fe670dfa1cd84a4e94 ""
+  "c:/texlive/2026/texmf-dist/tex/latex/float/float.sty" 1780669008 6749 16d2656a1984957e674b149555f1ea1d ""
   "c:/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty" 1780669111 164714 a0cc5579dc5aec4384653d8dd1b3832a ""
   "c:/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.cfg" 1780669111 549 c4adac819276241fea8eb79c5ab7b99e ""
   "c:/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.sty" 1780669111 3804 debc05110ffb506cef68ea4e72c7bcee ""
@@ -188,14 +189,18 @@
   "c:/texlive/2026/texmf-dist/web2c/texmf.cnf" 1780665417 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt" 1780677794 5961649 1708c2d442e21226d87cf3511edbc511 ""
   "c:/texlive/2026/texmf.cnf" 1780677510 713 e69b156964470283e0530f5060668171 ""
-  "main.aux" 1781024693 13653 05aded35db308b672ca33a64c6ba490e "xelatex"
-  "main.bbl" 1781024689 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
-  "main.out" 1781024693 16609 88f9405163a1058a1a81c1ff5e982c7e "xelatex"
-  "main.tex" 1781024683 9273 5ecfe14d02abd52d86adf7eb807c6e12 ""
-  "main.toc" 1781024693 8628 99f11adc220ffd704bbc5f749ff7fdd7 "xelatex"
+  "main.aux" 1781067804 14764 18cb432fff014c99659353725c090ef0 "xelatex"
+  "main.bbl" 1781067590 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
+  "main.lof" 1781067804 213 afe0935c0eeeefa89205a8904bb2ffcf "xelatex"
+  "main.lot" 1781067804 582 5b1870c92fe144392bc4b6ecaff1c74a "xelatex"
+  "main.out" 1781067804 16891 23587533ebdab6d49063c8db59e1742e "xelatex"
+  "main.tex" 1781067801 21257 4ca6668fbeb834709f03472f79d74c86 ""
+  "main.toc" 1781067804 8819 ce00cd5056447eac30fc4c7f10da9823 "xelatex"
   (generated)
   "main.aux"
+  "main.lof"
   "main.log"
+  "main.lot"
   "main.out"
   "main.toc"
   "main.xdv"

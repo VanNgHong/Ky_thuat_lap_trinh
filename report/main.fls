@@ -239,6 +239,8 @@ INPUT c:/texlive/2026/texmf-dist/tex/latex/tools/array.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/tools/array.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/preprint/authblk.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/preprint/authblk.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/float/float.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/float/float.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT c:/texlive/2026/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
@@ -312,6 +314,14 @@ INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 OUTPUT main.xdv
+INPUT ./main.lof
+INPUT ./main.lof
+INPUT main.lof
+OUTPUT main.lof
+INPUT ./main.lot
+INPUT ./main.lot
+INPUT main.lot
+OUTPUT main.lot
 INPUT ./main.toc
 INPUT ./main.toc
 INPUT main.toc
