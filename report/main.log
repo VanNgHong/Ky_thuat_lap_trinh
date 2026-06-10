@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.5)  10 JUN 2026 12:03
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.5)  10 JUN 2026 12:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -907,7 +907,7 @@ Chương 5.
 ]
 Chương 6.
 
-Overfull \hbox (26.61575pt too wide) in paragraph at lines 401--401
+Overfull \hbox (26.61575pt too wide) in paragraph at lines 333--333
 []\TU/LatinModernRoman(0)/b/n/14.4 Quy chuẩn lập trình: Naming Convention, No Global Variables 
  []
 
@@ -947,6 +947,6 @@ Here is how much of TeX's memory you used:
  60846 multiletter control sequences out of 15000+600000
  631827 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 102i,12n,107p,618b,533s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,12n,107p,662b,533s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (19 pages, 244804 bytes).
+Output written on main.xdv (19 pages, 244676 bytes).

@@ -92,40 +92,15 @@
 \thispagestyle{empty}
 \addcontentsline{toc}{chapter}{Lời mở đầu}
 
-Trong bối cảnh giáo dục ngày càng chú trọng đến việc ứng dụng công nghệ thông tin
-vào công tác đánh giá và kiểm tra, các hệ thống thi trắc nghiệm tự động đã trở thành
-một công cụ không thể thiếu tại nhiều cơ sở đào tạo. Từ những nền tảng trực tuyến
-quy mô lớn cho đến các phần mềm nội bộ đơn giản, điểm chung của chúng đều nằm ở
-khả năng tự động hoá quy trình ra đề, thu bài và chấm điểm --- giảm thiểu công sức
-thủ công và nâng cao tính khách quan.
+Trong bối cảnh giáo dục ngày càng chú trọng đến việc ứng dụng công nghệ thông tin vào công tác đánh giá và kiểm tra, các hệ thống thi trắc nghiệm tự động đã trở thành một công cụ không thể thiếu tại nhiều cơ sở đào tạo. Từ những nền tảng trực tuyến quy mô lớn cho đến các phần mềm nội bộ đơn giản, điểm chung của chúng đều nằm ở khả năng tự động hoá quy trình ra đề, thu bài và chấm điểm --- giảm thiểu công sức thủ công và nâng cao tính khách quan.
 
-Xuất phát từ yêu cầu của môn học \textbf{Kỹ thuật Lập trình (MI3310)}, nhóm chúng em
-lựa chọn đề tài \textit{``Xây dựng chương trình hỗ trợ thi trắc nghiệm đơn giản''}
-với mục tiêu vận dụng tổng hợp các kiến thức đã học vào một sản phẩm phần mềm có
-tính thực tiễn. Đây không đơn thuần là bài tập lập trình thông thường --- đề tài đặt
-ra yêu cầu thiết kế một hệ thống hoàn chỉnh, bao gồm quản lý ngân hàng câu hỏi,
-sinh đề ngẫu nhiên, tiến hành thi có đếm giờ, chấm điểm tự động và lưu trữ lịch sử
-kết quả.
+Xuất phát từ yêu cầu của môn học \textbf{Kỹ thuật Lập trình (MI3310)}, nhóm chúng em lựa chọn đề tài \textit{``Xây dựng chương trình hỗ trợ thi trắc nghiệm đơn giản''} với mục tiêu vận dụng tổng hợp các kiến thức đã học vào một sản phẩm phần mềm có tính thực tiễn. Đây không đơn thuần là bài tập lập trình thông thường --- đề tài đặt ra yêu cầu thiết kế một hệ thống hoàn chỉnh, bao gồm quản lý ngân hàng câu hỏi, sinh đề ngẫu nhiên, tiến hành thi có đếm giờ, chấm điểm tự động và lưu trữ lịch sử kết quả.
 
-Điểm thách thức đặc biệt của đề tài nằm ở ràng buộc kỹ thuật: toàn bộ chương trình
-được xây dựng bằng ngôn ngữ \textbf{C++} thuần, \textit{không sử dụng các container
-có sẵn} của thư viện chuẩn như \texttt{std::vector} hay \texttt{std::list}. Thay vào
-đó, nhóm tự cài đặt cấu trúc \textbf{danh sách liên kết đơn} bằng con trỏ, tự quản lý
-bộ nhớ động và tự triển khai tất cả các thuật toán cốt lõi. Điều này buộc mỗi thành
-viên phải nắm vững các nguyên lý nền tảng của lập trình hệ thống thay vì phụ thuộc
-vào các giải pháp trừu tượng hoá.
+Điểm thách thức đặc biệt của đề tài nằm ở ràng buộc kỹ thuật: toàn bộ chương trình được xây dựng bằng ngôn ngữ \textbf{C++} thuần, không sử dụng các container có sẵn của thư viện chuẩn như \texttt{std::vector} hay \texttt{std::list}. Thay vào đó, nhóm tự cài đặt cấu trúc danh sách liên kết đơn bằng con trỏ, tự quản lý bộ nhớ động và tự triển khai tất cả các thuật toán cốt lõi. Điều này buộc mỗi thành viên phải nắm vững các nguyên lý nền tảng của lập trình hệ thống thay vì phụ thuộc vào các giải pháp trừu tượng hoá.
 
-Báo cáo này trình bày toàn bộ quá trình phân tích, thiết kế, cài đặt và kiểm thử
-hệ thống. Nội dung được tổ chức theo cấu trúc khoa học: từ phân tích yêu cầu, thiết kế
-kiến trúc module, đến đánh giá kết quả kiểm thử và tổng kết các kỹ thuật đã vận dụng.
-Nhóm hy vọng báo cáo không chỉ phản ánh trung thực kết quả công việc mà còn là tài
-liệu tham khảo hữu ích cho các bạn sinh viên quan tâm đến lập trình hệ thống với C++.
+Báo cáo này trình bày toàn bộ quá trình phân tích, thiết kế, cài đặt và kiểm thử hệ thống. Nội dung được tổ chức theo cấu trúc khoa học: từ phân tích yêu cầu, thiết kế kiến trúc module, đến đánh giá kết quả kiểm thử và tổng kết các kỹ thuật đã vận dụng. Nhóm hy vọng báo cáo không chỉ phản ánh trung thực kết quả công việc mà còn là tài liệu tham khảo hữu ích cho các bạn sinh viên quan tâm đến lập trình hệ thống với C++.
 
-Nhóm xin gửi lời cảm ơn chân thành đến \textbf{TS. Vũ Thành Nam} --- giảng viên hướng
-dẫn môn Kỹ thuật Lập trình --- vì những bài giảng sâu sắc và những góc nhìn thực tiễn
-đã định hướng cho chúng em trong suốt quá trình thực hiện đề tài. Dù đã cố gắng hết
-sức, báo cáo chắc chắn còn nhiều điểm cần cải thiện; nhóm rất mong nhận được sự góp ý
-từ thầy và hội đồng để hoàn thiện hơn trong tương lai.
+Nhóm xin gửi lời cảm ơn chân thành đến \textbf{TS. Vũ Thành Nam} --- giảng viên hướng dẫn môn Kỹ thuật Lập trình --- vì những bài giảng sâu sắc và những góc nhìn thực tiễn đã định hướng cho chúng em trong suốt quá trình thực hiện đề tài. Dù đã cố gắng hết sức, báo cáo chắc chắn còn nhiều điểm cần cải thiện; nhóm rất mong nhận được sự góp ý từ thầy và hội đồng để hoàn thiện hơn trong tương lai.
 
 \vspace{24pt}
 \begin{flushright}
@@ -162,33 +137,19 @@ từ thầy và hội đồng để hoàn thiện hơn trong tương lai.
 
 \section{Mô tả bài toán}
 
-Trong thực tế giảng dạy, việc tổ chức một bài kiểm tra trắc nghiệm thủ công đòi hỏi
-giáo viên phải thực hiện nhiều bước lặp đi lặp lại: soạn đề, in ấn, phát đề, thu bài,
-chấm điểm và tổng hợp kết quả. Với lớp học đông sinh viên, quy trình này tiêu tốn
-nhiều thời gian và dễ phát sinh sai sót.
+Trong thực tế giảng dạy, việc tổ chức một bài kiểm tra trắc nghiệm thủ công đòi hỏi giáo viên phải thực hiện nhiều bước lặp đi lặp lại: soạn đề, in ấn, phát đề, thu bài, chấm điểm và tổng hợp kết quả. Với lớp học đông sinh viên, quy trình này tiêu tốn nhiều thời gian và dễ phát sinh sai sót.
 
-Bài toán đặt ra là xây dựng một \textbf{chương trình phần mềm chạy trên nền Terminal}
-có khả năng thay thế hoàn toàn quy trình thủ công trên. Hệ thống cần đáp ứng ba nghiệp
-vụ chính:
+Bài toán đặt ra là xây dựng một chương trình phần mềm chạy trên nền Terminal có khả năng thay thế hoàn toàn quy trình thủ công trên. Hệ thống cần đáp ứng ba nghiệp vụ chính:
 
 \begin{enumerate}[leftmargin=*, label=\arabic*.]
-    \item \textbf{Quản lý ngân hàng câu hỏi:} Admin có thể thêm, sửa, xoá câu hỏi
-    trắc nghiệm với 4 lựa chọn và đáp án đúng. Dữ liệu được lưu trữ bền vững trong
-    file văn bản, đảm bảo không mất mát khi tắt chương trình.
+    \item \textbf{Quản lý ngân hàng câu hỏi:} Admin có thể thêm, sửa, xoá câu hỏi trắc nghiệm với 4 lựa chọn và đáp án đúng. Dữ liệu được lưu trữ bền vững trong file văn bản, đảm bảo không mất mát khi tắt chương trình.
 
-    \item \textbf{Tổ chức thi:} Sinh viên đăng nhập, chọn môn thi và được cấp một đề
-    thi sinh ngẫu nhiên từ ngân hàng câu hỏi. Thứ tự câu hỏi và thứ tự các đáp án
-    được xáo trộn độc lập cho mỗi lần thi, cùng với giới hạn thời gian làm bài được
-    đếm ngược theo thời gian thực.
+    \item \textbf{Tổ chức thi:} Sinh viên đăng nhập, chọn môn thi và được cấp một đề thi sinh ngẫu nhiên từ ngân hàng câu hỏi. Thứ tự câu hỏi và thứ tự các đáp án được xáo trộn độc lập cho mỗi lần thi, cùng với giới hạn thời gian làm bài được đếm ngược theo thời gian thực.
 
-    \item \textbf{Chấm điểm và báo cáo kết quả:} Sau khi nộp bài --- dù do sinh viên
-    chủ động hoặc do hết giờ --- hệ thống tự động chấm điểm, hiển thị kết quả chi
-    tiết và lưu lịch sử để có thể truy xuất lại sau.
+    \item \textbf{Chấm điểm và báo cáo kết quả:} Sau khi nộp bài --- dù do sinh viên chủ động hoặc do hết giờ --- hệ thống tự động chấm điểm, hiển thị kết quả chi tiết và lưu lịch sử để có thể truy xuất lại sau.
 \end{enumerate}
 
-Toàn bộ chương trình được cài đặt bằng \textbf{C++ (chuẩn C++17)}, không sử dụng
-các container của thư viện STL, mà thay vào đó tự cài đặt cấu trúc dữ liệu bằng
-con trỏ để đáp ứng yêu cầu kỹ thuật của môn học.
+Toàn bộ chương trình được cài đặt bằng C++ (chuẩn C++17), không sử dụng các container của thư viện STL, mà thay vào đó tự cài đặt cấu trúc dữ liệu bằn con trỏ để đáp ứng yêu cầu kỹ thuật của môn học.
 
 % ------------------------------------------------------------------
 \section{Mục tiêu của chương trình}
@@ -196,21 +157,11 @@ con trỏ để đáp ứng yêu cầu kỹ thuật của môn học.
 Chương trình hướng đến các mục tiêu cụ thể sau:
 
 \begin{itemize}[leftmargin=*]
-    \item Xây dựng hệ thống thi trắc nghiệm hoàn chỉnh, có thể vận hành độc lập
-    trên môi trường Terminal mà không phụ thuộc vào kết nối mạng hay giao diện đồ hoạ.
-
-    \item Đảm bảo tính \textbf{công bằng và ngẫu nhiên} trong quá trình ra đề thông
-    qua thuật toán xáo trộn Fisher-Yates.
-
-    \item Cung cấp trải nghiệm thi sát với thực tế: có giới hạn thời gian, có cơ chế
-    tự động thu bài và phản hồi kết quả tức thì sau khi nộp bài.
-
-    \item Lưu trữ và truy xuất \textbf{lịch sử thi của từng sinh viên} qua nhiều lần
-    thi, phục vụ mục đích theo dõi tiến độ học tập.
-
-    \item Vận dụng và củng cố các kiến thức nền tảng của môn Kỹ thuật Lập trình:
-    con trỏ, cấu trúc dữ liệu tự cài đặt, quản lý bộ nhớ động, xử lý file I/O,
-    lập trình hướng đối tượng và tổ chức chương trình theo module.
+    \item Xây dựng hệ thống thi trắc nghiệm hoàn chỉnh, có thể vận hành độc lập trên môi trường Terminal mà không phụ thuộc vào kết nối mạng hay giao diện đồ hoạ.
+    \item Đảm bảo tính công bằng và ngẫu nhiên trong quá trình ra đề thông qua thuật toán xáo trộn Fisher-Yates.
+    \item Cung cấp trải nghiệm thi sát với thực tế: có giới hạn thời gian, có cơ chế tự động thu bài và phản hồi kết quả tức thì sau khi nộp bài.
+    \item Lưu trữ và truy xuất lịch sử thi của từng sinh viên qua nhiều lần thi, phục vụ mục đích theo dõi tiến độ học tập.
+    \item Vận dụng và củng cố các kiến thức nền tảng của môn Kỹ thuật Lập trình: con trỏ, cấu trúc dữ liệu tự cài đặt, quản lý bộ nhớ động, xử lý file I/O, lập trình hướng đối tượng và tổ chức chương trình theo module.
 \end{itemize}
 
 % ------------------------------------------------------------------
@@ -219,22 +170,11 @@ Chương trình hướng đến các mục tiêu cụ thể sau:
 Trong khuôn khổ bài tập lớn môn học, chương trình được giới hạn phạm vi như sau:
 
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Môi trường thực thi:} Terminal / Command Prompt trên hệ điều hành
-    Windows (MinGW / g++) hoặc Linux/macOS (g++). Không có giao diện đồ hoạ (GUI).
-
-    \item \textbf{Người dùng:} Hai vai trò --- Admin (quản trị viên) và Sinh viên
-    (người thi). Xác thực bằng tên đăng nhập và mật khẩu đơn giản, không mã hoá.
-
-    \item \textbf{Dữ liệu:} Câu hỏi và lịch sử thi được lưu trên file văn bản cục bộ
-    (\texttt{questions.txt}, \texttt{history.txt}), không sử dụng hệ quản trị
-    cơ sở dữ liệu.
-
-    \item \textbf{Câu hỏi:} Dạng trắc nghiệm một đáp án đúng trong bốn lựa chọn
-    (A, B, C, D). Chưa hỗ trợ câu hỏi tự luận, câu hỏi có hình ảnh hay nhiều đáp
-    án đúng.
-
-    \item \textbf{Đề thi:} Cấu hình số lượng câu hỏi và thời gian làm bài được thiết
-    lập tĩnh trong chương trình; chưa hỗ trợ cấu hình động theo từng môn học.
+    \item \textbf{Môi trường thực thi:} Terminal / Command Prompt trên hệ điều hành Windows (MinGW / g++) hoặc Linux/macOS (g++). Không có giao diện đồ hoạ (GUI).
+    \item \textbf{Người dùng:} Hai vai trò --- Admin (quản trị viên) và Sinh viên (người thi). Xác thực bằng tên đăng nhập và mật khẩu đơn giản, không mã hoá.
+    \item \textbf{Dữ liệu:} Câu hỏi và lịch sử thi được lưu trên file văn bản cục bộ (\texttt{questions.txt}, \texttt{history.txt}), không sử dụng hệ quản trị cơ sở dữ liệu.
+    \item \textbf{Câu hỏi:} Dạng trắc nghiệm một đáp án đúng trong bốn lựa chọn (A, B, C, D). Chưa hỗ trợ câu hỏi tự luận, câu hỏi có hình ảnh hay nhiều đáp án đúng.
+    \item \textbf{Đề thi:} Cấu hình số lượng câu hỏi và thời gian làm bài được thiết lập tĩnh trong chương trình; chưa hỗ trợ cấu hình động theo từng môn học.
 \end{itemize}
 
 % ------------------------------------------------------------------
@@ -255,11 +195,7 @@ Trong khuôn khổ bài tập lớn môn học, chương trình được giới 
     \label{tab:congnghe}
 \end{table}
 
-Nhóm tuân thủ nguyên tắc \textbf{không sử dụng biến toàn cục} --- mọi dữ liệu đều
-được truyền qua tham số hàm hoặc quản lý trong các class --- và \textbf{không sử dụng
-các container STL} như \texttt{std::vector}, \texttt{std::list}. Cấu trúc danh sách
-liên kết đơn được tự cài đặt để lưu trữ câu hỏi và lịch sử thi, nhằm rèn luyện kỹ
-năng làm việc trực tiếp với bộ nhớ động.
+Nhóm tuân thủ nguyên tắc không sử dụng biến toàn cục --- mọi dữ liệu đều được truyền qua tham số hàm hoặc quản lý trong các class --- và không sử dụng các container STL như \texttt{std::vector}, \texttt{std::list}. Cấu trúc danh sách liên kết đơn được tự cài đặt để lưu trữ câu hỏi và lịch sử thi, nhằm rèn luyện kỹ năng làm việc trực tiếp với bộ nhớ động.
 
 % ------------------------------------------------------------------
 \section{Phân công công việc}
@@ -292,11 +228,7 @@ năng làm việc trực tiếp với bộ nhớ động.
     \label{tab:phancong}
 \end{table}
 
-Quá trình phối hợp được thực hiện qua \textbf{GitHub} (quản lý mã nguồn theo nhánh)
-và \textbf{ClickUp} (theo dõi tiến độ nhiệm vụ). Quy tắc chung được thống nhất:
-mỗi thành viên chỉ đẩy code lên khi đã tự biên dịch thành công với \textbf{0 lỗi}
-trên máy cá nhân, tuyệt đối không đẩy code đang lỗi cú pháp ảnh hưởng đến tiến độ
-chung của nhóm.
+Quá trình phối hợp được thực hiện qua \textbf{GitHub} (quản lý mã nguồn theo nhánh) và \textbf{ClickUp} (theo dõi tiến độ nhiệm vụ). Quy tắc chung được thống nhất: mỗi thành viên chỉ đẩy code lên khi đã tự biên dịch thành công với \textbf{0 lỗi} trên máy cá nhân, tuyệt đối không đẩy code đang lỗi cú pháp ảnh hưởng đến tiến độ chung của nhóm.
 
 % ============================================================
 \chapter{Phân tích Yêu cầu hệ thống}
