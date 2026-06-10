@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.5)  10 JUN 2026 13:02
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.5)  10 JUN 2026 13:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -908,7 +908,7 @@ Chương 5.
 ]
 Chương 6.
 
-Overfull \hbox (26.61575pt too wide) in paragraph at lines 352--352
+Overfull \hbox (26.61575pt too wide) in paragraph at lines 351--351
 []\TU/LatinModernRoman(0)/b/n/14.4 Quy chuẩn lập trình: Naming Convention, No Global Variables 
  []
 
