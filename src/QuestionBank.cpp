@@ -1,5 +1,8 @@
 #include "../include/QuestionBank.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <cctype>       
 using namespace std;
 
 // Constructor: khởi tạo danh sách rỗng
@@ -112,4 +115,111 @@ Question* QuestionBank::getQuestionAt(int index) {
     
     // Duyệt hết danh sách mà không tìm thấy 
     return nullptr;
+}
+
+// loadFromFile
+// Định dạng mỗi dòng:
+// id|content|answerA|answerB|answerC|answerD|correct
+bool QuestionBank::loadFromFile(string filename) {
+    ifstream fin(filename);
+    if (!fin.is_open()) {
+        cout << "[Loi] Khong the mo file de doc: " << filename << "\n";
+        return false;
+    }
+
+    string line;
+    int lineNum = 0;
+    while (getline(fin, line)) {
+        lineNum++;
+        if (line.empty() || line[0] == '#') continue;
+        istringstream ss(line);
+        string token;
+        Question q;
+
+        // Truong 1: id
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu truong id. Bo qua.\n";
+            continue;
+        }
+        try {
+            q.id = stoi(token);
+        } catch (...) {
+            cout << "[Canh bao] Dong " << lineNum << ": id khong phai so (\"" << token << "\"). Bo qua.\n";
+            continue;
+        }
+
+        // Truong 2: content 
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu noi dung cau hoi. Bo qua.\n";
+            continue;
+        }
+        q.content = token;
+
+        // Truong 3-6: 4 dap an A B C D 
+        bool answersOk = true;
+        for (int i = 0; i < 4; i++) {
+            if (!getline(ss, token, '|')) {
+                cout << "[Canh bao] Dong " << lineNum << ": thieu dap an thu " << (i + 1) << ". Bo qua.\n";
+                answersOk = false;
+                break;
+            }
+            q.answers[i] = token;
+        }
+        if (!answersOk) continue;
+
+        // Truong 7: correct ('A'/'B'/'C'/'D') 
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu dap an dung. Bo qua.\n";
+            continue;
+        }
+        if (token.empty()) {
+            cout << "[Canh bao] Dong " << lineNum << ": truong dap an dung dang trong. Bo qua.\n";
+            continue;
+        }
+        char c = toupper((unsigned char)token[0]); 
+        if (c < 'A' || c > 'D') {
+            cout << "[Canh bao] Dong " << lineNum
+                 << ": dap an dung '" << token << "' khong hop le (chi chap nhan A-D). Bo qua.\n";
+            continue;
+        }
+        q.correct = c;
+
+        addQuestion(q);
+    }
+
+    fin.close();
+    cout << "[OK] Da nap " << getQuestionCount() << " cau hoi tu file \"" << filename << "\".\n";
+    return true;
+}
+
+// saveToFile
+// Ghi toan bo danh sach xuong file theo dinh dang phan tach '|':
+// id|content|answerA|answerB|answerC|answerD|correct
+bool QuestionBank::saveToFile(string filename) {
+    ofstream fout(filename);
+    if (!fout.is_open()) {
+        cout << "[Loi] Khong the mo file de ghi: " << filename << "\n";
+        return false;
+    }
+
+    QuestionNode* current = head;
+    int saved = 0;
+    while (current != nullptr) {
+        const Question& q = current->data;
+        fout << q.id         << '|'
+             << q.content    << '|'
+             << q.answers[0] << '|'
+             << q.answers[1] << '|'
+             << q.answers[2] << '|'
+             << q.answers[3] << '|'
+             << q.correct
+             << '\n';
+        saved++;
+        current = current->next;
+    }
+
+    fout.close();
+    cout << "[OK] Da luu " << saved
+         << " cau hoi vao file \"" << filename << "\".\n";
+    return true;
 }
