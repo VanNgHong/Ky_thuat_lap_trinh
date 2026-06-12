@@ -1,4 +1,10 @@
 #include "Exam.h"
+#include <iostream>
+#include <chrono>
+#include <limits>
+#include <ctime>
+#include <cctype>
+using namespace std;
 
 // CÁC HÀM CƠ BẢN CỦA CLASS EXAM
 
@@ -107,4 +113,85 @@ void Exam::printExam() const {
         std::cout << "  D. " << questionList[i].answers[3] << "\n";
         std::cout << "=> Dap an dung: " << questionList[i].correct << "\n\n";
     }
+}
+
+// Chạy toàn bộ bài thi: hiển thị từng câu, nhận đáp án, đếm giờ ngược,
+// tự động thu bài khi hết giờ và tính điểm theo thang 10.
+TestRecord Exam::run(const std::string& username, int timeLimitSec) {
+    TestRecord record;
+    record.studentName = username;
+    record.correctCount = 0;
+    record.totalCount   = numberOfQuestions;
+
+    auto startTime = chrono::steady_clock::now();
+
+    for (int i = 0; i < numberOfQuestions; ++i) {
+        // Tính thời gian còn lại
+        auto now = chrono::steady_clock::now();
+        long elapsedSec   = chrono::duration_cast<chrono::seconds>(now - startTime).count();
+        long remainingSec = static_cast<long>(timeLimitSec) - elapsedSec;
+
+        if (remainingSec <= 0) {
+            cout << "\n*** Het gio lam bai! He thong tu dong thu bai. ***\n";
+            break;
+        }
+
+        Question& q = questionList[i];
+        cout << "\n----------------------------------------\n";
+        cout << "Cau " << (i + 1) << "/" << numberOfQuestions
+             << "   (Thoi gian con lai: ~" << remainingSec << " giay)\n";
+        cout << q.content << "\n";
+        cout << "  A. " << q.answers[0] << "\n";
+        cout << "  B. " << q.answers[1] << "\n";
+        cout << "  C. " << q.answers[2] << "\n";
+        cout << "  D. " << q.answers[3] << "\n";
+
+        char chosen = 0;
+        bool validInput = false;
+        while (!validInput) {
+            cout << "Chon dap an (A/B/C/D): ";
+            string line;
+            if (!(cin >> line)) {
+                if (cin.eof()) {
+                    cout << "\n*** Het du lieu dau vao. Ket thuc bai thi som. ***\n";
+                    chosen = 0; // coi nhu khong tra loi -> sai
+                    validInput = true;
+                    break;
+                }
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            }
+            char c = static_cast<char>(toupper(static_cast<unsigned char>(line[0])));
+            if (c == 'A' || c == 'B' || c == 'C' || c == 'D') {
+                chosen = c;
+                validInput = true;
+            } else {
+                cout << "Lua chon khong hop le. Vui long nhap A, B, C hoac D.\n";
+            }
+        }
+
+        if (chosen == q.correct) {
+            record.correctCount++;
+            cout << "=> Chinh xac!\n";
+        } else {
+            cout << "=> Sai. Dap an dung la: " << q.correct << "\n";
+        }
+    }
+
+    // Tính điểm theo thang 10
+    if (record.totalCount > 0) {
+        record.score = (static_cast<double>(record.correctCount) / record.totalCount) * 10.0;
+    } else {
+        record.score = 0.0;
+    }
+
+    // Lấy thời gian hiện tại làm dấu thời gian (timestamp)
+    time_t nowTime = time(nullptr);
+    tm* localTm = localtime(&nowTime);
+    char buf[32];
+    strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", localTm);
+    record.datetime = string(buf);
+
+    return record;
 }

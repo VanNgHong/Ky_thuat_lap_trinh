@@ -1,21 +1,24 @@
 // ============================================================
-//  Menu.cpp  –  Xử lý I/O màn hình, bẫy lỗi nhập liệu
+//  Menu.cpp  –  Triển khai giao diện Menu và điều hướng
 //  Tác giả: THÀNH  |  Role: System Architect / UI / QA
 // ============================================================
 
-#include "Menu.h"
-#include "QuestionBank.h"
-#include "Exam.h"
-#include "History.h"
+#include "../include/Menu.h"
+#include "../include/QuestionBank.h"
+#include "../include/Exam.h"
+#include "../include/History.h"
 
 #include <iostream>
-#include <string>
 #include <limits>
-#include <sstream>
+#include <iomanip>
+#include <cstdlib>
+#include <cctype>
 
-// ────────────────────────────────────────────────────────────
-//  Hàm tiện ích Terminal
-// ────────────────────────────────────────────────────────────
+using namespace std;
+
+// ============================================================
+//  HÀM TIỆN ÍCH TERMINAL
+// ============================================================
 
 void clearScreen() {
 #ifdef _WIN32
@@ -26,421 +29,365 @@ void clearScreen() {
 }
 
 void pauseScreen() {
-    std::cout << "\n" << Color::YELLOW
-              << "  Nhấn Enter để tiếp tục..." << Color::RESET;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cin.get();
+    cout << "\nNhan Enter de tiep tuc...";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
 void printLine(char c, int width) {
-    std::cout << "  ";
-    for (int i = 0; i < width; ++i) std::cout << c;
-    std::cout << "\n";
+    cout << string(width, c) << "\n";
 }
 
-void printCentered(const std::string& text, int width) {
-    int padding = (width - static_cast<int>(text.size())) / 2;
-    if (padding < 0) padding = 0;
-    std::cout << "  ";
-    for (int i = 0; i < padding; ++i) std::cout << ' ';
-    std::cout << text << "\n";
+void printCentered(const string& text, int width) {
+    int len = static_cast<int>(text.length());
+    if (len >= width) {
+        cout << text << "\n";
+        return;
+    }
+    int padding = (width - len) / 2;
+    cout << string(padding, ' ') << text << "\n";
 }
 
-// ────────────────────────────────────────────────────────────
-//  Banner chào mừng
-// ────────────────────────────────────────────────────────────
+// ============================================================
+//  INPUT VALIDATION
+// ============================================================
+
+int getValidInt(const string& prompt, int minVal, int maxVal) {
+    int value;
+    while (true) {
+        cout << prompt;
+        if (cin >> value) {
+            if (value >= minVal && value <= maxVal) {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                return value;
+            }
+            cout << Color::RED << "Gia tri phai trong khoang ["
+                 << minVal << ", " << maxVal << "]!\n" << Color::RESET;
+        } else {
+            if (cin.eof()) {
+                cout << "\n[He thong] Het du lieu dau vao. Thoat chuong trinh.\n";
+                exit(0);
+            }
+            cout << Color::RED << "Vui long nhap mot so nguyen hop le!\n" << Color::RESET;
+            cin.clear();
+        }
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+
+string getValidString(const string& prompt, int maxLen) {
+    string input;
+    while (true) {
+        cout << prompt;
+        if (!getline(cin, input)) {
+            cout << "\n[He thong] Het du lieu dau vao. Thoat chuong trinh.\n";
+            exit(0);
+        }
+
+        if (!input.empty() && static_cast<int>(input.length()) <= maxLen) {
+            return input;
+        }
+
+        if (input.empty()) {
+            cout << Color::RED << "Chuoi khong duoc de trong!\n" << Color::RESET;
+        } else {
+            cout << Color::RED << "Chuoi qua dai (toi da " << maxLen << " ky tu)!\n" << Color::RESET;
+        }
+    }
+}
+
+bool getYesNo(const string& prompt) {
+    while (true) {
+        cout << prompt << " (Y/N): ";
+        string input;
+        if (!getline(cin, input)) {
+            cout << "\n[He thong] Het du lieu dau vao. Thoat chuong trinh.\n";
+            exit(0);
+        }
+
+        if (!input.empty()) {
+            char c = static_cast<char>(toupper(static_cast<unsigned char>(input[0])));
+            if (c == 'Y') return true;
+            if (c == 'N') return false;
+        }
+        cout << Color::RED << "Vui long nhap Y hoac N!\n" << Color::RESET;
+    }
+}
+
+// ============================================================
+//  MÀN HÌNH CHÀO MỪNG
+// ============================================================
 
 void showWelcomeBanner() {
     clearScreen();
-    std::cout << Color::CYAN << Color::BOLD;
+    cout << Color::CYAN << Color::BOLD;
     printLine('=');
-    printCentered("HE THONG THI TRAC NGHIEM");
-    printCentered("Mon Tieng Anh");
+    printCentered("HE THONG THI TRAC NGHIEM C++");
+    printCentered("Mon: Ky Thuat Lap Trinh");
     printLine('=');
-    std::cout << Color::RESET << "\n";
+    cout << Color::RESET;
+    pauseScreen();
 }
 
-// ────────────────────────────────────────────────────────────
-//  Đăng nhập
-// ────────────────────────────────────────────────────────────
+// ============================================================
+//  ĐĂNG NHẬP
+// ============================================================
 
 LoginResult showLoginScreen(LoginSession& session) {
-    showWelcomeBanner();
+    clearScreen();
+    cout << Color::CYAN << Color::BOLD;
+    printLine('=');
+    printCentered("DANG NHAP HE THONG");
+    printLine('=');
+    cout << Color::RESET << "\n";
 
-    // Tài khoản admin cứng (trong thực tế nên đọc từ file có hash)
-    const std::string ADMIN_USER = "admin";
-    const std::string ADMIN_PASS = "admin123";
+    cout << "(Go 'exit' o ten dang nhap de thoat chuong trinh)\n\n";
 
-    std::cout << Color::YELLOW << "  Chon chuc nang:\n" << Color::RESET;
-    std::cout << "  [1] Dang nhap\n";
-    std::cout << "  [0] Thoat chuong trinh\n\n";
+    string username = getValidString("Ten dang nhap: ", 50);
 
-    int choice = getValidInt("  > Lua chon", 0, 1);
-    if (choice == 0) return LoginResult::Exit;
+    string lowerUsername = username;
+    for (char& c : lowerUsername) c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
+    if (lowerUsername == "exit") {
+        return LoginResult::Exit;
+    }
 
-    std::string username = getValidString("\n  Ten dang nhap", 30);
-    std::cout << "  Mat khau: ";
-    std::string password;
-    std::getline(std::cin, password);
+    string password = getValidString("Mat khau: ", 50);
 
-    // Kiểm tra admin
-    if (username == ADMIN_USER && password == ADMIN_PASS) {
+    // Tai khoan Admin
+    if (username == "admin" && password == "admin123") {
         session.username = username;
         session.isAdmin  = true;
-        std::cout << Color::GREEN << "\n  Dang nhap thanh cong! Xin chao, "
-                  << username << " (Admin)\n" << Color::RESET;
-        pauseScreen();
         return LoginResult::Success;
     }
 
-    // Kiểm tra sinh viên (username bất kỳ, mật khẩu = "sv" + username)
-    // Đây là logic đơn giản – thực tế có thể đọc từ file users.txt
-    std::string expectedPass = "sv" + username;
-    if (!username.empty() && password == expectedPass) {
+    // Tai khoan Sinh vien: password = "sv" + username
+    if (password == ("sv" + username)) {
         session.username = username;
         session.isAdmin  = false;
-        std::cout << Color::GREEN << "\n  Dang nhap thanh cong! Xin chao, "
-                  << username << "\n" << Color::RESET;
-        pauseScreen();
         return LoginResult::Success;
     }
 
-    std::cout << Color::RED
-              << "\n  [LOI] Ten dang nhap hoac mat khau khong dung!\n"
-              << Color::RESET;
+    cout << "\n" << Color::RED << "Sai ten dang nhap hoac mat khau!\n" << Color::RESET;
     pauseScreen();
     return LoginResult::InvalidCredentials;
 }
 
-// ────────────────────────────────────────────────────────────
-//  Menu Admin
-// ────────────────────────────────────────────────────────────
+// ============================================================
+//  MENU ADMIN
+// ============================================================
 
 void showAdminMenu(LoginSession& session) {
-    QuestionBank qBank;
-    qBank.loadFromFile("data/questions.txt");
+    const string QUESTIONS_FILE = "data/questions.txt";
+    const string HISTORY_FILE   = "data/history.txt";
 
-    HistoryManager histMgr;
+    QuestionBank bank;
+    bank.loadFromFile(QUESTIONS_FILE);
 
     bool running = true;
     while (running) {
         clearScreen();
-        std::cout << Color::CYAN << Color::BOLD;
+        cout << Color::MAGENTA << Color::BOLD;
         printLine('=');
-        printCentered("MENU QUAN TRI VIEN  |  " + session.username);
+        printCentered("MENU QUAN TRI VIEN (" + session.username + ")");
         printLine('=');
-        std::cout << Color::RESET << "\n";
+        cout << Color::RESET;
 
-        std::cout << "  " << Color::YELLOW << "[1]" << Color::RESET
-                  << " Xem danh sach cau hoi\n";
-        std::cout << "  " << Color::YELLOW << "[2]" << Color::RESET
-                  << " Them cau hoi moi\n";
-        std::cout << "  " << Color::YELLOW << "[3]" << Color::RESET
-                  << " Xoa cau hoi\n";
-        std::cout << "  " << Color::YELLOW << "[4]" << Color::RESET
-                  << " Xem lich su tat ca bai thi\n";
-        std::cout << "  " << Color::YELLOW << "[5]" << Color::RESET
-                  << " Thong ke ket qua\n";
-        std::cout << "  " << Color::RED    << "[0]" << Color::RESET
-                  << " Dang xuat\n\n";
+        cout << "1. Xem danh sach cau hoi\n";
+        cout << "2. Them cau hoi moi\n";
+        cout << "3. Xoa cau hoi theo ID\n";
+        cout << "4. Xem lich su thi cua tat ca sinh vien\n";
+        cout << "5. Dang xuat\n";
+        printLine();
 
-        int choice = getValidInt("  > Lua chon", 0, 5);
+        int choice = getValidInt("Chon chuc nang (1-5): ", 1, 5);
 
         switch (choice) {
             case 1: {
                 clearScreen();
-                std::cout << Color::BOLD << "\n  DANH SACH CAU HOI:\n"
-                          << Color::RESET;
-                printLine('-');
-                qBank.printAll();
-                printLine('-');
+                cout << Color::BOLD;
+                printCentered("DANH SACH CAU HOI");
+                cout << Color::RESET;
+                printLine();
+                if (bank.getQuestionCount() == 0) {
+                    cout << "Ngan hang cau hoi dang rong.\n";
+                } else {
+                    bank.printAll();
+                }
                 pauseScreen();
                 break;
             }
+
             case 2: {
                 clearScreen();
-                std::cout << Color::BOLD << "\n  THEM CAU HOI MOI:\n"
-                          << Color::RESET;
-                printLine('-');
+                cout << Color::BOLD;
+                printCentered("THEM CAU HOI MOI");
+                cout << Color::RESET;
+                printLine();
 
                 Question q;
-                q.id      = qBank.getNextId();
-                q.content = getValidString("  Noi dung cau hoi", 200);
-                q.optA    = getValidString("  Dap an A", 100);
-                q.optB    = getValidString("  Dap an B", 100);
-                q.optC    = getValidString("  Dap an C", 100);
-                q.optD    = getValidString("  Dap an D", 100);
+                q.id = getValidInt("Nhap ID cau hoi (so nguyen duong): ", 1, 1000000);
+                q.content   = getValidString("Noi dung cau hoi: ", 200);
+                q.answers[0] = getValidString("Dap an A: ", 100);
+                q.answers[1] = getValidString("Dap an B: ", 100);
+                q.answers[2] = getValidString("Dap an C: ", 100);
+                q.answers[3] = getValidString("Dap an D: ", 100);
 
-                std::cout << "  Dap an dung (A/B/C/D): ";
-                std::string ans;
-                std::getline(std::cin, ans);
-                // Validate
-                while (ans != "A" && ans != "B" && ans != "C" && ans != "D" &&
-                       ans != "a" && ans != "b" && ans != "c" && ans != "d") {
-                    std::cout << Color::RED
-                              << "  [LOI] Chi nhap A, B, C hoac D: "
-                              << Color::RESET;
-                    std::getline(std::cin, ans);
+                while (true) {
+                    string cAns = getValidString("Dap an dung (A/B/C/D): ", 5);
+                    char up = static_cast<char>(toupper(static_cast<unsigned char>(cAns[0])));
+                    if (up == 'A' || up == 'B' || up == 'C' || up == 'D') {
+                        q.correct = up;
+                        break;
+                    }
+                    cout << Color::RED << "Vui long nhap A, B, C hoac D!\n" << Color::RESET;
                 }
-                q.correctAns = ans[0];
-                if (q.correctAns >= 'a') q.correctAns -= 32; // uppercase
 
-                qBank.addQuestion(q);
-                qBank.saveToFile("data/questions.txt");
+                bank.addQuestion(q);
+                bank.saveToFile(QUESTIONS_FILE);
 
-                std::cout << Color::GREEN
-                          << "\n  [OK] Da them cau hoi ID=" << q.id << " thanh cong!\n"
-                          << Color::RESET;
+                cout << Color::GREEN << "\n[OK] Da them cau hoi thanh cong!\n" << Color::RESET;
                 pauseScreen();
                 break;
             }
+
             case 3: {
                 clearScreen();
-                std::cout << Color::BOLD << "\n  XOA CAU HOI:\n" << Color::RESET;
-                printLine('-');
-                qBank.printAll();
-                printLine('-');
+                cout << Color::BOLD;
+                printCentered("XOA CAU HOI");
+                cout << Color::RESET;
+                printLine();
 
-                int delId = getValidInt("  Nhap ID cau hoi can xoa (0 = huy)", 0, 9999);
-                if (delId != 0) {
-                    if (getYesNo("  Ban chac chan muon xoa?")) {
-                        if (qBank.removeQuestion(delId)) {
-                            qBank.saveToFile("data/questions.txt");
-                            std::cout << Color::GREEN
-                                      << "  [OK] Da xoa cau hoi ID=" << delId << "\n"
-                                      << Color::RESET;
-                        } else {
-                            std::cout << Color::RED
-                                      << "  [LOI] Khong tim thay ID=" << delId << "\n"
-                                      << Color::RESET;
-                        }
-                    } else {
-                        std::cout << "  Da huy.\n";
-                    }
+                if (bank.getQuestionCount() == 0) {
+                    cout << "Ngan hang cau hoi dang rong.\n";
+                } else {
+                    bank.printAll();
+                    printLine();
+                    int id = getValidInt("Nhap ID cau hoi can xoa: ", 1, 1000000);
+                    bank.removeQuestion(id);
+                    bank.saveToFile(QUESTIONS_FILE);
                 }
                 pauseScreen();
                 break;
             }
+
             case 4: {
+                HistoryManager history;
+                history.loadFromFile(HISTORY_FILE);
+
                 clearScreen();
-                std::cout << Color::BOLD << "\n  LICH SU TAT CA BAI THI:\n"
-                          << Color::RESET;
-                printLine('-');
-                histMgr.loadFromFile("data/history.txt");
-                histMgr.printAll();
-                printLine('-');
+                cout << Color::BOLD;
+                printCentered("LICH SU THI CUA SINH VIEN");
+                cout << Color::RESET;
+                printLine();
+                history.printAll();
                 pauseScreen();
                 break;
             }
-            case 5: {
-                clearScreen();
-                std::cout << Color::BOLD << "\n  THONG KE KET QUA:\n"
-                          << Color::RESET;
-                printLine('-');
-                histMgr.loadFromFile("data/history.txt");
-                histMgr.printStats();
-                printLine('-');
-                pauseScreen();
-                break;
-            }
-            case 0:
+
+            case 5:
                 running = false;
                 break;
         }
     }
 }
 
-// ────────────────────────────────────────────────────────────
-//  Menu Sinh viên
-// ────────────────────────────────────────────────────────────
+// ============================================================
+//  MENU SINH VIÊN
+// ============================================================
 
 void showStudentMenu(LoginSession& session) {
-    QuestionBank qBank;
-    qBank.loadFromFile("data/questions.txt");
-
-    HistoryManager histMgr;
+    const string QUESTIONS_FILE = "data/questions.txt";
+    const string HISTORY_FILE   = "data/history.txt";
 
     bool running = true;
     while (running) {
         clearScreen();
-        std::cout << Color::CYAN << Color::BOLD;
+        cout << Color::BLUE << Color::BOLD;
         printLine('=');
-        printCentered("MENU SINH VIEN  |  " + session.username);
+        printCentered("MENU SINH VIEN (" + session.username + ")");
         printLine('=');
-        std::cout << Color::RESET << "\n";
+        cout << Color::RESET;
 
-        std::cout << "  " << Color::YELLOW << "[1]" << Color::RESET
-                  << " Bat dau lam bai thi\n";
-        std::cout << "  " << Color::YELLOW << "[2]" << Color::RESET
-                  << " Xem ket qua cua toi\n";
-        std::cout << "  " << Color::RED    << "[0]" << Color::RESET
-                  << " Dang xuat\n\n";
+        cout << "1. Bat dau lam bai thi\n";
+        cout << "2. Xem lich su thi cua ban\n";
+        cout << "3. Dang xuat\n";
+        printLine();
 
-        int choice = getValidInt("  > Lua chon", 0, 2);
+        int choice = getValidInt("Chon chuc nang (1-3): ", 1, 3);
 
         switch (choice) {
             case 1: {
-                // Kiểm tra đủ câu hỏi chưa
-                if (qBank.getCount() < 5) {
-                    std::cout << Color::RED
-                              << "\n  [LOI] Ngan hang cau hoi chua du (can it nhat 5 cau)!\n"
-                              << Color::RESET;
+                QuestionBank bank;
+                bank.loadFromFile(QUESTIONS_FILE);
+
+                int total = bank.getQuestionCount();
+                if (total == 0) {
+                    cout << Color::RED << "\nNgan hang cau hoi dang rong, khong the tao de thi!\n" << Color::RESET;
                     pauseScreen();
                     break;
                 }
 
                 clearScreen();
-                std::cout << Color::BOLD << "\n  THIET LAP BAI THI:\n"
-                          << Color::RESET;
-                printLine('-');
+                cout << Color::BOLD;
+                printCentered("BAT DAU LAM BAI THI");
+                cout << Color::RESET;
+                printLine();
+                cout << "Ngan hang hien co " << total << " cau hoi.\n\n";
 
                 int numQ = getValidInt(
-                    "  So cau hoi (toi da " + std::to_string(qBank.getCount()) + ")",
-                    1, qBank.getCount()
-                );
-                int timeSec = getValidInt("  Thoi gian lam bai (phut)", 1, 120) * 60;
+                    "Nhap so cau hoi muon thi (1-" + to_string(total) + "): ", 1, total);
+                int timeLimit = getValidInt(
+                    "Nhap thoi gian lam bai (giay, toi thieu 10): ", 10, 36000);
 
-                std::cout << Color::YELLOW
-                          << "\n  San sang lam bai? (" << numQ << " cau hoi, thoi gian "
-                          << timeSec / 60 << " phut).\n" << Color::RESET;
-
-                if (getYesNo("  Bat dau lam bai?")) {
-                    // Khởi tạo engine và chạy bài thi
-                    ExamEngine engine(qBank, session.username, numQ, timeSec);
-                    TestRecord record = engine.run();
-
-                    // Lưu kết quả
-                    histMgr.loadFromFile("data/history.txt");
-                    histMgr.addRecord(record);
-                    histMgr.saveToFile("data/history.txt");
-
-                    // Hiển thị kết quả
-                    clearScreen();
-                    std::cout << Color::BOLD << "\n  KET QUA BAI THI:\n"
-                              << Color::RESET;
-                    printLine('=');
-                    std::cout << "  Thi sinh  : " << record.username << "\n";
-                    std::cout << "  So cau    : " << record.totalQuestions << "\n";
-                    std::cout << "  So dung   : " << Color::GREEN
-                              << record.correctCount << Color::RESET << "\n";
-                    std::cout << "  So sai    : " << Color::RED
-                              << (record.totalQuestions - record.correctCount)
-                              << Color::RESET << "\n";
-
-                    double score = (record.totalQuestions > 0)
-                        ? (10.0 * record.correctCount / record.totalQuestions)
-                        : 0.0;
-                    std::cout << "  Diem so   : " << Color::CYAN
-                              << Color::BOLD;
-                    std::cout.precision(1);
-                    std::cout << std::fixed << score;
-                    std::cout << " / 10" << Color::RESET << "\n";
-                    printLine('=');
+                if (!getYesNo("\nBat dau lam bai ngay bay gio?")) {
+                    break;
                 }
-                pauseScreen();
-                break;
-            }
-            case 2: {
+
+                Exam exam(numQ);
+                exam.generateExamFromBank(bank);
+                exam.shuffleExam();
+
                 clearScreen();
-                std::cout << Color::BOLD << "\n  KET QUA BAI LAM  |  " 
-                          << session.username << ":\n" << Color::RESET;
-                printLine('-');
-                histMgr.loadFromFile("data/history.txt");
-                histMgr.printByUser(session.username);
-                printLine('-');
+                TestRecord record = exam.run(session.username, timeLimit);
+
+                clearScreen();
+                cout << Color::GREEN << Color::BOLD;
+                printLine('=');
+                printCentered("KET QUA BAI THI");
+                printLine('=');
+                cout << Color::RESET;
+
+                cout << "Sinh vien : " << record.studentName << "\n";
+                cout << "So cau dung: " << record.correctCount << "/" << record.totalCount << "\n";
+                cout << fixed << setprecision(2);
+                cout << "Diem so   : " << record.score << " / 10\n";
+                cout << "Thoi gian : " << record.datetime << "\n";
+
+                HistoryManager history;
+                history.addRecord(record);
+                history.saveToFile(HISTORY_FILE);
+
                 pauseScreen();
                 break;
             }
-            case 0:
+
+            case 2: {
+                HistoryManager history;
+                history.loadFromFile(HISTORY_FILE);
+
+                clearScreen();
+                cout << Color::BOLD;
+                printCentered("LICH SU THI CUA BAN");
+                cout << Color::RESET;
+                printLine();
+                cout << fixed << setprecision(2);
+                history.printByUser(session.username);
+                pauseScreen();
+                break;
+            }
+
+            case 3:
                 running = false;
                 break;
         }
-    }
-}
-
-// ────────────────────────────────────────────────────────────
-//  Input Validation
-// ────────────────────────────────────────────────────────────
-
-int getValidInt(const std::string& prompt, int minVal, int maxVal) {
-    int value;
-    std::string raw;
-    while (true) {
-        std::cout << prompt << " [" << minVal << "-" << maxVal << "]: ";
-        std::getline(std::cin, raw);
-
-        // Bắt chuỗi rỗng
-        if (raw.empty()) {
-            std::cout << Color::RED
-                      << "  [LOI] Khong duoc bo trong. Vui long nhap lai.\n"
-                      << Color::RESET;
-            continue;
-        }
-
-        // Bắt ký tự không phải số (cho phép dấu trừ ở đầu)
-        bool valid = true;
-        for (size_t i = 0; i < raw.size(); ++i) {
-            if (i == 0 && raw[0] == '-') continue;
-            if (raw[i] < '0' || raw[i] > '9') { valid = false; break; }
-        }
-
-        if (!valid) {
-            std::cout << Color::RED
-                      << "  [LOI] Vui long chi nhap so nguyen.\n"
-                      << Color::RESET;
-            continue;
-        }
-
-        // Bắt tràn số (stoi ném exception)
-        try {
-            value = std::stoi(raw);
-        } catch (...) {
-            std::cout << Color::RED
-                      << "  [LOI] Gia tri vuot qua gioi han cho phep.\n"
-                      << Color::RESET;
-            continue;
-        }
-
-        if (value < minVal || value > maxVal) {
-            std::cout << Color::RED << "  [LOI] Vui long nhap trong khoang ["
-                      << minVal << ", " << maxVal << "].\n" << Color::RESET;
-            continue;
-        }
-
-        return value;
-    }
-}
-
-std::string getValidString(const std::string& prompt, int maxLen) {
-    std::string input;
-    while (true) {
-        std::cout << prompt << ": ";
-        std::getline(std::cin, input);
-
-        if (input.empty()) {
-            std::cout << Color::RED
-                      << "  [LOI] Khong duoc de trong.\n" << Color::RESET;
-            continue;
-        }
-
-        if (static_cast<int>(input.size()) > maxLen) {
-            std::cout << Color::RED << "  [LOI] Toi da " << maxLen
-                      << " ky tu.\n" << Color::RESET;
-            continue;
-        }
-
-        return input;
-    }
-}
-
-bool getYesNo(const std::string& prompt) {
-    std::string input;
-    while (true) {
-        std::cout << prompt << " (Y/N): ";
-        std::getline(std::cin, input);
-        if (input == "Y" || input == "y") return true;
-        if (input == "N" || input == "n") return false;
-        std::cout << Color::RED
-                  << "  [LOI] Chi nhap Y hoac N.\n" << Color::RESET;
     }
 }
