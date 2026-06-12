@@ -206,7 +206,7 @@ bool QuestionBank::saveToFile(string filename) {
     int saved = 0;
     while (current != nullptr) {
         const Question& q = current->data;
-        fout << q.id         << '|'
+        fout << q.id         << '|' 
              << q.content    << '|'
              << q.answers[0] << '|'
              << q.answers[1] << '|'

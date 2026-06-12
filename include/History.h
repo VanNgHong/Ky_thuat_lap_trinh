@@ -37,6 +37,9 @@ public:
 
     // Ghi toàn bộ danh sách ra file 
     void saveToFile(const string& filename);
+
+    // Lưu thông tin từ file history.text vào danh sách móc nối
+    void loadFromFile(const string& filename);
 };
 
 #endif // HISTORY_H
