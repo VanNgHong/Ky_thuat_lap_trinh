@@ -2,48 +2,43 @@
 #include "QuestionBank.h"
 #include "History.h"
 #include <string>
-
 // ============================================================
 //  Exam.h  –  Khai báo logic sinh đề, xáo trộn, bộ đếm giờ
-//  Tác giả: HÙNG  |  Role: Kỹ sư Logic
 // ============================================================
 
-class ExamEngine {
+class Exam {
 public:
-    // Khởi tạo: nhận ngân hàng câu hỏi, username, số câu, thời gian (giây)
-    ExamEngine(const QuestionBank& bank,
-               const std::string& username,
-               int numQuestions,
-               int timeLimitSec);
-    
-    // Destructor: Cực kỳ quan trọng để delete[] questionList giải phóng bộ nhớ động
-    ~ExamEngine();
+    // Khởi tạo: cấp phát mảng Question[n]
+    Exam(int n);
+
+    // Destructor: giải phóng bộ nhớ động
+    ~Exam();
+
+    // Nạp ngẫu nhiên câu hỏi từ ngân hàng vào đề thi
+    void generateExamFromBank(QuestionBank& bank);
+
+    // Xáo trộn thứ tự câu hỏi và đáp án
+    void shuffleExam();
+
+    // In đề thi ra console để kiểm tra
+    void printExam() const;
 
     // Chạy toàn bộ bài thi → trả về kết quả
-    TestRecord run();
+    TestRecord startExam(const std::string& username, int timeLimitMin);
 
 private:
-    // ──── THUỘC TÍNH ĐƯỢC CUNG CẤP BAN ĐẦU ────
-    const QuestionBank& bank;
-    std::string         username;
-    int                 numQuestions;
-    int                 timeLimitSec;
+    // Số lượng câu hỏi trong đề
+    int       numberOfQuestions;
 
-    // ──── THUỘC TÍNH QUẢN LÝ MẢNG ĐỘNG (BỔ SUNG) ────
-    Question* questionList; // Mảng động Question* được cấp phát bằng new Question[N]
+    // Mảng động lưu danh sách câu hỏi
+    Question* questionList;
 
-    // ──── CÁC PHƯƠNG THỨC TRỢ GIÚP LOGIC TRỘN ĐỀ ────
-    
-    // Hàm nạp ngẫu nhiên câu hỏi từ ngân hàng câu hỏi vào questionList
-    void generateExamFromBank();
+    // Mảng động lưu đáp án người dùng chọn
+    char*     userAnswers;
 
-    // Hàm áp dụng giải thuật hoán vị Fisher-Yates cho mảng chuỗi (đáp án)
+    // Xáo trộn mảng đáp án của 1 câu (Fisher-Yates)
     void shuffleAnswers(std::string arr[], int n);
 
-    // Hàm áp dụng giải thuật hoán vị Fisher-Yates cho mảng Question (câu hỏi)
+    // Xáo trộn mảng câu hỏi (Fisher-Yates)
     void shuffleQuestions(Question arr[], int n);
-
-    // Hàm tổng hợp: Gọi xáo trộn thứ tự câu hỏi và đáp án của từng câu
-    void shuffleExam();
-TestRecord startExam(const std::string& username, int timeLimitMin);
 };
