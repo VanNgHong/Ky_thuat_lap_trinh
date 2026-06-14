@@ -1,6 +1,5 @@
 #include "Exam.h"
 #include <iostream>
-#include <chrono>
 #include <limits>
 #include <ctime>
 #include <cctype>
@@ -117,60 +116,64 @@ void Exam::printExam() const {
 
 // Chạy toàn bộ bài thi: hiển thị từng câu, nhận đáp án, đếm giờ ngược,
 // tự động thu bài khi hết giờ và tính điểm theo thang 10.
-TestRecord Exam::run(const std::string& username, int timeLimitSec) {
+TestRecord Exam::startExam(const std::string& username, int timeLimitMin) {
     TestRecord record;
     record.studentName = username;
     record.correctCount = 0;
-    record.totalCount   = numberOfQuestions;
+    record.totalCount = numberOfQuestions;
 
-    auto startTime = chrono::steady_clock::now();
+    // Cấp phát mảng động lưu đáp án người dùng
+    char* userAnswers = new char[numberOfQuestions];
+    for (int i = 0; i < numberOfQuestions; ++i)
+        userAnswers[i] = 0;
 
-    for (int i = 0; i < numberOfQuestions; ++i) {
-        // Tính thời gian còn lại
-        auto now = chrono::steady_clock::now();
-        long elapsedSec   = chrono::duration_cast<chrono::seconds>(now - startTime).count();
-        long remainingSec = static_cast<long>(timeLimitSec) - elapsedSec;
+    // Lấy mốc thời gian bắt đầu làm bài
+    time_t startTime = time(nullptr);
 
-        if (remainingSec <= 0) {
+    for (int i = 0; i < numberOfQuestions; i++) {
+        // Tính thời gian đã trôi qua (giây)
+        time_t now = time(nullptr);
+        double elapsedTime = difftime(now, startTime);
+
+        // Kiểm tra hết giờ: elapsedTime >= T * 60
+        if (elapsedTime >= timeLimitMin * 60) {
             cout << "\n*** Het gio lam bai! He thong tu dong thu bai. ***\n";
             break;
         }
 
+        long remainingSec = timeLimitMin * 60 - (long)elapsedTime;
+
         Question& q = questionList[i];
         cout << "\n----------------------------------------\n";
-        cout << "Cau " << (i + 1) << "/" << numberOfQuestions
-             << "   (Thoi gian con lai: ~" << remainingSec << " giay)\n";
+        cout << "Cau " << (i + 1) << "/" << numberOfQuestions;
+        cout << "   (Thoi gian con lai: ~" << remainingSec << " giay)\n";
         cout << q.content << "\n";
         cout << "  A. " << q.answers[0] << "\n";
         cout << "  B. " << q.answers[1] << "\n";
         cout << "  C. " << q.answers[2] << "\n";
         cout << "  D. " << q.answers[3] << "\n";
 
+        // Nhap dap an tu nguoi dung
         char chosen = 0;
         bool validInput = false;
         while (!validInput) {
             cout << "Chon dap an (A/B/C/D): ";
             string line;
-            if (!(cin >> line)) {
-                if (cin.eof()) {
-                    cout << "\n*** Het du lieu dau vao. Ket thuc bai thi som. ***\n";
-                    chosen = 0; // coi nhu khong tra loi -> sai
-                    validInput = true;
-                    break;
-                }
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                continue;
-            }
-            char c = static_cast<char>(toupper(static_cast<unsigned char>(line[0])));
+            cin >> line;
+
+            char c = toupper(line[0]);
             if (c == 'A' || c == 'B' || c == 'C' || c == 'D') {
                 chosen = c;
                 validInput = true;
             } else {
-                cout << "Lua chon khong hop le. Vui long nhap A, B, C hoac D.\n";
+                cout << "Nhap sai, vui long nhap lai (A/B/C/D)!\n";
             }
         }
 
+        // Luu dap an vao mang dong
+        userAnswers[i] = chosen;
+
+        // Kiem tra dap an
         if (chosen == q.correct) {
             record.correctCount++;
             cout << "=> Chinh xac!\n";
@@ -179,19 +182,19 @@ TestRecord Exam::run(const std::string& username, int timeLimitSec) {
         }
     }
 
-    // Tính điểm theo thang 10
-    if (record.totalCount > 0) {
-        record.score = (static_cast<double>(record.correctCount) / record.totalCount) * 10.0;
-    } else {
+    // Tinh diem theo thang 10
+    if (record.totalCount > 0)
+        record.score = (double)record.correctCount / record.totalCount * 10.0;
+    else
         record.score = 0.0;
-    }
 
-    // Lấy thời gian hiện tại làm dấu thời gian (timestamp)
+    // Lay thoi gian hien tai lam timestamp
     time_t nowTime = time(nullptr);
     tm* localTm = localtime(&nowTime);
     char buf[32];
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", localTm);
     record.datetime = string(buf);
 
+    delete[] userAnswers;
     return record;
 }
