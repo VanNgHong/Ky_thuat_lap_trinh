@@ -45,4 +45,5 @@ private:
 
     // Hàm tổng hợp: Gọi xáo trộn thứ tự câu hỏi và đáp án của từng câu
     void shuffleExam();
+TestRecord startExam(const std::string& username, int timeLimitMin);
 };
