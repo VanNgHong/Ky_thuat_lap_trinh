@@ -30,7 +30,9 @@ void clearScreen() {
 
 void pauseScreen() {
     cout << "\nNhan Enter de tiep tuc...";
+    cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.get();
 }
 
 void printLine(char c, int width) {
@@ -347,9 +349,12 @@ void showStudentMenu(LoginSession& session) {
                 exam.shuffleExam();
 
                 clearScreen();
-                TestRecord record = exam.run(session.username, timeLimit);
-
+                TestRecord record = exam.startExam(session.username, timeLimit);
+                cout << "\nRETURNED FROM startExam()\n";
+                pauseScreen(); 
                 clearScreen();
+                
+                cout << Color::GREEN << Color::BOLD;
                 cout << Color::GREEN << Color::BOLD;
                 printLine('=');
                 printCentered("KET QUA BAI THI");

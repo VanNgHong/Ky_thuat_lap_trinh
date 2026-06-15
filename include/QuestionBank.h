@@ -43,6 +43,8 @@ public:
     // Lấy con trỏ Question tại vị trí index (0-indexed)
     Question* getQuestionAt(int index);
 
+    void printAll();
+    
     //I/O
     bool loadFromFile(string filename);
     bool saveToFile(string filename);

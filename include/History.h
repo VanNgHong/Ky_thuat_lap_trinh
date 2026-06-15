@@ -35,6 +35,9 @@ public:
     // Thêm một bản ghi lịch sử vào cuối danh sách
     void addRecord(TestRecord r);
 
+    void printAll();                            
+    void printByUser(const string& username);
+
     // Ghi toàn bộ danh sách ra file 
     void saveToFile(const string& filename);
 
@@ -42,4 +45,5 @@ public:
     void loadFromFile(const string& filename);
 };
 
+void printAll();
 #endif // HISTORY_H

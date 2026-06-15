@@ -84,3 +84,79 @@ void HistoryManager::loadFromFile(const string& filename) {
     }
     fin.close();
 }
+
+void HistoryManager::printAll()
+{
+    if (head == nullptr)
+    {
+        cout << "Chua co lich su thi.\n";
+        return;
+    }
+
+    HistoryNode* current = head;
+
+    while (current != nullptr)
+    {
+        cout << "Sinh vien: "
+             << current->data.studentName
+             << "\n";
+
+        cout << "So cau dung: "
+             << current->data.correctCount
+             << "/"
+             << current->data.totalCount
+             << "\n";
+
+        cout << "Diem: "
+             << current->data.score
+             << "\n";
+
+        cout << "Thoi gian: "
+             << current->data.datetime
+             << "\n";
+
+        cout << "--------------------------\n";
+
+        current = current->next;
+    }
+}
+
+void HistoryManager::printByUser(const string& username)
+{
+    bool found = false;
+
+    HistoryNode* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->data.studentName == username)
+        {
+            found = true;
+
+            cout << "So cau dung: "
+                 << current->data.correctCount
+                 << "/"
+                 << current->data.totalCount
+                 << "\n";
+
+            cout << "Diem: "
+                 << current->data.score
+                 << "\n";
+
+            cout << "Thoi gian: "
+                 << current->data.datetime
+                 << "\n";
+
+            cout << "--------------------------\n";
+        }
+
+        current = current->next;
+    }
+
+    if (!found)
+    {
+        cout << "Khong tim thay lich su thi cua sinh vien "
+             << username
+             << ".\n";
+    }
+}

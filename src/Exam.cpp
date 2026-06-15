@@ -47,12 +47,11 @@ void Exam::generateExamFromBank(QuestionBank& bank) {
 
 // Xáo trộn mảng chuỗi (Áp dụng cho mảng answers[4])
 // Tương ứng: PROCEDURE Shuffle(arr[], n) dành cho đáp án
-void shuffleAnswers(string arr[], int n) {
+void Exam::shuffleAnswers(string arr[], int n)
+{
     for (int i = n - 1; i > 0; --i) {
-        // Chọn ngẫu nhiên j trong [0 .. i]
         int j = rand() % (i + 1);
 
-        // Hoán vị arr[i] <-> arr[j]
         string temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
@@ -62,12 +61,11 @@ void shuffleAnswers(string arr[], int n) {
 // Xáo trộn mảng câu hỏi (Áp dụng cho mảng questionList)
 // Tương ứng: PROCEDURE Shuffle(arr[], n) dành cho câu hỏi
 
-void shuffleQuestions(Question arr[], int n) {
+void Exam::shuffleQuestions(Question arr[], int n)
+{
     for (int i = n - 1; i > 0; --i) {
-        // Chọn ngẫu nhiên j trong [0 .. i]
         int j = rand() % (i + 1);
 
-        // Hoán vị arr[i] <-> arr[j]
         Question temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
@@ -116,85 +114,169 @@ void Exam::printExam() const {
 
 // Chạy toàn bộ bài thi: hiển thị từng câu, nhận đáp án, đếm giờ ngược,
 // tự động thu bài khi hết giờ và tính điểm theo thang 10.
-TestRecord Exam::startExam(const std::string& username, int timeLimitMin) {
-    TestRecord record;
-    record.studentName = username;
-    record.correctCount = 0;
-    record.totalCount = numberOfQuestions;
+TestRecord Exam::startExam(const std::string& username, int timeLimitMin)
+{
+    cout << "\n=== START EXAM VERSION NEW ===\n";
+TestRecord record;
+record.studentName = username;
+record.correctCount = 0;
+record.totalCount = numberOfQuestions;
 
-    // Cấp phát mảng động lưu đáp án người dùng
-    char* userAnswers = new char[numberOfQuestions];
-    for (int i = 0; i < numberOfQuestions; ++i)
-        userAnswers[i] = 0;
+// Lưu đáp án người dùng
+char* userAnswers = new char[numberOfQuestions];
 
-    // Lấy mốc thời gian bắt đầu làm bài
-    time_t startTime = time(nullptr);
+// Lưu trạng thái đúng/sai
+bool* result = new bool[numberOfQuestions];
 
-    for (int i = 0; i < numberOfQuestions; i++) {
-        // Tính thời gian đã trôi qua (giây)
-        time_t now = time(nullptr);
-        double elapsedTime = difftime(now, startTime);
+for (int i = 0; i < numberOfQuestions; i++) {
+    userAnswers[i] = '-';
+    result[i] = false;
+}
 
-        // Kiểm tra hết giờ: elapsedTime >= T * 60
-        if (elapsedTime >= timeLimitMin * 60) {
-            cout << "\n*** Het gio lam bai! He thong tu dong thu bai. ***\n";
+time_t startTime = time(nullptr);
+
+for (int i = 0; i < numberOfQuestions; i++) {
+
+    time_t now = time(nullptr);
+    double elapsedTime = difftime(now, startTime);
+
+    if (elapsedTime >= timeLimitMin) {
+        cout << "\n*** Het gio lam bai! He thong tu dong thu bai. ***\n";
+        break;
+    }
+
+    long remainingSec =
+        timeLimitMin - static_cast<long>(elapsedTime);
+
+    Question& q = questionList[i];
+
+    cout << "\n----------------------------------------\n";
+    cout << "Cau " << (i + 1)
+         << "/" << numberOfQuestions
+         << "   (Thoi gian con lai: ~"
+         << remainingSec << " giay)\n";
+
+    cout << q.content << "\n";
+
+    cout << "A. " << q.answers[0] << "\n";
+    cout << "B. " << q.answers[1] << "\n";
+    cout << "C. " << q.answers[2] << "\n";
+    cout << "D. " << q.answers[3] << "\n";
+
+    char chosen = 0;
+
+    while (true) {
+        cout << "Chon dap an (A/B/C/D): ";
+
+        string input;
+        cin >> input;
+
+        if (input.empty())
+            continue;
+
+        char c = toupper(input[0]);
+
+        if (c == 'A' || c == 'B' ||
+            c == 'C' || c == 'D')
+        {
+            chosen = c;
             break;
         }
 
-        long remainingSec = timeLimitMin * 60 - (long)elapsedTime;
-
-        Question& q = questionList[i];
-        cout << "\n----------------------------------------\n";
-        cout << "Cau " << (i + 1) << "/" << numberOfQuestions;
-        cout << "   (Thoi gian con lai: ~" << remainingSec << " giay)\n";
-        cout << q.content << "\n";
-        cout << "  A. " << q.answers[0] << "\n";
-        cout << "  B. " << q.answers[1] << "\n";
-        cout << "  C. " << q.answers[2] << "\n";
-        cout << "  D. " << q.answers[3] << "\n";
-
-        // Nhap dap an tu nguoi dung
-        char chosen = 0;
-        bool validInput = false;
-        while (!validInput) {
-            cout << "Chon dap an (A/B/C/D): ";
-            string line;
-            cin >> line;
-
-            char c = toupper(line[0]);
-            if (c == 'A' || c == 'B' || c == 'C' || c == 'D') {
-                chosen = c;
-                validInput = true;
-            } else {
-                cout << "Nhap sai, vui long nhap lai (A/B/C/D)!\n";
-            }
-        }
-
-        // Luu dap an vao mang dong
-        userAnswers[i] = chosen;
-
-        // Kiem tra dap an
-        if (chosen == q.correct) {
-            record.correctCount++;
-            cout << "=> Chinh xac!\n";
-        } else {
-            cout << "=> Sai. Dap an dung la: " << q.correct << "\n";
-        }
+        cout << "Nhap khong hop le! Vui long nhap A/B/C/D.\n";
     }
 
-    // Tinh diem theo thang 10
-    if (record.totalCount > 0)
-        record.score = (double)record.correctCount / record.totalCount * 10.0;
-    else
-        record.score = 0.0;
+    userAnswers[i] = chosen;
 
-    // Lay thoi gian hien tai lam timestamp
-    time_t nowTime = time(nullptr);
-    tm* localTm = localtime(&nowTime);
-    char buf[32];
-    strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", localTm);
-    record.datetime = string(buf);
+    if (chosen == q.correct) {
+        result[i] = true;
+        record.correctCount++;
+    }
+}
 
-    delete[] userAnswers;
-    return record;
+// Tính điểm
+if (record.totalCount > 0)
+    record.score =
+        (double)record.correctCount /
+        record.totalCount * 10.0;
+else
+    record.score = 0.0;
+
+// Thời gian nộp bài
+time_t nowTime = time(nullptr);
+tm* localTm = localtime(&nowTime);
+
+char buf[32];
+strftime(buf,
+         sizeof(buf),
+         "%Y-%m-%d %H:%M:%S",
+         localTm);
+
+record.datetime = buf;
+
+// =========================
+// HIỂN THỊ ĐÁP ÁN SAU KHI THI
+// =========================
+
+cout << "\n\n========================================\n";
+cout << "CHI TIET KET QUA BAI THI\n";
+cout << "========================================\n";
+
+for (int i = 0; i < numberOfQuestions; i++) {
+
+    cout << "\nCau " << (i + 1) << ":\n";
+    cout << questionList[i].content << "\n";
+
+    cout << "Ban chon   : "
+         << userAnswers[i];
+    
+    if (userAnswers[i] >= 'A' &&
+         userAnswers[i] <= 'D')
+    {
+        int idx = userAnswers[i] - 'A';
+        cout << ". "
+             << questionList[i].answers[idx];
+    }
+    
+    cout << "\n";
+    
+    cout << "Dap an dung: "
+         << questionList[i].correct
+         << ". "
+         << questionList[i].answers[
+            questionList[i].correct - 'A'
+        ]
+         << "\n";
+
+    if (userAnswers[i] == '-') {
+        cout << "[CHUA TRA LOI]\n";
+    }
+    else if (result[i]) {
+        cout << "[DUNG]\n";
+    }
+    else {
+        cout << "[SAI]\n";
+    }
+}
+
+cout << "\n========================================\n";
+cout << "Tong so cau dung: "
+     << record.correctCount
+     << "/"
+     << record.totalCount
+     << "\n";
+
+cout << "Diem so: "
+     << record.score
+     << "/10\n";
+
+cout << "========================================\n";
+
+cout << "\nDEBUG 1\n";
+
+delete[] userAnswers;
+delete[] result;
+
+cout << "\nDEBUG 2\n";
+return record;
 }
