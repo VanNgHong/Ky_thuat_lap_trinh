@@ -243,4 +243,29 @@ void QuestionBank::printAll()
 
         current = current->next;
     }
+
+    // mới thêm 16/06/2026
+    Question* QuestionBank::generateRandomSet(int n) {
+    int total = getQuestionCount();
+    if (n > total) {
+        cout << "[Loi] Khong du cau hoi!\n";
+        return nullptr;
+    }
+
+    // Tạo mảng index rồi Fisher-Yates
+    int* indices = new int[total];
+    for (int i = 0; i < total; i++) indices[i] = i;
+    for (int i = total - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int tmp = indices[i]; indices[i] = indices[j]; indices[j] = tmp;
+    }
+
+    // Lấy N câu đầu
+    Question* result = new Question[n];
+    for (int i = 0; i < n; i++)
+        result[i] = *getQuestionAt(indices[i]);
+
+    delete[] indices;
+    return result;
+   }
 }
