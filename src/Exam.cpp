@@ -6,7 +6,6 @@
 using namespace std;
 
 // CÁC HÀM CƠ BẢN CỦA CLASS EXAM
-
 // Constructor: Cấp phát động mảng Question[N]
 Exam::Exam(int n, int t) {
     numberOfQuestions = n;
