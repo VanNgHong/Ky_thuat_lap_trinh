@@ -24,7 +24,7 @@ int timeLimitSec;
     void printExam() const;
 
     // Chạy toàn bộ bài thi → trả về kết quả
-    TestRecord startExam(const std::string& username, int timeLimitMin);
+    TestRecord startExam(const std::string& username);
 
 private:
     // Số lượng câu hỏi trong đề
