@@ -8,9 +8,10 @@ using namespace std;
 // CÁC HÀM CƠ BẢN CỦA CLASS EXAM
 
 // Constructor: Cấp phát động mảng Question[N]
-Exam::Exam(int n) {
+Exam::Exam(int n, int t) {
     numberOfQuestions = n;
-    questionList = new Question[numberOfQuestions];
+    timeLimitSec = t;
+    questionList = new Question[n];
 }
 
 // Destructor: Giải phóng bộ nhớ động
@@ -72,6 +73,11 @@ void Exam::shuffleQuestions(Question arr[], int n)
     }
 }
 
+//mới thêm 16/06
+void Exam::loadFromBank(Question* questions) {
+    for (int i = 0; i < numberOfQuestions; i++)
+        questionList[i] = questions[i];
+}
 // Hàm chính áp dụng logic trộn đề thi
 // Tương ứng: PROCEDURE ShuffleExam(questions[], qCount)
 void Exam::shuffleExam() {
