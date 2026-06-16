@@ -264,13 +264,9 @@ DONE:
     cout << "Diem so: " << record.score << "/10\n";
     cout << "========================================\n";
 
-    cout << "\nDEBUG 1\n";
-
     // Giải phóng bộ nhớ động ở CUỐI HÀM, sau khi đã dùng xong để in kết quả
     delete[] userAnswers;
     delete[] result;
-
-    cout << "\nDEBUG 2\n";
     return record;
 } // Đóng hàm startExam hợp lệ ở đây
 

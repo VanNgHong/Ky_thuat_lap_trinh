@@ -14,6 +14,8 @@ int timeLimitSec;
     // Destructor: giải phóng bộ nhớ động
     ~Exam();
 
+    void loadFromBank(Question* questions);
+
     // Nạp ngẫu nhiên câu hỏi từ ngân hàng vào đề thi
     void generateExamFromBank(QuestionBank& bank);
 
@@ -22,6 +24,8 @@ int timeLimitSec;
 
     // In đề thi ra console để kiểm tra
     void printExam() const;
+
+    TestRecord startExam(const std::string &username, int timeLimitMin);
 
 private:
     // Số lượng câu hỏi trong đề
@@ -39,7 +43,4 @@ private:
     // Xáo trộn mảng câu hỏi (Fisher-Yates)
     void shuffleQuestions(Question arr[], int n);
     // Copy câu hỏi từ mảng vào exam
-    void loadFromBank(Question* questions);
-    // 
-    TestRecord startExam(const std::string &username, int timeLimitMin);
 };
