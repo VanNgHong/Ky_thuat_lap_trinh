@@ -23,9 +23,6 @@ int timeLimitSec;
     // In đề thi ra console để kiểm tra
     void printExam() const;
 
-    // Chạy toàn bộ bài thi → trả về kết quả
-    TestRecord startExam(const std::string& username);
-
 private:
     // Số lượng câu hỏi trong đề
     int       numberOfQuestions;
@@ -43,5 +40,6 @@ private:
     void shuffleQuestions(Question arr[], int n);
     // Copy câu hỏi từ mảng vào exam
     void loadFromBank(Question* questions);
-
+    // 
+    TestRecord startExam(const std::string &username, int timeLimitMin);
 };
