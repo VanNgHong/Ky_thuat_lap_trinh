@@ -343,13 +343,13 @@ void showStudentMenu(LoginSession& session) {
                 if (!getYesNo("\nBat dau lam bai ngay bay gio?")) {
                     break;
                 }
-
-                Exam exam(numQ);
-                exam.generateExamFromBank(bank);
-                exam.shuffleExam();
-
-                clearScreen();
-                TestRecord record = exam.startExam(session.username, timeLimit);
+// từ 346 đến 352 mới sửa
+                Question* selected = bank.generateRandomSet(numQ);
+             Exam exam(numQ, timeLimit);
+             exam.loadFromBank(selected);
+             delete[] selected;       // giải phóng sau khi đã load vào Exam
+             exam.shuffleExam();      // hoặc exam.shuffle() nếu bạn đổi tên
+             TestRecord record = exam.startExam(session.username);
                 cout << "\nRETURNED FROM startExam()\n";
                 pauseScreen(); 
                 clearScreen();
