@@ -10,6 +10,7 @@ class Exam {
 public:
     // Khởi tạo: cấp phát mảng Question[n]
 Exam(int n, int timeLimitSec);
+int timeLimitSec;
     // Destructor: giải phóng bộ nhớ động
     ~Exam();
 
