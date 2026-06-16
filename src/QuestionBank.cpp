@@ -243,8 +243,9 @@ void QuestionBank::printAll()
 
         current = current->next;
     }
+}
 
-    // mới thêm 16/06/2026
+// mới thêm 16/06/2026
     Question* QuestionBank::generateRandomSet(int n) {
     int total = getQuestionCount();
     if (n > total) {
@@ -268,4 +269,3 @@ void QuestionBank::printAll()
     delete[] indices;
     return result;
    }
-}
