@@ -41,4 +41,7 @@ private:
 
     // Xáo trộn mảng câu hỏi (Fisher-Yates)
     void shuffleQuestions(Question arr[], int n);
+    // Copy câu hỏi từ mảng vào exam
+    void loadFromBank(Question* questions);
+
 };
