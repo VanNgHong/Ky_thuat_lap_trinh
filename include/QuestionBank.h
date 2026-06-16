@@ -49,8 +49,8 @@ public:
     bool loadFromFile(string filename);
     bool saveToFile(string filename);
 
-// Bốc ngẫu nhiên N câu, trả về mảng động (caller tự delete[])
-Question* generateRandomSet(int n);
+    // Bốc ngẫu nhiên N câu, trả về mảng động 
+    Question* generateRandomSet(int n);
 };
 
 #endif // QUESTIONBANK_H
