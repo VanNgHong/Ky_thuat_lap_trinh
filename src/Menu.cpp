@@ -349,6 +349,7 @@ void showStudentMenu(LoginSession& session) {
              exam.loadFromBank(selected);
              delete[] selected;       // giải phóng sau khi đã load vào Exam
              exam.shuffleExam();      // hoặc exam.shuffle() nếu bạn đổi tên
+                clearScreen();
              TestRecord record = exam.startExam(session.username);
                 cout << "\nRETURNED FROM startExam()\n";
                 pauseScreen(); 
