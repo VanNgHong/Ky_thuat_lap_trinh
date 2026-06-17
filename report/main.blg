@@ -3,9 +3,16 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: ieeetr.bst
 Database file #1: references.bib
+Warning--I didn't find a database entry for "guralnick2015"
+Warning--I didn't find a database entry for "nam2022"
+Warning--I didn't find a database entry for "sommerville2016"
+Warning--I didn't find a database entry for "knuth1997"
+Warning--I didn't find a database entry for "stroustrup2013"
+Warning--I didn't find a database entry for "kernighan1999"
+Warning--I didn't find a database entry for "cormen2009"
 You've used 0 entries,
             1876 wiz_defined-function locations,
-            477 strings with 3468 characters,
+            484 strings with 3549 characters,
 and the built_in function-call counts, 20 in all, are:
 = -- 0
 > -- 0
@@ -44,3 +51,4 @@ warning$ -- 0
 while$ -- 0
 width$ -- 0
 write$ -- 2
+(There were 7 warnings)

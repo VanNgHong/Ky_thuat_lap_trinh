@@ -20,6 +20,39 @@
 \usepackage{authblk}
 \usepackage{float}
 \usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+
+% ============================================================
+% Cấu hình listings cho code C++
+% ============================================================
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.97}
+
+\lstdefinestyle{cppstyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    language=C++
+}
+\lstset{style=cppstyle}
+
 \patchcmd{\tableofcontents}{\thispagestyle{plain}}{\thispagestyle{empty}}{}{}
 \usepackage[colorlinks=true, allcolors=blue, hypertexnames=false]{hyperref}
 \usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=2cm,marginparwidth=1.75cm,headheight=18pt]{geometry}
@@ -27,11 +60,11 @@
 % ============================================================
 \newcommand{\vekhung}{
     \begin{tikzpicture}[remember picture, overlay]
-        \draw[line width=1.5pt] 
-            ([shift={(3.0cm,-2.0cm)}]current page.north west) 
+        \draw[line width=1.5pt]
+            ([shift={(3.0cm,-2.0cm)}]current page.north west)
             rectangle ([shift={(-2.0cm,2.0cm)}]current page.south east);
-        \draw[line width=0.5pt] 
-            ([shift={(3.15cm,-2.15cm)}]current page.north west) 
+        \draw[line width=0.5pt]
+            ([shift={(3.15cm,-2.15cm)}]current page.north west)
             rectangle ([shift={(-2.15cm,2.15cm)}]current page.south east);
     \end{tikzpicture}
 }
@@ -51,12 +84,12 @@
 % ============================================================
 \begin{document}
 \begin{titlepage}
-    \AddToShipoutPicture*{\vekhung} 
+    \AddToShipoutPicture*{\vekhung}
 \begin{center}
     \vspace*{6pt}
     \textbf{\Large ĐẠI HỌC BÁCH KHOA HÀ NỘI} \\
     \vspace{6pt}
-    \textbf{\large Khoa Toán - Tin} \\ 
+    \textbf{\large Khoa Toán - Tin} \\
     \vspace{18pt}
     \includegraphics[width=0.3\textwidth]{LogoHUST.png} \\
     \vspace{30pt}
@@ -149,13 +182,28 @@ Nhóm xin gửi lời cảm ơn chân thành đến \textbf{TS. Vũ Thành Nam} 
 % ============================================================
 \pagestyle{fancy}
 
+% ============================================================
+% CHƯƠNG 1: GIỚI THIỆU
+% ============================================================
 \newpage
 \chapter{Giới thiệu}
 \label{chap:gioithieu}
 
 \section{Bối cảnh}
 
+Trong những năm gần đây, việc ứng dụng công nghệ thông tin vào giáo dục đã tạo ra những bước chuyển biến sâu sắc trong cách thức tổ chức kiểm tra và đánh giá năng lực người học. Các hệ thống thi trắc nghiệm điện tử không chỉ giúp tiết kiệm chi phí in ấn và thời gian chấm bài thủ công, mà còn đảm bảo tính công bằng, khách quan và có thể mở rộng quy mô dễ dàng~\cite{guralnick2015}. Tại các trường đại học kỹ thuật, nơi khối lượng sinh viên lớn và nhu cầu kiểm tra định kỳ cao, yêu cầu về một công cụ hỗ trợ thi trắc nghiệm đáng tin cậy ngày càng trở nên cấp thiết.
+
+Song song với xu hướng đó, môn học \textbf{Kỹ thuật Lập trình (MI3310)} tại Khoa Toán -- Tin, Đại học Bách khoa Hà Nội đặt ra mục tiêu rèn luyện sinh viên không chỉ về kỹ năng viết mã mà còn về tư duy thiết kế phần mềm có cấu trúc. Một trong những yêu cầu quan trọng của môn học là sinh viên phải tự cài đặt các cấu trúc dữ liệu cơ bản bằng tay, không phụ thuộc vào thư viện chuẩn~\cite{nam2022}. Điều này tạo ra một bối cảnh học tập lý tưởng để kết hợp nhu cầu thực tiễn với mục tiêu giáo dục: xây dựng một hệ thống thi trắc nghiệm hoàn chỉnh hoàn toàn bằng C++ thuần.
+
 \section{Lý do lựa chọn bài toán}
+
+Nhóm lựa chọn đề tài \textit{``Xây dựng chương trình hỗ trợ thi trắc nghiệm đơn giản''} xuất phát từ ba lý do chính.
+
+Thứ nhất, bài toán có tính thực tiễn rõ ràng. Hệ thống quản lý câu hỏi, sinh đề, đếm giờ và chấm điểm là những nghiệp vụ xuất hiện trong hầu hết mọi hệ thống giáo dục. Việc xây dựng một phiên bản đơn giản giúp nhóm tiếp cận quy trình phân tích -- thiết kế -- cài đặt theo đúng vòng đời phát triển phần mềm~\cite{sommerville2016}.
+
+Thứ hai, bài toán đòi hỏi vận dụng đồng thời nhiều kỹ thuật lập trình nâng cao: quản lý bộ nhớ động với \texttt{new}/\texttt{delete}, cấu trúc danh sách liên kết đơn, thuật toán xáo trộn ngẫu nhiên, xử lý File I/O, lập trình hướng đối tượng và tổ chức mã nguồn theo module. Đây chính xác là tập hợp các chủ đề cốt lõi mà môn học hướng đến~\cite{nam2022}.
+
+Thứ ba, ràng buộc không dùng STL container buộc nhóm phải thực sự hiểu cách các cấu trúc dữ liệu hoạt động ở cấp độ con trỏ, thay vì chỉ sử dụng chúng như những hộp đen. Đây là kinh nghiệm học tập không thể thay thế đối với sinh viên kỹ thuật.
 
 \section{Mô tả bài toán}
 
@@ -164,29 +212,27 @@ Trong thực tế giảng dạy, việc tổ chức một bài kiểm tra trắc
 Bài toán đặt ra là xây dựng một chương trình phần mềm chạy trên nền Terminal có khả năng thay thế hoàn toàn quy trình thủ công trên. Hệ thống cần đáp ứng ba nghiệp vụ chính:
 
 \begin{enumerate}[leftmargin=*, label=\arabic*.]
-    \item \textbf{Quản lý ngân hàng câu hỏi:} Admin có thể thêm, sửa, xoá câu hỏi trắc nghiệm với 4 lựa chọn và đáp án đúng. Dữ liệu được lưu trữ bền vững trong file văn bản, đảm bảo không mất mát khi tắt chương trình.
+    \item \textbf{Quản lý ngân hàng câu hỏi:} Admin có thể thêm, xoá câu hỏi trắc nghiệm với 4 lựa chọn và đáp án đúng. Dữ liệu được lưu trữ bền vững trong file văn bản, đảm bảo không mất mát khi tắt chương trình.
 
-    \item \textbf{Tổ chức thi:} Sinh viên đăng nhập, chọn môn thi và được cấp một đề thi sinh ngẫu nhiên từ ngân hàng câu hỏi. Thứ tự câu hỏi và thứ tự các đáp án được xáo trộn độc lập cho mỗi lần thi, cùng với giới hạn thời gian làm bài được đếm ngược theo thời gian thực.
+    \item \textbf{Tổ chức thi:} Sinh viên đăng nhập, chọn số lượng câu và thời gian, được cấp một đề thi sinh ngẫu nhiên từ ngân hàng câu hỏi. Thứ tự câu hỏi và thứ tự các đáp án được xáo trộn độc lập cho mỗi lần thi, cùng với giới hạn thời gian làm bài được đếm ngược theo thời gian thực.
 
-    \item \textbf{Chấm điểm và báo cáo kết quả:} Sau khi nộp bài --- dù do sinh viên chủ động hoặc do hết giờ --- hệ thống tự động chấm điểm, hiển thị kết quả chi tiết và lưu lịch sử để có thể truy xuất lại sau.
+    \item \textbf{Chấm điểm và báo cáo kết quả:} Sau khi nộp bài --- dù do sinh viên chủ động hoặc do hết giờ --- hệ thống tự động chấm điểm, hiển thị kết quả chi tiết từng câu và lưu lịch sử để có thể truy xuất lại sau.
 \end{enumerate}
 
-Toàn bộ chương trình được cài đặt bằng C++ (chuẩn C++17), không sử dụng các container của thư viện STL, mà thay vào đó tự cài đặt cấu trúc dữ liệu bằn con trỏ để đáp ứng yêu cầu kỹ thuật của môn học.
+Toàn bộ chương trình được cài đặt bằng C++ (chuẩn C++17), không sử dụng các container của thư viện STL, mà thay vào đó tự cài đặt cấu trúc dữ liệu bằng con trỏ để đáp ứng yêu cầu kỹ thuật của môn học.
 
-% ------------------------------------------------------------------
 \section{Mục tiêu của chương trình}
 
 Chương trình hướng đến các mục tiêu cụ thể sau:
 
 \begin{itemize}[leftmargin=*]
     \item Xây dựng hệ thống thi trắc nghiệm hoàn chỉnh, có thể vận hành độc lập trên môi trường Terminal mà không phụ thuộc vào kết nối mạng hay giao diện đồ hoạ.
-    \item Đảm bảo tính công bằng và ngẫu nhiên trong quá trình ra đề thông qua thuật toán xáo trộn Fisher-Yates.
+    \item Đảm bảo tính công bằng và ngẫu nhiên trong quá trình ra đề thông qua thuật toán xáo trộn Fisher-Yates~\cite{knuth1997}.
     \item Cung cấp trải nghiệm thi sát với thực tế: có giới hạn thời gian, có cơ chế tự động thu bài và phản hồi kết quả tức thì sau khi nộp bài.
     \item Lưu trữ và truy xuất lịch sử thi của từng sinh viên qua nhiều lần thi, phục vụ mục đích theo dõi tiến độ học tập.
-    \item Vận dụng và củng cố các kiến thức nền tảng của môn Kỹ thuật Lập trình: con trỏ, cấu trúc dữ liệu tự cài đặt, quản lý bộ nhớ động, xử lý file I/O, lập trình hướng đối tượng và tổ chức chương trình theo module.
+    \item Vận dụng và củng cố các kiến thức nền tảng của môn Kỹ thuật Lập trình: con trỏ, cấu trúc dữ liệu tự cài đặt, quản lý bộ nhớ động, xử lý file I/O, lập trình hướng đối tượng và tổ chức chương trình theo module~\cite{nam2022}.
 \end{itemize}
 
-% ------------------------------------------------------------------
 \section{Phạm vi thực hiện}
 
 Trong khuôn khổ bài tập lớn môn học, chương trình được giới hạn phạm vi như sau:
@@ -196,10 +242,9 @@ Trong khuôn khổ bài tập lớn môn học, chương trình được giới 
     \item \textbf{Người dùng:} Hai vai trò --- Admin (quản trị viên) và Sinh viên (người thi). Xác thực bằng tên đăng nhập và mật khẩu đơn giản, không mã hoá.
     \item \textbf{Dữ liệu:} Câu hỏi và lịch sử thi được lưu trên file văn bản cục bộ (\texttt{questions.txt}, \texttt{history.txt}), không sử dụng hệ quản trị cơ sở dữ liệu.
     \item \textbf{Câu hỏi:} Dạng trắc nghiệm một đáp án đúng trong bốn lựa chọn (A, B, C, D). Chưa hỗ trợ câu hỏi tự luận, câu hỏi có hình ảnh hay nhiều đáp án đúng.
-    \item \textbf{Đề thi:} Cấu hình số lượng câu hỏi và thời gian làm bài được thiết lập tĩnh trong chương trình; chưa hỗ trợ cấu hình động theo từng môn học.
+    \item \textbf{Đề thi:} Số lượng câu hỏi và thời gian làm bài được sinh viên tự cấu hình khi bắt đầu mỗi lần thi; không phân loại theo môn học hay độ khó.
 \end{itemize}
 
-% ------------------------------------------------------------------
 \section{Công nghệ và ngôn ngữ lập trình sử dụng}
 
 \begin{table}[H]
@@ -207,19 +252,18 @@ Trong khuôn khổ bài tập lớn môn học, chương trình được giới 
     \begin{tabularx}{\textwidth}{|l|X|} \hline
         \textbf{Thành phần} & \textbf{Chi tiết} \\ \hline
         Ngôn ngữ lập trình & C++ (chuẩn C++17) \\ \hline
-        Trình biên dịch & MinGW g++ (Windows) / g++ (Linux, macOS) \\ \hline 
-        Thư viện sử dụng & \texttt{<iostream>}, \texttt{<fstream>}, \texttt{<sstream>}, \texttt{<string>}, \texttt{<cstdlib>}, \texttt{<ctime>}, \texttt{<thread>}, \texttt{<chrono>}, \texttt{<atomic>} \\ \hline
+        Trình biên dịch & MinGW g++ (Windows) / g++ (Linux, macOS) \\ \hline
+        Thư viện sử dụng & \texttt{<iostream>}, \texttt{<fstream>}, \texttt{<sstream>}, \texttt{<string>}, \texttt{<cstdlib>}, \texttt{<ctime>}, \texttt{<cctype>}, \texttt{<iomanip>}, \texttt{<limits>} \\ \hline
         Môi trường phát triển & Visual Studio Code với extension C/C++ (Microsoft) \\ \hline
-        Quản lý dự án & ClickUp (phân công nhiệm vụ), GitHub (quản lý mã nguồn) \\ \hline 
+        Quản lý dự án & ClickUp (phân công nhiệm vụ), GitHub (quản lý mã nguồn) \\ \hline
         Kiểm thử bộ nhớ & Valgrind (Linux) / DrMemory (Windows) \\ \hline
     \end{tabularx}
     \caption{Công nghệ và công cụ sử dụng trong dự án}
     \label{tab:congnghe}
 \end{table}
 
-Nhóm tuân thủ nguyên tắc không sử dụng biến toàn cục --- mọi dữ liệu đều được truyền qua tham số hàm hoặc quản lý trong các class --- và không sử dụng các container STL như \texttt{std::vector}, \texttt{std::list}. Cấu trúc danh sách liên kết đơn được tự cài đặt để lưu trữ câu hỏi và lịch sử thi, nhằm rèn luyện kỹ năng làm việc trực tiếp với bộ nhớ động.
+Nhóm tuân thủ nguyên tắc không sử dụng biến toàn cục --- mọi dữ liệu đều được truyền qua tham số hàm hoặc quản lý trong các class --- và không sử dụng các container STL như \texttt{std::vector}, \texttt{std::list}. Cấu trúc danh sách liên kết đơn được tự cài đặt để lưu trữ câu hỏi và lịch sử thi, nhằm rèn luyện kỹ năng làm việc trực tiếp với bộ nhớ động~\cite{stroustrup2013}.
 
-% ------------------------------------------------------------------
 \section{Phân công công việc}
 
 \subsection{Thành viên thực hiện}
@@ -244,7 +288,7 @@ Nhóm tuân thủ nguyên tắc không sử dụng biến toàn cục --- mọi 
         \textbf{Thành viên} & \textbf{Vai trò} & \textbf{Nhiệm vụ cụ thể} \\ \hline
         Thành & System Architect & Xây dựng giao diện Menu trên Terminal; điều hướng luồng Admin và Sinh viên; xử lý bẫy lỗi nhập liệu (validate input); viết file \texttt{main.cpp}, ráp nối các module; kiểm thử toàn hệ thống (cross-testing); đóng gói báo cáo cuối. \\ \hline
         Hùng & Algorithm Engineer & Xây dựng luồng cốt lõi bài thi; cài đặt thuật toán Fisher-Yates xáo trộn câu hỏi và đáp án; xử lý module đếm giờ đếm ngược thời gian thực; cơ chế tự động thu bài khi hết giờ; logic tính điểm và tổng hợp kết quả. \\ \hline
-        Vân & Data Engineer & Cài đặt cấu trúc danh sách liên kết đơn cho ngân hàng câu hỏi và lịch sử thi; quản lý cấp phát và giải phóng bộ nhớ (tránh Memory Leak); xử lý File I/O: đọc/ghi \texttt{questions.txt} và \texttt{history.txt} với ký tự phân tách \texttt{`|}'. \\ \hline
+        Vân & Data Engineer & Cài đặt cấu trúc danh sách liên kết đơn cho ngân hàng câu hỏi và lịch sử thi; quản lý cấp phát và giải phóng bộ nhớ (tránh Memory Leak); xử lý File I/O: đọc/ghi \texttt{questions.txt} và \texttt{history.txt} với ký tự phân tách \texttt{|}. \\ \hline
     \end{tabularx}
     \caption{Phân công nhiệm vụ giữa các thành viên}
     \label{tab:phancong}
@@ -253,10 +297,304 @@ Nhóm tuân thủ nguyên tắc không sử dụng biến toàn cục --- mọi 
 Quá trình phối hợp được thực hiện qua \textbf{GitHub} (quản lý mã nguồn theo nhánh) và \textbf{ClickUp} (theo dõi tiến độ nhiệm vụ). Quy tắc chung được thống nhất: mỗi thành viên chỉ đẩy code lên khi đã tự biên dịch thành công với \textbf{0 lỗi} trên máy cá nhân, tuyệt đối không đẩy code đang lỗi cú pháp ảnh hưởng đến tiến độ chung của nhóm.
 
 % ============================================================
+% CHƯƠNG 2: CƠ SỞ LÝ THUYẾT
+% ============================================================
+\newpage
 \chapter{Cơ sở lý thuyết}
 \label{chap:lythuyet}
 
+Chương này trình bày các kiến thức nền tảng được vận dụng trong quá trình xây dựng chương trình, bao gồm: nguyên lý thiết kế chương trình theo module, cấu trúc dữ liệu danh sách liên kết đơn, kỹ thuật quản lý bộ nhớ động, thuật toán xáo trộn Fisher-Yates, xử lý File I/O và lập trình hướng đối tượng trong C++.
 
+\section{Nguyên lý thiết kế chương trình theo module}
+
+\subsection{Tư tưởng module hoá (Modularity)}
+
+Một trong những nguyên lý căn bản nhất của kỹ thuật lập trình hiện đại là \textit{module hoá} --- tức là phân chia chương trình lớn thành các đơn vị nhỏ hơn, mỗi đơn vị thực thi một nhiệm vụ cụ thể và độc lập~\cite{nam2022}. Theo nguyên lý này, mỗi module (hàm, class, hoặc file mã nguồn) cần thoả mãn ba yêu cầu: có nhiệm vụ rõ ràng và duy nhất, giao tiếp với bên ngoài thông qua một giao diện tường minh (tham số và giá trị trả về), và có thể kiểm thử độc lập.
+
+Lợi ích của module hoá thể hiện rõ ở bốn phương diện~\cite{nam2022}:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Dễ đọc:} Mỗi module đủ ngắn để nắm bắt toàn bộ logic trong một lần đọc.
+    \item \textbf{Dễ kiểm thử:} Có thể test từng hàm riêng biệt mà không cần khởi chạy toàn bộ hệ thống.
+    \item \textbf{Dễ bảo trì:} Khi cần sửa đổi một chức năng, chỉ thay đổi module liên quan mà không ảnh hưởng đến phần còn lại.
+    \item \textbf{Tái sử dụng:} Các module được thiết kế tốt có thể dùng lại trong các dự án khác.
+\end{itemize}
+
+Trong dự án này, nguyên lý module hoá được áp dụng thông qua việc phân chia mã nguồn thành bốn module độc lập: \texttt{QuestionBank} (quản lý ngân hàng câu hỏi), \texttt{Exam} (logic bài thi), \texttt{History} (quản lý lịch sử) và \texttt{Menu} (giao diện và điều hướng), mỗi module có file header (\texttt{.h}) và file cài đặt (\texttt{.cpp}) riêng.
+
+\subsection{Thiết kế từ trên xuống (Top-down Design)}
+
+Phương pháp thiết kế từ trên xuống bắt đầu bằng việc phác hoạ toàn bộ chương trình ở mức tổng quan, sau đó tinh chỉnh dần xuống mức chi tiết~\cite{nam2022}. Cụ thể, quy trình gồm ba bước lặp:
+
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item Phác thảo hàm \texttt{main()} bằng giả ngữ (pseudocode), mô tả \textit{cái gì} cần làm chứ không phải \textit{làm như thế nào}.
+    \item Với mỗi tác vụ phức tạp trong giả ngữ, thay thế bằng lời gọi hàm và định nghĩa hàm đó ở bước tiếp theo.
+    \item Lặp lại quá trình ở mức chi tiết hơn cho đến khi toàn bộ các hàm được định nghĩa đầy đủ.
+\end{enumerate}
+
+Phương pháp này giúp kiểm soát độ phức tạp của chương trình ngay từ đầu, tránh tình trạng viết code đến đâu thiết kế đến đó (bottom-up không có kế hoạch) dẫn đến mã nguồn rối và khó bảo trì~\cite{nam2022}.
+
+\subsection{Phong cách lập trình tốt}
+
+Mã nguồn tốt không chỉ là mã nguồn chạy đúng, mà còn là mã nguồn dễ đọc, dễ hiểu và dễ bảo trì~\cite{kernighan1999}. Các nguyên tắc phong cách lập trình được nhóm tuân thủ trong dự án này bao gồm:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Đặt tên gợi nhớ:} Tên biến và hàm phản ánh rõ mục đích (ví dụ: \texttt{numberOfQuestions}, \texttt{shuffleAnswers}, \texttt{generateRandomSet}).
+    \item \textbf{Chú thích có ý nghĩa:} Chú thích cho từng đoạn mã (không phải từng dòng), mô tả \textit{tại sao} và \textit{cái gì}, không phải \textit{như thế nào} khi code đã tự giải thích.
+    \item \textbf{Nhất quán trong cách lề (indentation):} Toàn bộ mã nguồn dùng 4 dấu cách cho mỗi cấp lề.
+    \item \textbf{Không dùng biến toàn cục:} Mọi dữ liệu được truyền qua tham số, tuân thủ nguyên tắc bao đóng (encapsulation)~\cite{stroustrup2013}.
+    \item \textbf{Không vá víu mã xấu:} Khi phát hiện lỗi thiết kế, viết lại thay vì chắp vá~\cite{kernighan1999}.
+\end{itemize}
+
+\section{Con trỏ và quản lý bộ nhớ động trong C++}
+
+\subsection{Bộ nhớ tĩnh và bộ nhớ động}
+
+Trong C++, bộ nhớ được chia thành hai vùng chính: \textit{stack} (ngăn xếp) và \textit{heap} (đống). Biến cục bộ được cấp phát tự động trên stack và giải phóng khi hàm trả về. Ngược lại, bộ nhớ động được cấp phát trên heap thông qua toán tử \texttt{new} và phải được lập trình viên tường minh giải phóng bằng \texttt{delete} (hoặc \texttt{delete[]} với mảng)~\cite{stroustrup2013}.
+
+\begin{lstlisting}[caption={Cấp phát và giải phóng mảng động trong C++}, label={lst:dynamic}]
+// Cap phat mang dong
+Question* questionList = new Question[numberOfQuestions];
+char*     userAnswers  = new char[numberOfQuestions];
+
+// Su dung ...
+
+// Giai phong (bat buoc, tranh Memory Leak)
+delete[] questionList;
+delete[] userAnswers;
+\end{lstlisting}
+
+\subsection{Rò rỉ bộ nhớ (Memory Leak)}
+
+Rò rỉ bộ nhớ xảy ra khi chương trình cấp phát bộ nhớ động nhưng không giải phóng sau khi sử dụng xong~\cite{stroustrup2013}. Trong một chương trình chạy dài, hiện tượng này dẫn đến cạn kiệt bộ nhớ hệ thống. Để phòng tránh, nhóm tuân thủ quy tắc: mỗi \texttt{new} phải có một \texttt{delete} tương ứng, và việc giải phóng được thực hiện trong Destructor của class.
+
+\subsection{Constructor và Destructor}
+
+Constructor được gọi tự động khi một đối tượng được khởi tạo, còn Destructor được gọi khi đối tượng ra khỏi phạm vi hoặc bị xoá. Đây là cơ chế RAII (Resource Acquisition Is Initialization) của C++, đảm bảo tài nguyên luôn được quản lý đúng đắn~\cite{stroustrup2013}. Trong dự án, Destructor của \texttt{QuestionBank}, \texttt{HistoryManager} và \texttt{Exam} đều chịu trách nhiệm giải phóng toàn bộ bộ nhớ động đã cấp phát.
+
+\begin{lstlisting}[caption={Constructor và Destructor của lớp Exam}, label={lst:examctor}]
+// Constructor: Cap phat dong mang Question[N]
+Exam::Exam(int n, int t) {
+    numberOfQuestions = n;
+    timeLimitSec = t;
+    questionList = new Question[numberOfQuestions];
+    userAnswers  = new char[numberOfQuestions];
+    for (int i = 0; i < numberOfQuestions; i++)
+        userAnswers[i] = '-';
+}
+
+// Destructor: Giai phong bo nho dong
+Exam::~Exam() {
+    delete[] questionList;
+    delete[] userAnswers;
+}
+\end{lstlisting}
+
+\section{Danh sách liên kết đơn (Singly Linked List)}
+
+\subsection{Khái niệm và cấu trúc}
+
+Danh sách liên kết đơn là một cấu trúc dữ liệu tuyến tính trong đó mỗi phần tử (node) lưu trữ một giá trị dữ liệu và một con trỏ trỏ đến node kế tiếp~\cite{cormen2009}. Node cuối cùng có con trỏ \texttt{next} bằng \texttt{nullptr}. Danh sách được quản lý thông qua hai con trỏ: \texttt{head} (trỏ đến node đầu tiên) và \texttt{tail} (trỏ đến node cuối cùng).
+
+\begin{lstlisting}[caption={Định nghĩa node danh sách liên kết đơn cho câu hỏi}, label={lst:node}]
+struct Question {
+    int    id;
+    string content;
+    string answers[4];
+    char   correct;   // 'A', 'B', 'C' hoac 'D'
+};
+
+struct QuestionNode {
+    Question    data;
+    QuestionNode* next;
+};
+\end{lstlisting}
+
+\subsection{Ưu điểm so với mảng tĩnh}
+
+Khác với mảng có kích thước cố định phải khai báo trước, danh sách liên kết đơn cho phép thêm và xoá phần tử linh hoạt mà không cần cấp phát lại toàn bộ vùng nhớ~\cite{cormen2009}. Điều này rất phù hợp với ngân hàng câu hỏi, nơi số lượng câu hỏi thay đổi theo thời gian: Admin có thể thêm câu hỏi mới (thêm vào cuối danh sách trong $O(1)$ với con trỏ \texttt{tail}) hoặc xoá câu hỏi theo ID (duyệt tuyến tính $O(n)$).
+
+\subsection{Các thao tác cơ bản}
+
+Bảng~\ref{tab:linkedlist} tóm tắt các thao tác cơ bản được cài đặt trong dự án cùng độ phức tạp thời gian tương ứng.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|l|} \hline
+        \textbf{Thao tác} & \textbf{Mô tả} & \textbf{Độ phức tạp} \\ \hline
+        \texttt{addQuestion(q)} & Thêm câu hỏi vào cuối danh sách & $O(1)$ \\ \hline
+        \texttt{removeQuestion(id)} & Xoá câu hỏi theo ID & $O(n)$ \\ \hline
+        \texttt{getQuestionCount()} & Đếm số câu hỏi & $O(n)$ \\ \hline
+        \texttt{getQuestionAt(index)} & Lấy câu hỏi tại vị trí index & $O(n)$ \\ \hline
+        \texttt{printAll()} & In toàn bộ danh sách & $O(n)$ \\ \hline
+        \texttt{generateRandomSet(n)} & Bốc ngẫu nhiên $n$ câu & $O(n)$ \\ \hline
+    \end{tabularx}
+    \caption{Các thao tác trên danh sách liên kết đơn QuestionBank}
+    \label{tab:linkedlist}
+\end{table}
+
+\subsection{Cài đặt thêm và xoá node}
+
+Thao tác thêm node vào cuối (dùng con trỏ \texttt{tail}) có thể thực hiện trong $O(1)$ mà không cần duyệt toàn bộ danh sách. Thao tác xoá node theo ID cần xử lý ba trường hợp: danh sách rỗng, node cần xoá là HEAD, và node cần xoá ở giữa hoặc cuối.
+
+\begin{lstlisting}[caption={Thêm node vào cuối danh sách liên kết đơn}, label={lst:addnode}]
+void QuestionBank::addQuestion(Question q) {
+    QuestionNode* newNode = new QuestionNode();
+    newNode->data = q;
+    newNode->next = nullptr;
+    if (tail == nullptr) {
+        head = newNode;  // Danh sach rong
+        tail = newNode;
+    } else {
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
+\end{lstlisting}
+
+\section{Thuật toán xáo trộn Fisher-Yates}
+
+\subsection{Nguyên lý hoạt động}
+
+Thuật toán Fisher-Yates (còn gọi là Knuth Shuffle) là một thuật toán xáo trộn mảng \textit{in-place} cho phân phối đều (uniform distribution), nghĩa là mọi hoán vị của mảng đều có xác suất xuất hiện bằng nhau~\cite{knuth1997}. Thuật toán hoạt động theo nguyên tắc: duyệt mảng từ cuối về đầu, tại mỗi vị trí $i$, chọn ngẫu nhiên một vị trí $j$ trong đoạn $[0, i]$ và hoán đổi phần tử tại $i$ và $j$.
+
+\begin{lstlisting}[caption={Thuật toán Fisher-Yates xáo trộn mảng câu hỏi}, label={lst:fisheryates}]
+void Exam::shuffleQuestions(Question arr[], int n) {
+    for (int i = n - 1; i > 0; --i) {
+        int j = rand() % (i + 1);   // j ngau nhien trong [0, i]
+        Question temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+\end{lstlisting}
+
+\subsection{Độ phức tạp}
+
+Thuật toán Fisher-Yates có độ phức tạp thời gian $O(n)$ và không gian $O(1)$, tốt hơn nhiều so với các cách tiếp cận ngây thơ như chọn phần tử ngẫu nhiên và kiểm tra trùng lặp (có độ phức tạp trung bình $O(n^2)$)~\cite{knuth1997}.
+
+\subsection{Ứng dụng trong dự án}
+
+Trong chương trình, Fisher-Yates được áp dụng ở hai cấp độ. Thứ nhất, xáo trộn thứ tự các câu hỏi trong đề thi để mỗi sinh viên nhận được đề có trình tự câu hỏi khác nhau. Thứ hai, với mỗi câu hỏi, xáo trộn thứ tự bốn đáp án (A, B, C, D) và cập nhật lại trường \texttt{correct} để phản ánh đáp án đúng trong sắp xếp mới.
+
+\begin{lstlisting}[caption={Xáo trộn đáp án và cập nhật đáp án đúng}, label={lst:shuffleans}]
+void Exam::shuffleExam() {
+    shuffleQuestions(questionList, numberOfQuestions);
+    for (int i = 0; i < numberOfQuestions; ++i) {
+        Question& q = questionList[i];
+        // Ghi nho noi dung dap an dung truoc khi xao
+        string correctText = q.answers[q.correct - 'A'];
+        shuffleAnswers(q.answers, 4);
+        // Cap nhat lai vi tri dap an dung sau khi xao
+        for (int k = 0; k < 4; ++k) {
+            if (q.answers[k] == correctText) {
+                q.correct = static_cast<char>('A' + k);
+                break;
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\section{Xử lý File I/O trong C++}
+
+\subsection{Các lớp stream cơ bản}
+
+C++ cung cấp thư viện \texttt{<fstream>} với hai lớp chính cho File I/O: \texttt{ifstream} (đọc file) và \texttt{ofstream} (ghi file)~\cite{stroustrup2013}. Để xử lý chuỗi văn bản phân tách, nhóm kết hợp với \texttt{std::istringstream} từ thư viện \texttt{<sstream>} giúp phân tách từng trường dữ liệu theo ký tự \texttt{|}.
+
+\subsection{Định dạng dữ liệu}
+
+Nhóm lựa chọn định dạng file văn bản phẳng (plain text) với ký tự phân tách \texttt{|} cho cả hai file dữ liệu. Định dạng này có thể đọc bằng bất kỳ trình soạn thảo văn bản nào, dễ kiểm tra bằng tay khi debug, và không yêu cầu thư viện bên ngoài~\cite{stroustrup2013}.
+
+Định dạng file \texttt{questions.txt}:
+\begin{verbatim}
+id|NoiDungCauHoi|DapAnA|DapAnB|DapAnC|DapAnD|DapAnDung
+\end{verbatim}
+
+Định dạng file \texttt{history.txt}:
+\begin{verbatim}
+Username|SoCauDung|TongSoCau|Diem|Timestamp
+\end{verbatim}
+
+\subsection{Đọc file với xử lý lỗi}
+
+Một thực hành tốt khi làm việc với File I/O là luôn kiểm tra xem file có mở thành công không trước khi thao tác, và xử lý từng dòng với cơ chế bẫy lỗi để bỏ qua các dòng không hợp lệ thay vì làm crash toàn bộ chương trình~\cite{stroustrup2013}.
+
+\begin{lstlisting}[caption={Đọc file câu hỏi với kiểm tra lỗi từng dòng}, label={lst:fileread}]
+bool QuestionBank::loadFromFile(string filename) {
+    ifstream fin(filename);
+    if (!fin.is_open()) {
+        cout << "[Loi] Khong the mo file: " << filename << "\n";
+        return false;
+    }
+    string line;
+    while (getline(fin, line)) {
+        if (line.empty() || line[0] == '#') continue;
+        istringstream ss(line);
+        Question q;
+        string token;
+        if (!getline(ss, token, '|')) continue;
+        q.id = stoi(token);
+        // ... phan tich tung truong theo dinh dang
+        addQuestion(q);
+    }
+    fin.close();
+    return true;
+}
+\end{lstlisting}
+
+\section{Lập trình hướng đối tượng trong C++}
+
+\subsection{Class, đóng gói và trừu tượng hoá}
+
+Lập trình hướng đối tượng (OOP) tổ chức mã nguồn xung quanh các \textit{đối tượng} --- các thực thể kết hợp dữ liệu (thuộc tính) và hành vi (phương thức) thành một đơn vị thống nhất~\cite{stroustrup2013}. Nguyên lý \textit{đóng gói} (encapsulation) yêu cầu che dấu các chi tiết cài đặt bên trong class, chỉ để lộ ra giao diện công khai cần thiết. Điều này giảm sự phụ thuộc giữa các module và giúp thay đổi cài đặt nội bộ mà không ảnh hưởng đến code bên ngoài.
+
+Trong dự án, cả ba class chính (\texttt{QuestionBank}, \texttt{HistoryManager}, \texttt{Exam}) đều có thành viên \texttt{private} (con trỏ \texttt{head}, \texttt{tail}, mảng \texttt{questionList}) chỉ được truy cập thông qua các phương thức \texttt{public}.
+
+\subsection{Tách khai báo và cài đặt (Header/Source)}
+
+Quy ước phổ biến trong C++ là tách khai báo (declaration) vào file header \texttt{.h} và cài đặt (definition) vào file source \texttt{.cpp}~\cite{stroustrup2013}. File header chứa signature của các hàm và định nghĩa struct/class, cho phép các module khác \texttt{\#include} mà không cần biết chi tiết cài đặt. Cơ chế \texttt{\#pragma once} hoặc include guard ngăn chặn việc include trùng lặp gây lỗi biên dịch.
+
+Cấu trúc này mang lại nhiều lợi ích: giảm thời gian biên dịch lại khi chỉ thay đổi cài đặt, phân công công việc rõ ràng giữa các thành viên nhóm, và tạo ra một ``hợp đồng'' (contract) tường minh về giao diện của mỗi module~\cite{stroustrup2013}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|l|X|} \hline
+        \textbf{File Header} & \textbf{File Source} & \textbf{Nội dung} \\ \hline
+        \texttt{QuestionBank.h} & \texttt{QuestionBank.cpp} & Struct \texttt{Question}, \texttt{QuestionNode}; class \texttt{QuestionBank} với các thao tác thêm, xoá, đọc, ghi \\ \hline
+        \texttt{History.h} & \texttt{History.cpp} & Struct \texttt{TestRecord}, \texttt{HistoryNode}; class \texttt{HistoryManager} lưu trữ và truy vấn lịch sử thi \\ \hline
+        \texttt{Exam.h} & \texttt{Exam.cpp} & Class \texttt{Exam} với logic sinh đề, xáo trộn, đếm giờ và chấm điểm \\ \hline
+        \texttt{Menu.h} & \texttt{Menu.cpp} & Struct \texttt{LoginSession}; các hàm giao diện Terminal, đăng nhập, menu Admin, menu Sinh viên \\ \hline
+    \end{tabularx}
+    \caption{Cấu trúc header/source của các module trong dự án}
+    \label{tab:modules}
+\end{table}
+
+\subsection{Validate input và lập trình phòng ngừa}
+
+Một chương trình tốt không chỉ hoạt động đúng với đầu vào hợp lệ mà còn xử lý ổn thoả với đầu vào không hợp lệ~\cite{kernighan1999}. Kỹ thuật \textit{lập trình phòng ngừa} (defensive programming) yêu cầu kiểm tra mọi giá trị đầu vào từ người dùng trước khi sử dụng. Trong dự án, hàm \texttt{getValidInt()} đọc số nguyên trong đoạn $[\min, \max]$ với vòng lặp bẫy lỗi hoàn toàn: khi người dùng nhập ký tự không phải số, \texttt{cin.clear()} và \texttt{cin.ignore()} được gọi để xoá trạng thái lỗi và bộ đệm, sau đó yêu cầu nhập lại.
+
+\section{Tổng kết}
+
+Chương này đã trình bày sáu nhóm kiến thức lý thuyết làm nền tảng cho dự án: nguyên lý thiết kế theo module và top-down, con trỏ và quản lý bộ nhớ động, danh sách liên kết đơn, thuật toán Fisher-Yates, xử lý File I/O và lập trình hướng đối tượng trong C++. Bảng~\ref{tab:theory_summary} tóm tắt mối liên hệ giữa từng kiến thức lý thuyết và phần cài đặt tương ứng trong dự án.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Kiến thức lý thuyết} & \textbf{Ứng dụng trong dự án} \\ \hline
+        Thiết kế module / top-down & Phân chia thành 4 module độc lập; \texttt{main.cpp} chỉ điều phối luồng chính \\ \hline
+        Con trỏ / bộ nhớ động & Mảng \texttt{Question[]} và \texttt{char[]} trong class \texttt{Exam}; cấp phát bằng \texttt{new[]}, giải phóng trong Destructor \\ \hline
+        Danh sách liên kết đơn & \texttt{QuestionBank} và \texttt{HistoryManager} lưu trữ dữ liệu động không giới hạn kích thước \\ \hline
+        Fisher-Yates Shuffle & Xáo trộn thứ tự câu hỏi và đáp án trong \texttt{Exam::shuffleExam()} \\ \hline
+        File I/O (\texttt{fstream}) & Đọc/ghi \texttt{questions.txt} và \texttt{history.txt} với định dạng phân tách \texttt{|} \\ \hline
+        OOP (class, header/source) & 3 class với đóng gói đầy đủ; tách khai báo (\texttt{.h}) và cài đặt (\texttt{.cpp}) \\ \hline
+        Validate input & Hàm \texttt{getValidInt()}, \texttt{getValidString()}, \texttt{getYesNo()} với vòng lặp bẫy lỗi \\ \hline
+    \end{tabularx}
+    \caption{Tổng kết liên hệ lý thuyết và cài đặt trong dự án}
+    \label{tab:theory_summary}
+\end{table}
+
+% ============================================================
+% CHƯƠNG 3 - 6: SKELETON (GIỮ NGUYÊN NHƯ CŨ)
 % ============================================================
 \chapter{Phân tích Yêu cầu hệ thống}
 \label{chap:phantich}
@@ -278,9 +616,9 @@ Quá trình phối hợp được thực hiện qua \textbf{GitHub} (quản lý 
 \label{chap:thietke}
 
 \section{Kiến trúc tổng thể chương trình}
-\subsection{Sơ đồ phân chia module} %(Header – Source – Data)
+\subsection{Sơ đồ phân chia module}
 \subsection{Luồng dữ liệu giữa các module}
-\subsection{Sơ đồ luồng điều hướng Menu} %(Admin / Sinh viên)
+\subsection{Sơ đồ luồng điều hướng Menu}
 
 \section{Thiết kế cấu trúc dữ liệu}
 \subsection{Cấu trúc file questions.txt}
@@ -288,33 +626,32 @@ Quá trình phối hợp được thực hiện qua \textbf{GitHub} (quản lý 
 \subsection{Quy tắc định dạng và tách trường dữ liệu}
 
 \section{Thiết kế các module chức năng}
-\subsection{Module Menu} %Menu.h/Menu.cpp
+\subsection{Module Menu}
 \subsubsection{Giao diện đăng nhập và xác thực người dùng}
 \subsubsection{Menu Admin: quản lý câu hỏi, xem thống kê}
 \subsubsection{Menu Sinh viên: vào thi, xem lịch sử}
 \subsubsection{Cơ chế validate input và bẫy lỗi}
 
-\subsection{Module Ngân hàng câu hỏi} %(QuestionBank.h / QuestionBank.cpp)
+\subsection{Module Ngân hàng câu hỏi}
 \subsubsection{Struct Question và các thuộc tính}
 \subsubsection{Danh sách liên kết đơn lưu câu hỏi}
 \subsubsection{Đọc/ghi file questions.txt}
 \subsubsection{Thêm, sửa, xoá câu hỏi}
 
-\subsection{Module Thi} %(Exam.h / Exam.cpp)
+\subsection{Module Thi}
 \subsubsection{Thuật toán sinh đề: xáo trộn Fisher-Yates}
 \subsubsection{Xáo trộn thứ tự đáp án A/B/C/D}
 \subsubsection{Module đếm giờ đếm ngược thời gian thực}
 \subsubsection{Thu bài tự động khi hết giờ}
 \subsubsection{Logic tính điểm và tổng hợp kết quả}
 
-\subsection{Module Lịch sử thi} %(History.h / History.cpp)
+\subsection{Module Lịch sử thi}
 \subsubsection{Struct TestRecord và các thuộc tính}
 \subsubsection{Danh sách liên kết đơn lưu lịch sử}
 \subsubsection{Ghi kết quả vào file history.txt}
 \subsubsection{Truy vấn và hiển thị lịch sử theo username}
 
-\subsection{Hàm main} %(main.cpp)
-
+\subsection{Hàm main}
 
 % ============================================================
 \chapter{Cài đặt và xây dựng chương trình}
@@ -324,12 +661,12 @@ Quá trình phối hợp được thực hiện qua \textbf{GitHub} (quản lý 
 
 % ============================================================
 \chapter{Kiểm thử và Đánh giá kết quả}
-
 \label{chap:kiemthu}
-\section{Chiến lược kiểm thử} %(Test Strategy)
-\section{Tình huống kiểm thử} %(Test Cases)
-\subsection{Test Case-01: Đăng nhập đúng – Admin}
-\subsection{Test Case-02: Đăng nhập đúng – Sinh viên}
+
+\section{Chiến lược kiểm thử}
+\section{Tình huống kiểm thử}
+\subsection{Test Case-01: Đăng nhập đúng -- Admin}
+\subsection{Test Case-02: Đăng nhập đúng -- Sinh viên}
 \subsection{Test Case-03: Đăng nhập sai mật khẩu}
 \subsection{Test Case-04: Thêm câu hỏi mới}
 \subsection{Test Case-05: Sinh đề và xáo trộn câu hỏi/đáp án}
@@ -337,11 +674,10 @@ Quá trình phối hợp được thực hiện qua \textbf{GitHub} (quản lý 
 \subsection{Test Case-07: Tự động thu bài khi hết giờ}
 \subsection{Test Case-08: Xem lịch sử thi nhiều lần}
 \subsection{Test Case-09: Nhập sai định dạng (bẫy lỗi)}
-\subsection{Test Case-10: Kiểm thử rò rỉ bộ nhớ (Valgrind / địa chỉ)}
+\subsection{Test Case-10: Kiểm thử rò rỉ bộ nhớ (Valgrind)}
 
-\section{Hình ảnh chụp kết quả thực thi} %(Screenshots)
+\section{Hình ảnh chụp kết quả thực thi}
 \section{Đánh giá kết quả kiểm thử}
-
 
 % ============================================================
 \chapter{Kết luận và hướng phát triển}
@@ -349,11 +685,11 @@ Quá trình phối hợp được thực hiện qua \textbf{GitHub} (quản lý 
 
 \section{Kết quả đạt được}
 \section{Tổng kết các kỹ thuật đã được vận dụng}
-\subsection{Cấu trúc dữ liệu: Danh sách liên kết đơn} %(Singly Linked List)
+\subsection{Cấu trúc dữ liệu: Danh sách liên kết đơn}
 \subsection{Quản lý bộ nhớ động: con trỏ, new/delete, tránh Memory Leak}
 \subsection{Xử lý File I/O: đọc/ghi file text với ký tự phân tách '|'}
 \subsection{Thuật toán xáo trộn Fisher-Yates}
-\subsection{Lập trình hướng module: tách Header – Source – Data}
+\subsection{Lập trình hướng module: tách Header -- Source -- Data}
 \subsection{Lập trình hướng đối tượng (OOP): Class, Constructor, Destructor}
 \subsection{Lập trình phòng ngừa}
 \subsection{Validate input và xử lý ngoại lệ trên Terminal}
@@ -367,7 +703,7 @@ Quá trình phối hợp được thực hiện qua \textbf{GitHub} (quản lý 
 \cleardoublepage
 \nocite{*}
 \bibliographystyle{ieeetr}
-\bibliography{references}  % Gọi file references.bib
+\bibliography{references}
 
 % ============================================================
 \appendix
