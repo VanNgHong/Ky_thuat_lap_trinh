@@ -1,3 +1,8 @@
+// ============================================================
+//  History.h  –  Khai báo struct TestRecord & HistoryManager
+//  Tác giả: VÂN  |  Role: Kỹ sư Dữ liệu
+// ============================================================
+
 #ifndef HISTORY_H
 #define HISTORY_H
 

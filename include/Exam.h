@@ -1,10 +1,12 @@
+// ============================================================
+//  Exam.h  –  Khai báo logic sinh đề, xáo trộn, bộ đếm giờ
+//  Tác giả: HÙNG  |  Role: Kỹ sư Logic
+// ============================================================
+
 #pragma once
 #include "QuestionBank.h"
 #include "History.h"
 #include <string>
-// ============================================================
-//  Exam.h  –  Khai báo logic sinh đề, xáo trộn, bộ đếm giờ
-// ============================================================
 
 class Exam {
 public:

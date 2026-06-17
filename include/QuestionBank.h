@@ -1,3 +1,8 @@
+// ============================================================
+//  QuestionBank.h  –  Khai báo cấu trúc câu hỏi & ngân hàng
+//  Tác giả: VÂN  |  Role: Kỹ sư Dữ liệu
+// ============================================================
+
 #ifndef QUESTIONBANK_H
 #define QUESTIONBANK_H
 
@@ -9,7 +14,8 @@ struct Question {
     int id;                  
     string content;     
     string answers[4];  
-    char correct;            // Ký tự đáp án đúng: 'A', 'B', 'C', hoặc 'D'
+    char correct;            
+    // Ký tự đáp án đúng: 'A', 'B', 'C', hoặc 'D'
 };
 
 // Node của danh sách liên kết đơn chứa một câu hỏi

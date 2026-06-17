@@ -1,3 +1,8 @@
+// ============================================================
+//  Exam.cpp  –  Triển khai logic sinh đề, xáo trộn, bộ đếm giờ
+//  Tác giả: HÙNG  |  Role: Kỹ sư Logic / Thuật toán
+// ============================================================
+
 #include "Exam.h"
 #include <iostream>
 #include <limits>
@@ -5,20 +10,40 @@
 #include <cctype>
 using namespace std;
 
-// CÁC HÀM CƠ BẢN CỦA CLASS EXAM
+// ============================================================
+//  CONSTRUCTOR / DESTRUCTOR
+// ============================================================
+
 // Constructor: Cấp phát động mảng Question[N]
-Exam::Exam(int n, int t) {
+Exam::Exam(int n, int t)
+{
     numberOfQuestions = n;
     timeLimitSec = t;
-    questionList = new Question[n];
+
+    questionList = new Question[numberOfQuestions];
+    userAnswers  = new char[numberOfQuestions];
+
+    for (int i = 0; i < numberOfQuestions; i++)
+        userAnswers[i] = '-';
 }
 
 // Destructor: Giải phóng bộ nhớ động
 Exam::~Exam() {
     delete[] questionList;
+    delete[] userAnswers;
 }
 
-// Hàm nạp câu hỏi từ QuestionBank vào Exam 
+// ============================================================
+//  NẠP CÂU HỎI VÀO ĐỀ THI
+// ============================================================
+
+// Nạp từ mảng Question[] (dùng sau generateRandomSet)
+void Exam::loadFromBank(Question* questions) {
+    for (int i = 0; i < numberOfQuestions; i++)
+        questionList[i] = questions[i];
+}
+
+// Nạp câu hỏi từ QuestionBank vào Exam 
 void Exam::generateExamFromBank(QuestionBank& bank) {
     int bankCount = bank.getQuestionCount();
     if (bankCount < numberOfQuestions) {
@@ -29,6 +54,7 @@ void Exam::generateExamFromBank(QuestionBank& bank) {
     int* indices = new int[bankCount];
     for (int i = 0; i < bankCount; ++i) indices[i] = i;
 
+    // Fisher-Yates shuffle trên mảng index
     for (int i = bankCount - 1; i > 0; --i) {
         int j = rand() % (i + 1);
         int temp = indices[i];
@@ -45,8 +71,11 @@ void Exam::generateExamFromBank(QuestionBank& bank) {
     delete[] indices;
 }
 
+// ============================================================
+//  THUẬT TOÁN XÁO TRỘN (Fisher-Yates)
+// ============================================================
+
 // Xáo trộn mảng chuỗi (Áp dụng cho mảng answers[4])
-// Tương ứng: PROCEDURE Shuffle(arr[], n) dành cho đáp án
 void Exam::shuffleAnswers(string arr[], int n)
 {
     for (int i = n - 1; i > 0; --i) {
@@ -58,9 +87,7 @@ void Exam::shuffleAnswers(string arr[], int n)
     }
 }
 
-// Xáo trộn mảng câu hỏi (Áp dụng cho mảng questionList)
-// Tương ứng: PROCEDURE Shuffle(arr[], n) dành cho câu hỏi
-
+// Xáo trộn thứ tự các câu hỏi trong đề
 void Exam::shuffleQuestions(Question arr[], int n)
 {
     for (int i = n - 1; i > 0; --i) {
@@ -72,22 +99,18 @@ void Exam::shuffleQuestions(Question arr[], int n)
     }
 }
 
-//mới thêm 16/06
-void Exam::loadFromBank(Question* questions) {
-    for (int i = 0; i < numberOfQuestions; i++)
-        questionList[i] = questions[i];
-}
-// Hàm chính áp dụng logic trộn đề thi
-// Tương ứng: PROCEDURE ShuffleExam(questions[], qCount)
+// Áp dụng toàn bộ: xáo câu hỏi + xáo đáp án từng câu,
+// đồng thời cập nhật lại trường 'correct' sau khi xáo đáp án.
 void Exam::shuffleExam() {
-    
+
     // 1. Xáo thứ tự câu hỏi: Shuffle(questions, qCount)
     shuffleQuestions(questionList, numberOfQuestions);
 
-    // 2. FOR EACH q IN questions DO
+    // 2. Với mỗi câu, xáo đáp án và cập nhật đáp án đúng
     for (int i = 0; i < numberOfQuestions; ++i) {
         Question& q = questionList[i]; // Lấy câu hỏi hiện tại
-// Vì struct Question dùng ký tự 'A','B','C','D' để đánh dấu đáp án đúng, trước khi xáo ta cần biết nội dung chuỗi (text) chính xác của đáp án đúng là gì.
+
+        // Ghi nhớ nội dung đáp án đúng trước khi xáo
         int originalCorrectIndex = q.correct - 'A'; 
         string correctText = q.answers[originalCorrectIndex];
 
@@ -105,57 +128,64 @@ void Exam::shuffleExam() {
     }
 }
 
-// Hàm in đề thi để kiểm tra
+// ============================================================
+//  IN ĐỀ THI (dùng để debug / kiểm tra)
+// ============================================================
+
 void Exam::printExam() const {
     for (int i = 0; i < numberOfQuestions; ++i) {
-        std::cout << "Cau hoi " << i + 1 << " (ID: " << questionList[i].id << "): " << questionList[i].content << "\n";
-        std::cout << "  A. " << questionList[i].answers[0] << "\n";
-        std::cout << "  B. " << questionList[i].answers[1] << "\n";
-        std::cout << "  C. " << questionList[i].answers[2] << "\n";
-        std::cout << "  D. " << questionList[i].answers[3] << "\n";
-        std::cout << "=> Dap an dung: " << questionList[i].correct << "\n\n";
+        cout << "Cau hoi " << (i + 1)
+             << " (ID: " << questionList[i].id << "): "
+             << questionList[i].content << "\n";
+        cout << "  A. " << questionList[i].answers[0] << "\n";
+        cout << "  B. " << questionList[i].answers[1] << "\n";
+        cout << "  C. " << questionList[i].answers[2] << "\n";
+        cout << "  D. " << questionList[i].answers[3] << "\n";
+        cout << "=> Dap an dung: " << questionList[i].correct << "\n\n";
     }
 }
 
-// Chạy toàn bộ bài thi: hiển thị từng câu, nhận đáp án, đếm giờ ngược,
-// tự động thu bài khi hết giờ và tính điểm theo thang 10.
-TestRecord Exam::startExam(const std::string& username, int timeLimitMin)
-{
+// ============================================================
+//  CHẠY BÀI THI
+// ============================================================
+
+// Hiển thị từng câu hỏi, nhận đáp án, đếm giờ ngược,
+// tự động thu bài khi hết giờ, tính điểm thang 10.
+TestRecord Exam::startExam(const std::string& username, int timeLimitSec_) {
     cout << "\n=== BAT DAU LAM BAI ===\n";
-    cout << "Thoi gian: " << timeLimitMin << " giay\n"; 
+    cout << "Thoi gian: " << timeLimitSec_ << " giay\n";
     cout << "Nhan 'S' de nop bai som.\n\n";
 
     TestRecord record;
-    record.studentName = username;
+    record.studentName  = username;
     record.correctCount = 0;
-    record.totalCount = numberOfQuestions;
+    record.totalCount   = numberOfQuestions;
 
-    char* userAnswers = new char[numberOfQuestions];
+    // Khởi tạo mảng kết quả từng câu
     bool* result = new bool[numberOfQuestions];
     for (int i = 0; i < numberOfQuestions; i++) {
         userAnswers[i] = '-';
-        result[i] = false;
+        result[i]      = false;
     }
 
-    // Ghi lại thời điểm bắt đầu
     time_t startTime = time(nullptr);
-    bool timeUp = false;
+    bool   submitted = false;   // true khi nộp sớm hoặc hết giờ
 
-    for (int i = 0; i < numberOfQuestions; i++) {
-        // 1. Kiểm tra thời gian TRƯỚC KHI hiển thị câu hỏi tiếp theo
-        time_t now = time(nullptr);
-        long elapsed = (long)difftime(now, startTime);
-        long remaining = timeLimitMin - elapsed;
+    for (int i = 0; i < numberOfQuestions && !submitted; i++) {
+
+        // ── Kiểm tra giờ TRƯỚC khi hiển thị câu hỏi ──────────
+        long elapsed   = (long)difftime(time(nullptr), startTime);
+        long remaining = timeLimitSec_ - elapsed;
 
         if (remaining <= 0) {
-            cout << "\n\n*** HET GIO! He thong tu dung thu bai. ***\n";
-            timeUp = true;
+            cout << "\n\n*** HET GIO! He thong tu dong thu bai. ***\n";
+            submitted = true;
             break;
         }
 
-        // In thời gian còn lại cho người dùng biết trước khi làm câu này
         cout << "\n[Thoi gian con lai: " << remaining << " giay]\n";
 
+        // ── Hiển thị câu hỏi ──────────────────────────────────
         Question& q = questionList[i];
         cout << "----------------------------------------\n";
         cout << "Cau " << (i + 1) << "/" << numberOfQuestions << "\n";
@@ -166,39 +196,39 @@ TestRecord Exam::startExam(const std::string& username, int timeLimitMin)
         cout << "D. " << q.answers[3] << "\n";
         cout << "(Nhap S de nop bai ngay)\n";
 
+        // ── Nhận đáp án từ người dùng ─────────────────────────
         char chosen = '-';
-
         while (true) {
             cout << "Chon dap an (A/B/C/D hoac S=nop bai): ";
             string input;
-            if (!(cin >> input)) {
-                break;
-            }
-
+            if (!(cin >> input)) break;
             if (input.empty()) continue;
-            char c = toupper(input[0]);
+
+            char c = static_cast<char>(toupper(static_cast<unsigned char>(input[0])));
 
             if (c == 'S') {
                 cout << "\nBan da chon nop bai som.\n";
-                goto DONE;
+                submitted = true;
+                break;
             }
-
-            if (c == 'A' || c == 'B' || c == 'C' || c == 'D') {
+            if (c >= 'A' && c <= 'D') {
                 chosen = c;
                 break;
             }
-            cout << "Nhap khong hop le! Vui long nhap A/B/C/D.\n";
+            cout << "Nhap khong hop le! Vui long nhap A/B/C/D hoac S.\n";
         }
 
-        // 2. Kiểm tra thời gian SAU KHI người dùng nhập xong
-        now = time(nullptr);
-        elapsed = (long)difftime(now, startTime);
-        if (timeLimitMin - elapsed <= 0) {
+        if (submitted) break;
+
+        // ── Kiểm tra giờ SAU KHI nhập xong ───────────────────
+        elapsed   = (long)difftime(time(nullptr), startTime);
+        remaining = timeLimitSec_ - elapsed;
+        if (remaining <= 0) {
             cout << "\n\n*** HET GIO TRONG LUC LAM CAU NAY! He thong tu dong thu bai. ***\n";
-            timeUp = true;
-            break;
+            submitted = true;
         }
 
+        // ── Ghi nhận đáp án và chấm điểm câu này ─────────────
         userAnswers[i] = chosen;
         if (chosen != '-' && chosen == q.correct) {
             result[i] = true;
@@ -206,29 +236,24 @@ TestRecord Exam::startExam(const std::string& username, int timeLimitMin)
         }
     }
 
-DONE:
-    // Tính thời gian thực tế đã dùng
-    time_t endTime = time(nullptr);
-    long usedSec = (long)difftime(endTime, startTime);
-    if (usedSec > timeLimitMin) usedSec = timeLimitMin; 
-    
+    // ── Tính thời gian thực tế đã dùng ────────────────────────
+    long usedSec = (long)difftime(time(nullptr), startTime);
+    if (usedSec > timeLimitSec_) usedSec = timeLimitSec_;
     cout << "\nThoi gian lam bai: " << usedSec << " giay\n";
 
-    // --- Phần tính điểm giữ nguyên ---
-    if (record.totalCount > 0)
-        record.score = (double)record.correctCount / record.totalCount * 10.0;
-    else
-        record.score = 0.0;
+    // ── Tính điểm ─────────────────────────────────────────────
+    record.score = (record.totalCount > 0)
+        ? (double)record.correctCount / record.totalCount * 10.0
+        : 0.0;
 
+    // ── Ghi timestamp ─────────────────────────────────────────
     time_t nowTime = time(nullptr);
-    tm* localTm = localtime(&nowTime);
-    char buf[32];
+    tm*    localTm = localtime(&nowTime);
+    char   buf[32];
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", localTm);
     record.datetime = buf;
 
-    // =====================================
-    // HIỂN THỊ ĐÁP ÁN SAU KHI THI (ĐÃ ĐƯỢC ĐƯA VÀO ĐÚNG VỊ TRÍ)
-    // =====================================
+    // ── Hiển thị chi tiết kết quả từng câu ───────────────────
     cout << "\n\n========================================\n";
     cout << "CHI TIET KET QUA BAI THI\n";
     cout << "========================================\n";
@@ -238,35 +263,27 @@ DONE:
         cout << questionList[i].content << "\n";
 
         cout << "Ban chon   : " << userAnswers[i];
-        
-        if (userAnswers[i] >= 'A' && userAnswers[i] <= 'D') {
-            int idx = userAnswers[i] - 'A';
-            cout << ". " << questionList[i].answers[idx];
-        }
+        if (userAnswers[i] >= 'A' && userAnswers[i] <= 'D')
+            cout << ". " << questionList[i].answers[userAnswers[i] - 'A'];
         cout << "\n";
-        
+
         cout << "Dap an dung: " << questionList[i].correct << ". "
              << questionList[i].answers[questionList[i].correct - 'A'] << "\n";
 
-        if (userAnswers[i] == '-') {
+        if (userAnswers[i] == '-')
             cout << "[CHUA TRA LOI]\n";
-        }
-        else if (result[i]) {
+        else if (result[i])
             cout << "[DUNG]\n";
-        }
-        else {
+        else
             cout << "[SAI]\n";
-        }
     }
 
     cout << "\n========================================\n";
-    cout << "Tong so cau dung: " << record.correctCount << "/" << record.totalCount << "\n";
+    cout << "Tong so cau dung: " << record.correctCount
+         << "/" << record.totalCount << "\n";
     cout << "Diem so: " << record.score << "/10\n";
     cout << "========================================\n";
 
-    // Giải phóng bộ nhớ động ở CUỐI HÀM, sau khi đã dùng xong để in kết quả
-    delete[] userAnswers;
     delete[] result;
     return record;
-} // Đóng hàm startExam hợp lệ ở đây
-
+}

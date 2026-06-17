@@ -1,3 +1,8 @@
+// ============================================================
+//  History.cpp  –  Hoàn thiện các hàm I/O
+//  Tác giả: VÂN  |  Role: Kỹ sư Dữ liệu
+// ============================================================
+
 #include "../include/History.h"
 #include <iostream>
 #include <fstream>

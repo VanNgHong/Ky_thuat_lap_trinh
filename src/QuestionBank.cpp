@@ -1,3 +1,8 @@
+// ============================================================
+//  QuestionBank.cpp  –  Hoàn thiện các hàm I/O
+//  Tác giả: VÂN  |  Role: Kỹ sư Dữ liệu
+// ============================================================
+
 #include "../include/QuestionBank.h"
 #include <iostream>
 #include <fstream>

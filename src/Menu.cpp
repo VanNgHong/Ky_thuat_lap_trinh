@@ -123,8 +123,7 @@ void showWelcomeBanner() {
     clearScreen();
     cout << Color::CYAN << Color::BOLD;
     printLine('=');
-    printCentered("HE THONG THI TRAC NGHIEM C++");
-    printCentered("Mon: Ky Thuat Lap Trinh");
+    printCentered("HE THONG THI TRAC NGHIEM MON TIENG ANH");
     printLine('=');
     cout << Color::RESET;
     pauseScreen();
@@ -323,7 +322,7 @@ void showStudentMenu(LoginSession& session) {
 
                 int total = bank.getQuestionCount();
                 if (total == 0) {
-                    cout << Color::RED << "\nNgan hang cau hoi dang rong, khong the tao de thi!\n" << Color::RESET;
+                    cout << Color::RED << "\nNgan hang cau hoi rong, khong the tao de thi!\n" << Color::RESET;
                     pauseScreen();
                     break;
                 }
@@ -340,17 +339,26 @@ void showStudentMenu(LoginSession& session) {
                 int timeLimit = getValidInt(
                     "Nhap thoi gian lam bai (giay, toi thieu 10): ", 10, 36000);
 
-                if (!getYesNo("\nBat dau lam bai ngay bay gio?")) {
+                if (!getYesNo("\nBat dau lam bai?")) {
                     break;
                 }
-// từ 346 đến 352 mới sửa
+
                 Question* selected = bank.generateRandomSet(numQ);
-             Exam exam(numQ, timeLimit);
-             exam.loadFromBank(selected);
-             delete[] selected;       // giải phóng sau khi đã load vào Exam
-             exam.shuffleExam();      // hoặc exam.shuffle() nếu bạn đổi tên
+                if (selected == nullptr){
+                    cout << "Khong tao duoc de thi!\n";
+                    pauseScreen();
+                    break;
+                }
+
+
+                Exam exam(numQ, timeLimit);
+                exam.loadFromBank(selected);
+                delete[] selected;       
+                // giải phóng sau khi đã load vào Exam
+                exam.shuffleExam();      
+                // hoặc exam.shuffle() nếu bạn đổi tên
                 clearScreen();
-             TestRecord record = exam.startExam(session.username, timeLimit);
+                TestRecord record = exam.startExam(session.username, exam.timeLimitSec);
                 cout << "\nRETURNED FROM startExam()\n";
                 pauseScreen(); 
                 clearScreen();
@@ -382,7 +390,7 @@ void showStudentMenu(LoginSession& session) {
 
                 clearScreen();
                 cout << Color::BOLD;
-                printCentered("LICH SU THI CUA BAN");
+                printCentered("LICH SU LAM BAI THI CUA BAN");
                 cout << Color::RESET;
                 printLine();
                 cout << fixed << setprecision(2);

@@ -5,9 +5,9 @@
 //  LUỒNG CHÍNH:
 //    main()
 //      └─ showWelcomeBanner()
-//      └─ showLoginScreen()   ← lặp cho đến khi đăng nhập OK
-//          └─ [Admin]   → showAdminMenu()
-//          └─ [Student] → showStudentMenu()
+//      └─ showLoginScreen()   <-- lặp cho đến khi đăng nhập OK
+//          └─ [Admin]         --> showAdminMenu()
+//          └─ [Student]       --> showStudentMenu()
 // ============================================================
 
 #include "../include/Menu.h"

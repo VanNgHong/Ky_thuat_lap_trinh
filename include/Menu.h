@@ -1,11 +1,10 @@
-#pragma once
-#include <string>
-
 // ============================================================
 //  Menu.h  –  Khai báo các hàm vẽ giao diện và điều hướng
 //  Tác giả: THÀNH  |  Role: System Architect / UI / QA
-//  Quy tắc: camelCase cho hàm, PascalCase cho struct/class
 // ============================================================
+
+#pragma once
+#include <string>
 
 // ── Thông tin người dùng đang đăng nhập ─────────────────────
 struct LoginSession {
