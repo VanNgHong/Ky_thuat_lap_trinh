@@ -12,9 +12,13 @@
 
 #include "../include/Menu.h"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 int main() {
+    srand(static_cast<unsigned int>(time(nullptr)));  
+
     // Vòng lặp chính: cho phép đăng nhập lại nếu sai thông tin
     bool appRunning = true;
     while (appRunning) {

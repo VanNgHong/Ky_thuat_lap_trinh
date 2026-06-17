@@ -11,7 +11,9 @@ using namespace std;
 
 // Struct lưu thông tin một câu hỏi trắc nghiệm
 struct Question {
-    int id;                  
+    int id;      
+    string subject;      
+    string difficulty;   // Easy, Medium, Hard            
     string content;     
     string answers[4];  
     char correct;            
@@ -37,8 +39,11 @@ public:
     // Destructor: giải phóng toàn bộ bộ nhớ động
     ~QuestionBank();
 
+    // Kiem tra ID da ton tai trong ngan hang chua
+    bool isIdExists(int id);
+
     // Thêm câu hỏi vào cuối danh sách
-    void addQuestion(Question q);
+    bool addQuestion(Question q);
 
     // Xóa câu hỏi theo id
     void removeQuestion(int id);
@@ -48,6 +53,21 @@ public:
 
     // Lấy con trỏ Question tại vị trí index (0-indexed)
     Question* getQuestionAt(int index);
+
+    // Đếm số câu theo mức độ
+    int countByDifficulty(const string& difficulty);
+
+    // Lấy danh sách câu hỏi theo mức độ
+    Question* getQuestionsByDifficulty(const string& difficulty, int& count);
+
+    // Lay danh sach cac mon hoc khac nhau co trong ngan hang
+    string* getDistinctSubjects(int& count);
+
+    // Dem so cau hoi theo DUNG mon hoc VA muc do (dung khi sinh de theo mon)
+    int countBySubjectAndDifficulty(const string& subject, const string& difficulty);
+
+    // Lay danh sach cau hoi theo mon hoc VA muc do
+    Question* getQuestionsBySubjectAndDifficulty(const string& subject, const string& difficulty, int& count);
 
     void printAll();
     

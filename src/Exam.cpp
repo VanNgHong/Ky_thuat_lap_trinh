@@ -44,31 +44,42 @@ void Exam::loadFromBank(Question* questions) {
 }
 
 // Nạp câu hỏi từ QuestionBank vào Exam 
-void Exam::generateExamFromBank(QuestionBank& bank) {
-    int bankCount = bank.getQuestionCount();
-    if (bankCount < numberOfQuestions) {
-        std::cout << "Loi: Ngan hang khong du " << numberOfQuestions << " cau hoi!\n";
-        return;
+bool Exam::generateExamFromBank(QuestionBank& bank, const string& subject)
+{
+    int easyNeed   = numberOfQuestions * EASY_PERCENT / 100;
+    int mediumNeed = numberOfQuestions * MEDIUM_PERCENT / 100;
+    int hardNeed   = numberOfQuestions - easyNeed - mediumNeed;
+
+    int easySize, mediumSize, hardSize;
+
+    Question* easyQuestions   = bank.getQuestionsBySubjectAndDifficulty(subject, "Easy", easySize);
+    Question* mediumQuestions = bank.getQuestionsBySubjectAndDifficulty(subject, "Medium", mediumSize);
+    Question* hardQuestions   = bank.getQuestionsBySubjectAndDifficulty(subject, "Hard", hardSize);
+
+    if (easySize < easyNeed || mediumSize < mediumNeed || hardSize < hardNeed)
+    {
+        cout << "[Loi] Ngan hang cau hoi mon " << subject << " khong du de sinh de.\n";
+        delete[] easyQuestions;
+        delete[] mediumQuestions;
+        delete[] hardQuestions;
+        return false;
     }
 
-    int* indices = new int[bankCount];
-    for (int i = 0; i < bankCount; ++i) indices[i] = i;
+    shuffleQuestions(easyQuestions, easySize);
+    shuffleQuestions(mediumQuestions, mediumSize);
+    shuffleQuestions(hardQuestions, hardSize);
 
-    // Fisher-Yates shuffle trên mảng index
-    for (int i = bankCount - 1; i > 0; --i) {
-        int j = rand() % (i + 1);
-        int temp = indices[i];
-        indices[i] = indices[j];
-        indices[j] = temp;
-    }
+    int index = 0;
+    for (int i = 0; i < easyNeed; i++)   questionList[index++] = easyQuestions[i];
+    for (int i = 0; i < mediumNeed; i++) questionList[index++] = mediumQuestions[i];
+    for (int i = 0; i < hardNeed; i++)   questionList[index++] = hardQuestions[i];
 
-    for (int i = 0; i < numberOfQuestions; ++i) {
-        Question* bankQuestion = bank.getQuestionAt(indices[i]);
-        if (bankQuestion != nullptr) {
-            questionList[i] = *bankQuestion;
-        }
-    }
-    delete[] indices;
+    shuffleQuestions(questionList, numberOfQuestions);
+
+    delete[] easyQuestions;
+    delete[] mediumQuestions;
+    delete[] hardQuestions;
+    return true;
 }
 
 // ============================================================
@@ -134,9 +145,7 @@ void Exam::shuffleExam() {
 
 void Exam::printExam() const {
     for (int i = 0; i < numberOfQuestions; ++i) {
-        cout << "Cau hoi " << (i + 1)
-             << " (ID: " << questionList[i].id << "): "
-             << questionList[i].content << "\n";
+        cout << "Cau hoi " << (i + 1) << " (ID: " << questionList[i].id << ") [" << questionList[i].difficulty << "] : ";
         cout << "  A. " << questionList[i].answers[0] << "\n";
         cout << "  B. " << questionList[i].answers[1] << "\n";
         cout << "  C. " << questionList[i].answers[2] << "\n";

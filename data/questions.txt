@@ -1,3 +1,20 @@
-1|Thu do cua Viet Nam la gi?|Ha Noi|Ho Chi Minh|Da Nang|Hue|A
-3|Ngon ngu nao duoc dung trong bai nay?|Java|Python|C++|Rust|C
-4|HTTP la viet tat cua?|HyperText Transfer Protocol|High Transfer Text Protocol|Hyper Terminal Transfer Protocol|HyperText Transmission Protocol|A
+1|TACS1|Easy|What is the plural form of "book"?|Books|Bookses|Bookies|Booken|A
+2|TACS1|Easy|Choose the correct article: ___ apple a day keeps the doctor away.|A|An|The|No article|B
+3|TACS1|Easy|Which word is a verb?|Run|Beautiful|Quickly|Happy|A
+4|TACS1|Medium|Choose the correct sentence.|She go to school every day.|She goes to school every day.|She going to school every day.|She gone to school every day.|B
+5|TACS1|Medium|What is the past tense of "write"?|Writed|Written|Wrote|Writing|C
+6|TACS1|Medium|Choose the synonym of "big".|Tiny|Large|Short|Weak|B
+7|TACS1|Hard|Identify the passive voice sentence.|They built the bridge in 2020.|The bridge was built in 2020.|They are building the bridge.|They will build the bridge.|B
+8|TACS1|Hard|Choose the correct conditional sentence.|If I study hard, I will pass the exam.|If I studied hard, I will pass the exam.|If I study hard, I would pass the exam.|If I studied hard, I pass the exam.|A
+9|TACS1|Hard|Which sentence contains a relative clause?|I like pizza.|The man who lives next door is a teacher.|She runs fast.|They arrived early.|B
+10|TACS1|Medium|Choose the antonym of "expensive".|Costly|Cheap|Valuable|Luxury|B
+11|TACS2|Easy|What is the plural form of "book"?|Books|Bookses|Bookies|Booken|A
+12|TACS2|Easy|Choose the correct article: ___ apple a day keeps the doctor away.|A|An|The|No article|B
+13|TACS2|Easy|Which word is a verb?|Run|Beautiful|Quickly|Happy|A
+14|TACS2|Medium|Choose the correct sentence.|She go to school every day.|She goes to school every day.|She going to school every day.|She gone to school every day.|B
+15|TACS2|Medium|What is the past tense of "write"?|Writed|Written|Wrote|Writing|C
+16|TACS2|Medium|Choose the synonym of "big".|Tiny|Large|Short|Weak|B
+17|TACS2|Hard|Identify the passive voice sentence.|They built the bridge in 2020.|The bridge was built in 2020.|They are building the bridge.|They will build the bridge.|B
+18|TACS2|Hard|Choose the correct conditional sentence.|If I study hard, I will pass the exam.|If I studied hard, I will pass the exam.|If I study hard, I would pass the exam.|If I studied hard, I pass the exam.|A
+19|TACS2|Hard|Which sentence contains a relative clause?|I like pizza.|The man who lives next door is a teacher.|She runs fast.|They arrived early.|B
+20|TACS2|Medium|Choose the antonym of "expensive".|Costly|Cheap|Valuable|Luxury|B

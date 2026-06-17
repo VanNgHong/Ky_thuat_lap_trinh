@@ -12,6 +12,7 @@ using namespace std;
 // Struct lưu thông tin một lần thi của thí sinh
 struct TestRecord {
     string studentName;  
+    string subject;
     int correctCount;         
     int totalCount;           
     double score;             

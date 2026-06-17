@@ -11,15 +11,15 @@
 class Exam {
 public:
     // Khởi tạo: cấp phát mảng Question[n]
-Exam(int n, int timeLimitSec);
-int timeLimitSec;
+    Exam(int n, int timeLimitSec);
+    int timeLimitSec;
     // Destructor: giải phóng bộ nhớ động
     ~Exam();
 
     void loadFromBank(Question* questions);
 
     // Nạp ngẫu nhiên câu hỏi từ ngân hàng vào đề thi
-    void generateExamFromBank(QuestionBank& bank);
+    bool generateExamFromBank(QuestionBank& bank, const std::string& subject);
 
     // Xáo trộn thứ tự câu hỏi và đáp án
     void shuffleExam();
@@ -45,4 +45,8 @@ private:
     // Xáo trộn mảng câu hỏi (Fisher-Yates)
     void shuffleQuestions(Question arr[], int n);
     // Copy câu hỏi từ mảng vào exam
+
+    static const int EASY_PERCENT   = 40;
+    static const int MEDIUM_PERCENT = 40;
+    static const int HARD_PERCENT   = 20;
 };

@@ -55,6 +55,7 @@ void HistoryManager::saveToFile(const string& filename) {
     while (current != nullptr) {
         const TestRecord& rec = current->data;
         outFile << rec.studentName  << "|"
+                << rec.subject      << "|"
                 << rec.correctCount << "|"
                 << rec.totalCount   << "|"
                 << rec.score        << "|"
@@ -78,6 +79,7 @@ void HistoryManager::loadFromFile(const string& filename) {
         TestRecord r;
 
         getline(ss, r.studentName, '|');
+        getline(ss, r.subject, '|');
         getline(ss, token, '|');
         r.correctCount = stoi(token);
         getline(ss, token, '|');
@@ -104,6 +106,10 @@ void HistoryManager::printAll()
     {
         cout << "Sinh vien: "
              << current->data.studentName
+             << "\n";
+
+        cout << "Mon hoc: "
+             << current->data.subject
              << "\n";
 
         cout << "So cau dung: "
@@ -137,6 +143,10 @@ void HistoryManager::printByUser(const string& username)
         if (current->data.studentName == username)
         {
             found = true;
+
+            cout << "Mon hoc: "
+                 << current->data.subject
+                 << "\n";
 
             cout << "So cau dung: "
                  << current->data.correctCount

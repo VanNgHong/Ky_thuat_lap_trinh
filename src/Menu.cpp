@@ -115,6 +115,25 @@ bool getYesNo(const string& prompt) {
     }
 }
 
+// Tính so cau hoi toi da co the sinh de duoc, dua tren dung cong thuc chia ti le 40% Easy - 40% Medium - 20% Hard
+int getMaxNumberQuest(int nEasy, int nMedium, int nHard)
+{
+    int total = nEasy + nMedium + nHard;
+
+    // Thu N tu lon -> nho. N hop le dau tien tim duoc chinh la so cau toi da.
+    for (int n = total; n >= 1; n--) {
+        int easyNeed   = n * 40 / 100;
+        int mediumNeed = n * 40 / 100;
+        int hardNeed   = n - easyNeed - mediumNeed;
+
+        if (easyNeed <= nEasy && mediumNeed <= nMedium && hardNeed <= nHard) {
+            return n;
+        }
+    }
+
+    return 0;   // Khong co N nao hop le (vi du thieu han 1 muc do)
+}
+
 // ============================================================
 //  MÀN HÌNH CHÀO MỪNG
 // ============================================================
@@ -225,8 +244,33 @@ void showAdminMenu(LoginSession& session) {
                 printLine();
 
                 Question q;
-                q.id = getValidInt("Nhap ID cau hoi (so nguyen duong): ", 1, 1000000);
-                q.content   = getValidString("Noi dung cau hoi: ", 200);
+                while (true) {
+                    q.id = getValidInt("Nhap ID cau hoi (so nguyen duong): ", 1, 1000000);
+                    if (bank.isIdExists(q.id)) {
+                        cout << Color::RED << "[Loi] ID " << q.id
+                            << " da ton tai! Vui long nhap mot ID khac.\n" << Color::RESET;
+                    } else {
+                    break;
+                    }
+                }
+
+                q.subject = getValidString("Mon hoc: ", 50);
+
+                while (true) {
+                    string diff = getValidString("Muc do (Easy / Medium / Hard): ", 10);
+                    if (!diff.empty()) {
+                        diff[0] = toupper((unsigned char)diff[0]);
+                        for (int i = 1; i < (int)diff.size(); i++)
+                            diff[i] = tolower((unsigned char)diff[i]);
+                    }
+                    if (diff == "Easy" || diff == "Medium" || diff == "Hard") {
+                        q.difficulty = diff;
+                        break;
+                    }
+                    cout << Color::RED << "Chi chap nhan: Easy, Medium, hoac Hard!\n" << Color::RESET;
+                }
+
+                q.content    = getValidString("Noi dung cau hoi: ", 200);
                 q.answers[0] = getValidString("Dap an A: ", 100);
                 q.answers[1] = getValidString("Dap an B: ", 100);
                 q.answers[2] = getValidString("Dap an C: ", 100);
@@ -234,7 +278,7 @@ void showAdminMenu(LoginSession& session) {
 
                 while (true) {
                     string cAns = getValidString("Dap an dung (A/B/C/D): ", 5);
-                    char up = static_cast<char>(toupper(static_cast<unsigned char>(cAns[0])));
+                    char up = toupper((unsigned char)cAns[0]);
                     if (up == 'A' || up == 'B' || up == 'C' || up == 'D') {
                         q.correct = up;
                         break;
@@ -242,10 +286,12 @@ void showAdminMenu(LoginSession& session) {
                     cout << Color::RED << "Vui long nhap A, B, C hoac D!\n" << Color::RESET;
                 }
 
-                bank.addQuestion(q);
-                bank.saveToFile(QUESTIONS_FILE);
-
-                cout << Color::GREEN << "\n[OK] Da them cau hoi thanh cong!\n" << Color::RESET;
+                if (bank.addQuestion(q)) {
+                    bank.saveToFile(QUESTIONS_FILE);
+                    cout << Color::GREEN << "\n[OK] Da them cau hoi thanh cong!\n" << Color::RESET;
+                } else {
+                    cout << Color::RED << "\n[Loi] Khong the them cau hoi (ID bi trung).\n" << Color::RESET;
+                }
                 pauseScreen();
                 break;
             }
@@ -320,61 +366,85 @@ void showStudentMenu(LoginSession& session) {
                 QuestionBank bank;
                 bank.loadFromFile(QUESTIONS_FILE);
 
-                int total = bank.getQuestionCount();
-                if (total == 0) {
-                    cout << Color::RED << "\nNgan hang cau hoi rong, khong the tao de thi!\n" << Color::RESET;
+                if (bank.getQuestionCount() == 0) {
+                    cout << Color::RED << "\nNgan hang cau hoi rong!\n" << Color::RESET;
                     pauseScreen();
                     break;
                 }
+
+                // ── Cho sinh vien chon mon hoc ───────────────────────────
+                int subjectCount = 0;
+                string* subjects = bank.getDistinctSubjects(subjectCount);
 
                 clearScreen();
                 cout << Color::BOLD;
-                printCentered("BAT DAU LAM BAI THI");
+                printCentered("CHON MON HOC DE THI");
                 cout << Color::RESET;
                 printLine();
-                cout << "Ngan hang hien co " << total << " cau hoi.\n\n";
 
-                int numQ = getValidInt(
-                    "Nhap so cau hoi muon thi (1-" + to_string(total) + "): ", 1, total);
-                int timeLimit = getValidInt(
-                    "Nhap thoi gian lam bai (giay, toi thieu 10): ", 10, 36000);
-
-                if (!getYesNo("\nBat dau lam bai?")) {
-                    break;
+                for (int i = 0; i < subjectCount; i++) {
+                    cout << (i + 1) << ". " << subjects[i] << "\n";
                 }
+                printLine();
 
-                Question* selected = bank.generateRandomSet(numQ);
-                if (selected == nullptr){
-                    cout << "Khong tao duoc de thi!\n";
+                int subjectChoice = getValidInt("Chon mon hoc (1-" + to_string(subjectCount) + "): ", 1, subjectCount);
+
+                string selectedSubject = subjects[subjectChoice - 1];
+                delete[] subjects;   
+
+                int nEasy   = bank.countBySubjectAndDifficulty(selectedSubject, "Easy");
+                int nMedium = bank.countBySubjectAndDifficulty(selectedSubject, "Medium");
+                int nHard   = bank.countBySubjectAndDifficulty(selectedSubject, "Hard");
+
+                clearScreen();
+                cout << Color::BOLD;
+                printCentered("BAT DAU LAM BAI THI - MON " + selectedSubject);
+                cout << Color::RESET;
+                printLine();
+
+                int maxQ = getMaxNumberQuest(nEasy, nMedium, nHard);
+
+                if (maxQ < 1) {
+                    cout << Color::RED
+                        << "[Loi] Mon " << selectedSubject
+                        << " chua du cau hoi theo ca 3 muc do de sinh de!\n"
+                        << Color::RESET;
                     pauseScreen();
                     break;
                 }
 
+                int numQ = getValidInt("Nhap so cau hoi muon thi (1-" + to_string(maxQ) + "): ", 1, maxQ);
+                int timeLimit = getValidInt("Nhap thoi gian lam bai (giay, toi thieu 10): ", 10, 36000);
+                if (!getYesNo("\nBat dau lam bai?")) break;
 
+                // ── Sinh de CHI TU mon hoc da chon ───────────────────────
                 Exam exam(numQ, timeLimit);
-                exam.loadFromBank(selected);
-                delete[] selected;       
-                // giải phóng sau khi đã load vào Exam
-                exam.shuffleExam();      
-                // hoặc exam.shuffle() nếu bạn đổi tên
+                if (!exam.generateExamFromBank(bank, selectedSubject)) {
+                    cout << Color::RED
+                        << "[Loi] Khong the sinh de thi (ngan hang khong du theo ti le 40-40-20).\n"
+                        << Color::RESET;
+                    pauseScreen();
+                    break;
+                }
+                exam.shuffleExam();
+
                 clearScreen();
                 TestRecord record = exam.startExam(session.username, exam.timeLimitSec);
-                cout << "\nRETURNED FROM startExam()\n";
-                pauseScreen(); 
+                record.subject = selectedSubject;
+
                 clearScreen();
-                
-                cout << Color::GREEN << Color::BOLD;
                 cout << Color::GREEN << Color::BOLD;
                 printLine('=');
                 printCentered("KET QUA BAI THI");
                 printLine('=');
                 cout << Color::RESET;
 
-                cout << "Sinh vien : " << record.studentName << "\n";
+                cout << "Sinh vien  : " << record.studentName  << "\n";
+                cout << "Mon hoc    : " << record.subject       << "\n";  
                 cout << "So cau dung: " << record.correctCount << "/" << record.totalCount << "\n";
                 cout << fixed << setprecision(2);
-                cout << "Diem so   : " << record.score << " / 10\n";
-                cout << "Thoi gian : " << record.datetime << "\n";
+                cout << "Diem so    : " << record.score << " / 10\n";
+                cout << "Thoi gian  : " << record.datetime << "\n";
 
                 HistoryManager history;
                 history.addRecord(record);

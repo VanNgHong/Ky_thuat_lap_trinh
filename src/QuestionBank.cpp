@@ -30,21 +30,36 @@ QuestionBank::~QuestionBank() {
     tail = nullptr;
 }
 
-// Thêm câu hỏi mới vào cuối danh sách 
-void QuestionBank::addQuestion(Question q) {
+// Duyet toan bo danh sach de kiem tra id co trung khong
+bool QuestionBank::isIdExists(int id) {
+    QuestionNode* current = head;
+    while (current != nullptr) {
+        if (current->data.id == id) {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
+
+bool QuestionBank::addQuestion(Question q) {
+    if (isIdExists(q.id)) {
+        cout << "[Canh bao] ID " << q.id << " da ton tai trong ngan hang. Khong them duoc.\n";
+        return false;
+    }
+
     QuestionNode* newNode = new QuestionNode();
     newNode->data = q;
-    newNode->next = nullptr; 
+    newNode->next = nullptr;
 
     if (tail == nullptr) {
-        // Danh sách đang rỗng
         head = newNode;
         tail = newNode;
     } else {
-        // Danh sách đã có phần tử
         tail->next = newNode;
         tail = newNode;
     }
+    return true;
 }
 
 // Xóa node có id trùng khớp khỏi danh sách
@@ -124,7 +139,7 @@ Question* QuestionBank::getQuestionAt(int index) {
 
 // loadFromFile
 // Định dạng mỗi dòng:
-// id|content|answerA|answerB|answerC|answerD|correct
+// id|subject|difficulty|content|A|B|C|D|correct
 bool QuestionBank::loadFromFile(string filename) {
     ifstream fin(filename);
     if (!fin.is_open()) {
@@ -153,14 +168,28 @@ bool QuestionBank::loadFromFile(string filename) {
             continue;
         }
 
-        // Truong 2: content 
+        // Truong 2: subject
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu mon hoc. Bo qua.\n";
+            continue;
+        }
+        q.subject = token;
+
+        // Truong 3: difficulty
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu muc do. Bo qua.\n";
+            continue;
+        }
+        q.difficulty = token;
+
+        // Truong 4: content
         if (!getline(ss, token, '|')) {
             cout << "[Canh bao] Dong " << lineNum << ": thieu noi dung cau hoi. Bo qua.\n";
             continue;
         }
         q.content = token;
 
-        // Truong 3-6: 4 dap an A B C D 
+        // Truong 5-8: 4 dap an A B C D 
         bool answersOk = true;
         for (int i = 0; i < 4; i++) {
             if (!getline(ss, token, '|')) {
@@ -172,7 +201,7 @@ bool QuestionBank::loadFromFile(string filename) {
         }
         if (!answersOk) continue;
 
-        // Truong 7: correct ('A'/'B'/'C'/'D') 
+        // Truong 9: correct ('A'/'B'/'C'/'D') 
         if (!getline(ss, token, '|')) {
             cout << "[Canh bao] Dong " << lineNum << ": thieu dap an dung. Bo qua.\n";
             continue;
@@ -189,12 +218,78 @@ bool QuestionBank::loadFromFile(string filename) {
         }
         q.correct = c;
 
-        addQuestion(q);
+        if (!addQuestion(q)) {
+            cout << "[Canh bao] Dong " << lineNum << ": ID " << q.id << " bi trung voi cau hoi da co, da bo qua dong nay.\n";
+        }
     }
 
     fin.close();
     cout << "[OK] Da nap " << getQuestionCount() << " cau hoi tu file \"" << filename << "\".\n";
     return true;
+}
+
+// Duyet toan bo danh sach, gom cac ten mon hoc khac nhau lai
+string* QuestionBank::getDistinctSubjects(int& count) {
+    int total = getQuestionCount();
+    if (total == 0) {
+        count = 0;
+        return nullptr;
+    }
+
+    // Mang tam, toi da bang tong so cau hoi (truong hop xau nhat moi cau 1 mon)
+    string* temp = new string[total];
+    int distinctCount = 0;
+
+    QuestionNode* current = head;
+    while (current != nullptr) {
+        bool exists = false;
+        for (int i = 0; i < distinctCount; i++) {
+            if (temp[i] == current->data.subject) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            temp[distinctCount++] = current->data.subject;
+        }
+        current = current->next;
+    }
+
+    // Cap lai mang dung kich thuoc thuc te de tra ve cho ben ngoai
+    string* result = new string[distinctCount];
+    for (int i = 0; i < distinctCount; i++) result[i] = temp[i];
+    delete[] temp;
+
+    count = distinctCount;
+    return result;
+}
+
+int QuestionBank::countBySubjectAndDifficulty(const string& subject, const string& difficulty) {
+    int count = 0;
+    QuestionNode* current = head;
+    while (current != nullptr) {
+        if (current->data.subject == subject && current->data.difficulty == difficulty) {
+            count++;
+        }
+        current = current->next;
+    }
+    return count;
+}
+
+Question* QuestionBank::getQuestionsBySubjectAndDifficulty(const string& subject, const string& difficulty, int& count) {
+    count = countBySubjectAndDifficulty(subject, difficulty);
+    if (count == 0) return nullptr;
+
+    Question* result = new Question[count];
+    QuestionNode* current = head;
+    int index = 0;
+    while (current != nullptr) {
+        if (current->data.subject == subject && current->data.difficulty == difficulty) {
+            result[index++] = current->data;
+        }
+        current = current->next;
+    }
+    return result;
 }
 
 // saveToFile
@@ -211,14 +306,16 @@ bool QuestionBank::saveToFile(string filename) {
     int saved = 0;
     while (current != nullptr) {
         const Question& q = current->data;
-        fout << q.id         << '|' 
-             << q.content    << '|'
-             << q.answers[0] << '|'
-             << q.answers[1] << '|'
-             << q.answers[2] << '|'
-             << q.answers[3] << '|'
-             << q.correct
-             << '\n';
+        fout << q.id          << '|'
+            << q.subject     << '|'
+            << q.difficulty  << '|'
+            << q.content     << '|'
+            << q.answers[0]  << '|'
+            << q.answers[1]  << '|'
+            << q.answers[2]  << '|'
+            << q.answers[3]  << '|'
+            << q.correct
+            << '\n';
         saved++;
         current = current->next;
     }
@@ -236,6 +333,8 @@ void QuestionBank::printAll()
     while (current != nullptr)
     {
         cout << "ID: " << current->data.id << "\n";
+        cout << "Mon hoc: " << current->data.subject << "\n";
+        cout << "Muc do: " << current->data.difficulty << "\n";
         cout << "Cau hoi: " << current->data.content << "\n";
 
         cout << "A. " << current->data.answers[0] << "\n";
@@ -248,6 +347,58 @@ void QuestionBank::printAll()
 
         current = current->next;
     }
+}
+
+int QuestionBank::countByDifficulty(
+        const string& difficulty)
+{
+    int count = 0;
+
+    QuestionNode* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->data.difficulty ==
+            difficulty)
+        {
+            count++;
+        }
+
+        current = current->next;
+    }
+
+    return count;
+}
+
+Question* QuestionBank::getQuestionsByDifficulty(
+        const string& difficulty,
+        int& count)
+{
+    count = countByDifficulty(difficulty);
+
+    if (count == 0)
+        return nullptr;
+
+    Question* result =
+        new Question[count];
+
+    QuestionNode* current = head;
+
+    int index = 0;
+
+    while (current != nullptr)
+    {
+        if (current->data.difficulty ==
+            difficulty)
+        {
+            result[index++] =
+                current->data;
+        }
+
+        current = current->next;
+    }
+
+    return result;
 }
 
 // mới thêm 16/06/2026
