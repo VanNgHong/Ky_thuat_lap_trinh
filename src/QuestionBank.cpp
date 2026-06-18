@@ -294,7 +294,7 @@ Question* QuestionBank::getQuestionsBySubjectAndDifficulty(const string& subject
 
 // saveToFile
 // Ghi toan bo danh sach xuong file theo dinh dang phan tach '|':
-// id|content|answerA|answerB|answerC|answerD|correct
+// id|subject|difficulty|content|answerA|answerB|answerC|answerD|correct
 bool QuestionBank::saveToFile(string filename) {
     ofstream fout(filename);
     if (!fout.is_open()) {

@@ -1,20 +1,300 @@
-1|TACS1|Easy|What is the plural form of "book"?|Books|Bookses|Bookies|Booken|A
-2|TACS1|Easy|Choose the correct article: ___ apple a day keeps the doctor away.|A|An|The|No article|B
-3|TACS1|Easy|Which word is a verb?|Run|Beautiful|Quickly|Happy|A
-4|TACS1|Medium|Choose the correct sentence.|She go to school every day.|She goes to school every day.|She going to school every day.|She gone to school every day.|B
-5|TACS1|Medium|What is the past tense of "write"?|Writed|Written|Wrote|Writing|C
-6|TACS1|Medium|Choose the synonym of "big".|Tiny|Large|Short|Weak|B
-7|TACS1|Hard|Identify the passive voice sentence.|They built the bridge in 2020.|The bridge was built in 2020.|They are building the bridge.|They will build the bridge.|B
-8|TACS1|Hard|Choose the correct conditional sentence.|If I study hard, I will pass the exam.|If I studied hard, I will pass the exam.|If I study hard, I would pass the exam.|If I studied hard, I pass the exam.|A
-9|TACS1|Hard|Which sentence contains a relative clause?|I like pizza.|The man who lives next door is a teacher.|She runs fast.|They arrived early.|B
-10|TACS1|Medium|Choose the antonym of "expensive".|Costly|Cheap|Valuable|Luxury|B
-11|TACS2|Easy|What is the plural form of "book"?|Books|Bookses|Bookies|Booken|A
-12|TACS2|Easy|Choose the correct article: ___ apple a day keeps the doctor away.|A|An|The|No article|B
-13|TACS2|Easy|Which word is a verb?|Run|Beautiful|Quickly|Happy|A
-14|TACS2|Medium|Choose the correct sentence.|She go to school every day.|She goes to school every day.|She going to school every day.|She gone to school every day.|B
-15|TACS2|Medium|What is the past tense of "write"?|Writed|Written|Wrote|Writing|C
-16|TACS2|Medium|Choose the synonym of "big".|Tiny|Large|Short|Weak|B
-17|TACS2|Hard|Identify the passive voice sentence.|They built the bridge in 2020.|The bridge was built in 2020.|They are building the bridge.|They will build the bridge.|B
-18|TACS2|Hard|Choose the correct conditional sentence.|If I study hard, I will pass the exam.|If I studied hard, I will pass the exam.|If I study hard, I would pass the exam.|If I studied hard, I pass the exam.|A
-19|TACS2|Hard|Which sentence contains a relative clause?|I like pizza.|The man who lives next door is a teacher.|She runs fast.|They arrived early.|B
-20|TACS2|Medium|Choose the antonym of "expensive".|Costly|Cheap|Valuable|Luxury|B
+1|TA10|Easy|She usually _______ to school by bike every morning.|go|goes|going|went|B
+2|TA10|Easy|A _______ is a person who manages the home and raises children instead of earning money.|homemaker|breadwinner|servant|worker|A
+3|TA10|Easy|We _______ an interesting documentary about green living on TV last night.|watch|watches|watched|watching|C
+4|TA10|Easy|My parents always encourage me _______ hard for the final exam.|study|to study|studying|studied|B
+5|TA10|Medium|The local environment _______ by the heavy pollution from nearby factories recently.|is damaging|was damaging|has been damaged|damaged|C
+6|TA10|Medium|The volunteer youth group _______ the trash along the beach when it started to rain.|picked up|were picking up|are picking up|pick up|B
+7|TA10|Medium|The man _______ gave a presentation on eco-friendly lifestyle yesterday is my teacher.|whom|who|which|whose|B
+8|TA10|Medium|If we drop litter in the streets, we _______ our neighborhood dirty.|will make|would make|make|made|A
+9|TA10|Hard|Not until I arrived at the airport _______ that I had left my passport at home.|I realized|did I realize|had I realized|I had realized|B
+10|TA10|Hard|Many teenagers want to _______ a contribution to protecting their local ecosystem.|do|make|take|give|B
+11|TA10|Hard|It is no use _______ him to adopt a green lifestyle; he doesn't care about the environment.|to persuade|persuade|persuading|persuaded|C
+12|TA10|Hard|The heavy rain caused the rivers to rise, _______ widespread flooding in the low-lying areas.|resulting in|led to|because of|thanks to|A
+13|TA10|Easy|My mother _______ the cooking while my father does the heavy lifting.|does|makes|takes|has|A
+14|TA10|Easy|We can reduce our carbon footprint by _______ plastic bags.|using|recycling|throwing|buying|B
+15|TA10|Easy|He is very talented; he can play _______ guitar beautifully.|a|an|the|ø|C
+16|TA10|Easy|Look! The birds _______ in the sky.|fly|are flying|flew|have flown|B
+17|TA10|Easy|I decided _______ to the volunteer club last Sunday.|join|to join|joining|joined|B
+18|TA10|Easy|The Earth _______ around the Sun.|move|moves|moving|moved|B
+19|TA10|Easy|He wants to become a _______ singer like his idol.|famous|fame|famously|infamous|A
+20|TA10|Easy|We should turn _______ the lights when leaving the room.|on|off|up|down|B
+21|TA10|Easy|She _______ a book when I called her yesterday.|reads|is reading|was reading|has read|C
+22|TA10|Easy|They enjoy _______ board games in their free time.|playing|to play|play|played|A
+23|TA10|Easy|I usually wake up _______ 6 o'clock every morning.|at|on|in|for|A
+24|TA10|Easy|We need to plant more trees to protect our _______ environment.|local|locally|locality|localize|A
+25|TA10|Easy|This song sounds very _______ to me.|beautiful|beautifully|beauty|beautify|A
+26|TA10|Easy|Yesterday, I _______ to the market to buy some fresh vegetables.|go|goes|went|gone|C
+27|TA10|Easy|Computers are modern devices that help us _______ information.|store|stores|storing|stored|A
+28|TA10|Easy|Both men and women should share the _______ chores.|house|household|housewife|houseman|B
+29|TA10|Easy|You can send your application _______ email.|by|with|in|on|A
+30|TA10|Easy|Listen! Someone _______ at the door.|knocks|is knocking|knocked|has knocked|B
+31|TA10|Easy|The book _______ you lent me is very interesting.|who|whom|which|whose|C
+32|TA10|Easy|They hope _______ a new community center next year.|build|to build|building|built|B
+33|TA10|Easy|Organic food is better _______ our health.|for|at|with|to|A
+34|TA10|Easy|He is interested _______ learning English.|in|on|at|about|A
+35|TA10|Easy|We always avoid _______ plastic bottles.|to use|use|using|used|C
+36|TA10|Easy|The test was very _______, so all students passed it.|difficult|easy|hard|boring|B
+37|TA10|Easy|My father is the _______ in my family; he works to earn money.|homemaker|breadwinner|housewife|baby|B
+38|TA10|Easy|If it _______ tomorrow, we will go camping.|rains|rain|will rain|rained|A
+39|TA10|Easy|Music helps people relax after a _______ working day.|tire|tiring|tired|tiresome|B
+40|TA10|Easy|She has taught English here _______ 2020.|for|since|in|at|B
+41|TA10|Easy|We shouldn't throw trash into the _______ river.|clean|clear|polluted|fresh|C
+42|TA10|Easy|I _______ this movie three times before.|see|saw|have seen|seeing|C
+43|TA10|Easy|He didn't come to school yesterday _______ he was sick.|because|because of|although|despite|A
+44|TA10|Easy|The smartphone is a great _______ of modern technology.|invent|invention|inventive|inventor|B
+45|TA10|Easy|Please speak more _______ so everyone can understand you.|clear|clearly|clearness|clarify|B
+46|TA10|Easy|He promised _______ his homework before going out.|do|doing|to do|done|C
+47|TA10|Easy|Ecotourism helps tourists learn how to protect _______ wildlife.|a|an|the|ø|D
+48|TA10|Medium|The local market _______ with a lot of eco-friendly products lately.|is filled|was filled|has been filled|had been filled|C
+49|TA10|Medium|While I _______ my homework, the lights suddenly went out.|am doing|was doing|did|have done|B
+50|TA10|Medium|I am looking forward to _______ my pen pal from England next week.|meet|meeting|to meet|met|B
+51|TA10|Medium|The new species of bird _______ in the national park last month.|discovered|was discovered|has been discovered|discovers|B
+52|TA10|Medium|He worked very hard, _______ he couldn't finish the project on time.|so|but|and|or|B
+53|TA10|Medium|The charity organization has set _______ a new fund for poor children.|up|off|on|in|A
+54|TA10|Medium|Many volunteers joined the campaign to clean _______ the local lake.|up|out|off|in|A
+55|TA10|Medium|If I _______ you, I would take part in that green community project.|am|was|were|would be|C
+56|TA10|Medium|She is the most intelligent student _______ I have ever met.|who|which|that|whose|C
+57|TA10|Medium|The heavy rain prevented us _______ going on a picnic.|from|to|for|with|A
+58|TA10|Medium|The program aims to provide students _______ useful digital skills.|with|for|to|about|A
+59|TA10|Medium|They suggest _______ more trees in the schoolyard to create more shade.|to plant|planting|plant|planted|B
+60|TA10|Medium|The concert was canceled due to bad weather, _______ disappointed many fans.|that|which|who|whom|B
+61|TA10|Medium|We got lost in the forest because we forgot _______ a map.|bringing|to bring|bring|brought|B
+62|TA10|Medium|The internet allows students _______ information quickly and easily.|access|accessing|to access|accessed|C
+63|TA10|Medium|The teacher made us _______ all the new words by heart.|learn|to learn|learning|learned|A
+64|TA10|Medium|The old building _______ by the storm is being rebuilt now.|destroying|destroyed|was destroyed|destroys|B
+65|TA10|Medium|You _______ use your mobile phone during the final exam; it is against the rules.|needn't|mustn't|shouldn't|won't|B
+66|TA10|Medium|By the time the rescue team arrived, the fire _______ by the locals.|put out|has been put out|had been put out|was putting out|C
+67|TA10|Medium|She succeeded _______ winning the first prize in the singing contest.|in|at|on|for|A
+68|TA10|Medium|This is the town _______ I was born and grew up.|which|where|when|that|B
+69|TA10|Medium|The price of organic vegetables is higher _______ that of normal ones.|than|as|to|with|A
+70|TA10|Medium|The project focuses on raising awareness _______ environmental issues.|of|about|on|for|B
+71|TA10|Medium|The school has introduced several electronic _______ to improve learning.|devices|methods|skills|topics|A
+72|TA10|Medium|He is trying to give _______ smoking because it harms his lungs.|up|off|out|in|A
+73|TA10|Medium|If you don't study hard, you _______ pass the upcoming exam.|will|won't|would|wouldn't|B
+74|TA10|Medium|The company is accused _______ dumping toxic waste into the river.|of|for|with|about|A
+75|TA10|Medium|I can't stand _______ in long lines at the supermarket.|to wait|wait|waiting|waited|C
+76|TA10|Medium|The atmosphere became _______ as the dynamic music started.|exciting|excited|excites|excitement|A
+77|TA10|Medium|The student _______ essay won the prize was congratulated by the principal.|who|whom|which|whose|D
+78|TA10|Medium|The government is trying to promote sustainable _______ in the country.|develop|development|developer|developing|B
+79|TA10|Medium|You had better _______ up early to catch the first bus.|get|to get|getting|got|A
+80|TA10|Medium|The song _______ by Son Tung M-TP became a big hit instantly.|composing|composed|was composed|composes|B
+81|TA10|Medium|Many foreign tourists are attracted _______ the natural beauty of Viet Nam.|by|at|with|in|A
+82|TA10|Medium|The workshop provided us with a lot of _______ information.|useless|valuable|value|valueless|B
+83|TA10|Hard|Hardly _______ down to watch TV when the phone rang.|I sat|had I sat|did I sit|I had sat|B
+84|TA10|Hard|The local community has taken steps to _______ the native language from dying out.|preserve|reserve|conserve|deserve|A
+85|TA10|Hard|_______ the book twice, I still found it difficult to understand.|Reading|Having read|To read|Read|B
+86|TA10|Hard|The continuous heavy rain resulted _______ the cancellation of the outdoor concert.|in|from|to|for|A
+87|TA10|Hard|Under no circumstances _______ use school computers for personal gaming.|should students|students should|did students|students did|A
+88|TA10|Hard|The new eco-friendly policy is expected to _______ a significant difference.|do|make|give|take|B
+89|TA10|Hard|I would rather you _______ more attention to the lecture yesterday.|pay|paid|have paid|had paid|D
+90|TA10|Hard|The conference, _______ I learned about sustainable living, was highly educational.|in that|at which|which|where in|B
+91|TA10|Hard|The government needs to take _______ measures to curb environmental pollution.|drastic|mild|casual|temporary|A
+92|TA10|Hard|It was _______ a boring lecture that half the students fell asleep.|so|such|too|very|B
+93|TA10|Hard|The school curriculum places great _______ on practical skills.|emphasis|emphasize|emphatic|emphatically|A
+94|TA10|Hard|Many species are on the _______ of extinction due to habitat loss.|verge|edge|rim|boundary|A
+95|TA10|Hard|He was the first person _______ the global green campaign in our city.|joining|to join|joined|join|B
+96|TA10|Hard|It is vital that she _______ aware of the importance of recycling plastic.|is|be|was|been|B
+97|TA10|Hard|They had a big argument, but eventually they _______ their differences.|made up|put aside|took over|brought about|B
+98|TA10|Hard|The project failed because they didn't take local conditions into _______.|account|view|mind|thought|A
+99|TA10|Hard|_______ of the financial difficulties, the charity event was a huge success.|Regardless|In spite|Instead|Because|A
+100|TA10|Hard|The principal insisted that the new rules _______ strictly.|be followed|followed|are followed|must follow|A
+101|TA11|Easy|You should _______ exercise every day to stay healthy.|do|make|take|give|A
+102|TA11|Easy|Regular exercise can help you _______ weight.|losing|lose|loose|lost|B
+103|TA11|Easy|Children _______ obey their parents.|must to|ought|should|have|C
+104|TA11|Easy|The soup tastes _______; you did a great job!|deliciously|deliciousness|delicacy|delicious|D
+105|TA11|Easy|I lived in Hanoi _______ five years before moving here.|for|since|in|at|A
+106|TA11|Easy|Viet Nam became a member of _______ in 1995.|UN|ASEAN|WTO|EU|B
+107|TA11|Easy|He is interested in _______ about future cities.|to learn|learn|learning|learned|C
+108|TA11|Easy|The generation _______ refers to differences in attitudes between generations.|space|distance|hole|gap|D
+109|TA11|Easy|Green spaces help reduce air _______ in big cities.|pollution|pollute|polluted|polluting|A
+110|TA11|Easy|You _______ turn off the stove before leaving the kitchen.|ought|must|needn't|may|B
+111|TA11|Easy|She has been a volunteer _______ two weeks.|ago|in|for|since|C
+112|TA11|Easy|My grandfather looks very _______ today.|happily|happiness|unhappily|happy|D
+113|TA11|Easy|We should avoid _______ junk food.|eating|to eat|eat|ate|A
+114|TA11|Easy|Global _______ is causing ice caps to melt.|heat|warming|hot|warmed|B
+115|TA11|Easy|He wants to go to university after _______ high school.|to finish|finish|finishing|finished|C
+116|TA11|Easy|Independent people can take care of _______.|himself|herself|ourselves|themselves|D
+117|TA11|Easy|Social _______ can connect people around the world.|media|paper|press|radio|A
+118|TA11|Easy|Walking is a good way to improve your _______ health.|physics|physical|physically|physicist|B
+119|TA11|Easy|They have lived here _______ 2015.|for|in|since|during|C
+120|TA11|Easy|Parents shouldn't _______ their views on their children.|give|put|take|impose|D
+121|TA11|Easy|The city looks beautiful _______ night.|at|on|in|with|A
+122|TA11|Easy|Carbon dioxide is a greenhouse _______.|liquid|gas|solid|air|B
+123|TA11|Easy|It is important _______ time management skills.|learning|learn|to learn|learned|C
+124|TA11|Easy|Many young people use smartphones to _______ the internet.|swim|sail|fly|surf|D
+125|TA11|Easy|He decided _______ a vocational school.|to attend|attending|attend|attended|A
+126|TA11|Easy|You look _______ in that new dress.|greatly|great|greatness|grater|B
+127|TA11|Easy|Cutting down trees leads to _______ loss.|home|house|habitat|place|C
+128|TA11|Easy|We need to reduce the _______ of plastic waste.|number|many|much|amount|D
+129|TA11|Easy|He is capable _______ living on his own.|of|with|at|for|A
+130|TA11|Easy|Cyberbullying is a serious social _______ today.|topic|issue|story|news|B
+131|TA11|Easy|She loves spending time _______ her family.|to|for|with|at|C
+132|TA11|Easy|They are preparing _______ the ASEAN youth summit.|to|with|about|for|D
+133|TA11|Easy|Smart cities use technology to improve life _______.|quality|quantity|number|level|A
+134|TA11|Easy|My father enjoys _______ gardening on weekends.|making|doing|taking|playing|B
+135|TA11|Easy|You shouldn't stay _______ late at night.|on|in|up|down|C
+136|TA11|Easy|The atmosphere became _______ when the guests arrived.|livelily|liveness|live|lively|D
+137|TA11|Easy|Fossil fuels are non-renewable sources of _______.|energy|power|strength|force|A
+138|TA11|Easy|He has been looking for a job _______ he graduated.|for|since|when|while|B
+139|TA11|Easy|It is necessary for teenagers to be _______ independent.|most|much|more|many|C
+140|TA11|Easy|Smoking can cause serious illnesses like lung _______.|fever|flu|cold|cancer|D
+141|TA11|Medium|I am _______ of moving to a smart city in the future.|thinking|thought|think|thinks|A
+142|TA11|Medium|He apologized for not _______ his assignment on time.|finished|having finished|finish|to finish|B
+143|TA11|Medium|It is essential for youngsters to develop _______ skills like cooking and cleaning.|life skill|life-long|life-skills|lifelong|C
+144|TA11|Medium|This is the school _______ my older sister used to study.|which|where in|that|at which|D
+145|TA11|Medium|She was the first student in her class _______ the scholarship.|to receive|receiving|received|receive|A
+146|TA11|Medium|We are looking for ways to reduce the _______ effects of climate change.|negativity|negative|negatively|negate|B
+147|TA11|Medium|The program was designed to encourage _______ understanding among ASEAN countries.|culture|culturally|cultural|cultured|C
+148|TA11|Medium|The doctor recommended that he _______ more vegetables and less meat.|eats|eating|ate|eat|D
+149|TA11|Medium|Teenagers often clash with their parents because of their _______ values.|differing|different|difference|differently|A
+150|TA11|Medium|By _______ sustainable transport, we can lower greenhouse gas emissions.|use|using|to use|used|B
+151|TA11|Medium|I clearly remember _______ the door before I left, so I don't need to check again.|to lock|locked|locking|have locked|C
+152|TA11|Medium|The local authorities are trying to modernize the infrastructure _______ future growth.|accommodating|accommodated|accommodate|to accommodate|D
+153|TA11|Medium|Being self-reliant means you can rely _______ yourself rather than others.|on|in|at|with|A
+154|TA11|Medium|This is the platform on _______ young people can express their opinions.|that|which|whom|where|B
+155|TA11|Medium|Her parents are very open-minded; they always _______ her choices.|forbid|criticize|support|ignore|C
+156|TA11|Medium|_______ a healthy diet can boost your immune system.|Maintain|To maintain|Maintained|Maintaining|D
+157|TA11|Medium|He didn't get the job because he lacked the required _______ qualifications.|academic|academy|academically|academician|A
+158|TA11|Medium|The city council plans to replace old buildings _______ modern eco-friendly high-rises.|by|with|for|into|B
+159|TA11|Medium|She regrets _______ so much time on social media yesterday.|to spend|spent|spending|have spent|C
+160|TA11|Medium|An independent person knows how to set goals and _______ them.|drop|miss|avoid|achieve|D
+161|TA11|Medium|The government is investing heavily in _______ energy sources like solar and wind.|renewable|renew|renewed|renewing|A
+162|TA11|Medium|It was a relief _______ that all his family members were safe after the storm.|hearing|to hear|heard|hear|B
+163|TA11|Medium|They are busy _______ for the upcoming cultural exchange festival.|to prepare|prepare|preparing|prepared|C
+164|TA11|Medium|The perfume smells _______; I really love it.|wonderfully|wonder|wondering|wonderful|D
+165|TA11|Medium|Many students choose to take a _______ year to travel or work before university.|gap|bridge|leap|blank|A
+166|TA11|Medium|The older generation often holds more _______ views compared to the youth.|liberal|modern|conservative|progressive|C
+167|TA11|Medium|We shouldn't blame peer _______ for all the bad habits of teenagers.|force|pressure|weight|push|B
+168|TA11|Medium|The local community has benefited greatly _______ the new ecotourism project.|to|with|from|for|C
+169|TA11|Medium|He is considering _______ for a part-time job to gain work experience.|to apply|apply|applied|applying|D
+170|TA11|Medium|It is difficult for older people to adapt _______ rapid technological changes.|to|with|for|in|A
+171|TA11|Medium|Smart sensors can automatically turn off devices to prevent energy _______.|saving|waste|production|use|B
+172|TA11|Medium|He was praised for _______ the local charity club for five years.|running|run|having run|to run|C
+173|TA11|Medium|The new education policy aims to provide more vocational _______ for school-leavers.|train|trained|trainer|training|D
+174|TA11|Medium|The social worker is dedicated to helping people with _______ problems.|mental|mind|brain|memory|A
+175|TA11|Medium|She is trying to cut _______ on fast food to improve her physical health.|off|down|up|out|B
+176|TA11|Medium|The project focuses on reducing the city's environmental _______.|force|power|impact|energy|C
+177|TA11|Medium|He has a strong desire _______ an expert in artificial intelligence.|becoming|become|became|to become|D
+178|TA11|Medium|The internet has completely revolutionized the way we _______ with each other.|interact|action|active|activity|A
+179|TA11|Medium|They are proud _______ being selected as the representatives of Viet Nam.|with|of|for|at|B
+180|TA11|Medium|The country is facing severe issues related to soil _______.|eroding|erode|erosion|eroded|C
+181|TA11|Hard|_______ from university, he started looking for an internship immediately.|Having graduated|Graduating|Graduated|To graduate|A
+182|TA11|Hard|It was my English teacher _______ inspired me to apply for the ASEAN exchange program.|which|whom|whose|who|D
+183|TA11|Hard|Only after checking the map carefully _______ that we had taken the wrong path.|did we realize|we realized|had we realized|we had realized|A
+184|TA11|Hard|The high level of carbon emissions has given _______ to serious global concerns.|way|rise|birth|place|B
+185|TA11|Hard|He denied _______ any confidential information on social media sites.|sharing|to share|having shared|shared|C
+186|TA11|Hard|_______ all the requirements, she was confidently waiting for the interview results.|Fulfilling|Fulfilled|To fulfill|Having fulfilled|D
+187|TA11|Hard|It is imperative that the government _______ instant measures to reduce youth unemployment.|take|takes|took|taking|A
+188|TA11|Hard|Seldom _______ such an innovative solution to urban pollution problems.|I have seen|have I seen|did I see|I saw|B
+189|TA11|Hard|The lack of financial support brought _______ the failure of the community green project.|up|out|about|on|C
+190|TA11|Hard|_______ the global warming issue, the committee decided to implement strict green regulations.|Discussing|Discussed|To discuss|Having discussed|D
+191|TA11|Hard|It was the lack of proper training _______ caused the automation system to malfunction.|that|who|which|whom|A
+192|TA11|Hard|Not until the end of the lecture _______ the core concept of the generation gap.|the students grasped|did the students grasp|had the students grasped|the students had grasped|B
+193|TA11|Hard|The local council made a major _______ in making the city infrastructure sustainable.|breakout|breakdown|breakthrough|breakup|C
+194|TA11|Hard|He is suspected of _______ fake news regarding the pandemic on his Facebook page.|spreading|spread|having spread|to spread|C
+195|TA11|Hard|The company was heavily fined for _______ toxic chemical waste directly into the river system.|dumping|dumped|to dump|having dumped|D
+196|TA11|Hard|Little _______ that his online comments would spark such a huge controversy.|did he know|he knew|had he known|he had known|A
+197|TA11|Hard|It was in this remote village _______ they set up the first solar power grid.|where|that|which|in which|B
+198|TA11|Hard|_______ the lifelong learning course, she felt much more confident in her career.|Completing|Completed|Having completed|To complete|C
+199|TA11|Hard|The university board insisted that every student _______ the orientation session.|attends|attended|attending|attend|D
+200|TA11|Hard|The rapid expansion of the digital economy has paved the _______ for new career paths.|way|road|path|street|A
+201|TA12|Easy|A _______ is a story of a person's life written by another person.|biography|diary|novel|essay|A
+202|TA12|Easy|While I _______ for the bus, it started to rain heavily.|wait|am waiting|was waiting|waited|C
+203|TA12|Easy|Many young people move to big cities to seek better job _______.|problems|opportunities|difficulties|hobbies|B
+204|TA12|Easy|This old building _______ built in 1950.|is|was|were|has|B
+205|TA12|Easy|Using public transport is a great way to be more _______.|eco-friendly|polluted|expensive|harmful|A
+206|TA12|Easy|I am looking forward to _______ my favorite idol at the concert.|see|seeing|saw|seen|B
+207|TA12|Easy|He decided to apply _______ a scholarship at a foreign university.|for|to|with|in|A
+208|TA12|Easy|When I was young, I _______ to go swimming in the river every afternoon.|use|used|using|was used|B
+209|TA12|Easy|Lifelong learning helps us acquire new _______ throughout our lives.|money|skills|years|friends|B
+210|TA12|Easy|He is _______ most dedicated doctor I have ever known.|a|an|the|ø|C
+211|TA12|Easy|Social _______ like Facebook and TikTok are very popular among teenagers.|networks|papers|boxes|stations|A
+212|TA12|Easy|She _______ in this company for ten years and she loves it.|works|is working|has worked|worked|C
+213|TA12|Easy|Ao dai is part of the traditional _______ of Viet Nam.|food|clothing|music|game|B
+214|TA12|Easy|Parents always take _______ of their children when they are sick.|care|note|part|place|A
+215|TA12|Easy|Before going to a job interview, you should prepare your _______.|book|resume|ticket|letter|B
+216|TA12|Easy|He stayed at home yesterday _______ he had a bad cold.|because|because of|although|despite|A
+217|TA12|Easy|Artificial intelligence can help humans solve complex _______ quickly.|problems|games|stories|songs|A
+218|TA12|Easy|Living in the city is much _______ than living in the countryside.|expensive|more expensive|most expensive|as expensive|B
+219|TA12|Easy|Many endangered species are facing the risk of _______.|extinction|development|protection|surviving|A
+220|TA12|Easy|We are very proud _______ our traditional cultural values.|with|of|at|for|B
+221|TA12|Easy|Winning the gold medal was his greatest _______ in his sports career.|achievement|failure|mistake|problem|A
+222|TA12|Easy|By the time the police arrived, the thief _______ away.|ran|has run|had run|was running|C
+223|TA12|Easy|The city center is often _______ with traffic during rush hours.|crowded|empty|quiet|clean|A
+224|TA12|Easy|The woman _______ lives next door to me is a famous scientist.|who|which|whom|whose|A
+225|TA12|Easy|She wore a formal outfit to make a good impression at the job _______.|interview|fair|center|market|A
+226|TA12|Easy|He said that he _______ to the cinema the night before.|goes|went|had gone|will go|C
+227|TA12|Easy|Reading books is an excellent way to expand your _______.|money|knowledge|body|health|B
+228|TA12|Easy|You _______ throw trash into the river; it causes water pollution.|should|shouldn't|must|ought|B
+229|TA12|Easy|Solar energy and wind energy are sources of _______ energy.|renewable|non-renewable|limited|exhausted|A
+230|TA12|Easy|You are a student at Hanoi University of Science and Technology, _______ you?|are|aren't|do|don't|B
+231|TA12|Easy|In the digital age, _______ have become essential tools for communication.|smartphones|radios|clocks|papers|A
+232|TA12|Easy|I went to the bookstore _______ a new English dictionary.|buy|buying|to buy|bought|C
+233|TA12|Easy|It is a _______ in Viet Nam to visit relatives on the first day of Tet.|custom|law|rule|fact|A
+234|TA12|Easy|Young people want to be independent _______ their parents when they grow up.|from|of|with|on|B
+235|TA12|Easy|The United Nations is a large international _______.|organization|company|school|market|A
+236|TA12|Easy|If you study hard, you _______ pass the graduation exam easily.|will|would|won't|wouldn't|A
+237|TA12|Easy|Smart devices are equipped with artificial _______ to serve humans better.|intelligence|beauty|health|skill|A
+238|TA12|Easy|She gave me a _______ plastic box to store my old books.|beautiful small|small beautiful|beautifully small|small beautifully|A
+239|TA12|Easy|The news was _______ live on television last night.|broadcast|broadcasted|broadcasting|broadcasts|A
+240|TA12|Easy|My grandmother enjoys _______ traditional folk music in her free time.|listen|listening|to listen|listened|B
+241|TA12|Medium|By the end of next month, he _______ working on this project for a year.|will finish|will have been|will have finished|has finished|C
+242|TA12|Medium|Rapid urbanization has led to several issues, including the growth of _______ areas.|slum|rural|wealthy|suburban|A
+243|TA12|Medium|The professor to _______ I talked yesterday gave me great advice on my career.|who|whom|which|that|B
+244|TA12|Medium|Many immigrants find it difficult to _______ into the local culture.|assimilate|separate|divide|reject|A
+245|TA12|Medium|The _______ the city becomes, the more traffic jams we have to face.|crowded|more crowded|most crowded|as crowded|B
+246|TA12|Medium|Younger generations often look _______ to historical figures who fought for the country.|up|down|back|forward|A
+247|TA12|Medium|To apply for this position, candidates must have relevant academic _______.|qualifications|quantities|qualities|quarters|A
+248|TA12|Medium|All assignments _______ before the deadline on Friday afternoon.|must finish|must be finished|must be finish|must have finished|B
+249|TA12|Medium|HUST students are encouraged to develop _______ learning habits to adapt to rapid changes.|self-directed|teacher-directed|passive|dependent|A
+250|TA12|Medium|If we developed better green technologies, we _______ air pollution in urban areas.|will reduce|would reduce|reduced|would have reduced|B
+251|TA12|Medium|The assembly line has been completely _______ by advanced robotic systems.|automated|manual|done|made|A
+252|TA12|Medium|The scientists decided to _______ a series of experiments on the new vaccine.|carry out|take over|put off|bring up|A
+253|TA12|Medium|The media's wide _______ of the environmental crisis raised public awareness.|coverage|paper|broadcast|channel|A
+254|TA12|Medium|The manager accused him of _______ confidential data to the rivals.|leak|leaking|to leak|having leaked|D
+255|TA12|Medium|Protecting the coral reefs is vital for maintaining marine _______.|biodiversity|pollution|destruction|environment|A
+256|TA12|Medium|I wish I _______ more attention to the career guidance lecture last week.|pay|paid|have paid|had paid|D
+257|TA12|Medium|The process of _______ transforms rural areas into industrial and urban centers.|urbanization|agriculture|forestation|globalization|A
+258|TA12|Medium|Doing an internship provides students with an opportunity to _______ practical experience.|gain|make|do|take|A
+259|TA12|Medium|I need to have my graduation thesis _______ by my advisor before submission.|check|checking|checked|to check|C
+260|TA12|Medium|The new environmental policy aims to cut down on greenhouse gas _______.|emissions|omissions|admissions|permissions|A
+261|TA12|Medium|She turned _______ the job offer because the salary did not meet her expectations.|down|off|up|on|A
+262|TA12|Medium|The student was praised for _______ the highest score in the national exam.|achieving|having achieved|achieve|to achieve|B
+263|TA12|Medium|Advances in medical science have significantly increased human life _______.|expectancy|expectation|expecting|expected|A
+264|TA12|Medium|The internet, _______ was invented in the late 20th century, has changed our lives.|that|which|where|what|B
+265|TA12|Medium|The dynamic growth of the IT sector offers many jobs for tech-savvy _______.|graduates|dropouts|retirees|pensioners|A
+266|TA12|Medium|She was brought _______ by her grandparents in a quiet rural village.|up|on|off|down|A
+267|TA12|Medium|If you _______ to the advice of your career mentor, you wouldn't have made that mistake.|listen|listened|had listened|would listen|C
+268|TA12|Medium|Adults should continue to _______ knowledge through lifelong learning courses.|pursue|chase|run|catch|A
+269|TA12|Medium|You _______ your assignment yesterday; the system is locked now.|should finish|should have finished|must finish|must have finished|B
+270|TA12|Medium|The software uses a complex _______ to filter out spam emails automatically.|algorithm|logarithm|arithmetic|algebra|A
+271|TA12|Medium|His career as a data engineer _______ after he completed his master's degree.|took off|put off|turned up|brought about|A
+272|TA12|Medium|It was very kind _______ you to help me fix the database error in MySQL Workbench.|of|for|with|to|A
+273|TA12|Medium|We should implement strict laws to prevent traditional crafts from dying _______.|out|away|off|down|A
+274|TA12|Medium|It is _______ that artificial intelligence will replace some repetitive jobs in the future.|said|saying|to say|has said|A
+275|TA12|Medium|The architect design buildings with an emphasis on energy efficiency and _______.|sustainability|pollution|consumption|depletion|A
+276|TA12|Medium|When I look _______ on my university years, I feel very grateful for my professors.|back|up|forward|into|A
+277|TA12|Medium|The students _______ in the green campaign collected over two tons of plastic waste.|participating|participated|who participating|participate|A
+278|TA12|Medium|The government is trying to implement measures to lower the unemployment _______.|rate|ratio|scale|number|A
+279|TA12|Medium|I am not used to _______ up early on Monday mornings for the statistics class.|get|getting|got|to get|B
+280|TA12|Medium|This new smartphone application features _______ technology that detects health issues.|cutting-edge|old-fashioned|out-of-date|long-lasting|A
+281|TA12|Hard|No sooner _______ the lecture room than the electricity went out.|I had entered|had I entered|did I enter|I entered|B
+282|TA12|Hard|During the exam season, many HUST students have to burn the midnight _______ to study.|oil|lamp|candle|gas|A
+283|TA12|Hard|It was not until he failed the final interview _______ he realized the importance of soft skills.|that|when|then|which|A
+284|TA12|Hard|To secure a job as a senior data engineer, one must meet the stringent _______ of the company.|criteria|tests|demands|questions|A
+285|TA12|Hard|The university board insisted that the automated exam scheduling system _______ completed in one month.|is|be|was|been|B
+286|TA12|Hard|When the primary server crashed, the system had to fall _______ on the backup database.|back|down|off|into|A
+287|TA12|Hard|The _______ of old urban neighborhoods often drives out low-income residents due to high costs.|gentrification|urbanization|industrialization|modernization|A
+288|TA12|Hard|_______ your guidance on graph theory, I would have struggled to complete my graduation thesis.|Had it not been for|If it weren't for|Were it not for|But for|A
+289|TA12|Hard|Your explanation of the fixed-point iteration algorithm really hit the nail on the _______.|head|mind|brain|hand|A
+290|TA12|Hard|_______ about the scheduled database maintenance, the team postponed the data integration task.|Having been informed|Having informed|To inform|Informing|A
+291|TA12|Hard|The tendency to view one's own culture as superior to others is known as _______.|ethnocentrism|assimilation|integration|multiculturalism|A
+292|TA12|Hard|Not only _______ toxic waste into the river, but the factory also covered up the evidence.|did the company dump|the company dumped|had the company dumped|the company had dumped|A
+293|TA12|Hard|Before choosing a career path, it is critical to weigh up the pros and _______ of each sector.|cons|goods|downs|backs|A
+294|TA12|Hard|_______ your timely warning about the network security breach, the system would have collapsed.|But for|Thanks to|Because of|As for|A
+295|TA12|Hard|Some scientists believe that the technological _______, when AI surpasses human intelligence, is near.|singularity|plurality|similarity|regularity|A
+296|TA12|Hard|He managed to pass himself _______ as a qualified data analyst using a fabricated CV.|off|away|through|out|A
+297|TA12|Hard|She _______ her phone at the library; I just saw her texting her mother a minute ago.|can't have left|must have left|should have left|needn't have left|A
+298|TA12|Hard|Despite the unexpected failure of the quantum computing project, she kept her _______ up and tried again.|chin|head|mind|face|A
+299|TA12|Hard|If the administrator had checked the system logs yesterday, the server error _______ resolved by now.|would be|would have been|is|will be|A
+300|TA12|Hard|Developing high _______ flexibility is essential for individuals to thrive in the changing world of work.|cognitive|physical|manual|material|A
