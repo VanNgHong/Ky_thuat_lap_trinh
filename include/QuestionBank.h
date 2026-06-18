@@ -70,6 +70,8 @@ public:
     Question* getQuestionsBySubjectAndDifficulty(const string& subject, const string& difficulty, int& count);
 
     void printAll();
+
+    void printBySubject(const string& subject);
     
     //I/O
     bool loadFromFile(string filename);

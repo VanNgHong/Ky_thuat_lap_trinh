@@ -349,6 +349,30 @@ void QuestionBank::printAll()
     }
 }
 
+void QuestionBank::printBySubject(const string& subject)
+{
+    QuestionNode* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->data.subject == subject)
+        {
+            cout << "ID: " << current->data.id << "\n";
+            cout << "Mon hoc: " << current->data.subject << "\n";
+            cout << "Muc do: " << current->data.difficulty << "\n";
+            cout << "Cau hoi: " << current->data.content << "\n";
+
+            cout << "A. " << current->data.answers[0] << "\n";
+            cout << "B. " << current->data.answers[1] << "\n";
+            cout << "C. " << current->data.answers[2] << "\n";
+            cout << "D. " << current->data.answers[3] << "\n";
+
+            cout << "Dap an dung: " << current->data.correct << "\n\n";
+        }
+        current = current->next;
+    }
+}
+
 int QuestionBank::countByDifficulty(
         const string& difficulty)
 {

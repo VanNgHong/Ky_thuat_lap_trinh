@@ -227,12 +227,55 @@ void showAdminMenu(LoginSession& session) {
                 printCentered("DANH SACH CAU HOI");
                 cout << Color::RESET;
                 printLine();
+
                 if (bank.getQuestionCount() == 0) {
                     cout << "Ngan hang cau hoi dang rong.\n";
-                } else {
-                    bank.printAll();
+                    pauseScreen();
+                    break;
                 }
-                pauseScreen();
+
+                int subjectCount = 0;
+                string* subjects = bank.getDistinctSubjects(subjectCount);
+
+                cout << "Danh sach cac mon hoc:\n";
+                for (int i = 0; i < subjectCount; i++) {
+                    cout << "- " << subjects[i] << "\n";
+                }
+
+                string subject;
+                while (true){
+                    cout << "\nNhap mon hoc muon xem cau hoi (Nhap ALL neu muon in het tat ca): ";
+                    getline(cin, subject);
+
+                    if (subject == "all" || subject == "ALL" || subject == "All")
+                    {
+                        bank.printAll();
+                        pauseScreen();
+                        break;
+                    }
+
+                    bool found = false;
+                    for (int i = 0; i < subjectCount; i++)
+                    {
+                        if (subjects[i] == subject)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found)
+                    {
+                        bank.printBySubject(subject);
+                        pauseScreen();
+                        break;
+                    }
+
+                    cout << Color::RED
+                        << "\n[LOI] Khong ton tai mon hoc \"" << subject << "\"!\n"
+                        << "Vui long nhap lai.\n"
+                        << Color::RESET;
+                }
                 break;
             }
 
