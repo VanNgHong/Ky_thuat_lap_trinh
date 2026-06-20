@@ -337,6 +337,12 @@ INPUT ./main.toc
 INPUT ./main.toc
 INPUT main.toc
 OUTPUT main.toc
+INPUT c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT ./main.bbl
 INPUT ./main.bbl
 INPUT main.bbl

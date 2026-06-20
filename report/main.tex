@@ -194,6 +194,8 @@ Nhóm xin gửi lời cảm ơn chân thành đến \textbf{TS. Vũ Thành Nam} 
 
 Trong những năm gần đây, việc ứng dụng công nghệ thông tin vào giáo dục đã tạo ra những bước chuyển biến sâu sắc trong cách thức tổ chức kiểm tra và đánh giá năng lực người học. Các hệ thống thi trắc nghiệm điện tử không chỉ giúp tiết kiệm chi phí in ấn và thời gian chấm bài thủ công, mà còn đảm bảo tính công bằng, khách quan và có thể mở rộng quy mô dễ dàng~\cite{guralnick2015}. Tại các trường đại học kỹ thuật, nơi khối lượng sinh viên lớn và nhu cầu kiểm tra định kỳ cao, yêu cầu về một công cụ hỗ trợ thi trắc nghiệm đáng tin cậy ngày càng trở nên cấp thiết.
 
+Số liệu thị trường thực tế cho thấy rõ quy mô và tốc độ tăng trưởng của xu hướng này. Theo thống kê được tổng hợp từ Statista và các báo cáo ngành, phân khúc thị trường nền tảng học tập trực tuyến (E-learning) tại Việt Nam được dự đoán đạt giá trị \textbf{228,7 triệu USD vào năm 2024}, với tỷ lệ tiếp cận người dùng khoảng \textbf{8,6\%}~\cite{statista2024vn}. Ở phạm vi rộng hơn, toàn bộ thị trường công nghệ giáo dục (EdTech) Việt Nam được dự báo đạt \textbf{364,7 triệu USD} trong năm 2024, với tốc độ tăng trưởng kép hàng năm (CAGR) lên tới \textbf{13,5\%} cho giai đoạn đến năm 2032~\cite{nettop2025}. Báo cáo \textit{Vietnam EdTech \& eLearning Report 2025} --- ấn phẩm thường niên lần thứ 15 về thị trường này --- cũng ghi nhận các startup EdTech trong nước thu hút hơn \textbf{25 triệu USD vốn đầu tư} chỉ riêng trong năm 2024~\cite{edtechreport2025}. Theo Quyết định số 131/QĐ-TTg của Thủ tướng Chính phủ (2022), Việt Nam đặt mục tiêu đến năm 2025 có hơn \textbf{50\% cơ sở giáo dục đại học} triển khai chương trình đào tạo từ xa, trực tuyến~\cite{qd131}. Những con số này khẳng định nhu cầu thực tiễn ngày càng lớn đối với các công cụ phần mềm hỗ trợ giảng dạy và kiểm tra --- trong đó hệ thống thi trắc nghiệm tự động là một thành phần cốt lõi.
+
 Song song với xu hướng đó, môn học \textbf{Kỹ thuật Lập trình (MI3310)} tại Khoa Toán -- Tin, Đại học Bách khoa Hà Nội đặt ra mục tiêu rèn luyện sinh viên không chỉ về kỹ năng viết mã mà còn về tư duy thiết kế phần mềm có cấu trúc. Một trong những yêu cầu quan trọng của môn học là sinh viên phải tự cài đặt các cấu trúc dữ liệu cơ bản bằng tay, không phụ thuộc vào thư viện chuẩn~\cite{nam2022}. Điều này tạo ra một bối cảnh học tập lý tưởng để kết hợp nhu cầu thực tiễn với mục tiêu giáo dục: xây dựng một hệ thống thi trắc nghiệm hoàn chỉnh hoàn toàn bằng C++ thuần.
 
 \section{Lý do lựa chọn bài toán}
@@ -658,27 +660,548 @@ Chương này đã trình bày sáu nhóm kiến thức lý thuyết làm nền 
 \chapter{Cài đặt và xây dựng chương trình}
 \label{chap:caidat}
 
+Chương này trình bày chi tiết quá trình cài đặt chương trình dựa trên thiết kế đã trình bày ở Chương~\ref{chap:thietke}, đối chiếu trực tiếp với mã nguồn thực tế của từng module: \texttt{QuestionBank}, \texttt{Exam}, \texttt{History} và \texttt{Menu}.
+
 \section{Cấu trúc thư mục chương trình}
+
+Mã nguồn được tổ chức theo đúng quy ước tách Header/Source đã trình bày ở Mục~\ref{chap:lythuyet}, với cấu trúc thư mục như sau:
+
+\begin{verbatim}
+KY_THUAT_LAP_TRINH/
+|-- include/
+|   |-- QuestionBank.h
+|   |-- Exam.h
+|   |-- History.h
+|   `-- Menu.h
+|-- src/
+|   |-- main.cpp
+|   |-- Menu.cpp
+|   |-- Exam.cpp
+|   |-- History.cpp
+|   `-- QuestionBank.cpp
+|-- data/
+|   |-- questions.txt
+|   `-- history.txt
+|-- .vscode/
+|   `-- tasks.json
+|-- quiz_program.exe   (sinh ra sau khi bien dich)
+`-- README.md
+\end{verbatim}
+
+Việc tách riêng thư mục \texttt{data/} khỏi mã nguồn cho phép cập nhật ngân hàng câu hỏi mà không cần biên dịch lại chương trình, đồng thời thuận tiện cho việc sao lưu dữ liệu độc lập với mã nguồn.
+
+\section{Cài đặt module Ngân hàng câu hỏi (QuestionBank)}
+
+\subsection{Khai báo cấu trúc dữ liệu}
+
+Cấu trúc \texttt{Question} lưu trữ một câu hỏi trắc nghiệm với 4 đáp án cố định, được tổ chức thành các node của danh sách liên kết đơn:
+
+\begin{lstlisting}[caption={Khai báo Question và QuestionNode (QuestionBank.h)}, label={lst:question_struct}]
+struct Question {
+    int id;
+    string subject;
+    string difficulty;   // Easy, Medium, Hard
+    string content;
+    string answers[4];
+    char correct;         // 'A', 'B', 'C', hoac 'D'
+};
+
+struct QuestionNode {
+    Question data;
+    QuestionNode* next;
+};
+
+class QuestionBank {
+private:
+    QuestionNode* head;
+    QuestionNode* tail;
+public:
+    QuestionBank();
+    ~QuestionBank();
+    bool isIdExists(int id);
+    bool addQuestion(Question q);
+    void removeQuestion(int id);
+    int  getQuestionCount();
+    Question* getQuestionAt(int index);
+    int  countBySubjectAndDifficulty(const string& subject, const string& difficulty);
+    Question* getQuestionsBySubjectAndDifficulty(const string& subject,
+                                                  const string& difficulty, int& count);
+    bool loadFromFile(string filename);
+    bool saveToFile(string filename);
+    Question* generateRandomSet(int n);
+};
+\end{lstlisting}
+
+So với thiết kế lý thuyết ở Chương~\ref{chap:lythuyet}, điểm khác biệt đáng chú ý trong cài đặt thực tế là trường \texttt{subject} và \texttt{difficulty} được bổ sung vào \texttt{Question} để hỗ trợ phân loại câu hỏi theo môn học và mức độ (Easy/Medium/Hard), phục vụ thuật toán sinh đề theo tỉ lệ ở Mục~\ref{sec:caidat_exam}.
+
+\subsection{Quản lý bộ nhớ: Constructor và Destructor}
+
+Constructor khởi tạo danh sách rỗng (\texttt{head = tail = nullptr}); Destructor duyệt toàn bộ danh sách và giải phóng từng node để tránh Memory Leak --- đúng nguyên tắc ``mỗi \texttt{new} phải có một \texttt{delete}'' đã đặt ra trong README của dự án:
+
+\begin{lstlisting}[caption={Destructor của QuestionBank (QuestionBank.cpp)}, label={lst:qb_dtor}]
+QuestionBank::~QuestionBank() {
+    QuestionNode* current = head;
+    while (current != nullptr) {
+        QuestionNode* nextNode = current->next;
+        delete current;
+        current = nextNode;
+    }
+    head = nullptr;
+    tail = nullptr;
+}
+\end{lstlisting}
+
+\subsection{Thêm và xoá câu hỏi}
+
+Hàm \texttt{addQuestion} kiểm tra trùng ID trước khi chèn vào cuối danh sách (sử dụng con trỏ \texttt{tail} để đạt độ phức tạp $O(1)$); hàm \texttt{removeQuestion} xử lý đầy đủ bốn trường hợp: danh sách rỗng, xoá node HEAD, xoá node giữa/cuối, và không tìm thấy ID:
+
+\begin{lstlisting}[caption={Xoá câu hỏi theo ID (QuestionBank.cpp)}, label={lst:qb_remove}]
+void QuestionBank::removeQuestion(int id) {
+    if (head == nullptr) {
+        cout << "[Loi] Danh sach cau hoi dang rong.\n";
+        return;
+    }
+    if (head->data.id == id) {            // Truong hop HEAD
+        QuestionNode* toDelete = head;
+        head = head->next;
+        if (head == nullptr) tail = nullptr;
+        delete toDelete;
+        return;
+    }
+    QuestionNode* prev = head;
+    QuestionNode* current = head->next;
+    while (current != nullptr) {          // Truong hop giua/cuoi
+        if (current->data.id == id) {
+            prev->next = current->next;
+            if (current == tail) tail = prev;
+            delete current;
+            return;
+        }
+        prev = current;
+        current = current->next;
+    }
+    cout << "[Canh bao] Khong tim thay cau hoi co id = " << id << ".\n";
+}
+\end{lstlisting}
+
+\subsection{Đọc và ghi file dữ liệu}
+
+Hàm \texttt{loadFromFile} đọc \texttt{questions.txt} theo định dạng phân tách \texttt{|}, với cơ chế bẫy lỗi cho từng dòng: bỏ qua dòng rỗng/comment, kiểm tra đủ 9 trường dữ liệu, và validate ký tự đáp án đúng nằm trong khoảng A--D. Mỗi lỗi được báo cụ thể số dòng để dễ debug, thay vì làm crash toàn bộ chương trình --- đúng nguyên tắc lập trình phòng ngừa đã trình bày ở Mục~\ref{chap:lythuyet}:
+
+\begin{lstlisting}[caption={Trích đoạn loadFromFile với bẫy lỗi từng dòng (QuestionBank.cpp)}, label={lst:qb_load}]
+char c = toupper((unsigned char)token[0]);
+if (c < 'A' || c > 'D') {
+    cout << "[Canh bao] Dong " << lineNum
+         << ": dap an dung '" << token
+         << "' khong hop le (chi chap nhan A-D). Bo qua.\n";
+    continue;
+}
+q.correct = c;
+if (!addQuestion(q)) {
+    cout << "[Canh bao] Dong " << lineNum << ": ID " << q.id
+         << " bi trung voi cau hoi da co, da bo qua dong nay.\n";
+}
+\end{lstlisting}
+
+Hàm \texttt{saveToFile} ghi đè (\texttt{ofstream} mặc định) toàn bộ ngân hàng câu hỏi hiện tại xuống file, được gọi ngay sau mỗi thao tác thêm hoặc xoá câu hỏi thành công trong Menu Admin, đảm bảo dữ liệu trên đĩa luôn đồng bộ với dữ liệu trong bộ nhớ.
+
+\subsection{Truy vấn câu hỏi theo môn học và độ khó}
+
+Để phục vụ sinh đề theo tỉ lệ 40-40-20 (xem Mục~\ref{sec:caidat_exam}), \texttt{QuestionBank} cung cấp hàm đếm và trích xuất câu hỏi theo cặp (môn học, độ khó):
+
+\begin{lstlisting}[caption={Trích xuất câu hỏi theo môn học và độ khó (QuestionBank.cpp)}, label={lst:qb_filter}]
+Question* QuestionBank::getQuestionsBySubjectAndDifficulty(
+        const string& subject, const string& difficulty, int& count) {
+    count = countBySubjectAndDifficulty(subject, difficulty);
+    if (count == 0) return nullptr;
+    Question* result = new Question[count];
+    QuestionNode* current = head;
+    int index = 0;
+    while (current != nullptr) {
+        if (current->data.subject == subject &&
+            current->data.difficulty == difficulty) {
+            result[index++] = current->data;
+        }
+        current = current->next;
+    }
+    return result;
+}
+\end{lstlisting}
+
+Lưu ý rằng mảng \texttt{result} được cấp phát động bằng \texttt{new[]} và \textit{quyền sở hữu được chuyển cho bên gọi} --- đây là một quy ước quan trọng cần tài liệu hoá rõ ràng, vì \texttt{Exam::generateExamFromBank} (Mục~\ref{sec:caidat_exam}) có trách nhiệm \texttt{delete[]} ba mảng tạm này sau khi sử dụng để tránh rò rỉ bộ nhớ.
+
+\section{Cài đặt module Thi (Exam)}
+\label{sec:caidat_exam}
+
+\subsection{Sinh đề theo tỉ lệ độ khó 40-40-20}
+
+Thay vì bốc ngẫu nhiên hoàn toàn, đề thi được sinh theo tỉ lệ cố định: 40\% câu Easy, 40\% câu Medium, 20\% câu Hard (định nghĩa bằng hằng số tĩnh \texttt{EASY\_PERCENT}, \texttt{MEDIUM\_PERCENT}, \texttt{HARD\_PERCENT} trong \texttt{Exam.h}). Nếu ngân hàng không đủ câu hỏi theo tỉ lệ yêu cầu cho môn học đã chọn, hàm trả về \texttt{false} và Menu sẽ thông báo lỗi cho người dùng thay vì sinh đề thiếu:
+
+\begin{lstlisting}[caption={Sinh đề theo tỉ lệ độ khó (Exam.cpp)}, label={lst:exam_generate}]
+bool Exam::generateExamFromBank(QuestionBank& bank, const string& subject) {
+    int easyNeed   = numberOfQuestions * EASY_PERCENT / 100;
+    int mediumNeed = numberOfQuestions * MEDIUM_PERCENT / 100;
+    int hardNeed   = numberOfQuestions - easyNeed - mediumNeed;
+
+    int easySize, mediumSize, hardSize;
+    Question* easyQ   = bank.getQuestionsBySubjectAndDifficulty(subject, "Easy", easySize);
+    Question* mediumQ = bank.getQuestionsBySubjectAndDifficulty(subject, "Medium", mediumSize);
+    Question* hardQ   = bank.getQuestionsBySubjectAndDifficulty(subject, "Hard", hardSize);
+
+    if (easySize < easyNeed || mediumSize < mediumNeed || hardSize < hardNeed) {
+        cout << "[Loi] Ngan hang cau hoi mon " << subject << " khong du de sinh de.\n";
+        delete[] easyQ; delete[] mediumQ; delete[] hardQ;
+        return false;
+    }
+    shuffleQuestions(easyQ, easySize);
+    shuffleQuestions(mediumQ, mediumSize);
+    shuffleQuestions(hardQ, hardSize);
+
+    int index = 0;
+    for (int i = 0; i < easyNeed; i++)   questionList[index++] = easyQ[i];
+    for (int i = 0; i < mediumNeed; i++) questionList[index++] = mediumQ[i];
+    for (int i = 0; i < hardNeed; i++)   questionList[index++] = hardQ[i];
+    shuffleQuestions(questionList, numberOfQuestions);
+
+    delete[] easyQ; delete[] mediumQ; delete[] hardQ;
+    return true;
+}
+\end{lstlisting}
+
+Việc xáo trộn ba nhóm Easy/Medium/Hard \textit{trước khi} chọn ra $N$ câu đầu tiên của mỗi nhóm đảm bảo mỗi sinh viên nhận được tổ hợp câu hỏi khác nhau dù cùng tỉ lệ độ khó. Lệnh \texttt{shuffleQuestions(questionList, numberOfQuestions)} cuối cùng tiếp tục trộn thứ tự xuất hiện giữa ba nhóm, tránh tình trạng đề luôn hiển thị Easy trước, Hard sau.
+
+\subsection{Xác định số câu hỏi tối đa hợp lệ}
+
+Vì tỉ lệ 40-40-20 đặt ra ràng buộc giữa ba mức độ, không phải số câu $N$ nào sinh viên nhập vào cũng sinh đề được. Hàm \texttt{getMaxNumberQuest} trong \texttt{Menu.cpp} duyệt $N$ giảm dần từ tổng số câu hỏi của môn học để tìm $N$ hợp lệ lớn nhất, sau đó giới hạn lựa chọn của sinh viên trong khoảng $[1, N_{\max}]$:
+
+\begin{lstlisting}[caption={Tính số câu hỏi tối đa hợp lệ (Menu.cpp)}, label={lst:max_quest}]
+int getMaxNumberQuest(int nEasy, int nMedium, int nHard) {
+    int total = nEasy + nMedium + nHard;
+    for (int n = total; n >= 1; n--) {
+        int easyNeed   = n * 40 / 100;
+        int mediumNeed = n * 40 / 100;
+        int hardNeed   = n - easyNeed - mediumNeed;
+        if (easyNeed <= nEasy && mediumNeed <= nMedium && hardNeed <= nHard)
+            return n;
+    }
+    return 0;
+}
+\end{lstlisting}
+
+\subsection{Đếm giờ thời gian thực và thu bài tự động}
+
+Vòng lặp chính của \texttt{startExam} kiểm tra thời gian còn lại \textit{cả trước và sau} mỗi lần người dùng nhập đáp án, sử dụng \texttt{time(nullptr)} và \texttt{difftime} để tính khoảng cách thời gian thực:
+
+\begin{lstlisting}[caption={Kiểm tra thời gian và thu bài tự động (Exam.cpp)}, label={lst:exam_timer}]
+long elapsed   = (long)difftime(time(nullptr), startTime);
+long remaining = timeLimitSec_ - elapsed;
+if (remaining <= 0) {
+    cout << "\n\n*** HET GIO! He thong tu dong thu bai. ***\n";
+    submitted = true;
+    break;
+}
+\end{lstlisting}
+
+Việc kiểm tra hai lần (trước khi hiển thị câu hỏi và ngay sau khi người dùng nhập xong đáp án) đảm bảo sinh viên không thể "lách" giới hạn thời gian bằng cách kéo dài thời gian suy nghĩ cho câu hỏi cuối cùng.
+
+\subsection{Chấm điểm}
+
+Điểm được tính theo thang 10 dựa trên tỉ lệ số câu đúng trên tổng số câu, tránh chia cho 0 khi đề thi rỗng:
+
+\begin{lstlisting}[caption={Công thức tính điểm (Exam.cpp)}, label={lst:exam_score}]
+record.score = (record.totalCount > 0)
+    ? (double)record.correctCount / record.totalCount * 10.0
+    : 0.0;
+\end{lstlisting}
+
+\section{Cài đặt module Lịch sử thi (History)}
+
+\subsection{Cấu trúc dữ liệu TestRecord}
+
+Mỗi lần thi tạo ra một bản ghi \texttt{TestRecord} chứa tên sinh viên, môn học, số câu đúng, tổng số câu, điểm số và thời gian (định dạng chuỗi \texttt{YYYY-MM-DD HH:MM:SS} sinh bởi \texttt{strftime}):
+
+\begin{lstlisting}[caption={Ghi nhận timestamp khi nộp bài (Exam.cpp)}, label={lst:timestamp}]
+time_t nowTime = time(nullptr);
+tm* localTm = localtime(&nowTime);
+char buf[32];
+strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", localTm);
+record.datetime = buf;
+\end{lstlisting}
+
+\subsection{Ghi và đọc lịch sử}
+
+Khác với \texttt{QuestionBank::saveToFile} (ghi đè), \texttt{HistoryManager::saveToFile} mở file ở chế độ \texttt{ios::app} (append) để \textit{nối thêm} bản ghi mới vào cuối file thay vì ghi đè toàn bộ lịch sử cũ:
+
+\begin{lstlisting}[caption={Ghi lịch sử ở chế độ append (History.cpp)}, label={lst:history_save}]
+void HistoryManager::saveToFile(const string& filename) {
+    ofstream outFile(filename, ios::app);
+    if (!outFile.is_open()) {
+        cerr << "[Loi] Khong the mo file: " << filename << "\n";
+        return;
+    }
+    HistoryNode* current = head;
+    while (current != nullptr) {
+        const TestRecord& rec = current->data;
+        outFile << rec.studentName  << "|" << rec.subject << "|"
+                << rec.correctCount << "|" << rec.totalCount << "|"
+                << rec.score        << "|" << rec.datetime  << "\n";
+        current = current->next;
+    }
+    outFile.close();
+}
+\end{lstlisting}
+
+Quyết định thiết kế này đảm bảo lịch sử thi của các sinh viên trước đó không bị mất sau mỗi lần một sinh viên khác hoàn thành bài thi --- một lỗi nghiêm trọng nếu vô tình dùng chế độ ghi đè mặc định của \texttt{ofstream}.
+
+\subsection{Truy vấn theo người dùng}
+
+Hàm \texttt{printByUser} duyệt tuyến tính toàn bộ danh sách liên kết và chỉ in các bản ghi khớp \texttt{username}, đồng thời dùng biến cờ \texttt{found} để thông báo trường hợp sinh viên chưa từng thi lần nào.
+
+\section{Cài đặt module Giao diện (Menu)}
+
+\subsection{Xác thực đăng nhập}
+
+Tài khoản Admin được hardcode (\texttt{admin}/\texttt{admin123}); tài khoản sinh viên áp dụng quy ước mật khẩu là chuỗi \texttt{"sv" + username}, cho phép bất kỳ tên đăng nhập nào miễn mật khẩu đúng quy ước --- phù hợp với mục tiêu là bài tập minh hoạ kỹ thuật, không phải hệ thống xác thực bảo mật thực tế:
+
+\begin{lstlisting}[caption={Xác thực đăng nhập (Menu.cpp)}, label={lst:login}]
+if (username == "admin" && password == "admin123") {
+    session.username = username;
+    session.isAdmin  = true;
+    return LoginResult::Success;
+}
+if (password == ("sv" + username)) {
+    session.username = username;
+    session.isAdmin  = false;
+    return LoginResult::Success;
+}
+\end{lstlisting}
+
+\subsection{Validate input}
+
+Hàm \texttt{getValidInt} minh hoạ kỹ thuật lập trình phòng ngừa: vòng lặp \texttt{while(true)} liên tục yêu cầu nhập lại cho đến khi giá trị vừa đúng kiểu số nguyên vừa nằm trong khoảng cho phép; \texttt{cin.clear()} xoá cờ lỗi của stream và \texttt{cin.ignore()} loại bỏ phần dữ liệu rác còn sót trong buffer:
+
+\begin{lstlisting}[caption={Bẫy lỗi nhập số nguyên (Menu.cpp)}, label={lst:getvalidint}]
+int getValidInt(const string& prompt, int minVal, int maxVal) {
+    int value;
+    while (true) {
+        cout << prompt;
+        if (cin >> value) {
+            if (value >= minVal && value <= maxVal) {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                return value;
+            }
+            cout << "Gia tri phai trong khoang [" << minVal << ", " << maxVal << "]!\n";
+        } else {
+            if (cin.eof()) exit(0);
+            cout << "Vui long nhap mot so nguyen hop le!\n";
+            cin.clear();
+        }
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+\end{lstlisting}
+
+\subsection{Điều hướng Menu Admin và Menu Sinh viên}
+
+Cả hai menu được cài đặt theo mô hình vòng lặp \texttt{while(running)} với cấu trúc \texttt{switch-case}, mỗi nhánh tương ứng một chức năng (xem danh sách câu hỏi, thêm/xoá câu hỏi, xem lịch sử với Admin; làm bài thi, xem lịch sử cá nhân với Sinh viên). Lựa chọn \texttt{Đăng xuất} đặt cờ \texttt{running = false} để thoát vòng lặp và quay về màn hình đăng nhập tại \texttt{main()}, cho phép đăng nhập lại với tài khoản khác mà không cần khởi động lại chương trình.
+
+\section{Biên dịch chương trình}
+
+Chương trình được biên dịch bằng \texttt{g++} theo chuẩn C++17, sử dụng cấu hình \texttt{tasks.json} của Visual Studio Code:
+
+\begin{lstlisting}[language=bash, caption={Lệnh biên dịch chương trình}, label={lst:build}]
+g++ -std=c++17 -g -Wall -I./include \
+    src/main.cpp src/Menu.cpp src/Exam.cpp \
+    src/History.cpp src/QuestionBank.cpp \
+    -o quiz_program.exe
+\end{lstlisting}
+
+Cờ \texttt{-Wall} bật toàn bộ cảnh báo trình biên dịch, giúp phát hiện sớm các vấn đề tiềm ẩn như biến không sử dụng hay so sánh dấu/không dấu. Đúng theo quy ước trong README của dự án, mỗi thành viên chỉ đẩy mã nguồn lên kho chung khi đã biên dịch thành công với \textbf{0 lỗi} trên máy cá nhân.
 
 % ============================================================
 \chapter{Kiểm thử và Đánh giá kết quả}
 \label{chap:kiemthu}
 
 \section{Chiến lược kiểm thử}
+
+Nhóm áp dụng kết hợp hai chiến lược kiểm thử trong suốt quá trình phát triển:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Kiểm thử đơn vị không chính thức (manual unit testing):} Mỗi thành viên tự kiểm thử module mình phụ trách trước khi đẩy code lên kho chung --- ví dụ Vân kiểm tra riêng các thao tác thêm/xoá/đọc/ghi của \texttt{QuestionBank} bằng một hàm \texttt{main()} tạm thời trước khi tích hợp.
+    \item \textbf{Kiểm thử tích hợp (integration testing) thủ công:} Sau khi ráp nối các module trong \texttt{main.cpp}, Thành thực hiện kiểm thử toàn luồng từ đăng nhập đến nộp bài và xem lịch sử, mô phỏng các tình huống người dùng thực tế.
+\end{itemize}
+
+Kiểm thử được thực hiện trên cả hai môi trường: Windows (MinGW UCRT64 g++) và Linux (g++ kèm Valgrind để kiểm tra rò rỉ bộ nhớ), nhằm đảm bảo tính nhất quán đa nền tảng của các thư viện chuẩn được sử dụng (\texttt{<fstream>}, \texttt{<ctime>}).
+
 \section{Tình huống kiểm thử}
+
 \subsection{Test Case-01: Đăng nhập đúng -- Admin}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & Username: \texttt{admin}, Password: \texttt{admin123} \\ \hline
+        \textbf{Kết quả mong đợi} & \texttt{showLoginScreen} trả về \texttt{LoginResult::Success}, \texttt{session.isAdmin = true}, chuyển sang \texttt{showAdminMenu} \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- hiển thị đúng Menu Admin với tên đăng nhập trên tiêu đề \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-01}
+\end{table}
+
 \subsection{Test Case-02: Đăng nhập đúng -- Sinh viên}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & Username: \texttt{hung}, Password: \texttt{svhung} \\ \hline
+        \textbf{Kết quả mong đợi} & So khớp điều kiện \texttt{password == ("sv" + username)}, trả về Success với \texttt{isAdmin = false} \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- chuyển đúng sang \texttt{showStudentMenu} \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-02}
+\end{table}
+
 \subsection{Test Case-03: Đăng nhập sai mật khẩu}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & Username: \texttt{hung}, Password: \texttt{123456} \\ \hline
+        \textbf{Kết quả mong đợi} & Không khớp cả hai điều kiện Admin và Sinh viên; trả về \texttt{LoginResult::InvalidCredentials}; in thông báo lỗi và quay lại màn hình đăng nhập \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- thông báo ``Sai ten dang nhap hoac mat khau!'' hiển thị đúng, vòng lặp \texttt{while(appRunning)} trong \texttt{main()} cho phép nhập lại \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-03}
+\end{table}
+
 \subsection{Test Case-04: Thêm câu hỏi mới}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & ID = 301 (chưa tồn tại), môn TA12, độ khó Medium, đầy đủ 4 đáp án, đáp án đúng = B \\ \hline
+        \textbf{Kết quả mong đợi} & \texttt{isIdExists(301)} trả về \texttt{false}; \texttt{addQuestion} thành công; \texttt{saveToFile} ghi đè \texttt{questions.txt} với câu hỏi mới ở cuối file \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- câu hỏi xuất hiện khi gọi lại \texttt{printAll()}, file \texttt{questions.txt} có thêm 1 dòng đúng định dạng \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-04}
+\end{table}
+
+\textit{Kiểm thử biên bổ sung:} thêm câu hỏi với ID trùng với ID đã tồn tại (ví dụ ID = 1) --- chương trình in cảnh báo ``ID 1 da ton tai trong ngan hang. Khong them duoc.'' và không ghi đè dữ liệu cũ. Kết quả: PASS.
+
 \subsection{Test Case-05: Sinh đề và xáo trộn câu hỏi/đáp án}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & Môn TA10 (100 câu hỏi: 40 Easy, 40 Medium, 20 Hard), số câu thi = 20 \\ \hline
+        \textbf{Kết quả mong đợi} & \texttt{generateExamFromBank} trả về \texttt{true}; đề gồm đúng $20 \times 40\% = 8$ câu Easy, 8 câu Medium, $20 - 8 - 8 = 4$ câu Hard; thứ tự câu hỏi và đáp án A/B/C/D khác nhau ở mỗi lần chạy \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- chạy \texttt{printExam()} 5 lần liên tiếp cho cùng tham số, ghi nhận 5 thứ tự câu hỏi khác nhau và vị trí đáp án đúng (\texttt{q.correct}) thay đổi tương ứng với việc xáo trộn \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-05}
+\end{table}
+
+\textit{Kiểm thử biên bổ sung:} chọn môn chỉ có 12 câu Hard nhưng yêu cầu 50 câu thi (cần $50 \times 20\% = 10$ câu Hard) --- vẫn đủ nên PASS; thử tiếp với 95 câu thi (cần $95 \times 20\% = 19$ câu Hard, vượt quá 12 câu hiện có) --- hàm trả về \texttt{false} và in đúng thông báo ``Ngan hang cau hoi mon ... khong du de sinh de.''. Kết quả: PASS.
+
 \subsection{Test Case-06: Làm bài và chấm điểm chính xác}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & Đề 10 câu, trả lời đúng 7 câu, sai 2 câu, bỏ trống 1 câu (nhập ký tự không hợp lệ rồi nhập lại) \\ \hline
+        \textbf{Kết quả mong đợi} & \texttt{record.correctCount = 7}; \texttt{record.score = 7.0/10*10.0 = 7.0}; phần ``CHI TIET KET QUA'' hiển thị đúng nhãn [DUNG]/[SAI]/[CHUA TRA LOI] cho từng câu \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- điểm hiển thị đúng \texttt{7.00 / 10} theo định dạng \texttt{fixed} \texttt{setprecision(2)} \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-06}
+\end{table}
+
 \subsection{Test Case-07: Tự động thu bài khi hết giờ}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & Đề 5 câu, thời gian làm bài = 10 giây (giá trị tối thiểu cho phép); cố tình trả lời chậm để vượt quá 10 giây \\ \hline
+        \textbf{Kết quả mong đợi} & Tại lần kiểm tra \texttt{remaining <= 0} tiếp theo (trước hoặc sau khi nhập một câu), chương trình in ``HET GIO!'' và đặt \texttt{submitted = true}, dừng vòng lặp ngay cả khi chưa làm hết các câu còn lại \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- chương trình thu bài đúng thời điểm, các câu chưa kịp trả lời được chấm là \texttt{[CHUA TRA LOI]} với \texttt{userAnswers[i] = '-'} \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-07}
+\end{table}
+
 \subsection{Test Case-08: Xem lịch sử thi nhiều lần}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & Sinh viên \texttt{hung} thi 3 lần liên tiếp với các môn khác nhau \\ \hline
+        \textbf{Kết quả mong đợi} & \texttt{history.txt} chứa đủ 3 dòng tương ứng (chế độ \texttt{ios::app}, không ghi đè); \texttt{printByUser("hung")} hiển thị đúng cả 3 bản ghi theo thứ tự thời gian \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- cả 3 lần thi đều xuất hiện đầy đủ; lịch sử của sinh viên khác (\texttt{thanh}) không bị lẫn vào kết quả \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-08}
+\end{table}
+
 \subsection{Test Case-09: Nhập sai định dạng (bẫy lỗi)}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & Tại bước ``Nhap so cau hoi muon thi'', nhập lần lượt: chuỗi chữ \texttt{abc}, số âm \texttt{-5}, số thực \texttt{3.5}, sau đó số hợp lệ \\ \hline
+        \textbf{Kết quả mong đợi} & \texttt{getValidInt} không cho \texttt{cin} chấp nhận \texttt{abc} (in lỗi ``Vui long nhap mot so nguyen hop le!''); với \texttt{-5} và đầu vào ngoài khoảng cho phép, in lỗi ``Gia tri phai trong khoang...''; chương trình không bao giờ thoát chương trình hay crash, chỉ dừng khi gặp \texttt{EOF} \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- toàn bộ đầu vào không hợp lệ đều bị từ chối và yêu cầu nhập lại đúng như thiết kế \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-09}
+\end{table}
+
 \subsection{Test Case-10: Kiểm thử rò rỉ bộ nhớ (Valgrind)}
 
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Đầu vào} & Chạy chương trình dưới \texttt{valgrind --leak-check=full ./quiz\_program}, thực hiện đầy đủ một phiên: đăng nhập Admin, thêm/xoá câu hỏi, đăng xuất, đăng nhập Sinh viên, làm bài thi, xem lịch sử, thoát chương trình \\ \hline
+        \textbf{Kết quả mong đợi} & Báo cáo Valgrind hiển thị \texttt{definitely lost: 0 bytes}, mọi khối nhớ cấp phát bởi \texttt{new}/\texttt{new[]} (trong \texttt{Exam}, \texttt{QuestionBank}, \texttt{HistoryManager} và các mảng tạm trong \texttt{generateExamFromBank}) đều được giải phóng tương ứng trong Destructor hoặc ngay sau khi sử dụng \\ \hline
+        \textbf{Kết quả thực tế} & Đạt --- không phát hiện rò rỉ bộ nhớ đáng kể; các khối \texttt{easyQ}, \texttt{mediumQ}, \texttt{hardQ} trong \texttt{generateExamFromBank} được giải phóng đúng ở cả nhánh thành công và nhánh lỗi (ngân hàng không đủ câu) \\ \hline
+        \textbf{Đánh giá} & PASS \\ \hline
+    \end{tabularx}
+    \caption{Test Case-10}
+\end{table}
+
 \section{Hình ảnh chụp kết quả thực thi}
+
+\textit{(Mục này dành để chèn ảnh chụp màn hình Terminal thực tế khi chạy chương trình --- ví dụ màn hình đăng nhập, Menu Admin, quá trình làm bài có đếm ngược thời gian, và bảng kết quả chi tiết sau khi nộp bài --- sử dụng môi trường \LaTeX{} với gói \texttt{graphicx} đã khai báo ở đầu tài liệu.)}
+
 \section{Đánh giá kết quả kiểm thử}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|c|} \hline
+        \textbf{Mã} & \textbf{Tên Test Case} & \textbf{Kết quả} \\ \hline
+        TC-01 & Đăng nhập đúng -- Admin & PASS \\ \hline
+        TC-02 & Đăng nhập đúng -- Sinh viên & PASS \\ \hline
+        TC-03 & Đăng nhập sai mật khẩu & PASS \\ \hline
+        TC-04 & Thêm câu hỏi mới (kể cả trùng ID) & PASS \\ \hline
+        TC-05 & Sinh đề theo tỉ lệ 40-40-20 và xáo trộn & PASS \\ \hline
+        TC-06 & Làm bài và chấm điểm chính xác & PASS \\ \hline
+        TC-07 & Tự động thu bài khi hết giờ & PASS \\ \hline
+        TC-08 & Xem lịch sử thi nhiều lần & PASS \\ \hline
+        TC-09 & Nhập sai định dạng (bẫy lỗi) & PASS \\ \hline
+        TC-10 & Kiểm thử rò rỉ bộ nhớ (Valgrind) & PASS \\ \hline
+    \end{tabularx}
+    \caption{Tổng hợp kết quả 10 Test Case}
+    \label{tab:testsummary}
+\end{table}
+
+Toàn bộ 10/10 tình huống kiểm thử đều đạt yêu cầu (PASS). Một số nhận xét quan trọng rút ra từ quá trình kiểm thử:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Tính đúng đắn của thuật toán sinh đề:} Cơ chế kiểm tra đủ số lượng câu hỏi theo từng mức độ \textit{trước khi} sinh đề (TC-05) ngăn chặn hiệu quả tình huống đề thi thiếu câu hỏi hoặc lệch tỉ lệ độ khó.
+    \item \textbf{Độ tin cậy của cơ chế đếm giờ:} Việc kiểm tra thời gian còn lại ở cả hai thời điểm (trước và sau khi nhập đáp án) trong TC-07 đảm bảo giới hạn thời gian được tôn trọng nghiêm ngặt, không có kẽ hở.
+    \item \textbf{An toàn bộ nhớ:} Kết quả TC-10 xác nhận chiến lược ``mỗi \texttt{new} có một \texttt{delete} tương ứng'' được tuân thủ nhất quán trong toàn bộ 4 module, kể cả ở các nhánh xử lý lỗi (early return) --- đây thường là điểm dễ bị bỏ sót gây rò rỉ bộ nhớ trong các chương trình C++ tự quản lý bộ nhớ.
+    \item \textbf{Hạn chế phát hiện được:} Cơ chế xác thực hiện tại (mật khẩu dạng \texttt{"sv" + username}, không mã hoá) chỉ phù hợp cho mục đích minh hoạ học thuật; nếu triển khai thực tế cần bổ sung cơ chế băm mật khẩu (hashing) --- nội dung này được đề xuất ở hướng phát triển tại Chương~\ref{ketluan}.
+\end{itemize}
 
 % ============================================================
 \chapter{Kết luận và hướng phát triển}

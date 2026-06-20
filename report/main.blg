@@ -3,52 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: ieeetr.bst
 Database file #1: references.bib
-Warning--I didn't find a database entry for "guralnick2015"
-Warning--I didn't find a database entry for "nam2022"
-Warning--I didn't find a database entry for "sommerville2016"
-Warning--I didn't find a database entry for "knuth1997"
-Warning--I didn't find a database entry for "stroustrup2013"
-Warning--I didn't find a database entry for "kernighan1999"
-Warning--I didn't find a database entry for "cormen2009"
-You've used 0 entries,
+You've used 12 entries,
             1876 wiz_defined-function locations,
-            484 strings with 3549 characters,
-and the built_in function-call counts, 20 in all, are:
-= -- 0
-> -- 0
+            543 strings with 5551 characters,
+and the built_in function-call counts, 1786 in all, are:
+= -- 168
+> -- 62
 < -- 0
-+ -- 0
-- -- 0
-* -- 2
-:= -- 9
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
++ -- 28
+- -- 16
+* -- 85
+:= -- 271
+add.period$ -- 22
+call.type$ -- 12
+change.case$ -- 10
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 1
+cite$ -- 12
+duplicate$ -- 78
+empty$ -- 229
+format.name$ -- 16
+if$ -- 449
 int.to.chr$ -- 0
-int.to.str$ -- 0
-missing$ -- 0
-newline$ -- 3
-num.names$ -- 0
-pop$ -- 0
+int.to.str$ -- 12
+missing$ -- 12
+newline$ -- 49
+num.names$ -- 12
+pop$ -- 68
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1
+skip$ -- 26
 stack$ -- 0
 substring$ -- 0
-swap$ -- 0
+swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 0
-width$ -- 0
-write$ -- 2
-(There were 7 warnings)
+while$ -- 12
+width$ -- 14
+write$ -- 116
