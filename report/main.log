@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.5)  20 JUN 2026 21:07
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.5)  21 JUN 2026 03:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -9,8 +9,8 @@ LaTeX2e <2026-06-01>
 L3 programming layer <2026-05-26>
 (c:/texlive/2026/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2025/01/22 v1.4n Standard LaTeX document class
-(c:/texlive/2026/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+(c:/texlive/2026/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count273
 \c@chapter=\count274
@@ -643,6 +643,12 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count361
 \@lastruleclass=\count362
 \@thisrulewidth=\dimen312
+) (c:/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip73
+\multirow@cntb=\count363
+\multirow@dima=\skip74
+\bigstrutjot=\dimen313
 ) (c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 ) (c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -669,19 +675,19 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/texlive/2026/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count363
+\c@section@level=\count364
 ) (c:/texlive/2026/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
-\@linkdim=\dimen313
-\Hy@linkcounter=\count364
-\Hy@pagecounter=\count365
+\@linkdim=\dimen314
+\Hy@linkcounter=\count365
+\Hy@pagecounter=\count366
  (c:/texlive/2026/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2026-04-24 v7.01q Hyperref: PDFDocEncoding definition (HO)
 ) (c:/texlive/2026/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count366
+\Hy@SavedSpaceFactor=\count367
  (c:/texlive/2026/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2026-04-24 v7.01q Hyperref: PDF Unicode definition (HO)
 )
@@ -694,17 +700,17 @@ Package hyperref Info: Plain pages OFF on input line 4214.
 Package hyperref Info: Backreferencing OFF on input line 4219.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4466.
-\c@Hy@tempcnt=\count367
+\c@Hy@tempcnt=\count368
 LaTeX Info: Redefining \url on input line 4805.
-\XeTeXLinkMargin=\dimen314
+\XeTeXLinkMargin=\dimen315
  (c:/texlive/2026/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (c:/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count368
-\Field@Width=\dimen315
-\Fld@charsize=\dimen316
+\Fld@menulength=\count369
+\Field@Width=\dimen316
+\Fld@charsize=\dimen317
 Package hyperref Info: Hyper figures OFF on input line 6091.
 Package hyperref Info: Link nesting OFF on input line 6096.
 Package hyperref Info: Hyper index ON on input line 6099.
@@ -712,18 +718,18 @@ Package hyperref Info: backreferencing OFF on input line 6106.
 Package hyperref Info: Link coloring ON on input line 6109.
 Package hyperref Info: Link coloring with OCG OFF on input line 6116.
 Package hyperref Info: PDF/A mode OFF on input line 6121.
-\Hy@abspage=\count369
-\c@Item=\count370
-\c@Hfootnote=\count371
+\Hy@abspage=\count370
+\c@Item=\count371
+\c@Hfootnote=\count372
 )
 Package hyperref Info: Driver (autodetected): hxetex.
  (c:/texlive/2026/texmf-dist/tex/latex/hyperref/hxetex.def
 File: hxetex.def 2026-04-24 v7.01q Hyperref driver for XeTeX
 \pdfm@box=\box86
-\c@Hy@AnnotLevel=\count372
-\HyField@AnnotCount=\count373
-\Fld@listcount=\count374
-\c@bookmark@seq@number=\count375
+\c@Hy@AnnotLevel=\count373
+\HyField@AnnotCount=\count374
+\Fld@listcount=\count375
+\c@bookmark@seq@number=\count376
  (c:/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
  (c:/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -731,23 +737,23 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
 )
-\Hy@SectionHShift=\skip73
+\Hy@SectionHShift=\skip75
 ) (c:/texlive/2026/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2026/03/07 v6.0 Page Geometry
  (c:/texlive/2026/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count376
-\Gm@cntv=\count377
-\c@Gm@tempcnt=\count378
-\Gm@bindingoffset=\dimen317
-\Gm@wd@mp=\dimen318
-\Gm@odd@mp=\dimen319
-\Gm@even@mp=\dimen320
-\Gm@layoutwidth=\dimen321
-\Gm@layoutheight=\dimen322
-\Gm@layouthoffset=\dimen323
-\Gm@layoutvoffset=\dimen324
+\Gm@cnth=\count377
+\Gm@cntv=\count378
+\c@Gm@tempcnt=\count379
+\Gm@bindingoffset=\dimen318
+\Gm@wd@mp=\dimen319
+\Gm@odd@mp=\dimen320
+\Gm@even@mp=\dimen321
+\Gm@layoutwidth=\dimen322
+\Gm@layoutheight=\dimen323
+\Gm@layouthoffset=\dimen324
+\Gm@layoutvoffset=\dimen325
 \Gm@dimlist=\toks45
 ) (./main.aux
 Package babel Info: 'vietnamese' activates 'vietnamese' shorthands.
@@ -755,26 +761,26 @@ Package babel Info: 'vietnamese' activates 'vietnamese' shorthands.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
 
 Package fontspec Info: 
 (fontspec)             Adjusting the maths setup (use [no-math] to avoid
@@ -782,62 +788,62 @@ Package fontspec Info:
 
 \symlegacymaths=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 86.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 86.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 86.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 86.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 86.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 86.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 86.
-LaTeX Font Info:    Redeclaring math accent \check on input line 86.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 86.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 86.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 86.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 86.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 86.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 87.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 87.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 87.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 87.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 87.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 87.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 87.
+LaTeX Font Info:    Redeclaring math accent \check on input line 87.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 87.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 87.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 87.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 87.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 87.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 86.
+(Font)              `operators' in the math version `normal' on input line 87.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/LatinModernRoman(0)/m/n on input line 86.
+(Font)                  OT1/cmr/m/n --> TU/LatinModernRoman(0)/m/n on input line 87.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 86.
+(Font)              `operators' in the math version `bold' on input line 87.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/LatinModernRoman(0)/m/n on input line 86.
+(Font)                  OT1/cmr/bx/n --> TU/LatinModernRoman(0)/m/n on input line 87.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/LatinModernRoman(0)/m/n --> TU/LatinModernRoman(0)/m/n on input line 86.
+(Font)                  TU/LatinModernRoman(0)/m/n --> TU/LatinModernRoman(0)/m/n on input line 87.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/LatinModernRoman(0)/m/it on input line 86.
+(Font)                  OT1/cmr/m/it --> TU/LatinModernRoman(0)/m/it on input line 87.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/LatinModernRoman(0)/b/n on input line 86.
+(Font)                  OT1/cmr/bx/n --> TU/LatinModernRoman(0)/b/n on input line 87.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/LatinModernSans(0)/m/n on input line 86.
+(Font)                  OT1/cmss/m/n --> TU/LatinModernSans(0)/m/n on input line 87.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/LatinModernMono(0)/m/n on input line 86.
+(Font)                  OT1/cmtt/m/n --> TU/LatinModernMono(0)/m/n on input line 87.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/LatinModernRoman(0)/m/n --> TU/LatinModernRoman(0)/b/n on input line 86.
+(Font)                  TU/LatinModernRoman(0)/m/n --> TU/LatinModernRoman(0)/b/n on input line 87.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/LatinModernRoman(0)/b/it on input line 86.
+(Font)                  OT1/cmr/bx/it --> TU/LatinModernRoman(0)/b/it on input line 87.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/LatinModernSans(0)/b/n on input line 86.
+(Font)                  OT1/cmss/bx/n --> TU/LatinModernSans(0)/b/n on input line 87.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/LatinModernMono(0)/b/n on input line 86.
-\c@lstlisting=\count379
+(Font)                  OT1/cmtt/m/n --> TU/LatinModernMono(0)/b/n on input line 87.
+\c@lstlisting=\count380
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 86.
+Package hyperref Info: Link coloring ON on input line 87.
  (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -862,12 +868,12 @@ Package hyperref Info: Link coloring ON on input line 86.
 * \topmargin=-58.36449pt
 * \headheight=18.0pt
 * \headsep=25.0pt
-* \topskip=12.0pt
+* \topskip=11.0pt
 * \footskip=30.0pt
 * \marginparwidth=49.79231pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -911,165 +917,169 @@ Chương 1.
 [7
 
 
-] [8] [9] [10]
+] [8]
+Overfull \hbox (12.1214pt too wide) in paragraph at lines 247--248
+[]\TU/LatinModernRoman(0)/b/n/10.95 Dữ liệu: \TU/LatinModernRoman(0)/m/n/10.95 Câu hỏi và lịch sử thi được lưu trên file văn bản cục bộ (\TU/LatinModernMono(0)/m/n/10.95 questions.txt\TU/LatinModernRoman(0)/m/n/10.95 , \TU/LatinModernMono(0)/m/n/10.95 history.txt\TU/LatinModernRoman(0)/m/n/10.95 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\TU/LatinModernMono(0)/m/n/10.95 <iostream>\TU/LatinModernRoman(0)/m/n/10.95 , \TU/LatinModernMono(0)/m/n/10.95 <fstream>\TU/LatinModernRoman(0)/m/n/10.95 , \TU/LatinModernMono(0)/m/n/10.95 <sstream>\TU/LatinModernRoman(0)/m/n/10.95 , \TU/LatinModernMono(0)/m/n/10.95 <string>\TU/LatinModernRoman(0)/m/n/10.95 , \TU/LatinModernMono(0)/m/n/10.95 <cstdlib>\TU/LatinModernRoman(0)/m/n/10.95 ,
+ []
+
+[9] [10]
 Chương 2.
 [11
 
 ]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 357.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 358.
 
 
 LaTeX Font Warning: Font shape `TU/LatinModernMono(0)/b/n' undefined
-(Font)              using `TU/LatinModernMono(0)/m/n' instead on input line 359.
+(Font)              using `TU/LatinModernMono(0)/m/n' instead on input line 360.
 
-[12] [13] [14] [15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 570--570
-[]|\TU/LatinModernRoman(0)/m/n/12 Struct \TU/LatinModernMono(0)/m/n/12 Question\TU/LatinModernRoman(0)/m/n/12 , \TU/LatinModernMono(0)/m/n/12 QuestionNode\TU/LatinModernRoman(0)/m/n/12 ; class
+[12] [13] [14] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 571--571
+[]|\TU/LatinModernRoman(0)/m/n/10.95 Struct \TU/LatinModernMono(0)/m/n/10.95 Question\TU/LatinModernRoman(0)/m/n/10.95 , \TU/LatinModernMono(0)/m/n/10.95 QuestionNode\TU/LatinModernRoman(0)/m/n/10.95 ; class
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 570--570
-[]|\TU/LatinModernRoman(0)/m/n/12 Struct \TU/LatinModernMono(0)/m/n/12 TestRecord\TU/LatinModernRoman(0)/m/n/12 , \TU/LatinModernMono(0)/m/n/12 HistoryNode\TU/LatinModernRoman(0)/m/n/12 ; class
+Underfull \hbox (badness 5681) in paragraph at lines 571--571
+\TU/LatinModernMono(0)/m/n/10.95 QuestionBank \TU/LatinModernRoman(0)/m/n/10.95 với các thao tác thêm, xoá,
  []
 
 
-Underfull \hbox (badness 1184) in paragraph at lines 570--570
-[]|\TU/LatinModernRoman(0)/m/n/12 Struct \TU/LatinModernMono(0)/m/n/12 LoginSession\TU/LatinModernRoman(0)/m/n/12 ; các hàm giao diện
+Underfull \hbox (badness 10000) in paragraph at lines 571--571
+[]|\TU/LatinModernRoman(0)/m/n/10.95 Struct \TU/LatinModernMono(0)/m/n/10.95 TestRecord\TU/LatinModernRoman(0)/m/n/10.95 , \TU/LatinModernMono(0)/m/n/10.95 HistoryNode\TU/LatinModernRoman(0)/m/n/10.95 ; class
  []
 
 
-Underfull \hbox (badness 7486) in paragraph at lines 594--594
-[]|\TU/LatinModernRoman(0)/m/n/12 Xáo trộn thứ tự câu hỏi và đáp án trong
+Underfull \hbox (badness 1953) in paragraph at lines 571--571
+\TU/LatinModernMono(0)/m/n/10.95 HistoryManager \TU/LatinModernRoman(0)/m/n/10.95 lưu trữ và truy vấn lịch sử
  []
 
-[17] [18]
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 595--595
+[]|\TU/LatinModernRoman(0)/m/n/10.95 Xáo trộn thứ tự câu hỏi và đáp án trong
+ []
+
+[17]
 Chương 3.
-[19
+[18
 
 ]
 Chương 4.
-[20
+[19
 
 ]
-Overfull \vbox (228.84763pt too high) has occurred while \output is active []
+Overfull \vbox (128.48949pt too high) has occurred while \output is active []
 
- [21]
+ [20]
 Chương 5.
+[21
 
-Overfull \hbox (11.938pt too wide) in paragraph at lines 693--693
-[]\TU/LatinModernRoman(0)/b/n/17.28 Cài đặt module Ngân hàng câu hỏi (QuestionBank) 
- []
-
-[22
-
-] [23] [24]
-Overfull \hbox (45.18925pt too wide) in paragraph at lines 831--832
-\TU/LatinModernRoman(0)/m/it/12 bên gọi \TU/LatinModernRoman(0)/m/n/12 — đây là một quy ước quan trọng cần tài liệu hoá rõ ràng, vì \TU/LatinModernMono(0)/m/n/12 Exam::generateExamFromBank
- []
-
-
-Overfull \hbox (7.75323pt too wide) in paragraph at lines 838--839
-\TU/LatinModernRoman(0)/m/n/12 câu Medium, 20% câu Hard (định nghĩa bằng hằng số tĩnh \TU/LatinModernMono(0)/m/n/12 EASY_PERCENT\TU/LatinModernRoman(0)/m/n/12 , \TU/LatinModernMono(0)/m/n/12 MEDIUM_PERCENT\TU/LatinModernRoman(0)/m/n/12 ,
- []
-
-[25] [26] [27] [28]
-Overfull \hbox (9.32393pt too wide) in paragraph at lines 1006--1007
-\TU/LatinModernRoman(0)/m/n/12 Cả hai menu được cài đặt theo mô hình vòng lặp \TU/LatinModernMono(0)/m/n/12 while(running) \TU/LatinModernRoman(0)/m/n/12 với cấu trúc \TU/LatinModernMono(0)/m/n/12 switch-case\TU/LatinModernRoman(0)/m/n/12 ,
- []
-
-(c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
+] [22] [23] [24] [25] [26] (c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 ) (c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
-) [29]
+) [27]
 Chương 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1047--1047
-[]|\TU/LatinModernMono(0)/m/n/12 showLoginScreen \TU/LatinModernRoman(0)/m/n/12 trả về \TU/LatinModernMono(0)/m/n/12 LoginResult::Success\TU/LatinModernRoman(0)/m/n/12 ,
+Underfull \hbox (badness 2529) in paragraph at lines 1074--1074
+[]|\TU/LatinModernRoman(0)/m/n/10.95 Không khớp cả hai điều kiện Admin và Sinh viên; trả về
  []
 
-[30
+[28
 
 ]
-Underfull \hbox (badness 1796) in paragraph at lines 1086--1086
-[]|\TU/LatinModernRoman(0)/m/n/12 Đạt — câu hỏi xuất hiện khi gọi lại \TU/LatinModernMono(0)/m/n/12 printAll()\TU/LatinModernRoman(0)/m/n/12 , file
- []
-
-[31]
-Underfull \hbox (badness 1137) in paragraph at lines 1116--1116
-\TU/LatinModernMono(0)/m/n/12 7.0\TU/LatinModernRoman(0)/m/n/12 ; phần “CHI TIET KET QUA” hiển thị đúng nhãn
- []
-
-[32]
-Underfull \hbox (badness 10000) in paragraph at lines 1168--1168
-[]|\TU/LatinModernRoman(0)/m/n/12 Chạy chương trình dưới \TU/LatinModernMono(0)/m/n/12 valgrind --leak-check=full
+Underfull \hbox (badness 10000) in paragraph at lines 1087--1087
+[]|\TU/LatinModernMono(0)/m/n/10.95 isIdExists(301) \TU/LatinModernRoman(0)/m/n/10.95 trả về \TU/LatinModernMono(0)/m/n/10.95 false\TU/LatinModernRoman(0)/m/n/10.95 ; \TU/LatinModernMono(0)/m/n/10.95 addQuestion \TU/LatinModernRoman(0)/m/n/10.95 thành công;
  []
 
 
-Underfull \hbox (badness 4673) in paragraph at lines 1168--1168
-[]|\TU/LatinModernRoman(0)/m/n/12 Báo cáo Valgrind hiển thị \TU/LatinModernMono(0)/m/n/12 definitely lost: 0 bytes\TU/LatinModernRoman(0)/m/n/12 ,
+Underfull \hbox (badness 10000) in paragraph at lines 1117--1117
+[]|\TU/LatinModernMono(0)/m/n/10.95 record.correctCount = 7\TU/LatinModernRoman(0)/m/n/10.95 ; \TU/LatinModernMono(0)/m/n/10.95 record.score = 7.0/10*10.0
  []
 
 
-Underfull \hbox (badness 5519) in paragraph at lines 1168--1168
-\TU/LatinModernRoman(0)/m/n/12 mọi khối nhớ cấp phát bởi \TU/LatinModernMono(0)/m/n/12 new\TU/LatinModernRoman(0)/m/n/12 /\TU/LatinModernMono(0)/m/n/12 new[] \TU/LatinModernRoman(0)/m/n/12 (trong \TU/LatinModernMono(0)/m/n/12 Exam\TU/LatinModernRoman(0)/m/n/12 ,
+Underfull \hbox (badness 3668) in paragraph at lines 1117--1117
+\TU/LatinModernMono(0)/m/n/10.95 = 7.0\TU/LatinModernRoman(0)/m/n/10.95 ; phần “CHI TIET KET QUA” hiển thị đúng nhãn
  []
 
-
-Underfull \hbox (badness 2057) in paragraph at lines 1168--1168
-\TU/LatinModernMono(0)/m/n/12 QuestionBank\TU/LatinModernRoman(0)/m/n/12 , \TU/LatinModernMono(0)/m/n/12 HistoryManager \TU/LatinModernRoman(0)/m/n/12 và các mảng tạm trong
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 1169--1169
+[]|\TU/LatinModernRoman(0)/m/n/10.95 Chạy chương trình dưới \TU/LatinModernMono(0)/m/n/10.95 valgrind --leak-check=full
  []
 
-[33] [34]
+[30] [31] [32] [33]
 Chương 7.
+[34
 
-Overfull \hbox (26.61575pt too wide) in paragraph at lines 1220--1220
-[]\TU/LatinModernRoman(0)/b/n/14.4 Quy chuẩn lập trình: Naming Convention, No Global Variables 
+]
+Overfull \hbox (7.55034pt too wide) in paragraph at lines 1280--1281
+\TU/LatinModernRoman(0)/m/n/10.95 Thuật toán Fisher-Yates Shuffle được cài đặt hai lần trong class \TU/LatinModernMono(0)/m/n/10.95 Exam\TU/LatinModernRoman(0)/m/n/10.95 : một hàm \TU/LatinModernMono(0)/m/n/10.95 shuffleQuestions
  []
 
-[35
+[35] [36] [37] [38
 
 ] (./main.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 12--14
-[][][] [] [][][][][][] [] [][] [] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]$[][]\TU/LatinModernRoman(0)/m/n/12 ,
+Underfull \hbox (badness 10000) in paragraph at lines 16--18
+[]\TU/LatinModernRoman(0)/m/n/10.95 N. T. Hiển, “Vietnam edtech & elearning report 2025: Kỷ nguyên vươn
  []
 
 
-Underfull \hbox (badness 2556) in paragraph at lines 16--18
-[]\TU/LatinModernRoman(0)/m/n/12 N. T. Hiển, “Vietnam edtech & elearning report 2025: Kỷ nguyên vươn
+Underfull \hbox (badness 10000) in paragraph at lines 16--18
+\TU/LatinModernRoman(0)/m/n/10.95 mình của giáo dục trực tuyến.” [][]$[][][][][] [] [] [] [][][] [] [][][][][][][][][][][][][] [] [][][] [] [][][][] [] [][] []
  []
 
-
-Underfull \hbox (badness 2205) in paragraph at lines 16--18
-\TU/LatinModernRoman(0)/m/n/12 mình của giáo dục trực tuyến.” [][]$[][][][][] [] [] [] [][][] [] [][][][][][][][][][][][][] [] [][][] [] [][][][] [] [][] []
- []
-
-
-Underfull \hbox (badness 4819) in paragraph at lines 16--18
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] [] [][][][]$[][]\TU/LatinModernRoman(0)/m/n/12 , 2025.  Truy cập ngày
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--48
-[][]$[][][][][] [] [] [] [][][][] [] [][][][][][][][][][][][][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]$[][]\TU/LatinModernRoman(0)/m/n/12 ,
- []
-
-) [36
+) [39
 
 
 ]
 Phụ lục A.
-[37
+[40
 
-]
+] [41]
 Phụ lục B.
-[38
+
+Underfull \hbox (badness 4279) in paragraph at lines 1443--1443
+[]|\TU/LatinModernRoman(0)/m/n/10.95 Xáo trộn Fisher-Yates cho
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1443--1443
+\TU/LatinModernRoman(0)/m/n/10.95 phục vụ mục đích kiểm
+ []
+
+
+Underfull \hbox (badness 2556) in paragraph at lines 1443--1443
+[]|\TU/LatinModernRoman(0)/m/n/10.95 Ghi nối (append) toàn bộ
+ []
+
+
+Underfull \hbox (badness 1997) in paragraph at lines 1443--1443
+[]|\TU/LatinModernRoman(0)/m/n/10.95 Đọc và bẫy lỗi số nguyên
+ []
+
+
+Underfull \hbox (badness 1769) in paragraph at lines 1443--1443
+\TU/LatinModernRoman(0)/m/n/10.95 trong khoảng $\OT1/cmr/m/n/10.95 [[]\OML/cmm/m/it/10.95 ; []\OT1/cmr/m/n/10.95 ]$ \TU/LatinModernRoman(0)/m/n/10.95 từ
+ []
+
+[42
 
 ]
-Phụ lục C.
-[39
+Overfull \vbox (42.80351pt too high) has occurred while \output is active []
 
-] (./main.aux)
+ [43]
+Phụ lục C.
+[44
+
+] [45] [46] [47] [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71]
+Phụ lục D.
+[72
+
+] [73] (./main.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-05-26>
@@ -1079,15 +1089,15 @@ L3 programming layer <2026-05-26>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 2769F620ED94C77FE3D423D8870F5907;27806.
+(rerunfilecheck)             Checksum: A9A21FF4875FE249D0441E5622620A90;30031.
  ) 
 Here is how much of TeX's memory you used:
- 32980 strings out of 467813
- 703598 string characters out of 5427156
- 1637158 words of memory out of 5000000
- 61523 multiletter control sequences out of 15000+600000
- 631851 words of font info for 98 fonts, out of 8000000 for 9000
+ 33270 strings out of 467813
+ 707873 string characters out of 5427156
+ 2054905 words of memory out of 5000000
+ 61811 multiletter control sequences out of 15000+600000
+ 631854 words of font info for 98 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 102i,13n,107p,1399b,1810s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,13n,107p,1402b,1814s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (40 pages, 958360 bytes).
+Output written on main.xdv (74 pages, 2854116 bytes).

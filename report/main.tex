@@ -1,4 +1,4 @@
-\documentclass[12pt]{report}
+\documentclass[11pt]{report}
 \usepackage{fontspec}
 %setmainfont{Times New Roman}
 \setmainfont{Latin Modern Roman}
@@ -23,6 +23,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{booktabs}
+\usepackage{multirow}
 
 % ============================================================
 % Cấu hình listings cho code C++
@@ -672,20 +673,20 @@ KY_THUAT_LAP_TRINH/
 |   |-- QuestionBank.h
 |   |-- Exam.h
 |   |-- History.h
-|   `-- Menu.h
+|   '-- Menu.h
 |-- src/
 |   |-- main.cpp
 |   |-- Menu.cpp
 |   |-- Exam.cpp
 |   |-- History.cpp
-|   `-- QuestionBank.cpp
+|   '-- QuestionBank.cpp
 |-- data/
 |   |-- questions.txt
-|   `-- history.txt
+|   '-- history.txt
 |-- .vscode/
-|   `-- tasks.json
+|   '-- tasks.json
 |-- quiz_program.exe   (sinh ra sau khi bien dich)
-`-- README.md
+'-- README.md
 \end{verbatim}
 
 Việc tách riêng thư mục \texttt{data/} khỏi mã nguồn cho phép cập nhật ngân hàng câu hỏi mà không cần biên dịch lại chương trình, đồng thời thuận tiện cho việc sao lưu dữ liệu độc lập với mã nguồn.
@@ -1169,9 +1170,45 @@ Kiểm thử được thực hiện trên cả hai môi trường: Windows (MinG
     \caption{Test Case-10}
 \end{table}
 
-\section{Hình ảnh chụp kết quả thực thi}
+\section{Kịch bản kiểm thử minh hoạ}
 
-\textit{(Mục này dành để chèn ảnh chụp màn hình Terminal thực tế khi chạy chương trình --- ví dụ màn hình đăng nhập, Menu Admin, quá trình làm bài có đếm ngược thời gian, và bảng kết quả chi tiết sau khi nộp bài --- sử dụng môi trường \LaTeX{} với gói \texttt{graphicx} đã khai báo ở đầu tài liệu.)}
+Ngoài các tình huống kiểm thử có cấu trúc ở Mục~\ref{chap:kiemthu} trên, nhóm còn thực hiện một phiên chạy thử hoàn chỉnh trên chương trình thực tế (\texttt{quiz\_program.exe}) để xác nhận trải nghiệm người dùng đầu cuối diễn ra đúng như thiết kế. Kịch bản dưới đây tường thuật lại trình tự thao tác thực tế, từ màn hình khởi động cho đến khi đăng xuất.
+
+\subsection{Khởi động chương trình và đăng nhập}
+
+Ngay sau khi chạy file \texttt{quiz\_program.exe}, hệ thống hiển thị màn hình chào mừng và yêu cầu nhập \textit{``Ten dang nhap''}. Nếu là Admin, tài khoản cố định được sử dụng là \texttt{Username: admin}, \texttt{Password: admin123}. Nếu là sinh viên, người dùng có thể nhập một tên đăng nhập bất kỳ, với điều kiện mật khẩu phải tuân theo đúng cú pháp \texttt{"sv" + username} --- ví dụ với \texttt{Username: hung12} thì \texttt{Password} bắt buộc phải là \texttt{svhung12}.
+
+Khi người dùng nhập sai thông tin đăng nhập, hệ thống hiển thị thông báo lỗi và yêu cầu nhấn Enter để quay lại màn hình nhập liệu. Khi người dùng gõ \texttt{exit} vào ô tên đăng nhập, chương trình kết thúc ngay lập tức --- đúng theo cơ chế \texttt{LoginResult::Exit} đã trình bày ở Chương~\ref{chap:caidat}.
+
+\subsection{Luồng thao tác của Admin}
+
+Sau khi đăng nhập thành công với tài khoản Admin, Menu Admin hiển thị 5 chức năng để lựa chọn bằng cách nhập số từ 1 đến 5.
+
+\textbf{Chức năng 1 -- Xem danh sách câu hỏi:} Chương trình liệt kê các môn học hiện có (TA10, TA11, TA12) để người dùng lựa chọn xem riêng từng môn, hoặc nhập \texttt{ALL} để xem toàn bộ. Mỗi môn học có 100 câu hỏi; khi chọn xem tất cả, hệ thống in lần lượt 300 câu hỏi theo thứ tự TA10 (câu 1--100), TA11 (câu 101--200) rồi đến TA12 (câu 201--300), đúng với thứ tự lưu trữ trong \texttt{questions.txt}. Sau khi in xong, người dùng nhấn Enter để quay lại Menu Admin.
+
+\textbf{Chức năng 2 -- Thêm câu hỏi mới:} Sau khi nhập đầy đủ các trường (ID, môn học, độ khó, nội dung câu hỏi, bốn đáp án, đáp án đúng), câu hỏi được lưu thành công vào \texttt{questions.txt}. Trường hợp ID nhập vào trùng với một câu hỏi đã tồn tại, chương trình báo lỗi ngay và yêu cầu nhập lại ID khác --- đúng theo cơ chế \texttt{isIdExists} đã trình bày ở Mục~\ref{chap:caidat}.
+
+\textbf{Chức năng 3 -- Xoá câu hỏi theo ID:} Hệ thống in ra toàn bộ danh sách câu hỏi hiện có trong \texttt{questions.txt} để người dùng tham khảo trước khi nhập ID cần xoá. Trường hợp ID nhập vào không tồn tại trong ngân hàng, chương trình hiển thị thông báo lỗi tương ứng thay vì xoá nhầm hoặc gây crash.
+
+\textbf{Chức năng 4 -- Xem lịch sử làm bài của tất cả sinh viên:} Hệ thống đọc toàn bộ \texttt{history.txt} và hiển thị lần lượt từng bản ghi của mọi sinh viên đã từng thi.
+
+\textbf{Chức năng 5 -- Đăng xuất:} Chương trình quay trở lại màn hình đăng nhập ban đầu, sẵn sàng cho lượt đăng nhập tiếp theo.
+
+\subsection{Luồng thao tác của sinh viên}
+
+Sau khi đăng nhập với tài khoản \texttt{Username: hung12} / \texttt{Password: svhung12}, hệ thống hiển thị Menu Sinh viên tương ứng với tên người dùng \texttt{hung12}.
+
+\textbf{Chức năng 1 -- Bắt đầu làm bài thi:} Hệ thống hiển thị danh sách 3 môn học (TA10, TA11, TA12) để người dùng chọn bằng cách nhập số từ 1 đến 3. Sau khi chọn môn (ví dụ chọn môn 1), người dùng nhập số câu hỏi muốn làm (ví dụ chọn 5 câu), tiếp theo nhập thời gian làm bài --- giới hạn cho phép từ tối thiểu 10 giây đến tối đa 36\,000 giây. Trước khi vào thi, hệ thống hỏi xác nhận: nếu người dùng nhập \texttt{N}, chương trình quay lại Menu Sinh viên mà không sinh đề; nếu nhập \texttt{Y}, bài thi chính thức bắt đầu.
+
+Sau khi xác nhận, câu hỏi được hiển thị tuần tự --- làm xong câu 1 mới chuyển sang câu 2, và tiếp tục như vậy cho đến khi hết số câu đã chọn. Nếu muốn nộp bài sớm, người dùng nhập \texttt{S} bất kỳ lúc nào và chương trình lập tức kết thúc bài thi, quay về Menu Sinh viên sau khi hiển thị kết quả. Sau khi hoàn thành (dù do trả lời hết câu hay nộp sớm), hệ thống tự động ghi lại kết quả vào \texttt{history.txt}.
+
+\textbf{Chức năng 2 -- Xem lịch sử làm bài của bản thân:} Hệ thống chỉ hiển thị các bản ghi có tên đăng nhập trùng khớp với người dùng hiện tại, đúng theo cơ chế lọc của \texttt{printByUser} đã trình bày ở Chương~\ref{chap:caidat}.
+
+\textbf{Chức năng 3 -- Đăng xuất:} Chương trình quay trở lại giao diện đăng nhập ban đầu.
+
+\subsection{Nhận xét từ kịch bản kiểm thử thực tế}
+
+Quá trình chạy thử trực tiếp này xác nhận chương trình hoạt động đúng như mô tả trong tài liệu thiết kế ở Chương~\ref{chap:thietke} và khớp với kết quả các Test Case dạng bảng ở Mục~\ref{chap:kiemthu}. Đặc biệt, ba điểm sau được quan sát thấy nhất quán qua nhiều lần chạy thử độc lập: (1) thứ tự câu hỏi trong chức năng "Xem danh sách câu hỏi" của Admin luôn phản ánh đúng thứ tự lưu trữ vật lý trong file, không bị xáo trộn ngoài ý muốn; (2) việc nộp bài sớm bằng phím \texttt{S} hoạt động ở bất kỳ câu hỏi nào trong đề, không giới hạn riêng cho câu cuối; (3) dữ liệu lịch sử thi của các sinh viên khác nhau không bị lẫn lộn khi truy vấn theo \texttt{username}, kể cả khi nhiều sinh viên thi liên tiếp trong cùng một phiên chạy chương trình.
 
 \section{Đánh giá kết quả kiểm thử}
 
@@ -1208,20 +1245,94 @@ Toàn bộ 10/10 tình huống kiểm thử đều đạt yêu cầu (PASS). M�
 \label{ketluan}
 
 \section{Kết quả đạt được}
+
+Sau quá trình nghiên cứu, thiết kế và lập trình, nhóm đã xây dựng thành công chương trình Hệ thống thi trắc nghiệm trực tiếp trên Terminal, đáp ứng đầy đủ các yêu cầu đặt ra của đề bài. Chương trình được viết hoàn toàn bằng C++ theo mô hình lập trình hướng module và hướng đối tượng, không sử dụng thư viện ngoài nào ngoài thư viện chuẩn của C++.
+
+Về phía người dùng, chương trình cung cấp hai vai trò chính là Sinh viên và Quản trị viên, mỗi vai trò có màn hình đăng nhập và menu riêng biệt. Sinh viên có thể chọn môn học, thiết lập số lượng câu hỏi và thời gian thi, sau đó làm bài và xem kết quả chi tiết lẫn lịch sử các lần thi. Quản trị viên có đầy đủ quyền quản lý ngân hàng câu hỏi: thêm, xoá, xem danh sách theo môn học, và theo dõi lịch sử thi của toàn bộ sinh viên.
+
+Về phía kỹ thuật, chương trình đạt được các kết quả cụ thể như sau:
+
+\begin{itemize}[leftmargin=*]
+    \item Ngân hàng câu hỏi được quản lý bằng danh sách liên kết đơn, hỗ trợ thêm vào cuối danh sách, xoá theo ID và duyệt toàn bộ không giới hạn kích thước.
+    \item Đề thi được sinh tự động theo tỉ lệ 40\% câu Dễ -- 40\% câu Trung bình -- 20\% câu Khó, đảm bảo tính công bằng và phân hoá.
+    \item Câu hỏi và thứ tự đáp án được xáo trộn ngẫu nhiên bằng thuật toán Fisher-Yates, loại bỏ hoàn toàn hiện tượng lặp mẫu giữa các lần thi.
+    \item Dữ liệu câu hỏi và lịch sử thi được lưu trữ dưới dạng file văn bản thuần tuý với ký tự phân tách \texttt{|}, đảm bảo khả năng đọc/ghi bền vững giữa các phiên làm việc.
+    \item Bộ đếm thời gian thực được tích hợp, tự động thu bài khi hết giờ ngay cả khi sinh viên chưa hoàn thành.
+    \item Toàn bộ bộ nhớ động cấp phát bằng \texttt{new} đều được giải phóng trong Destructor tương ứng, không để lại Memory Leak.
+\end{itemize}
+
 \section{Tổng kết các kỹ thuật đã được vận dụng}
+
 \subsection{Cấu trúc dữ liệu: Danh sách liên kết đơn}
+
+Hai class \texttt{QuestionBank} và \texttt{HistoryManager} đều sử dụng danh sách liên kết đơn (Singly Linked List) làm cấu trúc lưu trữ nội tại. Mỗi node chứa dữ liệu (\texttt{Question} hoặc \texttt{TestRecord}) cùng con trỏ \texttt{next} trỏ đến node tiếp theo. Nhóm duy trì cả hai con trỏ \texttt{head} và \texttt{tail} để thêm vào cuối danh sách trong $O(1)$ và duyệt từ đầu trong $O(n)$. Việc lựa chọn danh sách liên kết thay cho mảng tĩnh giúp chương trình hoạt động với ngân hàng câu hỏi có kích thước tuỳ ý mà không cần khai báo trước dung lượng tối đa.
+
 \subsection{Quản lý bộ nhớ động: con trỏ, new/delete, tránh Memory Leak}
+
+Chương trình sử dụng bộ nhớ động ở hai tầng. Tầng thứ nhất là các node trong danh sách liên kết: mỗi lần thêm câu hỏi hoặc bản ghi lịch sử, một \texttt{QuestionNode} hoặc \texttt{HistoryNode} mới được cấp phát bằng \texttt{new} và nối vào danh sách; Destructor của mỗi class chịu trách nhiệm duyệt toàn bộ danh sách và \texttt{delete} từng node. Tầng thứ hai là mảng động trong class \texttt{Exam}: constructor nhận số câu hỏi $n$, cấp phát \texttt{Question[n]} và \texttt{char[n]} cho danh sách câu và mảng đáp án người dùng; Destructor gọi \texttt{delete[]} để thu hồi. Nguyên tắc ``mỗi \texttt{new} phải có \texttt{delete}'' được tuân thủ nghiêm ngặt trong suốt dự án.
+
 \subsection{Xử lý File I/O: đọc/ghi file text với ký tự phân tách '|'}
+
+Dữ liệu của chương trình được lưu trữ trong hai file văn bản thuần tuý: \texttt{questions.txt} cho ngân hàng câu hỏi và \texttt{history.txt} cho lịch sử thi. Mỗi dòng trong file tương ứng với một bản ghi, các trường dữ liệu được ngăn cách bởi ký tự \texttt{|}. Khi đọc file, chương trình sử dụng \texttt{getline} kết hợp với \texttt{istringstream} để tách từng trường, đồng thời xử lý các trường hợp ngoại lệ như dòng trống, thiếu trường hoặc ID bị trùng. Khi ghi file, \texttt{QuestionBank} sử dụng \texttt{ofstream} thông thường để ghi đè toàn bộ danh sách, trong khi \texttt{HistoryManager} dùng cờ \texttt{ios::app} để nối thêm vào cuối file, tránh mất dữ liệu lịch sử cũ.
+
 \subsection{Thuật toán xáo trộn Fisher-Yates}
+
+Thuật toán Fisher-Yates Shuffle được cài đặt hai lần trong class \texttt{Exam}: một hàm \texttt{shuffleQuestions} để xáo trộn thứ tự câu hỏi trong đề thi và một hàm \texttt{shuffleAnswers} để xáo trộn thứ tự bốn đáp án của từng câu. Thuật toán duyệt mảng từ cuối về đầu, tại mỗi vị trí $i$ chọn ngẫu nhiên một vị trí $j$ trong đoạn $[0, i]$ rồi hoán đổi hai phần tử. Cách tiếp cận này đảm bảo mọi hoán vị đều có xác suất xuất hiện như nhau (phân phối đều). Đặc biệt, sau khi xáo trộn đáp án, chương trình tự động cập nhật lại trường \texttt{correct} của câu hỏi bằng cách tìm lại nội dung đáp án đúng trong mảng đã xáo, đảm bảo chấm điểm không bị sai lệch.
+
 \subsection{Lập trình hướng module: tách Header -- Source -- Data}
+
+Toàn bộ dự án được tổ chức theo mô hình tách biệt ba tầng. Thư mục \texttt{include} chứa các file \texttt{.h} khai báo interface (class, struct, enum, prototype hàm) mà không chứa bất kỳ logic nào. Thư mục \texttt{src} chứa các file \texttt{.cpp} triển khai logic tương ứng. Thư mục \texttt{data} chứa các file dữ liệu \texttt{questions.txt} và \texttt{history.txt}. Sự phân chia này giúp mỗi thành viên trong nhóm làm việc độc lập trên module của mình (Thành phụ trách Menu, Hùng phụ trách Exam, Vân phụ trách QuestionBank và History) mà không gây xung đột, đồng thời giúp việc biên dịch và bảo trì trở nên rõ ràng hơn.
+
 \subsection{Lập trình hướng đối tượng (OOP): Class, Constructor, Destructor}
+
+Ba class chính của chương trình là \texttt{QuestionBank}, \texttt{Exam} và \texttt{HistoryManager}, mỗi class đóng gói hoàn toàn dữ liệu nội tại (\texttt{private}) và chỉ để lộ các thao tác cần thiết qua giao diện \texttt{public}. Constructor của mỗi class chịu trách nhiệm khởi tạo trạng thái ban đầu hợp lệ (đặt \texttt{head = tail = nullptr} hoặc cấp phát mảng động), trong khi Destructor đảm nhận việc thu hồi toàn bộ tài nguyên. Nguyên tắc RAII (Resource Acquisition Is Initialization) được áp dụng nhất quán, đảm bảo không có tài nguyên nào bị rò rỉ khi đối tượng ra khỏi phạm vi.
+
 \subsection{Lập trình phòng ngừa}
+
+Các hàm quan trọng đều được thiết kế để xử lý tình huống bất thường mà không để chương trình crash. Hàm \texttt{addQuestion} kiểm tra ID trùng lặp trước khi thêm. Hàm \texttt{removeQuestion} xử lý ba trường hợp đặc biệt: danh sách rỗng, xoá node đầu, và không tìm thấy ID. Hàm \texttt{getQuestionAt} kiểm tra index âm và vượt giới hạn. Hàm \texttt{generateExamFromBank} kiểm tra số lượng câu hỏi theo từng mức độ trước khi sinh đề, trả về \texttt{false} ngay nếu ngân hàng không đủ điều kiện thay vì sinh đề không hợp lệ.
+
 \subsection{Validate input và xử lý ngoại lệ trên Terminal}
+
+Module Menu cung cấp ba hàm tiện ích dùng chung: \texttt{getValidInt} để đọc số nguyên trong đoạn $[\min, \max]$ với vòng lặp kiểm tra không giới hạn số lần thử, \texttt{getValidString} để đọc chuỗi không rỗng có giới hạn độ dài, và \texttt{getYesNo} để đọc lựa chọn Y/N. Cả ba hàm đều xử lý trường hợp \texttt{cin} fail (nhập sai kiểu dữ liệu) bằng cách gọi \texttt{cin.clear()} và \texttt{cin.ignore()} để xoá bộ đệm, tránh vòng lặp vô hạn. Trường hợp \texttt{cin.eof()} (hết dữ liệu đầu vào) được phát hiện riêng và kết thúc chương trình một cách an toàn.
+
 \subsection{Quy chuẩn lập trình: Naming Convention, No Global Variables}
+
+Nhóm thống nhất áp dụng một số quy ước lập trình nhất quán trong toàn dự án. Tên class và struct viết theo PascalCase (\texttt{QuestionBank}, \texttt{TestRecord}, \texttt{LoginSession}). Tên hàm viết theo camelCase (\texttt{addQuestion}, \texttt{shuffleAnswers}, \texttt{loadFromFile}). Tên biến cục bộ viết theo camelCase (\texttt{currentNode}, \texttt{correctCount}). Hằng số lớp khai báo \texttt{static const}. Đặc biệt, toàn bộ dữ liệu của chương trình được truyền qua tham số hàm hoặc thành viên của class, không có bất kỳ biến toàn cục nào được sử dụng, giúp tránh các lỗi trạng thái không mong muốn và tăng khả năng kiểm thử.
 
 \section{Đánh giá ưu điểm và hạn chế của chương trình}
 
+Về ưu điểm, chương trình đã đáp ứng đầy đủ các yêu cầu chức năng và kỹ thuật đặt ra. Kiến trúc module rõ ràng giúp mã nguồn dễ đọc, dễ bảo trì và phân công làm việc nhóm hiệu quả. Việc sử dụng danh sách liên kết đơn thay cho mảng tĩnh cho phép ngân hàng câu hỏi mở rộng không giới hạn. Thuật toán Fisher-Yates đảm bảo tính ngẫu nhiên thực sự cho mỗi lần thi. Toàn bộ bộ nhớ động được quản lý chặt chẽ, không để lại Memory Leak (đã được xác nhận bằng Valgrind ở Mục~\ref{chap:kiemthu}). Các hàm validate input bảo vệ chương trình khỏi các đầu vào sai định dạng hay ngoài giới hạn.
+
+Về hạn chế, chương trình hiện vẫn còn một số điểm có thể cải thiện. Hệ thống xác thực tài khoản đang ở mức tối giản: mật khẩu sinh viên được suy ra trực tiếp từ tên đăng nhập (\texttt{"sv" + username}) mà không có cơ chế mã hoá hay lưu trữ tài khoản riêng. Giao diện Terminal thuần tuý không có màu sắc phong phú trên một số môi trường và không hỗ trợ chuột hay điều hướng bằng phím mũi tên. Chương trình chưa có chức năng tìm kiếm câu hỏi theo từ khoá hay lọc theo nhiều tiêu chí kết hợp. Ngoài ra, dữ liệu lịch sử được ghi nối vào file mà không có cơ chế phân trang khi số lượng bản ghi lớn, có thể làm chậm thao tác đọc toàn bộ lịch sử.
+
 \section{Hướng phát triển và Nâng cấp tương lai}
+
+Dựa trên những hạn chế đã xác định, nhóm đề xuất một số hướng nâng cấp khả thi cho các phiên bản tiếp theo của chương trình.
+
+Thứ nhất, về quản lý tài khoản, hệ thống có thể được nâng cấp để lưu trữ tài khoản sinh viên trong file riêng với mật khẩu được băm bằng thuật toán đơn giản như MD5 hoặc SHA-256, thay vì quy tắc cố định hiện tại. Quản trị viên có thể có chức năng tạo, xoá và đặt lại mật khẩu tài khoản sinh viên.
+
+Thứ hai, về cấu trúc dữ liệu, khi ngân hàng câu hỏi phát triển lên hàng nghìn câu, việc tìm kiếm và lọc theo nhiều tiêu chí sẽ trở nên chậm với danh sách liên kết đơn $O(n)$. Có thể xem xét bổ sung cấu trúc cây nhị phân tìm kiếm (BST) hoặc bảng băm (hash map) để tăng tốc độ truy vấn theo ID hoặc từ khoá.
+
+Thứ ba, về tính năng thi, chương trình có thể bổ sung chế độ xem lại đề thi sau khi nộp bài kèm giải thích đáp án, hỗ trợ câu hỏi có nhiều đáp án đúng (multiple correct answers), hoặc tích hợp tính năng lưu bài tạm thời để tiếp tục sau khi bị gián đoạn.
+
+Thứ tư, về giao diện, nếu chuyển sang phát triển trên nền web hoặc ứng dụng desktop, chương trình có thể tận dụng giao diện đồ hoạ để hiển thị bộ đếm thời gian trực quan, biểu đồ kết quả thi và bảng xếp hạng giữa các sinh viên.
+
+Thứ năm, về khả năng mở rộng dữ liệu, định dạng file có thể được nâng cấp sang JSON hoặc XML để hỗ trợ câu hỏi có hình ảnh, công thức toán học hay nhiều loại media khác nhau, đồng thời dễ dàng tích hợp với các hệ thống quản lý học tập (LMS) bên ngoài.
+
+Nhìn chung, dự án đã hoàn thành mục tiêu xây dựng một hệ thống thi trắc nghiệm hoạt động đầy đủ, vận dụng các kỹ thuật lập trình C++ cốt lõi được học trong môn học. Quá trình thực hiện không chỉ củng cố kiến thức lý thuyết mà còn rèn luyện kỹ năng làm việc nhóm, phân chia công việc theo module và quản lý mã nguồn bằng Git. Những hạn chế còn tồn tại chính là động lực cho các cải tiến trong tương lai, hướng đến một sản phẩm hoàn thiện và thực dụng hơn.
+
+\newpage
+\chapter*{Lời cảm ơn}
+\thispagestyle{empty}
+\addcontentsline{toc}{section}{Lời cảm ơn}
+
+Nhóm xin gửi lời cảm ơn sâu sắc đến \textbf{TS. Vũ Thành Nam} --- giảng viên hướng dẫn môn học Kỹ thuật Lập trình (MI3310) --- vì đã tận tình truyền đạt những kiến thức nền tảng và định hướng quý báu trong suốt quá trình giảng dạy, từ các nguyên lý thiết kế chương trình, phong cách lập trình tốt cho đến những kinh nghiệm thực tiễn trong kỹ thuật lập trình C++. Những góp ý của thầy trong các buổi trên lớp đã giúp nhóm hình dung rõ ràng hơn về cách vận dụng lý thuyết vào một sản phẩm phần mềm cụ thể.
+
+Nhóm cũng xin cảm ơn Khoa Toán -- Tin, Đại học Bách khoa Hà Nội đã tạo điều kiện về môi trường học tập và tài liệu tham khảo để nhóm có thể hoàn thành đề tài này một cách thuận lợi.
+
+Cuối cùng, ba thành viên trong nhóm xin cảm ơn nhau vì tinh thần hợp tác, trách nhiệm và kiên trì trong suốt quá trình thực hiện đề tài --- từ những buổi thảo luận thiết kế ban đầu, những lần debug đến tận khuya, cho đến khi hoàn thiện báo cáo cuối cùng. Đây là một trải nghiệm làm việc nhóm đáng giá, giúp mỗi thành viên trưởng thành hơn cả về kỹ năng chuyên môn lẫn kỹ năng phối hợp.
+
+Do thời gian thực hiện có hạn và đây là lần đầu nhóm xây dựng một chương trình hoàn chỉnh theo mô hình module hoá quy mô như vậy, báo cáo và sản phẩm chắc chắn còn nhiều thiếu sót. Nhóm rất mong nhận được sự góp ý từ thầy và hội đồng chấm để có thể hoàn thiện hơn trong những dự án tiếp theo.
 
 % ============================================================
 \cleardoublepage
@@ -1232,6 +1343,1897 @@ Toàn bộ 10/10 tình huống kiểm thử đều đạt yêu cầu (PASS). M�
 % ============================================================
 \appendix
 \chapter{Mã nguồn hàm main()}
+
+Dưới đây là toàn bộ nội dung file \texttt{main.cpp} --- điểm khởi đầu của chương trình, có nhiệm vụ khởi tạo bộ sinh số ngẫu nhiên, điều phối vòng lặp đăng nhập và chuyển hướng đến menu tương ứng với vai trò người dùng.
+
+\begin{lstlisting}[caption={Toàn bộ mã nguồn main.cpp}, label={lst:appendix_main}]
+// ============================================================
+//  main.cpp - Entry point | Noi cac module lai voi nhau
+//  Tac gia: THANH | Role: System Architect / QA
+//
+//  LUONG CHINH:
+//    main()
+//      |-- showWelcomeBanner()
+//      |-- showLoginScreen()   <-- lap cho den khi dang nhap OK
+//          |-- [Admin]         --> showAdminMenu()
+//          |-- [Student]       --> showStudentMenu()
+// ============================================================
+
+#include "../include/Menu.h"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    // Vong lap chinh: cho phep dang nhap lai neu sai thong tin
+    bool appRunning = true;
+    while (appRunning) {
+        LoginSession session;
+        LoginResult result = showLoginScreen(session);
+
+        switch (result) {
+            case LoginResult::Success:
+                if (session.isAdmin) {
+                    showAdminMenu(session);
+                } else {
+                    showStudentMenu(session);
+                }
+                // Sau khi dang xuat, quay lai man hinh dang nhap
+                break;
+
+            case LoginResult::InvalidCredentials:
+                // showLoginScreen da in thong bao loi, tiep tuc vong lap
+                break;
+
+            case LoginResult::Exit:
+                appRunning = false;
+                break;
+        }
+    }
+
+    // Man hinh tam biet
+    clearScreen();
+    std::cout << Color::CYAN << Color::BOLD;
+    printLine('=');
+    printCentered("Chuc mung ban hoan thanh bai kiem tra!");
+    printLine('=');
+    std::cout << Color::RESET << "\n";
+
+    return 0;
+}
+\end{lstlisting}
+
+Cấu trúc hàm \texttt{main()} ở trên là minh hoạ trực tiếp cho nguyên lý thiết kế từ trên xuống (Top-down design) đã trình bày ở Chương~\ref{chap:lythuyet}: toàn bộ logic chi tiết được che giấu sau các lời gọi hàm \texttt{showLoginScreen}, \texttt{showAdminMenu}, \texttt{showStudentMenu}, giúp hàm \texttt{main()} ngắn gọn, dễ đọc và phản ánh đúng luồng nghiệp vụ tổng quát của chương trình.
+
 \chapter{Mô tả các hàm xử lý chính}
+
+Bảng~\ref{tab:appendix_functions} tổng hợp các hàm quan trọng nhất của từng module, kèm mô tả ngắn gọn chức năng và độ phức tạp thời gian (nếu áp dụng được).
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|l|X|} \hline
+        \textbf{Module} & \textbf{Hàm} & \textbf{Mô tả chức năng} \\ \hline
+        \multirow{6}{*}{QuestionBank}
+            & \texttt{addQuestion(q)} & Thêm câu hỏi vào cuối danh sách liên kết, có kiểm tra trùng ID. $O(n)$ do phải kiểm tra trùng. \\ \cline{2-3}
+            & \texttt{removeQuestion(id)} & Xoá câu hỏi theo ID, xử lý đầy đủ 4 trường hợp biên. $O(n)$. \\ \cline{2-3}
+            & \texttt{loadFromFile(filename)} & Đọc toàn bộ ngân hàng câu hỏi từ file văn bản, bẫy lỗi từng dòng. \\ \cline{2-3}
+            & \texttt{saveToFile(filename)} & Ghi đè toàn bộ ngân hàng câu hỏi hiện tại xuống file. \\ \cline{2-3}
+            & \texttt{getQuestionsBySubjectAndDifficulty} & Trích xuất mảng động các câu hỏi theo môn học và độ khó, phục vụ sinh đề. \\ \cline{2-3}
+            & \texttt{generateRandomSet(n)} & Bốc ngẫu nhiên $n$ câu hỏi bằng Fisher-Yates trên mảng chỉ số. \\ \hline
+        \multirow{5}{*}{Exam}
+            & \texttt{generateExamFromBank} & Sinh đề thi theo tỉ lệ độ khó 40-40-20 từ ngân hàng câu hỏi của một môn học. \\ \cline{2-3}
+            & \texttt{shuffleQuestions} & Xáo trộn Fisher-Yates cho mảng câu hỏi. $O(n)$. \\ \cline{2-3}
+            & \texttt{shuffleAnswers} & Xáo trộn Fisher-Yates cho 4 đáp án của một câu hỏi, cập nhật lại \texttt{correct}. \\ \cline{2-3}
+            & \texttt{startExam} & Vòng lặp chính điều khiển quá trình làm bài: hiển thị câu hỏi, nhận đáp án, đếm giờ, thu bài và chấm điểm. \\ \cline{2-3}
+            & \texttt{printExam} & In toàn bộ đề thi ra console, phục vụ mục đích kiểm thử/debug. \\ \hline
+        \multirow{4}{*}{HistoryManager}
+            & \texttt{addRecord(r)} & Thêm một bản ghi kết quả thi vào cuối danh sách liên kết. \\ \cline{2-3}
+            & \texttt{saveToFile} & Ghi nối (append) toàn bộ bản ghi trong bộ nhớ xuống \texttt{history.txt}. \\ \cline{2-3}
+            & \texttt{loadFromFile} & Đọc toàn bộ lịch sử thi từ file vào danh sách liên kết. \\ \cline{2-3}
+            & \texttt{printByUser(username)} & Lọc và hiển thị các bản ghi lịch sử thuộc về một người dùng cụ thể. \\ \hline
+        \multirow{5}{*}{Menu}
+            & \texttt{showLoginScreen} & Hiển thị màn hình đăng nhập, xác thực Admin/Sinh viên, trả về \texttt{LoginResult}. \\ \cline{2-3}
+            & \texttt{showAdminMenu} & Vòng lặp điều hướng 5 chức năng dành cho Quản trị viên. \\ \cline{2-3}
+            & \texttt{showStudentMenu} & Vòng lặp điều hướng 3 chức năng dành cho Sinh viên. \\ \cline{2-3}
+            & \texttt{getValidInt} & Đọc và bẫy lỗi số nguyên trong khoảng $[\min, \max]$ từ bàn phím. \\ \cline{2-3}
+            & \texttt{getMaxNumberQuest} & Tính số câu hỏi tối đa hợp lệ thoả tỉ lệ 40-40-20 dựa trên số câu hiện có theo từng độ khó. \\ \hline
+    \end{tabularx}
+    \caption{Tổng hợp các hàm xử lý chính theo từng module}
+    \label{tab:appendix_functions}
+\end{table}
+
+\chapter{Mã nguồn đầy đủ chương trình}
+\label{appendix:fullsource}
+
+Phụ lục này trình bày toàn bộ mã nguồn của chương trình, bao gồm 4 file header (\texttt{.h}) khai báo interface và 4 file cài đặt (\texttt{.cpp}) tương ứng, giúp người đọc đối chiếu trực tiếp với các trích đoạn đã phân tích ở Chương~\ref{chap:caidat} mà không cần truy cập kho mã nguồn riêng.
+
+\section{QuestionBank.h}
+
+\begin{lstlisting}[caption={QuestionBank.h -- Khai báo cấu trúc câu hỏi và ngân hàng câu hỏi}, label={lst:full_qb_h}]
+// ============================================================
+//  QuestionBank.h - Khai bao cau truc cau hoi & ngan hang
+//  Tac gia: VAN | Role: Ky su Du lieu
+// ============================================================
+
+#ifndef QUESTIONBANK_H
+#define QUESTIONBANK_H
+
+#include <string>
+using namespace std;
+
+// Struct luu thong tin mot cau hoi trac nghiem
+struct Question {
+    int id;
+    string subject;
+    string difficulty;   // Easy, Medium, Hard
+    string content;
+    string answers[4];
+    char correct;
+    // Ky tu dap an dung: 'A', 'B', 'C', hoac 'D'
+};
+
+// Node cua danh sach lien ket don chua mot cau hoi
+struct QuestionNode {
+    Question data;
+    QuestionNode* next;
+};
+
+// Class quan ly ngan hang cau hoi bang danh sach lien ket don
+class QuestionBank {
+private:
+    QuestionNode* head;
+    QuestionNode* tail;
+
+public:
+    // Constructor: khoi tao danh sach rong
+    QuestionBank();
+
+    // Destructor: giai phong toan bo bo nho dong
+    ~QuestionBank();
+
+    // Kiem tra ID da ton tai trong ngan hang chua
+    bool isIdExists(int id);
+
+    // Them cau hoi vao cuoi danh sach
+    bool addQuestion(Question q);
+
+    // Xoa cau hoi theo id
+    void removeQuestion(int id);
+
+    // Dem tong so cau hoi hien co
+    int getQuestionCount();
+
+    // Lay con tro Question tai vi tri index (0-indexed)
+    Question* getQuestionAt(int index);
+
+    // Dem so cau theo muc do
+    int countByDifficulty(const string& difficulty);
+
+    // Lay danh sach cau hoi theo muc do
+    Question* getQuestionsByDifficulty(const string& difficulty, int& count);
+
+    // Lay danh sach cac mon hoc khac nhau co trong ngan hang
+    string* getDistinctSubjects(int& count);
+
+    // Dem so cau hoi theo DUNG mon hoc VA muc do (dung khi sinh de theo mon)
+    int countBySubjectAndDifficulty(const string& subject, const string& difficulty);
+
+    // Lay danh sach cau hoi theo mon hoc VA muc do
+    Question* getQuestionsBySubjectAndDifficulty(const string& subject, const string& difficulty, int& count);
+
+    void printAll();
+
+    void printBySubject(const string& subject);
+
+    //I/O
+    bool loadFromFile(string filename);
+    bool saveToFile(string filename);
+
+    // Boc ngau nhien N cau, tra ve mang dong
+    Question* generateRandomSet(int n);
+};
+
+#endif // QUESTIONBANK_H
+\end{lstlisting}
+
+\section{QuestionBank.cpp}
+
+\begin{lstlisting}[caption={QuestionBank.cpp -- Cài đặt ngân hàng câu hỏi}, label={lst:full_qb_cpp}]
+// ============================================================
+//  QuestionBank.cpp - Hoan thien cac ham I/O
+//  Tac gia: VAN | Role: Ky su Du lieu
+// ============================================================
+
+#include "../include/QuestionBank.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <cctype>
+using namespace std;
+
+// Constructor: khoi tao danh sach rong
+QuestionBank::QuestionBank() {
+    head = nullptr;
+    tail = nullptr;
+}
+
+// Destructor: duyet toan bo danh sach va giai phong tung node de tranh Memory Leak
+QuestionBank::~QuestionBank() {
+    QuestionNode* current = head;
+
+    while (current != nullptr) {
+        QuestionNode* nextNode = current->next;
+        delete current;
+        current = nextNode;
+    }
+
+    head = nullptr;
+    tail = nullptr;
+}
+
+// Duyet toan bo danh sach de kiem tra id co trung khong
+bool QuestionBank::isIdExists(int id) {
+    QuestionNode* current = head;
+    while (current != nullptr) {
+        if (current->data.id == id) {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
+
+bool QuestionBank::addQuestion(Question q) {
+    if (isIdExists(q.id)) {
+        cout << "[Canh bao] ID " << q.id << " da ton tai trong ngan hang. Khong them duoc.\n";
+        return false;
+    }
+
+    QuestionNode* newNode = new QuestionNode();
+    newNode->data = q;
+    newNode->next = nullptr;
+
+    if (tail == nullptr) {
+        head = newNode;
+        tail = newNode;
+    } else {
+        tail->next = newNode;
+        tail = newNode;
+    }
+    return true;
+}
+
+// Xoa node co id trung khop khoi danh sach
+void QuestionBank::removeQuestion(int id) {
+    // Truong hop 1: Danh sach rong
+    if (head == nullptr) {
+        cout << "[Loi] Danh sach cau hoi dang rong.\n";
+        return;
+    }
+
+    // Truong hop 2: Node can xoa chinh la HEAD
+    if (head->data.id == id) {
+        QuestionNode* toDelete = head;
+        head = head->next;
+        if (head == nullptr) {
+            tail = nullptr;
+        }
+        delete toDelete;
+        return;
+    }
+
+    // Truong hop 3: Node can xoa nam o giua hoac cuoi
+    QuestionNode* prev    = head;
+    QuestionNode* current = head->next;
+
+    while (current != nullptr) {
+        // Tim thay node can xoa tai 'current'
+        if (current->data.id == id) {
+            prev->next = current->next;
+            if (current == tail) {
+                tail = prev;
+            }
+            delete current;
+            return;
+        }
+        // Chua tim thay
+        prev    = current;
+        current = current->next;
+    }
+
+    // Truong hop 4: Khong tim thay id trong danh sach
+    cout << "[Canh bao] Khong tim thay cau hoi co id = " << id << ".\n";
+}
+
+// Dem va tra ve tong so cau hoi hien co trong danh sach
+int QuestionBank::getQuestionCount() {
+    int count = 0;
+    QuestionNode* current = head;
+    while (current != nullptr) {
+        count++;
+        current = current->next;
+    }
+    return count;
+}
+
+// Tra ve con tro toi Question tai vi tri index (0-indexed)
+// Tra ve nullptr neu index vuot qua pham vi
+Question* QuestionBank::getQuestionAt(int index) {
+    // Neu index am
+    if (index < 0) {
+        return nullptr;
+    }
+
+    int currentIndex  = 0;
+    QuestionNode* current = head;
+    while (current != nullptr) {
+        if (currentIndex == index) {
+            return &(current->data);
+        }
+        currentIndex++;
+        current = current->next;
+    }
+
+    // Duyet het danh sach ma khong tim thay
+    return nullptr;
+}
+
+// loadFromFile
+// Dinh dang moi dong:
+// id|subject|difficulty|content|A|B|C|D|correct
+bool QuestionBank::loadFromFile(string filename) {
+    ifstream fin(filename);
+    if (!fin.is_open()) {
+        cout << "[Loi] Khong the mo file de doc: " << filename << "\n";
+        return false;
+    }
+
+    string line;
+    int lineNum = 0;
+    while (getline(fin, line)) {
+        lineNum++;
+        if (line.empty() || line[0] == '#') continue;
+        istringstream ss(line);
+        string token;
+        Question q;
+
+        // Truong 1: id
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu truong id. Bo qua.\n";
+            continue;
+        }
+        try {
+            q.id = stoi(token);
+        } catch (...) {
+            cout << "[Canh bao] Dong " << lineNum << ": id khong phai so (\"" << token << "\"). Bo qua.\n";
+            continue;
+        }
+
+        // Truong 2: subject
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu mon hoc. Bo qua.\n";
+            continue;
+        }
+        q.subject = token;
+
+        // Truong 3: difficulty
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu muc do. Bo qua.\n";
+            continue;
+        }
+        q.difficulty = token;
+
+        // Truong 4: content
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu noi dung cau hoi. Bo qua.\n";
+            continue;
+        }
+        q.content = token;
+
+        // Truong 5-8: 4 dap an A B C D
+        bool answersOk = true;
+        for (int i = 0; i < 4; i++) {
+            if (!getline(ss, token, '|')) {
+                cout << "[Canh bao] Dong " << lineNum << ": thieu dap an thu " << (i + 1) << ". Bo qua.\n";
+                answersOk = false;
+                break;
+            }
+            q.answers[i] = token;
+        }
+        if (!answersOk) continue;
+
+        // Truong 9: correct ('A'/'B'/'C'/'D')
+        if (!getline(ss, token, '|')) {
+            cout << "[Canh bao] Dong " << lineNum << ": thieu dap an dung. Bo qua.\n";
+            continue;
+        }
+        if (token.empty()) {
+            cout << "[Canh bao] Dong " << lineNum << ": truong dap an dung dang trong. Bo qua.\n";
+            continue;
+        }
+        char c = toupper((unsigned char)token[0]);
+        if (c < 'A' || c > 'D') {
+            cout << "[Canh bao] Dong " << lineNum
+                 << ": dap an dung '" << token << "' khong hop le (chi chap nhan A-D). Bo qua.\n";
+            continue;
+        }
+        q.correct = c;
+
+        if (!addQuestion(q)) {
+            cout << "[Canh bao] Dong " << lineNum << ": ID " << q.id << " bi trung voi cau hoi da co, da bo qua dong nay.\n";
+        }
+    }
+
+    fin.close();
+    cout << "[OK] Da nap " << getQuestionCount() << " cau hoi tu file \"" << filename << "\".\n";
+    return true;
+}
+
+// Duyet toan bo danh sach, gom cac ten mon hoc khac nhau lai
+string* QuestionBank::getDistinctSubjects(int& count) {
+    int total = getQuestionCount();
+    if (total == 0) {
+        count = 0;
+        return nullptr;
+    }
+
+    // Mang tam, toi da bang tong so cau hoi (truong hop xau nhat moi cau 1 mon)
+    string* temp = new string[total];
+    int distinctCount = 0;
+
+    QuestionNode* current = head;
+    while (current != nullptr) {
+        bool exists = false;
+        for (int i = 0; i < distinctCount; i++) {
+            if (temp[i] == current->data.subject) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            temp[distinctCount++] = current->data.subject;
+        }
+        current = current->next;
+    }
+
+    // Cap lai mang dung kich thuoc thuc te de tra ve cho ben ngoai
+    string* result = new string[distinctCount];
+    for (int i = 0; i < distinctCount; i++) result[i] = temp[i];
+    delete[] temp;
+
+    count = distinctCount;
+    return result;
+}
+
+int QuestionBank::countBySubjectAndDifficulty(const string& subject, const string& difficulty) {
+    int count = 0;
+    QuestionNode* current = head;
+    while (current != nullptr) {
+        if (current->data.subject == subject && current->data.difficulty == difficulty) {
+            count++;
+        }
+        current = current->next;
+    }
+    return count;
+}
+
+Question* QuestionBank::getQuestionsBySubjectAndDifficulty(const string& subject, const string& difficulty, int& count) {
+    count = countBySubjectAndDifficulty(subject, difficulty);
+    if (count == 0) return nullptr;
+
+    Question* result = new Question[count];
+    QuestionNode* current = head;
+    int index = 0;
+    while (current != nullptr) {
+        if (current->data.subject == subject && current->data.difficulty == difficulty) {
+            result[index++] = current->data;
+        }
+        current = current->next;
+    }
+    return result;
+}
+
+// saveToFile
+// Ghi toan bo danh sach xuong file theo dinh dang phan tach '|':
+// id|subject|difficulty|content|answerA|answerB|answerC|answerD|correct
+bool QuestionBank::saveToFile(string filename) {
+    ofstream fout(filename);
+    if (!fout.is_open()) {
+        cout << "[Loi] Khong the mo file de ghi: " << filename << "\n";
+        return false;
+    }
+
+    QuestionNode* current = head;
+    int saved = 0;
+    while (current != nullptr) {
+        const Question& q = current->data;
+        fout << q.id          << '|'
+            << q.subject     << '|'
+            << q.difficulty  << '|'
+            << q.content     << '|'
+            << q.answers[0]  << '|'
+            << q.answers[1]  << '|'
+            << q.answers[2]  << '|'
+            << q.answers[3]  << '|'
+            << q.correct
+            << '\n';
+        saved++;
+        current = current->next;
+    }
+
+    fout.close();
+    cout << "[OK] Da luu " << saved
+         << " cau hoi vao file \"" << filename << "\".\n";
+    return true;
+}
+
+void QuestionBank::printAll()
+{
+    QuestionNode* current = head;
+
+    while (current != nullptr)
+    {
+        cout << "ID: " << current->data.id << "\n";
+        cout << "Mon hoc: " << current->data.subject << "\n";
+        cout << "Muc do: " << current->data.difficulty << "\n";
+        cout << "Cau hoi: " << current->data.content << "\n";
+
+        cout << "A. " << current->data.answers[0] << "\n";
+        cout << "B. " << current->data.answers[1] << "\n";
+        cout << "C. " << current->data.answers[2] << "\n";
+        cout << "D. " << current->data.answers[3] << "\n";
+
+        cout << "Dap an dung: "
+             << current->data.correct << "\n\n";
+
+        current = current->next;
+    }
+}
+
+void QuestionBank::printBySubject(const string& subject)
+{
+    QuestionNode* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->data.subject == subject)
+        {
+            cout << "ID: " << current->data.id << "\n";
+            cout << "Mon hoc: " << current->data.subject << "\n";
+            cout << "Muc do: " << current->data.difficulty << "\n";
+            cout << "Cau hoi: " << current->data.content << "\n";
+
+            cout << "A. " << current->data.answers[0] << "\n";
+            cout << "B. " << current->data.answers[1] << "\n";
+            cout << "C. " << current->data.answers[2] << "\n";
+            cout << "D. " << current->data.answers[3] << "\n";
+
+            cout << "Dap an dung: " << current->data.correct << "\n\n";
+        }
+        current = current->next;
+    }
+}
+
+int QuestionBank::countByDifficulty(
+        const string& difficulty)
+{
+    int count = 0;
+
+    QuestionNode* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->data.difficulty ==
+            difficulty)
+        {
+            count++;
+        }
+
+        current = current->next;
+    }
+
+    return count;
+}
+
+Question* QuestionBank::getQuestionsByDifficulty(
+        const string& difficulty,
+        int& count)
+{
+    count = countByDifficulty(difficulty);
+
+    if (count == 0)
+        return nullptr;
+
+    Question* result =
+        new Question[count];
+
+    QuestionNode* current = head;
+
+    int index = 0;
+
+    while (current != nullptr)
+    {
+        if (current->data.difficulty ==
+            difficulty)
+        {
+            result[index++] =
+                current->data;
+        }
+
+        current = current->next;
+    }
+
+    return result;
+}
+
+// moi them 16/06/2026
+    Question* QuestionBank::generateRandomSet(int n) {
+    int total = getQuestionCount();
+    if (n > total) {
+        cout << "[Loi] Khong du cau hoi!\n";
+        return nullptr;
+    }
+
+    // Tao mang index roi Fisher-Yates
+    int* indices = new int[total];
+    for (int i = 0; i < total; i++) indices[i] = i;
+    for (int i = total - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int tmp = indices[i]; indices[i] = indices[j]; indices[j] = tmp;
+    }
+
+    // Lay N cau dau
+    Question* result = new Question[n];
+    for (int i = 0; i < n; i++)
+        result[i] = *getQuestionAt(indices[i]);
+
+    delete[] indices;
+    return result;
+   }
+\end{lstlisting}
+
+\section{Exam.h}
+
+\begin{lstlisting}[caption={Exam.h -- Khai báo logic sinh đề, xáo trộn, bộ đếm giờ}, label={lst:full_exam_h}]
+// ============================================================
+//  Exam.h - Khai bao logic sinh de, xao tron, bo dem gio
+//  Tac gia: HUNG | Role: Ky su Logic
+// ============================================================
+
+#pragma once
+#include "QuestionBank.h"
+#include "History.h"
+#include <string>
+
+class Exam {
+public:
+    // Khoi tao: cap phat mang Question[n]
+    Exam(int n, int timeLimitSec);
+    int timeLimitSec;
+    // Destructor: giai phong bo nho dong
+    ~Exam();
+
+    void loadFromBank(Question* questions);
+
+    // Nap ngau nhien cau hoi tu ngan hang vao de thi
+    bool generateExamFromBank(QuestionBank& bank, const std::string& subject);
+
+    // Xao tron thu tu cau hoi va dap an
+    void shuffleExam();
+
+    // In de thi ra console de kiem tra
+    void printExam() const;
+
+    TestRecord startExam(const std::string &username, int timeLimitMin);
+
+private:
+    // So luong cau hoi trong de
+    int       numberOfQuestions;
+
+    // Mang dong luu danh sach cau hoi
+    Question* questionList;
+
+    // Mang dong luu dap an nguoi dung chon
+    char*     userAnswers;
+
+    // Xao tron mang dap an cua 1 cau (Fisher-Yates)
+    void shuffleAnswers(std::string arr[], int n);
+
+    // Xao tron mang cau hoi (Fisher-Yates)
+    void shuffleQuestions(Question arr[], int n);
+    // Copy cau hoi tu mang vao exam
+
+    static const int EASY_PERCENT   = 40;
+    static const int MEDIUM_PERCENT = 40;
+    static const int HARD_PERCENT   = 20;
+};
+\end{lstlisting}
+
+\section{Exam.cpp}
+
+\begin{lstlisting}[caption={Exam.cpp -- Cài đặt logic sinh đề, xáo trộn, bộ đếm giờ}, label={lst:full_exam_cpp}]
+// ============================================================
+//  Exam.cpp - Trien khai logic sinh de, xao tron, bo dem gio
+//  Tac gia: HUNG | Role: Ky su Logic / Thuat toan
+// ============================================================
+
+#include "Exam.h"
+#include <iostream>
+#include <limits>
+#include <ctime>
+#include <cctype>
+using namespace std;
+
+// ============================================================
+//  CONSTRUCTOR / DESTRUCTOR
+// ============================================================
+
+// Constructor: Cap phat dong mang Question[N]
+Exam::Exam(int n, int t)
+{
+    numberOfQuestions = n;
+    timeLimitSec = t;
+
+    questionList = new Question[numberOfQuestions];
+    userAnswers  = new char[numberOfQuestions];
+
+    for (int i = 0; i < numberOfQuestions; i++)
+        userAnswers[i] = '-';
+}
+
+// Destructor: Giai phong bo nho dong
+Exam::~Exam() {
+    delete[] questionList;
+    delete[] userAnswers;
+}
+
+// ============================================================
+//  NAP CAU HOI VAO DE THI
+// ============================================================
+
+// Nap tu mang Question[] (dung sau generateRandomSet)
+void Exam::loadFromBank(Question* questions) {
+    for (int i = 0; i < numberOfQuestions; i++)
+        questionList[i] = questions[i];
+}
+
+// Nap cau hoi tu QuestionBank vao Exam
+bool Exam::generateExamFromBank(QuestionBank& bank, const string& subject)
+{
+    int easyNeed   = numberOfQuestions * EASY_PERCENT / 100;
+    int mediumNeed = numberOfQuestions * MEDIUM_PERCENT / 100;
+    int hardNeed   = numberOfQuestions - easyNeed - mediumNeed;
+
+    int easySize, mediumSize, hardSize;
+
+    Question* easyQuestions   = bank.getQuestionsBySubjectAndDifficulty(subject, "Easy", easySize);
+    Question* mediumQuestions = bank.getQuestionsBySubjectAndDifficulty(subject, "Medium", mediumSize);
+    Question* hardQuestions   = bank.getQuestionsBySubjectAndDifficulty(subject, "Hard", hardSize);
+
+    if (easySize < easyNeed || mediumSize < mediumNeed || hardSize < hardNeed)
+    {
+        cout << "[Loi] Ngan hang cau hoi mon " << subject << " khong du de sinh de.\n";
+        delete[] easyQuestions;
+        delete[] mediumQuestions;
+        delete[] hardQuestions;
+        return false;
+    }
+
+    shuffleQuestions(easyQuestions, easySize);
+    shuffleQuestions(mediumQuestions, mediumSize);
+    shuffleQuestions(hardQuestions, hardSize);
+
+    int index = 0;
+    for (int i = 0; i < easyNeed; i++)   questionList[index++] = easyQuestions[i];
+    for (int i = 0; i < mediumNeed; i++) questionList[index++] = mediumQuestions[i];
+    for (int i = 0; i < hardNeed; i++)   questionList[index++] = hardQuestions[i];
+
+    shuffleQuestions(questionList, numberOfQuestions);
+
+    delete[] easyQuestions;
+    delete[] mediumQuestions;
+    delete[] hardQuestions;
+    return true;
+}
+
+// ============================================================
+//  THUAT TOAN XAO TRON (Fisher-Yates)
+// ============================================================
+
+// Xao tron mang chuoi (Ap dung cho mang answers[4])
+void Exam::shuffleAnswers(string arr[], int n)
+{
+    for (int i = n - 1; i > 0; --i) {
+        int j = rand() % (i + 1);
+
+        string temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+
+// Xao tron thu tu cac cau hoi trong de
+void Exam::shuffleQuestions(Question arr[], int n)
+{
+    for (int i = n - 1; i > 0; --i) {
+        int j = rand() % (i + 1);
+
+        Question temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+
+// Ap dung toan bo: xao cau hoi + xao dap an tung cau,
+// dong thoi cap nhat lai truong 'correct' sau khi xao dap an.
+void Exam::shuffleExam() {
+
+    // 1. Xao thu tu cau hoi: Shuffle(questions, qCount)
+    shuffleQuestions(questionList, numberOfQuestions);
+
+    // 2. Voi moi cau, xao dap an va cap nhat dap an dung
+    for (int i = 0; i < numberOfQuestions; ++i) {
+        Question& q = questionList[i]; // Lay cau hoi hien tai
+
+        // Ghi nho noi dung dap an dung truoc khi xao
+        int originalCorrectIndex = q.correct - 'A';
+        string correctText = q.answers[originalCorrectIndex];
+
+        // Xao dap an rieng tung cau: Shuffle(q.answers, q.answerCount)
+        // Voi cau hoi trac nghiem co dinh la 4 dap an
+        shuffleAnswers(q.answers, 4);
+
+        // Cap nhat lai correctIndex sau khi xao
+        for (int k = 0; k < 4; ++k) {
+            if (q.answers[k] == correctText) {
+                q.correct = static_cast<char>('A' + k);
+                break;
+            }
+        }
+    }
+}
+
+// ============================================================
+//  IN DE THI (dung de debug / kiem tra)
+// ============================================================
+
+void Exam::printExam() const {
+    for (int i = 0; i < numberOfQuestions; ++i) {
+        cout << "Cau hoi " << (i + 1) << " (ID: " << questionList[i].id << ") [" << questionList[i].difficulty << "] : ";
+        cout << "  A. " << questionList[i].answers[0] << "\n";
+        cout << "  B. " << questionList[i].answers[1] << "\n";
+        cout << "  C. " << questionList[i].answers[2] << "\n";
+        cout << "  D. " << questionList[i].answers[3] << "\n";
+        cout << "=> Dap an dung: " << questionList[i].correct << "\n\n";
+    }
+}
+
+// ============================================================
+//  CHAY BAI THI
+// ============================================================
+
+// Hien thi tung cau hoi, nhan dap an, dem gio nguoc,
+// tu dong thu bai khi het gio, tinh diem thang 10.
+TestRecord Exam::startExam(const std::string& username, int timeLimitSec_) {
+    cout << "\n=== BAT DAU LAM BAI ===\n";
+    cout << "Thoi gian: " << timeLimitSec_ << " giay\n";
+    cout << "Nhan 'S' de nop bai som.\n\n";
+
+    TestRecord record;
+    record.studentName  = username;
+    record.correctCount = 0;
+    record.totalCount   = numberOfQuestions;
+
+    // Khoi tao mang ket qua tung cau
+    bool* result = new bool[numberOfQuestions];
+    for (int i = 0; i < numberOfQuestions; i++) {
+        userAnswers[i] = '-';
+        result[i]      = false;
+    }
+
+    time_t startTime = time(nullptr);
+    bool   submitted = false;   // true khi nop som hoac het gio
+
+    for (int i = 0; i < numberOfQuestions && !submitted; i++) {
+
+        // -- Kiem tra gio TRUOC khi hien thi cau hoi --------
+        long elapsed   = (long)difftime(time(nullptr), startTime);
+        long remaining = timeLimitSec_ - elapsed;
+
+        if (remaining <= 0) {
+            cout << "\n\n*** HET GIO! He thong tu dong thu bai. ***\n";
+            submitted = true;
+            break;
+        }
+
+        cout << "\n[Thoi gian con lai: " << remaining << " giay]\n";
+
+        // -- Hien thi cau hoi ----------------------------------
+        Question& q = questionList[i];
+        cout << "----------------------------------------\n";
+        cout << "Cau " << (i + 1) << "/" << numberOfQuestions << "\n";
+        cout << q.content << "\n";
+        cout << "A. " << q.answers[0] << "\n";
+        cout << "B. " << q.answers[1] << "\n";
+        cout << "C. " << q.answers[2] << "\n";
+        cout << "D. " << q.answers[3] << "\n";
+        cout << "(Nhap S de nop bai ngay)\n";
+
+        // -- Nhan dap an tu nguoi dung -------------------------
+        char chosen = '-';
+        while (true) {
+            cout << "Chon dap an (A/B/C/D hoac S=nop bai): ";
+            string input;
+            if (!(cin >> input)) break;
+            if (input.empty()) continue;
+
+            char c = static_cast<char>(toupper(static_cast<unsigned char>(input[0])));
+
+            if (c == 'S') {
+                cout << "\nBan da chon nop bai som.\n";
+                submitted = true;
+                break;
+            }
+            if (c >= 'A' && c <= 'D') {
+                chosen = c;
+                break;
+            }
+            cout << "Nhap khong hop le! Vui long nhap A/B/C/D hoac S.\n";
+        }
+
+        if (submitted) break;
+
+        // -- Kiem tra gio SAU KHI nhap xong ---------------------
+        elapsed   = (long)difftime(time(nullptr), startTime);
+        remaining = timeLimitSec_ - elapsed;
+        if (remaining <= 0) {
+            cout << "\n\n*** HET GIO TRONG LUC LAM CAU NAY! He thong tu dong thu bai. ***\n";
+            submitted = true;
+        }
+
+        // -- Ghi nhan dap an va cham diem cau nay --------------
+        userAnswers[i] = chosen;
+        if (chosen != '-' && chosen == q.correct) {
+            result[i] = true;
+            record.correctCount++;
+        }
+    }
+
+    // -- Tinh thoi gian thuc te da dung ----------------------
+    long usedSec = (long)difftime(time(nullptr), startTime);
+    if (usedSec > timeLimitSec_) usedSec = timeLimitSec_;
+    cout << "\nThoi gian lam bai: " << usedSec << " giay\n";
+
+    // -- Tinh diem ---------------------------------------------
+    record.score = (record.totalCount > 0)
+        ? (double)record.correctCount / record.totalCount * 10.0
+        : 0.0;
+
+    // -- Ghi timestamp -------------------------------------------
+    time_t nowTime = time(nullptr);
+    tm*    localTm = localtime(&nowTime);
+    char   buf[32];
+    strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", localTm);
+    record.datetime = buf;
+
+    // -- Hien thi chi tiet ket qua tung cau ---------------------
+    cout << "\n\n========================================\n";
+    cout << "CHI TIET KET QUA BAI THI\n";
+    cout << "========================================\n";
+
+    for (int i = 0; i < numberOfQuestions; i++) {
+        cout << "\nCau " << (i + 1) << ":\n";
+        cout << questionList[i].content << "\n";
+
+        cout << "Ban chon   : " << userAnswers[i];
+        if (userAnswers[i] >= 'A' && userAnswers[i] <= 'D')
+            cout << ". " << questionList[i].answers[userAnswers[i] - 'A'];
+        cout << "\n";
+
+        cout << "Dap an dung: " << questionList[i].correct << ". "
+             << questionList[i].answers[questionList[i].correct - 'A'] << "\n";
+
+        if (userAnswers[i] == '-')
+            cout << "[CHUA TRA LOI]\n";
+        else if (result[i])
+            cout << "[DUNG]\n";
+        else
+            cout << "[SAI]\n";
+    }
+
+    cout << "\n========================================\n";
+    cout << "Tong so cau dung: " << record.correctCount
+         << "/" << record.totalCount << "\n";
+    cout << "Diem so: " << record.score << "/10\n";
+    cout << "========================================\n";
+
+    delete[] result;
+    return record;
+}
+\end{lstlisting}
+
+\section{History.h}
+
+\begin{lstlisting}[caption={History.h -- Khai báo struct TestRecord và HistoryManager}, label={lst:full_history_h}]
+// ============================================================
+//  History.h - Khai bao struct TestRecord & HistoryManager
+//  Tac gia: VAN | Role: Ky su Du lieu
+// ============================================================
+
+#ifndef HISTORY_H
+#define HISTORY_H
+
+#include <string>
+using namespace std;
+
+// Struct luu thong tin mot lan thi cua thi sinh
+struct TestRecord {
+    string studentName;
+    string subject;
+    int correctCount;
+    int totalCount;
+    double score;
+    string datetime;     // Ngay gio thi (dang chuoi, vi du: "2025-06-09 14:30:00")
+};
+
+// Node cua danh sach lien ket don chua mot ban ghi lich su
+struct HistoryNode {
+    TestRecord data;
+    HistoryNode* next;
+};
+
+// Class quan ly lich su thi bang danh sach lien ket don
+class HistoryManager {
+private:
+    HistoryNode* head;
+    HistoryNode* tail;
+
+public:
+    // Constructor: khoi tao danh sach rong
+    HistoryManager();
+
+    // Destructor: giai phong toan bo bo nho dong
+    ~HistoryManager();
+
+    // Them mot ban ghi lich su vao cuoi danh sach
+    void addRecord(TestRecord r);
+
+    void printAll();
+    void printByUser(const string& username);
+
+    // Ghi toan bo danh sach ra file
+    void saveToFile(const string& filename);
+
+    // Luu thong tin tu file history.text vao danh sach moc noi
+    void loadFromFile(const string& filename);
+};
+
+void printAll();
+#endif // HISTORY_H
+\end{lstlisting}
+
+\section{History.cpp}
+
+\begin{lstlisting}[caption={History.cpp -- Cài đặt quản lý lịch sử thi}, label={lst:full_history_cpp}]
+// ============================================================
+//  History.cpp - Hoan thien cac ham I/O
+//  Tac gia: VAN | Role: Ky su Du lieu
+// ============================================================
+
+#include "../include/History.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+using namespace std;
+
+// Constructor: khoi tao danh sach rong
+HistoryManager::HistoryManager() {
+    head = nullptr;
+    tail = nullptr;
+}
+
+// Destructor: duyet toan bo danh sach va giai phong tung node
+HistoryManager::~HistoryManager() {
+    HistoryNode* current = head;
+    while (current != nullptr) {
+        HistoryNode* nextNode = current->next;
+        delete current;
+        current = nextNode;
+    }
+    head = nullptr;
+    tail = nullptr;
+}
+
+// Them ban ghi moi vao cuoi danh sach
+void HistoryManager::addRecord(TestRecord r) {
+    HistoryNode* newNode = new HistoryNode();
+    newNode->data = r;
+    newNode->next = nullptr;
+    if (tail == nullptr) {
+        // Truong hop: Danh sach rong
+        head = newNode;
+        tail = newNode;
+    } else {
+        // Truong hop con lai
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
+
+// Ghi noi toan bo danh sach lich su vao file text
+// Dinh dang moi dong: studentName|correctCount|totalCount|score|datetime
+void HistoryManager::saveToFile(const string& filename) {
+    ofstream outFile(filename, ios::app);
+    if (!outFile.is_open()) {
+        cerr << "[Loi] Khong the mo file: " << filename << "\n";
+        return;
+    }
+    HistoryNode* current = head;
+    while (current != nullptr) {
+        const TestRecord& rec = current->data;
+        outFile << rec.studentName  << "|"
+                << rec.subject      << "|"
+                << rec.correctCount << "|"
+                << rec.totalCount   << "|"
+                << rec.score        << "|"
+                << rec.datetime     << "\n";
+
+        current = current->next;
+    }
+    outFile.close();
+    cout << "[OK] Da ghi lich su vao file: " << filename << "\n";
+}
+
+// Luu thong tin tu file history.text vao danh sach moc noi
+void HistoryManager::loadFromFile(const string& filename) {
+    ifstream fin(filename);
+    if (!fin.is_open()) return;
+    string line;
+    while (getline(fin, line)) {
+        if (line.empty()) continue;
+        istringstream ss(line);
+        string token;
+        TestRecord r;
+
+        getline(ss, r.studentName, '|');
+        getline(ss, r.subject, '|');
+        getline(ss, token, '|');
+        r.correctCount = stoi(token);
+        getline(ss, token, '|');
+        r.totalCount = stoi(token);
+        getline(ss, token, '|');
+        r.score = stod(token);
+        getline(ss, r.datetime, '|');
+        addRecord(r);
+    }
+    fin.close();
+}
+
+void HistoryManager::printAll()
+{
+    if (head == nullptr)
+    {
+        cout << "Chua co lich su thi.\n";
+        return;
+    }
+
+    HistoryNode* current = head;
+
+    while (current != nullptr)
+    {
+        cout << "Sinh vien: "
+             << current->data.studentName
+             << "\n";
+
+        cout << "Mon hoc: "
+             << current->data.subject
+             << "\n";
+
+        cout << "So cau dung: "
+             << current->data.correctCount
+             << "/"
+             << current->data.totalCount
+             << "\n";
+
+        cout << "Diem: "
+             << current->data.score
+             << "\n";
+
+        cout << "Thoi gian: "
+             << current->data.datetime
+             << "\n";
+
+        cout << "--------------------------\n";
+
+        current = current->next;
+    }
+}
+
+void HistoryManager::printByUser(const string& username)
+{
+    bool found = false;
+
+    HistoryNode* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->data.studentName == username)
+        {
+            found = true;
+
+            cout << "Mon hoc: "
+                 << current->data.subject
+                 << "\n";
+
+            cout << "So cau dung: "
+                 << current->data.correctCount
+                 << "/"
+                 << current->data.totalCount
+                 << "\n";
+
+            cout << "Diem: "
+                 << current->data.score
+                 << "\n";
+
+            cout << "Thoi gian: "
+                 << current->data.datetime
+                 << "\n";
+
+            cout << "--------------------------\n";
+        }
+
+        current = current->next;
+    }
+
+    if (!found)
+    {
+        cout << "Khong tim thay lich su thi cua sinh vien "
+             << username
+             << ".\n";
+    }
+}
+\end{lstlisting}
+
+\section{Menu.h}
+
+\begin{lstlisting}[caption={Menu.h -- Khai báo các hàm vẽ giao diện và điều hướng}, label={lst:full_menu_h}]
+// ============================================================
+//  Menu.h - Khai bao cac ham ve giao dien va dieu huong
+//  Tac gia: THANH | Role: System Architect / UI / QA
+// ============================================================
+
+#pragma once
+#include <string>
+
+// -- Thong tin nguoi dung dang dang nhap -----------------------
+struct LoginSession {
+    std::string username;
+    bool        isAdmin;
+};
+
+// -- Ket qua dang nhap -------------------------------------------
+enum class LoginResult {
+    Success,
+    InvalidCredentials,
+    Exit
+};
+
+// -- Cac ma mau ANSI cho Terminal --------------------------------
+namespace Color {
+    const std::string RESET   = "\033[0m";
+    const std::string BOLD    = "\033[1m";
+    const std::string RED     = "\033[31m";
+    const std::string GREEN   = "\033[32m";
+    const std::string YELLOW  = "\033[33m";
+    const std::string BLUE    = "\033[34m";
+    const std::string MAGENTA = "\033[35m";
+    const std::string CYAN    = "\033[36m";
+    const std::string WHITE   = "\033[37m";
+    const std::string BG_BLUE = "\033[44m";
+}
+
+// -- Ham tien ich Terminal -----------------------------------------
+void clearScreen();
+void pauseScreen();
+void printLine(char c = '-', int width = 60);
+void printCentered(const std::string& text, int width = 60);
+
+// -- Man hinh chao mung --------------------------------------------
+void showWelcomeBanner();
+
+// -- Dang nhap / Dang xuat -------------------------------------------
+LoginResult showLoginScreen(LoginSession& session);
+
+// -- Menu chinh Admin -------------------------------------------------
+void showAdminMenu(LoginSession& session);
+
+// -- Menu chinh Sinh vien ----------------------------------------------
+void showStudentMenu(LoginSession& session);
+
+// -- Input Validation -----------------------------------------------
+// Doc so nguyen trong doan [min, max], bay loi hoan toan
+int  getValidInt(const std::string& prompt, int minVal, int maxVal);
+
+// Doc chuoi khong rong
+std::string getValidString(const std::string& prompt, int maxLen = 50);
+
+// Doc lua chon Y/N
+bool getYesNo(const std::string& prompt);
+\end{lstlisting}
+
+\section{Menu.cpp}
+
+\begin{lstlisting}[caption={Menu.cpp -- Cài đặt giao diện Menu và điều hướng}, label={lst:full_menu_cpp}]
+// ============================================================
+//  Menu.cpp - Trien khai giao dien Menu va dieu huong
+//  Tac gia: THANH | Role: System Architect / UI / QA
+// ============================================================
+
+#include "../include/Menu.h"
+#include "../include/QuestionBank.h"
+#include "../include/Exam.h"
+#include "../include/History.h"
+
+#include <iostream>
+#include <limits>
+#include <iomanip>
+#include <cstdlib>
+#include <cctype>
+
+using namespace std;
+
+// ============================================================
+//  HAM TIEN ICH TERMINAL
+// ============================================================
+
+void clearScreen() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+void pauseScreen() {
+    cout << "\nNhan Enter de tiep tuc...";
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.get();
+}
+
+void printLine(char c, int width) {
+    cout << string(width, c) << "\n";
+}
+
+void printCentered(const string& text, int width) {
+    int len = static_cast<int>(text.length());
+    if (len >= width) {
+        cout << text << "\n";
+        return;
+    }
+    int padding = (width - len) / 2;
+    cout << string(padding, ' ') << text << "\n";
+}
+
+// ============================================================
+//  INPUT VALIDATION
+// ============================================================
+
+int getValidInt(const string& prompt, int minVal, int maxVal) {
+    int value;
+    while (true) {
+        cout << prompt;
+        if (cin >> value) {
+            if (value >= minVal && value <= maxVal) {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                return value;
+            }
+            cout << Color::RED << "Gia tri phai trong khoang ["
+                 << minVal << ", " << maxVal << "]!\n" << Color::RESET;
+        } else {
+            if (cin.eof()) {
+                cout << "\n[He thong] Het du lieu dau vao. Thoat chuong trinh.\n";
+                exit(0);
+            }
+            cout << Color::RED << "Vui long nhap mot so nguyen hop le!\n" << Color::RESET;
+            cin.clear();
+        }
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+
+string getValidString(const string& prompt, int maxLen) {
+    string input;
+    while (true) {
+        cout << prompt;
+        if (!getline(cin, input)) {
+            cout << "\n[He thong] Het du lieu dau vao. Thoat chuong trinh.\n";
+            exit(0);
+        }
+
+        if (!input.empty() && static_cast<int>(input.length()) <= maxLen) {
+            return input;
+        }
+
+        if (input.empty()) {
+            cout << Color::RED << "Chuoi khong duoc de trong!\n" << Color::RESET;
+        } else {
+            cout << Color::RED << "Chuoi qua dai (toi da " << maxLen << " ky tu)!\n" << Color::RESET;
+        }
+    }
+}
+
+bool getYesNo(const string& prompt) {
+    while (true) {
+        cout << prompt << " (Y/N): ";
+        string input;
+        if (!getline(cin, input)) {
+            cout << "\n[He thong] Het du lieu dau vao. Thoat chuong trinh.\n";
+            exit(0);
+        }
+
+        if (!input.empty()) {
+            char c = static_cast<char>(toupper(static_cast<unsigned char>(input[0])));
+            if (c == 'Y') return true;
+            if (c == 'N') return false;
+        }
+        cout << Color::RED << "Vui long nhap Y hoac N!\n" << Color::RESET;
+    }
+}
+
+// Tinh so cau hoi toi da co the sinh de duoc, dua tren dung cong thuc chia ti le 40% Easy - 40% Medium - 20% Hard
+int getMaxNumberQuest(int nEasy, int nMedium, int nHard)
+{
+    int total = nEasy + nMedium + nHard;
+
+    // Thu N tu lon -> nho. N hop le dau tien tim duoc chinh la so cau toi da.
+    for (int n = total; n >= 1; n--) {
+        int easyNeed   = n * 40 / 100;
+        int mediumNeed = n * 40 / 100;
+        int hardNeed   = n - easyNeed - mediumNeed;
+
+        if (easyNeed <= nEasy && mediumNeed <= nMedium && hardNeed <= nHard) {
+            return n;
+        }
+    }
+
+    return 0;   // Khong co N nao hop le (vi du thieu han 1 muc do)
+}
+
+// ============================================================
+//  MAN HINH CHAO MUNG
+// ============================================================
+
+void showWelcomeBanner() {
+    clearScreen();
+    cout << Color::CYAN << Color::BOLD;
+    printLine('=');
+    printCentered("HE THONG THI TRAC NGHIEM MON TIENG ANH");
+    printLine('=');
+    cout << Color::RESET;
+    pauseScreen();
+}
+
+// ============================================================
+//  DANG NHAP
+// ============================================================
+
+LoginResult showLoginScreen(LoginSession& session) {
+    clearScreen();
+    cout << Color::CYAN << Color::BOLD;
+    printLine('=');
+    printCentered("DANG NHAP HE THONG");
+    printLine('=');
+    cout << Color::RESET << "\n";
+
+    cout << "(Go 'exit' o ten dang nhap de thoat chuong trinh)\n\n";
+
+    string username = getValidString("Ten dang nhap: ", 50);
+
+    string lowerUsername = username;
+    for (char& c : lowerUsername) c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
+    if (lowerUsername == "exit") {
+        return LoginResult::Exit;
+    }
+
+    string password = getValidString("Mat khau: ", 50);
+
+    // Tai khoan Admin
+    if (username == "admin" && password == "admin123") {
+        session.username = username;
+        session.isAdmin  = true;
+        return LoginResult::Success;
+    }
+
+    // Tai khoan Sinh vien: password = "sv" + username
+    if (password == ("sv" + username)) {
+        session.username = username;
+        session.isAdmin  = false;
+        return LoginResult::Success;
+    }
+
+    cout << "\n" << Color::RED << "Sai ten dang nhap hoac mat khau!\n" << Color::RESET;
+    pauseScreen();
+    return LoginResult::InvalidCredentials;
+}
+
+// ============================================================
+//  MENU ADMIN
+// ============================================================
+
+void showAdminMenu(LoginSession& session) {
+    const string QUESTIONS_FILE = "data/questions.txt";
+    const string HISTORY_FILE   = "data/history.txt";
+
+    QuestionBank bank;
+    bank.loadFromFile(QUESTIONS_FILE);
+
+    bool running = true;
+    while (running) {
+        clearScreen();
+        cout << Color::MAGENTA << Color::BOLD;
+        printLine('=');
+        printCentered("MENU QUAN TRI VIEN (" + session.username + ")");
+        printLine('=');
+        cout << Color::RESET;
+
+        cout << "1. Xem danh sach cau hoi\n";
+        cout << "2. Them cau hoi moi\n";
+        cout << "3. Xoa cau hoi theo ID\n";
+        cout << "4. Xem lich su thi cua tat ca sinh vien\n";
+        cout << "5. Dang xuat\n";
+        printLine();
+
+        int choice = getValidInt("Chon chuc nang (1-5): ", 1, 5);
+
+        switch (choice) {
+            case 1: {
+                clearScreen();
+                cout << Color::BOLD;
+                printCentered("DANH SACH CAU HOI");
+                cout << Color::RESET;
+                printLine();
+
+                if (bank.getQuestionCount() == 0) {
+                    cout << "Ngan hang cau hoi dang rong.\n";
+                    pauseScreen();
+                    break;
+                }
+
+                int subjectCount = 0;
+                string* subjects = bank.getDistinctSubjects(subjectCount);
+
+                cout << "Danh sach cac mon hoc:\n";
+                for (int i = 0; i < subjectCount; i++) {
+                    cout << "- " << subjects[i] << "\n";
+                }
+
+                string subject;
+                while (true){
+                    cout << "\nNhap mon hoc muon xem cau hoi (Nhap ALL neu muon in het tat ca): ";
+                    getline(cin, subject);
+
+                    if (subject == "all" || subject == "ALL" || subject == "All")
+                    {
+                        bank.printAll();
+                        pauseScreen();
+                        break;
+                    }
+
+                    bool found = false;
+                    for (int i = 0; i < subjectCount; i++)
+                    {
+                        if (subjects[i] == subject)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found)
+                    {
+                        bank.printBySubject(subject);
+                        pauseScreen();
+                        break;
+                    }
+
+                    cout << Color::RED
+                        << "\n[LOI] Khong ton tai mon hoc \"" << subject << "\"!\n"
+                        << "Vui long nhap lai.\n"
+                        << Color::RESET;
+                }
+                break;
+            }
+
+            case 2: {
+                clearScreen();
+                cout << Color::BOLD;
+                printCentered("THEM CAU HOI MOI");
+                cout << Color::RESET;
+                printLine();
+
+                Question q;
+                while (true) {
+                    q.id = getValidInt("Nhap ID cau hoi (so nguyen duong): ", 1, 1000000);
+                    if (bank.isIdExists(q.id)) {
+                        cout << Color::RED << "[Loi] ID " << q.id
+                            << " da ton tai! Vui long nhap mot ID khac.\n" << Color::RESET;
+                    } else {
+                    break;
+                    }
+                }
+
+                q.subject = getValidString("Mon hoc: ", 50);
+
+                while (true) {
+                    string diff = getValidString("Muc do (Easy / Medium / Hard): ", 10);
+                    if (!diff.empty()) {
+                        diff[0] = toupper((unsigned char)diff[0]);
+                        for (int i = 1; i < (int)diff.size(); i++)
+                            diff[i] = tolower((unsigned char)diff[i]);
+                    }
+                    if (diff == "Easy" || diff == "Medium" || diff == "Hard") {
+                        q.difficulty = diff;
+                        break;
+                    }
+                    cout << Color::RED << "Chi chap nhan: Easy, Medium, hoac Hard!\n" << Color::RESET;
+                }
+
+                q.content    = getValidString("Noi dung cau hoi: ", 200);
+                q.answers[0] = getValidString("Dap an A: ", 100);
+                q.answers[1] = getValidString("Dap an B: ", 100);
+                q.answers[2] = getValidString("Dap an C: ", 100);
+                q.answers[3] = getValidString("Dap an D: ", 100);
+
+                while (true) {
+                    string cAns = getValidString("Dap an dung (A/B/C/D): ", 5);
+                    char up = toupper((unsigned char)cAns[0]);
+                    if (up == 'A' || up == 'B' || up == 'C' || up == 'D') {
+                        q.correct = up;
+                        break;
+                    }
+                    cout << Color::RED << "Vui long nhap A, B, C hoac D!\n" << Color::RESET;
+                }
+
+                if (bank.addQuestion(q)) {
+                    bank.saveToFile(QUESTIONS_FILE);
+                    cout << Color::GREEN << "\n[OK] Da them cau hoi thanh cong!\n" << Color::RESET;
+                } else {
+                    cout << Color::RED << "\n[Loi] Khong the them cau hoi (ID bi trung).\n" << Color::RESET;
+                }
+                pauseScreen();
+                break;
+            }
+
+            case 3: {
+                clearScreen();
+                cout << Color::BOLD;
+                printCentered("XOA CAU HOI");
+                cout << Color::RESET;
+                printLine();
+
+                if (bank.getQuestionCount() == 0) {
+                    cout << "Ngan hang cau hoi dang rong.\n";
+                } else {
+                    bank.printAll();
+                    printLine();
+                    int id = getValidInt("Nhap ID cau hoi can xoa: ", 1, 1000000);
+                    bank.removeQuestion(id);
+                    bank.saveToFile(QUESTIONS_FILE);
+                }
+                pauseScreen();
+                break;
+            }
+
+            case 4: {
+                HistoryManager history;
+                history.loadFromFile(HISTORY_FILE);
+
+                clearScreen();
+                cout << Color::BOLD;
+                printCentered("LICH SU THI CUA SINH VIEN");
+                cout << Color::RESET;
+                printLine();
+                history.printAll();
+                pauseScreen();
+                break;
+            }
+
+            case 5:
+                running = false;
+                break;
+        }
+    }
+}
+
+// ============================================================
+//  MENU SINH VIEN
+// ============================================================
+
+void showStudentMenu(LoginSession& session) {
+    const string QUESTIONS_FILE = "data/questions.txt";
+    const string HISTORY_FILE   = "data/history.txt";
+
+    bool running = true;
+    while (running) {
+        clearScreen();
+        cout << Color::BLUE << Color::BOLD;
+        printLine('=');
+        printCentered("MENU SINH VIEN (" + session.username + ")");
+        printLine('=');
+        cout << Color::RESET;
+
+        cout << "1. Bat dau lam bai thi\n";
+        cout << "2. Xem lich su thi cua ban\n";
+        cout << "3. Dang xuat\n";
+        printLine();
+
+        int choice = getValidInt("Chon chuc nang (1-3): ", 1, 3);
+
+        switch (choice) {
+            case 1: {
+                QuestionBank bank;
+                bank.loadFromFile(QUESTIONS_FILE);
+
+                if (bank.getQuestionCount() == 0) {
+                    cout << Color::RED << "\nNgan hang cau hoi rong!\n" << Color::RESET;
+                    pauseScreen();
+                    break;
+                }
+
+                // -- Cho sinh vien chon mon hoc -----------------------------
+                int subjectCount = 0;
+                string* subjects = bank.getDistinctSubjects(subjectCount);
+
+                clearScreen();
+                cout << Color::BOLD;
+                printCentered("CHON MON HOC DE THI");
+                cout << Color::RESET;
+                printLine();
+
+                for (int i = 0; i < subjectCount; i++) {
+                    cout << (i + 1) << ". " << subjects[i] << "\n";
+                }
+                printLine();
+
+                int subjectChoice = getValidInt("Chon mon hoc (1-" + to_string(subjectCount) + "): ", 1, subjectCount);
+
+                string selectedSubject = subjects[subjectChoice - 1];
+                delete[] subjects;
+
+                int nEasy   = bank.countBySubjectAndDifficulty(selectedSubject, "Easy");
+                int nMedium = bank.countBySubjectAndDifficulty(selectedSubject, "Medium");
+                int nHard   = bank.countBySubjectAndDifficulty(selectedSubject, "Hard");
+
+                clearScreen();
+                cout << Color::BOLD;
+                printCentered("BAT DAU LAM BAI THI - MON " + selectedSubject);
+                cout << Color::RESET;
+                printLine();
+
+                int maxQ = getMaxNumberQuest(nEasy, nMedium, nHard);
+
+                if (maxQ < 1) {
+                    cout << Color::RED
+                        << "[Loi] Mon " << selectedSubject
+                        << " chua du cau hoi theo ca 3 muc do de sinh de!\n"
+                        << Color::RESET;
+                    pauseScreen();
+                    break;
+                }
+
+                int numQ = getValidInt("Nhap so cau hoi muon thi (1-" + to_string(maxQ) + "): ", 1, maxQ);
+                int timeLimit = getValidInt("Nhap thoi gian lam bai (giay, toi thieu 10): ", 10, 36000);
+                if (!getYesNo("\nBat dau lam bai?")) break;
+
+                // -- Sinh de CHI TU mon hoc da chon -----------------------
+                Exam exam(numQ, timeLimit);
+                if (!exam.generateExamFromBank(bank, selectedSubject)) {
+                    cout << Color::RED
+                        << "[Loi] Khong the sinh de thi (ngan hang khong du theo ti le 40-40-20).\n"
+                        << Color::RESET;
+                    pauseScreen();
+                    break;
+                }
+                exam.shuffleExam();
+
+                clearScreen();
+                TestRecord record = exam.startExam(session.username, exam.timeLimitSec);
+                record.subject = selectedSubject;
+
+                clearScreen();
+                cout << Color::GREEN << Color::BOLD;
+                printLine('=');
+                printCentered("KET QUA BAI THI");
+                printLine('=');
+                cout << Color::RESET;
+
+                cout << "Sinh vien  : " << record.studentName  << "\n";
+                cout << "Mon hoc    : " << record.subject       << "\n";
+                cout << "So cau dung: " << record.correctCount << "/" << record.totalCount << "\n";
+                cout << fixed << setprecision(2);
+                cout << "Diem so    : " << record.score << " / 10\n";
+                cout << "Thoi gian  : " << record.datetime << "\n";
+
+                HistoryManager history;
+                history.addRecord(record);
+                history.saveToFile(HISTORY_FILE);
+
+                pauseScreen();
+                break;
+            }
+
+            case 2: {
+                HistoryManager history;
+                history.loadFromFile(HISTORY_FILE);
+
+                clearScreen();
+                cout << Color::BOLD;
+                printCentered("LICH SU LAM BAI THI CUA BAN");
+                cout << Color::RESET;
+                printLine();
+                cout << fixed << setprecision(2);
+                history.printByUser(session.username);
+                pauseScreen();
+                break;
+            }
+
+            case 3:
+                running = false;
+                break;
+        }
+    }
+}
+\end{lstlisting}
+
 \chapter{Hướng dẫn cài đặt và sử dụng chương trình}
+
+\section*{C.1. Yêu cầu môi trường}
+
+\begin{itemize}[leftmargin=*]
+    \item Trình biên dịch hỗ trợ chuẩn C++17 trở lên: \texttt{g++} (khuyến nghị MinGW UCRT64 trên Windows, hoặc GCC mặc định trên Linux/macOS).
+    \item Visual Studio Code (tuỳ chọn) kèm extension C/C++ của Microsoft để biên dịch và debug thuận tiện thông qua \texttt{tasks.json} có sẵn trong dự án.
+\end{itemize}
+
+\section*{C.2. Biên dịch chương trình}
+
+Mở Terminal tại thư mục gốc của dự án (\texttt{KY\_THUAT\_LAP\_TRINH/}) và chạy lệnh:
+
+\begin{lstlisting}[language=bash, caption={Biên dịch thủ công bằng g++}]
+g++ -std=c++17 -g -Wall -I./include \
+    src/main.cpp src/Menu.cpp src/Exam.cpp \
+    src/History.cpp src/QuestionBank.cpp \
+    -o quiz_program.exe
+\end{lstlisting}
+
+Nếu sử dụng Visual Studio Code với cấu hình \texttt{.vscode/tasks.json} có sẵn, người dùng chỉ cần nhấn tổ hợp phím \textbf{Ctrl + Shift + B} để chạy tác vụ \textit{Build Quiz Program}.
+
+\section*{C.3. Chạy chương trình}
+
+Sau khi biên dịch thành công, file thực thi \texttt{quiz\_program.exe} được tạo tại thư mục gốc của dự án. Chạy chương trình bằng lệnh:
+
+\begin{lstlisting}[language=bash, caption={Chạy chương trình}]
+./quiz_program.exe
+\end{lstlisting}
+
+Lưu ý chương trình cần được chạy từ đúng thư mục gốc để các đường dẫn tương đối đến \texttt{data/questions.txt} và \texttt{data/history.txt} hoạt động chính xác.
+
+\section*{C.4. Tài khoản mặc định}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|l|X|} \hline
+        \textbf{Vai trò} & \textbf{Username} & \textbf{Password} \\ \hline
+        Admin & \texttt{admin} & \texttt{admin123} \\ \hline
+        Sinh viên & (bất kỳ, ví dụ \texttt{hung}) & \texttt{sv} + username (ví dụ \texttt{svhung}) \\ \hline
+    \end{tabularx}
+    \caption{Tài khoản mặc định để đăng nhập chương trình}
+\end{table}
+
+\section*{C.5. Thoát chương trình}
+
+Tại màn hình đăng nhập, gõ \texttt{exit} vào ô tên đăng nhập để kết thúc chương trình một cách an toàn. Trong quá trình làm bài thi, sinh viên có thể nhấn \texttt{S} bất kỳ lúc nào để nộp bài sớm thay vì phải hoàn thành toàn bộ số câu đã chọn.
 \end{document}

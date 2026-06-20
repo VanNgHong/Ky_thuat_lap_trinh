@@ -4,13 +4,13 @@
 \contentsline {chapter}{Danh sách bảng}{3}{chapter*.2}%
 \contentsline {chapter}{\numberline {1}Giới thiệu}{7}{chapter*.5}%
 \contentsline {section}{\numberline {1.1}Bối cảnh}{7}{section*.6}%
-\contentsline {section}{\numberline {1.2}Lý do lựa chọn bài toán}{8}{section*.7}%
+\contentsline {section}{\numberline {1.2}Lý do lựa chọn bài toán}{7}{section*.7}%
 \contentsline {section}{\numberline {1.3}Mô tả bài toán}{8}{section*.8}%
 \contentsline {section}{\numberline {1.4}Mục tiêu của chương trình}{8}{section*.12}%
-\contentsline {section}{\numberline {1.5}Phạm vi thực hiện}{9}{section*.13}%
+\contentsline {section}{\numberline {1.5}Phạm vi thực hiện}{8}{section*.13}%
 \contentsline {section}{\numberline {1.6}Công nghệ và ngôn ngữ lập trình sử dụng}{9}{section*.14}%
-\contentsline {section}{\numberline {1.7}Phân công công việc}{10}{section*.16}%
-\contentsline {subsection}{\numberline {1.7.1}Thành viên thực hiện}{10}{subsection*.17}%
+\contentsline {section}{\numberline {1.7}Phân công công việc}{9}{section*.16}%
+\contentsline {subsection}{\numberline {1.7.1}Thành viên thực hiện}{9}{subsection*.17}%
 \contentsline {subsection}{\numberline {1.7.2}Phân công chi tiết nhiệm vụ}{10}{subsection*.19}%
 \contentsline {chapter}{\numberline {2}Cơ sở lý thuyết}{11}{chapter*.21}%
 \contentsline {section}{\numberline {2.1}Nguyên lý thiết kế chương trình theo module}{11}{section*.22}%
@@ -19,119 +19,133 @@
 \contentsline {subsection}{\numberline {2.1.3}Phong cách lập trình tốt}{12}{subsection*.28}%
 \contentsline {section}{\numberline {2.2}Con trỏ và quản lý bộ nhớ động trong C++}{12}{section*.29}%
 \contentsline {subsection}{\numberline {2.2.1}Bộ nhớ tĩnh và bộ nhớ động}{12}{subsection*.30}%
-\contentsline {subsection}{\numberline {2.2.2}Rò rỉ bộ nhớ (Memory Leak)}{13}{subsection*.41}%
-\contentsline {subsection}{\numberline {2.2.3}Constructor và Destructor}{13}{subsection*.42}%
+\contentsline {subsection}{\numberline {2.2.2}Rò rỉ bộ nhớ (Memory Leak)}{12}{subsection*.41}%
+\contentsline {subsection}{\numberline {2.2.3}Constructor và Destructor}{12}{subsection*.42}%
 \contentsline {section}{\numberline {2.3}Danh sách liên kết đơn (Singly Linked List)}{13}{section*.59}%
 \contentsline {subsection}{\numberline {2.3.1}Khái niệm và cấu trúc}{13}{subsection*.60}%
-\contentsline {subsection}{\numberline {2.3.2}Ưu điểm so với mảng tĩnh}{14}{subsection*.73}%
-\contentsline {subsection}{\numberline {2.3.3}Các thao tác cơ bản}{14}{subsection*.74}%
+\contentsline {subsection}{\numberline {2.3.2}Ưu điểm so với mảng tĩnh}{13}{subsection*.73}%
+\contentsline {subsection}{\numberline {2.3.3}Các thao tác cơ bản}{13}{subsection*.74}%
 \contentsline {subsection}{\numberline {2.3.4}Cài đặt thêm và xoá node}{14}{subsection*.76}%
 \contentsline {section}{\numberline {2.4}Thuật toán xáo trộn Fisher-Yates}{14}{section*.90}%
 \contentsline {subsection}{\numberline {2.4.1}Nguyên lý hoạt động}{14}{subsection*.91}%
-\contentsline {subsection}{\numberline {2.4.2}Độ phức tạp}{15}{subsection*.101}%
-\contentsline {subsection}{\numberline {2.4.3}Ứng dụng trong dự án}{15}{subsection*.102}%
+\contentsline {subsection}{\numberline {2.4.2}Độ phức tạp}{14}{subsection*.101}%
+\contentsline {subsection}{\numberline {2.4.3}Ứng dụng trong dự án}{14}{subsection*.102}%
 \contentsline {section}{\numberline {2.5}Xử lý File I/O trong C++}{15}{section*.120}%
 \contentsline {subsection}{\numberline {2.5.1}Các lớp stream cơ bản}{15}{subsection*.121}%
 \contentsline {subsection}{\numberline {2.5.2}Định dạng dữ liệu}{15}{subsection*.122}%
-\contentsline {subsection}{\numberline {2.5.3}Đọc file với xử lý lỗi}{16}{subsection*.123}%
+\contentsline {subsection}{\numberline {2.5.3}Đọc file với xử lý lỗi}{15}{subsection*.123}%
 \contentsline {section}{\numberline {2.6}Lập trình hướng đối tượng trong C++}{16}{section*.145}%
 \contentsline {subsection}{\numberline {2.6.1}Class, đóng gói và trừu tượng hoá}{16}{subsection*.146}%
 \contentsline {subsection}{\numberline {2.6.2}Tách khai báo và cài đặt (Header/Source)}{16}{subsection*.147}%
-\contentsline {subsection}{\numberline {2.6.3}Validate input và lập trình phòng ngừa}{17}{subsection*.149}%
+\contentsline {subsection}{\numberline {2.6.3}Validate input và lập trình phòng ngừa}{16}{subsection*.149}%
 \contentsline {section}{\numberline {2.7}Tổng kết}{17}{section*.150}%
-\contentsline {chapter}{\numberline {3}Phân tích Yêu cầu hệ thống}{19}{chapter*.152}%
-\contentsline {section}{\numberline {3.1}Khảo sát bài toán}{19}{section*.153}%
-\contentsline {section}{\numberline {3.2}Yêu cầu chức năng}{19}{section*.154}%
-\contentsline {subsection}{\numberline {3.2.1}Quản lý ngân hàng câu hỏi}{19}{subsection*.155}%
-\contentsline {subsection}{\numberline {3.2.2}Cấu hình và sinh đề thi}{19}{subsection*.156}%
-\contentsline {subsection}{\numberline {3.2.3}Tiến hành thi và đếm giờ thời gian thực}{19}{subsection*.157}%
-\contentsline {subsection}{\numberline {3.2.4}Chấm điểm tự động và hiển thị kết quả}{19}{subsection*.158}%
-\contentsline {subsection}{\numberline {3.2.5}Xem lịch sử thi}{19}{subsection*.159}%
-\contentsline {section}{\numberline {3.3}Yêu cầu phi chức năng}{19}{section*.160}%
-\contentsline {section}{\numberline {3.4}Mô tả luồng hoạt động của chương trình}{19}{section*.161}%
-\contentsline {chapter}{\numberline {4}Thiết kế hệ thống}{20}{chapter*.162}%
-\contentsline {section}{\numberline {4.1}Kiến trúc tổng thể chương trình}{21}{section*.163}%
-\contentsline {subsection}{\numberline {4.1.1}Sơ đồ phân chia module}{21}{subsection*.164}%
-\contentsline {subsection}{\numberline {4.1.2}Luồng dữ liệu giữa các module}{21}{subsection*.165}%
-\contentsline {subsection}{\numberline {4.1.3}Sơ đồ luồng điều hướng Menu}{21}{subsection*.166}%
-\contentsline {section}{\numberline {4.2}Thiết kế cấu trúc dữ liệu}{21}{section*.167}%
-\contentsline {subsection}{\numberline {4.2.1}Cấu trúc file questions.txt}{21}{subsection*.168}%
-\contentsline {subsection}{\numberline {4.2.2}Cấu trúc file history.txt}{21}{subsection*.169}%
-\contentsline {subsection}{\numberline {4.2.3}Quy tắc định dạng và tách trường dữ liệu}{21}{subsection*.170}%
-\contentsline {section}{\numberline {4.3}Thiết kế các module chức năng}{21}{section*.171}%
-\contentsline {subsection}{\numberline {4.3.1}Module Menu}{21}{subsection*.172}%
-\contentsline {subsubsection}{Giao diện đăng nhập và xác thực người dùng}{21}{section*.173}%
-\contentsline {subsubsection}{Menu Admin: quản lý câu hỏi, xem thống kê}{21}{section*.174}%
-\contentsline {subsubsection}{Menu Sinh viên: vào thi, xem lịch sử}{21}{section*.175}%
-\contentsline {subsubsection}{Cơ chế validate input và bẫy lỗi}{21}{section*.176}%
-\contentsline {subsection}{\numberline {4.3.2}Module Ngân hàng câu hỏi}{21}{subsection*.177}%
-\contentsline {subsubsection}{Struct Question và các thuộc tính}{21}{section*.178}%
-\contentsline {subsubsection}{Danh sách liên kết đơn lưu câu hỏi}{21}{section*.179}%
-\contentsline {subsubsection}{Đọc/ghi file questions.txt}{21}{section*.180}%
-\contentsline {subsubsection}{Thêm, sửa, xoá câu hỏi}{21}{section*.181}%
-\contentsline {subsection}{\numberline {4.3.3}Module Thi}{21}{subsection*.182}%
-\contentsline {subsubsection}{Thuật toán sinh đề: xáo trộn Fisher-Yates}{21}{section*.183}%
-\contentsline {subsubsection}{Xáo trộn thứ tự đáp án A/B/C/D}{21}{section*.184}%
-\contentsline {subsubsection}{Module đếm giờ đếm ngược thời gian thực}{21}{section*.185}%
-\contentsline {subsubsection}{Thu bài tự động khi hết giờ}{21}{section*.186}%
-\contentsline {subsubsection}{Logic tính điểm và tổng hợp kết quả}{21}{section*.187}%
-\contentsline {subsection}{\numberline {4.3.4}Module Lịch sử thi}{21}{subsection*.188}%
-\contentsline {subsubsection}{Struct TestRecord và các thuộc tính}{21}{section*.189}%
-\contentsline {subsubsection}{Danh sách liên kết đơn lưu lịch sử}{21}{section*.190}%
-\contentsline {subsubsection}{Ghi kết quả vào file history.txt}{21}{section*.191}%
-\contentsline {subsubsection}{Truy vấn và hiển thị lịch sử theo username}{21}{section*.192}%
-\contentsline {subsection}{\numberline {4.3.5}Hàm main}{21}{subsection*.193}%
-\contentsline {chapter}{\numberline {5}Cài đặt và xây dựng chương trình}{22}{chapter*.194}%
-\contentsline {section}{\numberline {5.1}Cấu trúc thư mục chương trình}{22}{section*.195}%
-\contentsline {section}{\numberline {5.2}Cài đặt module Ngân hàng câu hỏi (QuestionBank)}{23}{section*.196}%
-\contentsline {subsection}{\numberline {5.2.1}Khai báo cấu trúc dữ liệu}{23}{subsection*.197}%
-\contentsline {subsection}{\numberline {5.2.2}Quản lý bộ nhớ: Constructor và Destructor}{23}{subsection*.232}%
-\contentsline {subsection}{\numberline {5.2.3}Thêm và xoá câu hỏi}{24}{subsection*.244}%
-\contentsline {subsection}{\numberline {5.2.4}Đọc và ghi file dữ liệu}{24}{subsection*.272}%
-\contentsline {subsection}{\numberline {5.2.5}Truy vấn câu hỏi theo môn học và độ khó}{25}{subsection*.286}%
-\contentsline {section}{\numberline {5.3}Cài đặt module Thi (Exam)}{25}{section*.304}%
-\contentsline {subsection}{\numberline {5.3.1}Sinh đề theo tỉ lệ độ khó 40-40-20}{25}{subsection*.305}%
-\contentsline {subsection}{\numberline {5.3.2}Xác định số câu hỏi tối đa hợp lệ}{26}{subsection*.335}%
-\contentsline {subsection}{\numberline {5.3.3}Đếm giờ thời gian thực và thu bài tự động}{27}{subsection*.348}%
-\contentsline {subsection}{\numberline {5.3.4}Chấm điểm}{27}{subsection*.357}%
-\contentsline {section}{\numberline {5.4}Cài đặt module Lịch sử thi (History)}{27}{section*.362}%
-\contentsline {subsection}{\numberline {5.4.1}Cấu trúc dữ liệu TestRecord}{27}{subsection*.363}%
-\contentsline {subsection}{\numberline {5.4.2}Ghi và đọc lịch sử}{27}{subsection*.370}%
-\contentsline {subsection}{\numberline {5.4.3}Truy vấn theo người dùng}{28}{subsection*.388}%
-\contentsline {section}{\numberline {5.5}Cài đặt module Giao diện (Menu)}{28}{section*.389}%
-\contentsline {subsection}{\numberline {5.5.1}Xác thực đăng nhập}{28}{subsection*.390}%
-\contentsline {subsection}{\numberline {5.5.2}Validate input}{28}{subsection*.402}%
-\contentsline {subsection}{\numberline {5.5.3}Điều hướng Menu Admin và Menu Sinh viên}{29}{subsection*.422}%
-\contentsline {section}{\numberline {5.6}Biên dịch chương trình}{29}{section*.423}%
-\contentsline {chapter}{\numberline {6}Kiểm thử và Đánh giá kết quả}{30}{chapter*.429}%
-\contentsline {section}{\numberline {6.1}Chiến lược kiểm thử}{30}{section*.430}%
-\contentsline {section}{\numberline {6.2}Tình huống kiểm thử}{30}{section*.431}%
-\contentsline {subsection}{\numberline {6.2.1}Test Case-01: Đăng nhập đúng -- Admin}{30}{subsection*.432}%
-\contentsline {subsection}{\numberline {6.2.2}Test Case-02: Đăng nhập đúng -- Sinh viên}{31}{subsection*.434}%
-\contentsline {subsection}{\numberline {6.2.3}Test Case-03: Đăng nhập sai mật khẩu}{31}{subsection*.436}%
-\contentsline {subsection}{\numberline {6.2.4}Test Case-04: Thêm câu hỏi mới}{31}{subsection*.438}%
-\contentsline {subsection}{\numberline {6.2.5}Test Case-05: Sinh đề và xáo trộn câu hỏi/đáp án}{32}{subsection*.440}%
-\contentsline {subsection}{\numberline {6.2.6}Test Case-06: Làm bài và chấm điểm chính xác}{32}{subsection*.442}%
-\contentsline {subsection}{\numberline {6.2.7}Test Case-07: Tự động thu bài khi hết giờ}{32}{subsection*.444}%
-\contentsline {subsection}{\numberline {6.2.8}Test Case-08: Xem lịch sử thi nhiều lần}{33}{subsection*.446}%
-\contentsline {subsection}{\numberline {6.2.9}Test Case-09: Nhập sai định dạng (bẫy lỗi)}{33}{subsection*.448}%
-\contentsline {subsection}{\numberline {6.2.10}Test Case-10: Kiểm thử rò rỉ bộ nhớ (Valgrind)}{33}{subsection*.450}%
-\contentsline {section}{\numberline {6.3}Hình ảnh chụp kết quả thực thi}{34}{section*.452}%
-\contentsline {section}{\numberline {6.4}Đánh giá kết quả kiểm thử}{34}{section*.453}%
-\contentsline {chapter}{\numberline {7}Kết luận và hướng phát triển}{35}{chapter*.455}%
-\contentsline {section}{\numberline {7.1}Kết quả đạt được}{35}{section*.456}%
-\contentsline {section}{\numberline {7.2}Tổng kết các kỹ thuật đã được vận dụng}{35}{section*.457}%
-\contentsline {subsection}{\numberline {7.2.1}Cấu trúc dữ liệu: Danh sách liên kết đơn}{35}{subsection*.458}%
-\contentsline {subsection}{\numberline {7.2.2}Quản lý bộ nhớ động: con trỏ, new/delete, tránh Memory Leak}{35}{subsection*.459}%
-\contentsline {subsection}{\numberline {7.2.3}Xử lý File I/O: đọc/ghi file text với ký tự phân tách '|'}{35}{subsection*.460}%
-\contentsline {subsection}{\numberline {7.2.4}Thuật toán xáo trộn Fisher-Yates}{35}{subsection*.461}%
-\contentsline {subsection}{\numberline {7.2.5}Lập trình hướng module: tách Header -- Source -- Data}{35}{subsection*.462}%
-\contentsline {subsection}{\numberline {7.2.6}Lập trình hướng đối tượng (OOP): Class, Constructor, Destructor}{35}{subsection*.463}%
-\contentsline {subsection}{\numberline {7.2.7}Lập trình phòng ngừa}{35}{subsection*.464}%
-\contentsline {subsection}{\numberline {7.2.8}Validate input và xử lý ngoại lệ trên Terminal}{35}{subsection*.465}%
-\contentsline {subsection}{\numberline {7.2.9}Quy chuẩn lập trình: Naming Convention, No Global Variables}{35}{subsection*.466}%
-\contentsline {section}{\numberline {7.3}Đánh giá ưu điểm và hạn chế của chương trình}{35}{section*.467}%
-\contentsline {section}{\numberline {7.4}Hướng phát triển và Nâng cấp tương lai}{35}{section*.468}%
-\contentsline {chapter}{\numberline {A}Mã nguồn hàm main()}{37}{chapter*.470}%
-\contentsline {chapter}{\numberline {B}Mô tả các hàm xử lý chính}{38}{chapter*.471}%
-\contentsline {chapter}{\numberline {C}Hướng dẫn cài đặt và sử dụng chương trình}{39}{chapter*.472}%
+\contentsline {chapter}{\numberline {3}Phân tích Yêu cầu hệ thống}{18}{chapter*.152}%
+\contentsline {section}{\numberline {3.1}Khảo sát bài toán}{18}{section*.153}%
+\contentsline {section}{\numberline {3.2}Yêu cầu chức năng}{18}{section*.154}%
+\contentsline {subsection}{\numberline {3.2.1}Quản lý ngân hàng câu hỏi}{18}{subsection*.155}%
+\contentsline {subsection}{\numberline {3.2.2}Cấu hình và sinh đề thi}{18}{subsection*.156}%
+\contentsline {subsection}{\numberline {3.2.3}Tiến hành thi và đếm giờ thời gian thực}{18}{subsection*.157}%
+\contentsline {subsection}{\numberline {3.2.4}Chấm điểm tự động và hiển thị kết quả}{18}{subsection*.158}%
+\contentsline {subsection}{\numberline {3.2.5}Xem lịch sử thi}{18}{subsection*.159}%
+\contentsline {section}{\numberline {3.3}Yêu cầu phi chức năng}{18}{section*.160}%
+\contentsline {section}{\numberline {3.4}Mô tả luồng hoạt động của chương trình}{18}{section*.161}%
+\contentsline {chapter}{\numberline {4}Thiết kế hệ thống}{19}{chapter*.162}%
+\contentsline {section}{\numberline {4.1}Kiến trúc tổng thể chương trình}{20}{section*.163}%
+\contentsline {subsection}{\numberline {4.1.1}Sơ đồ phân chia module}{20}{subsection*.164}%
+\contentsline {subsection}{\numberline {4.1.2}Luồng dữ liệu giữa các module}{20}{subsection*.165}%
+\contentsline {subsection}{\numberline {4.1.3}Sơ đồ luồng điều hướng Menu}{20}{subsection*.166}%
+\contentsline {section}{\numberline {4.2}Thiết kế cấu trúc dữ liệu}{20}{section*.167}%
+\contentsline {subsection}{\numberline {4.2.1}Cấu trúc file questions.txt}{20}{subsection*.168}%
+\contentsline {subsection}{\numberline {4.2.2}Cấu trúc file history.txt}{20}{subsection*.169}%
+\contentsline {subsection}{\numberline {4.2.3}Quy tắc định dạng và tách trường dữ liệu}{20}{subsection*.170}%
+\contentsline {section}{\numberline {4.3}Thiết kế các module chức năng}{20}{section*.171}%
+\contentsline {subsection}{\numberline {4.3.1}Module Menu}{20}{subsection*.172}%
+\contentsline {subsubsection}{Giao diện đăng nhập và xác thực người dùng}{20}{section*.173}%
+\contentsline {subsubsection}{Menu Admin: quản lý câu hỏi, xem thống kê}{20}{section*.174}%
+\contentsline {subsubsection}{Menu Sinh viên: vào thi, xem lịch sử}{20}{section*.175}%
+\contentsline {subsubsection}{Cơ chế validate input và bẫy lỗi}{20}{section*.176}%
+\contentsline {subsection}{\numberline {4.3.2}Module Ngân hàng câu hỏi}{20}{subsection*.177}%
+\contentsline {subsubsection}{Struct Question và các thuộc tính}{20}{section*.178}%
+\contentsline {subsubsection}{Danh sách liên kết đơn lưu câu hỏi}{20}{section*.179}%
+\contentsline {subsubsection}{Đọc/ghi file questions.txt}{20}{section*.180}%
+\contentsline {subsubsection}{Thêm, sửa, xoá câu hỏi}{20}{section*.181}%
+\contentsline {subsection}{\numberline {4.3.3}Module Thi}{20}{subsection*.182}%
+\contentsline {subsubsection}{Thuật toán sinh đề: xáo trộn Fisher-Yates}{20}{section*.183}%
+\contentsline {subsubsection}{Xáo trộn thứ tự đáp án A/B/C/D}{20}{section*.184}%
+\contentsline {subsubsection}{Module đếm giờ đếm ngược thời gian thực}{20}{section*.185}%
+\contentsline {subsubsection}{Thu bài tự động khi hết giờ}{20}{section*.186}%
+\contentsline {subsubsection}{Logic tính điểm và tổng hợp kết quả}{20}{section*.187}%
+\contentsline {subsection}{\numberline {4.3.4}Module Lịch sử thi}{20}{subsection*.188}%
+\contentsline {subsubsection}{Struct TestRecord và các thuộc tính}{20}{section*.189}%
+\contentsline {subsubsection}{Danh sách liên kết đơn lưu lịch sử}{20}{section*.190}%
+\contentsline {subsubsection}{Ghi kết quả vào file history.txt}{20}{section*.191}%
+\contentsline {subsubsection}{Truy vấn và hiển thị lịch sử theo username}{20}{section*.192}%
+\contentsline {subsection}{\numberline {4.3.5}Hàm main}{20}{subsection*.193}%
+\contentsline {chapter}{\numberline {5}Cài đặt và xây dựng chương trình}{21}{chapter*.194}%
+\contentsline {section}{\numberline {5.1}Cấu trúc thư mục chương trình}{21}{section*.195}%
+\contentsline {section}{\numberline {5.2}Cài đặt module Ngân hàng câu hỏi (QuestionBank)}{21}{section*.196}%
+\contentsline {subsection}{\numberline {5.2.1}Khai báo cấu trúc dữ liệu}{21}{subsection*.197}%
+\contentsline {subsection}{\numberline {5.2.2}Quản lý bộ nhớ: Constructor và Destructor}{22}{subsection*.232}%
+\contentsline {subsection}{\numberline {5.2.3}Thêm và xoá câu hỏi}{22}{subsection*.244}%
+\contentsline {subsection}{\numberline {5.2.4}Đọc và ghi file dữ liệu}{23}{subsection*.272}%
+\contentsline {subsection}{\numberline {5.2.5}Truy vấn câu hỏi theo môn học và độ khó}{23}{subsection*.286}%
+\contentsline {section}{\numberline {5.3}Cài đặt module Thi (Exam)}{24}{section*.304}%
+\contentsline {subsection}{\numberline {5.3.1}Sinh đề theo tỉ lệ độ khó 40-40-20}{24}{subsection*.305}%
+\contentsline {subsection}{\numberline {5.3.2}Xác định số câu hỏi tối đa hợp lệ}{25}{subsection*.335}%
+\contentsline {subsection}{\numberline {5.3.3}Đếm giờ thời gian thực và thu bài tự động}{25}{subsection*.348}%
+\contentsline {subsection}{\numberline {5.3.4}Chấm điểm}{25}{subsection*.357}%
+\contentsline {section}{\numberline {5.4}Cài đặt module Lịch sử thi (History)}{25}{section*.362}%
+\contentsline {subsection}{\numberline {5.4.1}Cấu trúc dữ liệu TestRecord}{25}{subsection*.363}%
+\contentsline {subsection}{\numberline {5.4.2}Ghi và đọc lịch sử}{26}{subsection*.370}%
+\contentsline {subsection}{\numberline {5.4.3}Truy vấn theo người dùng}{26}{subsection*.388}%
+\contentsline {section}{\numberline {5.5}Cài đặt module Giao diện (Menu)}{26}{section*.389}%
+\contentsline {subsection}{\numberline {5.5.1}Xác thực đăng nhập}{26}{subsection*.390}%
+\contentsline {subsection}{\numberline {5.5.2}Validate input}{27}{subsection*.402}%
+\contentsline {subsection}{\numberline {5.5.3}Điều hướng Menu Admin và Menu Sinh viên}{27}{subsection*.422}%
+\contentsline {section}{\numberline {5.6}Biên dịch chương trình}{27}{section*.423}%
+\contentsline {chapter}{\numberline {6}Kiểm thử và Đánh giá kết quả}{28}{chapter*.429}%
+\contentsline {section}{\numberline {6.1}Chiến lược kiểm thử}{28}{section*.430}%
+\contentsline {section}{\numberline {6.2}Tình huống kiểm thử}{28}{section*.431}%
+\contentsline {subsection}{\numberline {6.2.1}Test Case-01: Đăng nhập đúng -- Admin}{28}{subsection*.432}%
+\contentsline {subsection}{\numberline {6.2.2}Test Case-02: Đăng nhập đúng -- Sinh viên}{28}{subsection*.434}%
+\contentsline {subsection}{\numberline {6.2.3}Test Case-03: Đăng nhập sai mật khẩu}{29}{subsection*.436}%
+\contentsline {subsection}{\numberline {6.2.4}Test Case-04: Thêm câu hỏi mới}{29}{subsection*.438}%
+\contentsline {subsection}{\numberline {6.2.5}Test Case-05: Sinh đề và xáo trộn câu hỏi/đáp án}{29}{subsection*.440}%
+\contentsline {subsection}{\numberline {6.2.6}Test Case-06: Làm bài và chấm điểm chính xác}{30}{subsection*.442}%
+\contentsline {subsection}{\numberline {6.2.7}Test Case-07: Tự động thu bài khi hết giờ}{30}{subsection*.444}%
+\contentsline {subsection}{\numberline {6.2.8}Test Case-08: Xem lịch sử thi nhiều lần}{30}{subsection*.446}%
+\contentsline {subsection}{\numberline {6.2.9}Test Case-09: Nhập sai định dạng (bẫy lỗi)}{30}{subsection*.448}%
+\contentsline {subsection}{\numberline {6.2.10}Test Case-10: Kiểm thử rò rỉ bộ nhớ (Valgrind)}{31}{subsection*.450}%
+\contentsline {section}{\numberline {6.3}Kịch bản kiểm thử minh hoạ}{31}{section*.452}%
+\contentsline {subsection}{\numberline {6.3.1}Khởi động chương trình và đăng nhập}{31}{subsection*.453}%
+\contentsline {subsection}{\numberline {6.3.2}Luồng thao tác của Admin}{31}{subsection*.454}%
+\contentsline {subsection}{\numberline {6.3.3}Luồng thao tác của sinh viên}{32}{subsection*.455}%
+\contentsline {subsection}{\numberline {6.3.4}Nhận xét từ kịch bản kiểm thử thực tế}{32}{subsection*.456}%
+\contentsline {section}{\numberline {6.4}Đánh giá kết quả kiểm thử}{32}{section*.457}%
+\contentsline {chapter}{\numberline {7}Kết luận và hướng phát triển}{34}{chapter*.459}%
+\contentsline {section}{\numberline {7.1}Kết quả đạt được}{34}{section*.460}%
+\contentsline {section}{\numberline {7.2}Tổng kết các kỹ thuật đã được vận dụng}{34}{section*.461}%
+\contentsline {subsection}{\numberline {7.2.1}Cấu trúc dữ liệu: Danh sách liên kết đơn}{34}{subsection*.462}%
+\contentsline {subsection}{\numberline {7.2.2}Quản lý bộ nhớ động: con trỏ, new/delete, tránh Memory Leak}{35}{subsection*.463}%
+\contentsline {subsection}{\numberline {7.2.3}Xử lý File I/O: đọc/ghi file text với ký tự phân tách '|'}{35}{subsection*.464}%
+\contentsline {subsection}{\numberline {7.2.4}Thuật toán xáo trộn Fisher-Yates}{35}{subsection*.465}%
+\contentsline {subsection}{\numberline {7.2.5}Lập trình hướng module: tách Header -- Source -- Data}{35}{subsection*.466}%
+\contentsline {subsection}{\numberline {7.2.6}Lập trình hướng đối tượng (OOP): Class, Constructor, Destructor}{35}{subsection*.467}%
+\contentsline {subsection}{\numberline {7.2.7}Lập trình phòng ngừa}{35}{subsection*.468}%
+\contentsline {subsection}{\numberline {7.2.8}Validate input và xử lý ngoại lệ trên Terminal}{36}{subsection*.469}%
+\contentsline {subsection}{\numberline {7.2.9}Quy chuẩn lập trình: Naming Convention, No Global Variables}{36}{subsection*.470}%
+\contentsline {section}{\numberline {7.3}Đánh giá ưu điểm và hạn chế của chương trình}{36}{section*.471}%
+\contentsline {section}{\numberline {7.4}Hướng phát triển và Nâng cấp tương lai}{36}{section*.472}%
+\contentsline {section}{Lời cảm ơn}{38}{chapter*.473}%
+\contentsline {chapter}{\numberline {A}Mã nguồn hàm main()}{40}{chapter*.475}%
+\contentsline {chapter}{\numberline {B}Mô tả các hàm xử lý chính}{42}{chapter*.534}%
+\contentsline {chapter}{\numberline {C}Mã nguồn đầy đủ chương trình}{44}{chapter*.536}%
+\contentsline {section}{\numberline {C.1}QuestionBank.h}{44}{section*.537}%
+\contentsline {section}{\numberline {C.2}QuestionBank.cpp}{45}{section*.623}%
+\contentsline {section}{\numberline {C.3}Exam.h}{52}{section*.1076}%
+\contentsline {section}{\numberline {C.4}Exam.cpp}{53}{section*.1130}%
+\contentsline {section}{\numberline {C.5}History.h}{58}{section*.1430}%
+\contentsline {section}{\numberline {C.6}History.cpp}{59}{section*.1487}%
+\contentsline {section}{\numberline {C.7}Menu.h}{62}{section*.1666}%
+\contentsline {section}{\numberline {C.8}Menu.cpp}{63}{section*.1730}%
+\contentsline {chapter}{\numberline {D}Hướng dẫn cài đặt và sử dụng chương trình}{72}{chapter*.2252}%

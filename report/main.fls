@@ -6,9 +6,9 @@ INPUT c:/Users/nguye/.vscode/Projects/designing a multiple-choice test program/K
 OUTPUT main.log
 INPUT c:/texlive/2026/texmf-dist/tex/latex/base/report.cls
 INPUT c:/texlive/2026/texmf-dist/tex/latex/base/report.cls
-INPUT c:/texlive/2026/texmf-dist/tex/latex/base/size12.clo
-INPUT c:/texlive/2026/texmf-dist/tex/latex/base/size12.clo
-INPUT c:/texlive/2026/texmf-dist/tex/latex/base/size12.clo
+INPUT c:/texlive/2026/texmf-dist/tex/latex/base/size11.clo
+INPUT c:/texlive/2026/texmf-dist/tex/latex/base/size11.clo
+INPUT c:/texlive/2026/texmf-dist/tex/latex/base/size11.clo
 INPUT c:/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
@@ -245,6 +245,8 @@ INPUT c:/texlive/2026/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/booktabs/booktabs.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/booktabs/booktabs.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -312,7 +314,7 @@ OUTPUT main.out
 INPUT ./LogoHUST.png
 INPUT ./LogoHUST.png
 INPUT ./LogoHUST.png
-INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
@@ -321,7 +323,7 @@ INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 OUTPUT main.xdv
