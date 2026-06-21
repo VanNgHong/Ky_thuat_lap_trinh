@@ -96,7 +96,7 @@
 \contentsline {subsubsection}{Danh sách liên kết đơn lưu lịch sử}{33}{section*.252}%
 \contentsline {subsubsection}{Ghi kết quả vào file history.txt}{33}{section*.253}%
 \contentsline {subsubsection}{Truy vấn và hiển thị lịch sử theo username}{33}{section*.254}%
-\contentsline {subsection}{\numberline {4.3.5}Hàm main}{34}{subsection*.255}%
+\contentsline {subsection}{\numberline {4.3.5}Hàm main}{33}{subsection*.255}%
 \contentsline {chapter}{\numberline {5}Cài đặt và xây dựng chương trình}{35}{chapter*.256}%
 \contentsline {section}{\numberline {5.1}Cấu trúc thư mục chương trình}{35}{section*.257}%
 \contentsline {section}{\numberline {5.2}Cài đặt module Ngân hàng câu hỏi (QuestionBank)}{35}{section*.258}%
@@ -152,20 +152,19 @@
 \contentsline {subsection}{\numberline {7.2.9}Quy chuẩn lập trình: Naming Convention, No Global Variables}{59}{subsection*.555}%
 \contentsline {section}{\numberline {7.3}Đánh giá ưu điểm và hạn chế của chương trình}{59}{section*.556}%
 \contentsline {section}{\numberline {7.4}Hướng phát triển và Nâng cấp tương lai}{59}{section*.557}%
-\contentsline {section}{Lời cảm ơn}{61}{chapter*.558}%
-\contentsline {chapter}{\numberline {A}Mã nguồn hàm main()}{63}{chapter*.560}%
-\contentsline {chapter}{\numberline {B}Mô tả các hàm xử lý chính}{65}{chapter*.619}%
-\contentsline {section}{\numberline {B.1}Module \texttt {QuestionBank}}{65}{section*.620}%
-\contentsline {section}{\numberline {B.2}Module \texttt {HistoryManager}}{65}{section*.621}%
-\contentsline {section}{\numberline {B.3}Module \texttt {Exam}}{65}{section*.622}%
-\contentsline {section}{\numberline {B.4}Module \texttt {Menu}}{65}{section*.623}%
-\contentsline {chapter}{\numberline {C}Mã nguồn đầy đủ chương trình}{67}{chapter*.624}%
-\contentsline {section}{\numberline {C.1}QuestionBank.h}{67}{section*.625}%
-\contentsline {section}{\numberline {C.2}QuestionBank.cpp}{68}{section*.711}%
-\contentsline {section}{\numberline {C.3}Exam.h}{75}{section*.1164}%
-\contentsline {section}{\numberline {C.4}Exam.cpp}{76}{section*.1218}%
-\contentsline {section}{\numberline {C.5}History.h}{81}{section*.1518}%
-\contentsline {section}{\numberline {C.6}History.cpp}{82}{section*.1575}%
-\contentsline {section}{\numberline {C.7}Menu.h}{85}{section*.1754}%
-\contentsline {section}{\numberline {C.8}Menu.cpp}{86}{section*.1818}%
-\contentsline {chapter}{\numberline {D}Hướng dẫn cài đặt và sử dụng chương trình}{95}{chapter*.2340}%
+\contentsline {chapter}{\numberline {A}Mã nguồn hàm main()}{62}{chapter*.559}%
+\contentsline {chapter}{\numberline {B}Mô tả các hàm xử lý chính}{64}{chapter*.618}%
+\contentsline {section}{\numberline {B.1}Module QuestionBank}{64}{section*.619}%
+\contentsline {section}{\numberline {B.2}Module HistoryManager}{64}{section*.620}%
+\contentsline {section}{\numberline {B.3}Module Exam}{64}{section*.621}%
+\contentsline {section}{\numberline {B.4}Module Menu}{64}{section*.622}%
+\contentsline {chapter}{\numberline {C}Mã nguồn đầy đủ chương trình}{66}{chapter*.623}%
+\contentsline {section}{\numberline {C.1}QuestionBank.h}{66}{section*.624}%
+\contentsline {section}{\numberline {C.2}QuestionBank.cpp}{67}{section*.710}%
+\contentsline {section}{\numberline {C.3}Exam.h}{74}{section*.1163}%
+\contentsline {section}{\numberline {C.4}Exam.cpp}{75}{section*.1217}%
+\contentsline {section}{\numberline {C.5}History.h}{80}{section*.1517}%
+\contentsline {section}{\numberline {C.6}History.cpp}{81}{section*.1574}%
+\contentsline {section}{\numberline {C.7}Menu.h}{84}{section*.1753}%
+\contentsline {section}{\numberline {C.8}Menu.cpp}{85}{section*.1817}%
+\contentsline {chapter}{\numberline {D}Hướng dẫn cài đặt và sử dụng chương trình}{94}{chapter*.2339}%

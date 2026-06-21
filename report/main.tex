@@ -1152,11 +1152,7 @@ Việc sinh đề được tách thành hai giai đoạn rõ ràng trong \texttt
 
 Thiết kế này đảm bảo: nếu ngân hàng có nhiều hơn số câu cần ở một mức độ, mỗi sinh viên có xác suất nhận tổ hợp câu hỏi khác nhau dù cùng tỉ lệ độ khó - đúng mục tiêu công bằng đã đặt ra ở yêu cầu FR-07.
 
-<<<<<<< HEAD
-Một quyết định thiết kế quan trọng về sở hữu bộ nhớ: \texttt{easyQuestions}, \texttt{mediumQuestions}, \texttt{hardQuestions} được \texttt{QuestionBank} cấp phát động (\texttt{new[]}) và trả về cho \texttt{Exam}; theo quy ước đã nêu ở Mục~\ref{chap:caidat}, bên gọi (\texttt{Exam}) chịu trách nhiệm \texttt{delete[]} các mảng này được thực hiện ở cả hai nhánh thành công và thất bại của \texttt{generateExamFromBank}, tránh rò rỉ bộ nhớ ngay cả khi hàm trả về \texttt{false} sớm.
-=======
 Một quyết định thiết kế quan trọng về quyền sở hữu bộ nhớ: ba mảng \texttt{easyQuestions}, \texttt{mediumQuestions}, \texttt{hardQuestions} được \texttt{QuestionBank} cấp phát động (\texttt{new[]}) và trả về cho \texttt{Exam}, bên gọi (\texttt{Exam}) chịu trách nhiệm \texttt{delete[]} các mảng này được thực hiện ở cả hai nhánh thành công và thất bại của \texttt{generateExamFromBank}, tránh rò rỉ bộ nhớ ngay cả khi hàm trả về \texttt{false} sớm.
->>>>>>> c3764f2d25e3b60068f5c55aa6c1dd960f4b72b8
 
 \subsubsection{Xáo trộn thứ tự đáp án A/B/C/D}
 \label{sec:shuffle_answer}
@@ -2026,28 +2022,6 @@ Thứ năm, về khả năng mở rộng dữ liệu, định dạng file có th
 
 Nhìn chung, dự án đã hoàn thành mục tiêu xây dựng một hệ thống thi trắc nghiệm hoạt động đầy đủ, vận dụng các kỹ thuật lập trình C++ cốt lõi được học trong môn học. Quá trình thực hiện không chỉ củng cố kiến thức lý thuyết mà còn rèn luyện kỹ năng làm việc nhóm, phân chia công việc theo module và quản lý mã nguồn bằng Git. Những hạn chế còn tồn tại chính là động lực cho các cải tiến trong tương lai, hướng đến một sản phẩm hoàn thiện và thực dụng hơn.
 
-\newpage
-\chapter*{Lời cảm ơn}
-\thispagestyle{empty}
-\addcontentsline{toc}{section}{Lời cảm ơn}
-
-Nhóm xin gửi lời cảm ơn sâu sắc đến \textbf{TS. Vũ Thành Nam} --- giảng viên hướng dẫn môn học Kỹ thuật Lập trình (MI3310) --- vì đã tận tình truyền đạt những kiến thức nền tảng và định hướng quý báu trong suốt quá trình giảng dạy, từ các nguyên lý thiết kế chương trình, phong cách lập trình tốt cho đến những kinh nghiệm thực tiễn trong kỹ thuật lập trình C++. Những góp ý của thầy trong các buổi trên lớp đã giúp nhóm hình dung rõ ràng hơn về cách vận dụng lý thuyết vào một sản phẩm phần mềm cụ thể.
-
-Nhóm cũng xin cảm ơn Khoa Toán -- Tin, Đại học Bách khoa Hà Nội đã tạo điều kiện về môi trường học tập và tài liệu tham khảo để nhóm có thể hoàn thành đề tài này một cách thuận lợi.
-
-Cuối cùng, ba thành viên trong nhóm xin cảm ơn nhau vì tinh thần hợp tác, trách nhiệm và kiên trì trong suốt quá trình thực hiện đề tài --- từ những buổi thảo luận thiết kế ban đầu, những lần debug đến tận khuya, cho đến khi hoàn thiện báo cáo cuối cùng. Đây là một trải nghiệm làm việc nhóm đáng giá, giúp mỗi thành viên trưởng thành hơn cả về kỹ năng chuyên môn lẫn kỹ năng phối hợp.
-
-Do thời gian thực hiện có hạn và đây là lần đầu nhóm xây dựng một chương trình hoàn chỉnh theo mô hình module hoá quy mô như vậy, báo cáo và sản phẩm chắc chắn còn nhiều thiếu sót. Nhóm rất mong nhận được sự góp ý từ thầy và hội đồng chấm để có thể hoàn thiện hơn trong những dự án tiếp theo.
-
-Trân trọng cảm ơn!
-
-\vspace{24pt}
-\begin{flushright}
-    \textit{Hà Nội, tháng 6 năm 2026} \\[6pt]
-    \textit{Nhóm sinh viên thực hiện} \\[4pt]
-    \textit{Nguyễn Mạnh Hùng --- Nguyễn Đức Thành --- Nguyễn Hồng Vân}
-\end{flushright}
-
 % ============================================================
 \cleardoublepage
 \nocite{*}
@@ -2124,53 +2098,53 @@ Cấu trúc hàm \texttt{main()} ở trên là minh hoạ trực tiếp cho nguy
 
 \chapter{Mô tả các hàm xử lý chính}
 
-\section{Module \texttt{QuestionBank}}
+\section{Module QuestionBank}
 
-\texttt{addQuestion(q)}: Thêm câu hỏi vào cuối danh sách liên kết, có kiểm tra trùng ID. $O(n)$ do phải kiểm tra trùng. 
+\texttt{\textbf addQuestion(q)}: Thêm câu hỏi vào cuối danh sách liên kết, có kiểm tra trùng ID. $O(n)$ do phải kiểm tra trùng. 
 
-\texttt{removeQuestion(id)}: Xoá câu hỏi theo ID, xử lý đầy đủ 4 trường hợp biên. $O(n)$. 
+\texttt{\textbf removeQuestion(id)}: Xoá câu hỏi theo ID, xử lý đầy đủ 4 trường hợp biên. $O(n)$. 
 
-\texttt{loadFromFile(filename)}: Đọc toàn bộ ngân hàng câu hỏi từ file văn bản, bẫy lỗi từng dòng. 
+\texttt{\textbf loadFromFile(filename)}: Đọc toàn bộ ngân hàng câu hỏi từ file văn bản, bẫy lỗi từng dòng. 
 
-\texttt{saveToFile(filename)}: Ghi đè toàn bộ ngân hàng câu hỏi hiện tại xuống file. 
+\texttt{\textbf saveToFile(filename)}: Ghi đè toàn bộ ngân hàng câu hỏi hiện tại xuống file. 
 
-\texttt{getQuestionsBySubjectAndDifficulty}: Trích xuất mảng động các câu hỏi theo môn học và độ khó, phục vụ sinh đề. 
+\texttt{\textbf getQuestionsBySubjectAndDifficulty}: Trích xuất mảng động các câu hỏi theo môn học và độ khó, phục vụ sinh đề. 
 
-\texttt{generateRandomSet(n)}: Bốc ngẫu nhiên $n$ câu hỏi bằng Fisher-Yates trên mảng chỉ số.
+\texttt{\textbf generateRandomSet(n)}: Bốc ngẫu nhiên $n$ câu hỏi bằng Fisher-Yates trên mảng chỉ số.
 
-\section{Module \texttt{HistoryManager}}
+\section{Module HistoryManager}
 
-\texttt{addRecord(r)}: Thêm một bản ghi kết quả thi vào cuối danh sách liên kết. 
+\texttt{\textbf addRecord(r)}: Thêm một bản ghi kết quả thi vào cuối danh sách liên kết. 
 
-\texttt{saveToFile}: Ghi nối (append) toàn bộ bản ghi trong bộ nhớ xuống \texttt{history.txt}. 
+\texttt{\textbf saveToFile}: Ghi nối (append) toàn bộ bản ghi trong bộ nhớ xuống \texttt{history.txt}. 
 
-\texttt{loadFromFile}: Đọc toàn bộ lịch sử thi từ file vào danh sách liên kết. 
+\texttt{\textbf loadFromFile}: Đọc toàn bộ lịch sử thi từ file vào danh sách liên kết. 
 
-\texttt{printByUser(username)}: Lọc và hiển thị các bản ghi lịch sử thuộc về một người dùng cụ thể. 
+\texttt{\textbf printByUser(username)}: Lọc và hiển thị các bản ghi lịch sử thuộc về một người dùng cụ thể. 
 
-\section{Module \texttt{Exam}}
+\section{Module Exam}
 
-\texttt{generateExamFromBank}: Sinh đề thi theo tỉ lệ độ khó 40-40-20 từ ngân hàng câu hỏi của một môn học. 
+\texttt{\textbf generateExamFromBank}: Sinh đề thi theo tỉ lệ độ khó 40-40-20 từ ngân hàng câu hỏi của một môn học. 
 
-\texttt{shuffleQuestions}: Xáo trộn Fisher-Yates cho mảng câu hỏi. $O(n)$. 
+\texttt{\textbf shuffleQuestions}: Xáo trộn Fisher-Yates cho mảng câu hỏi. $O(n)$. 
 
-\texttt{shuffleAnswers}: Xáo trộn Fisher-Yates cho 4 đáp án của một câu hỏi, cập nhật lại \texttt{correct}. 
+\texttt{\textbf shuffleAnswers}: Xáo trộn Fisher-Yates cho 4 đáp án của một câu hỏi, cập nhật lại \texttt{correct}. 
 
-\texttt{startExam}: Vòng lặp chính điều khiển quá trình làm bài: hiển thị câu hỏi, nhận đáp án, đếm giờ, thu bài và chấm điểm. 
+\texttt{\textbf startExam}: Vòng lặp chính điều khiển quá trình làm bài: hiển thị câu hỏi, nhận đáp án, đếm giờ, thu bài và chấm điểm. 
 
-\texttt{printExam}: In toàn bộ đề thi ra console, phục vụ mục đích kiểm thử/debug. 
+\texttt{\textbf printExam}: In toàn bộ đề thi ra console, phục vụ mục đích kiểm thử/debug. 
 
-\section{Module \texttt{Menu}}
+\section{Module Menu}
 
-\texttt{showLoginScreen}: Hiển thị màn hình đăng nhập, xác thực là Admin hay Sinh viên, và trả về \texttt{LoginResult}. 
+\texttt{\textbf showLoginScreen}: Hiển thị màn hình đăng nhập, xác thực là Admin hay Sinh viên, và trả về \texttt{LoginResult}. 
 
-\texttt{showAdminMenu}: Vòng lặp điều hướng 5 chức năng dành cho Quản trị viên. 
+\texttt{\textbf showAdminMenu}: Vòng lặp điều hướng 5 chức năng dành cho Quản trị viên. 
 
-\texttt{showStudentMenu}: Vòng lặp điều hướng 3 chức năng dành cho Sinh viên. 
+\texttt{\textbf showStudentMenu}: Vòng lặp điều hướng 3 chức năng dành cho Sinh viên. 
 
-\texttt{getValidInt}: Đọc và bẫy lỗi số nguyên trong khoảng $[\min, \max]$ từ bàn phím. 
+\texttt{\textbf getValidInt}: Đọc và bẫy lỗi số nguyên trong khoảng $[\min, \max]$ từ bàn phím. 
 
-\texttt{getMaxNumberQuest}: Tính số câu hỏi tối đa hợp lệ thoả tỉ lệ 40-40-20 dựa trên số câu hiện có theo từng độ khó. 
+\texttt{\textbf getMaxNumberQuest}: Tính số câu hỏi tối đa hợp lệ thoả tỉ lệ 40-40-20 dựa trên số câu hiện có theo từng độ khó. 
 
 \chapter{Mã nguồn đầy đủ chương trình}
 \label{appendix:fullsource}
