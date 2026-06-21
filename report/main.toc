@@ -96,7 +96,7 @@
 \contentsline {subsubsection}{Danh sách liên kết đơn lưu lịch sử}{33}{section*.252}%
 \contentsline {subsubsection}{Ghi kết quả vào file history.txt}{33}{section*.253}%
 \contentsline {subsubsection}{Truy vấn và hiển thị lịch sử theo username}{33}{section*.254}%
-\contentsline {subsection}{\numberline {4.3.5}Hàm main}{33}{subsection*.255}%
+\contentsline {subsection}{\numberline {4.3.5}Hàm main}{34}{subsection*.255}%
 \contentsline {chapter}{\numberline {5}Cài đặt và xây dựng chương trình}{35}{chapter*.256}%
 \contentsline {section}{\numberline {5.1}Cấu trúc thư mục chương trình}{35}{section*.257}%
 \contentsline {section}{\numberline {5.2}Cài đặt module Ngân hàng câu hỏi (QuestionBank)}{35}{section*.258}%
