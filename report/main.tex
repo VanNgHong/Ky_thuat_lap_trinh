@@ -24,6 +24,7 @@
 \usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usetikzlibrary{positioning, arrows.meta}
 
 % ============================================================
 % Cấu hình listings cho code C++
@@ -598,64 +599,599 @@ Chương này đã trình bày sáu nhóm kiến thức lý thuyết làm nền 
 \end{table}
 
 % ============================================================
-% CHƯƠNG 3 - 6: SKELETON (GIỮ NGUYÊN NHƯ CŨ)
+% CHƯƠNG 3: Phân tích yêu cầu hệ thống
 % ============================================================
-\chapter{Phân tích Yêu cầu hệ thống}
+\chapter{Phân tích yêu cầu hệ thống}
 \label{chap:phantich}
 
 \section{Khảo sát bài toán}
+\label{sec:khaosat}
+
+\subsection{Phương pháp khảo sát}
+
+Trước khi xác định danh sách yêu cầu cụ thể, nhóm tiến hành khảo sát bài toán theo ba phương pháp kết hợp:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Đóng vai:} các thành viên đóng vai giảng viên ra đề và sinh viên dự thi để mô phỏng lại toàn bộ quy trình thi trắc nghiệm trên giấy truyền thống, từ đó ghi nhận các bước thao tác lặp lại nhiều lần (soạn đề, in ấn, coi thi, thu bài, chấm điểm, tổng hợp điểm) cùng các điểm dễ phát sinh sai sót (chấm nhầm, thất lạc bài thi, mất nhiều thời gian tổng hợp kết quả).
+    \item \textbf{Tham khảo cấu trúc đề thi thực tế:} nhóm khảo sát cấu trúc đề thi trắc nghiệm Tiếng Anh - môn học được chọn làm minh hoạ chính cho chương trình - để xác định các thuộc tính cần thiết của một câu hỏi: nội dung, bốn phương án lựa chọn, đáp án đúng, mức độ khó (dễ/trung bình/khó) và môn học được chia theo các cấp bậc lớp học.
+    \item \textbf{Đối chiếu yêu cầu môn học:} nhóm tổng hợp các ràng buộc kỹ thuật do môn học Kỹ thuật Lập trình (MI3310) đặt ra - không sử dụng cấu trúc dữ liệu nâng cao, tự cài đặt cấu trúc dữ liệu bằng con trỏ - làm đầu vào song song cho giai đoạn thiết kế dữ liệu ở mục~\ref{sec:ycchucnang}.
+\end{itemize}
+
+\subsection{Đối tượng sử dụng hệ thống}
+
+Từ kết quả khảo sát, nhóm xác định hệ thống có hai tác nhân chính, được phân quyền ngay tại bước đăng nhập thông qua trường \texttt{isAdmin} trong \texttt{LoginSession} (xem \texttt{Menu.h}). Bảng~\ref{tab:actor} tóm tắt vai trò và quyền hạn của từng tác nhân.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|X|} \hline
+        \textbf{Tác nhân} & \textbf{Vai trò} & \textbf{Quyền hạn chính} \\ \hline
+        Admin (Quản trị viên) & Người quản lý nội dung câu hỏi, không trực tiếp tham gia thi & Thêm/xoá câu hỏi, xem toàn bộ ngân hàng câu hỏi theo môn, xem lịch sử thi của tất cả sinh viên \\ \hline
+        Sinh viên & Người dự thi & Chọn môn học và cấu hình đề thi, làm bài thi có đếm giờ, xem lịch sử thi của chính mình \\ \hline
+    \end{tabularx}
+    \caption{Tác nhân và quyền hạn trong hệ thống}
+    \label{tab:actor}
+\end{table}
+
+Việc phân quyền chặt theo tác nhân giúp đơn giản hoá luồng điều hướng Menu (mỗi tác nhân chỉ nhìn thấy một bộ chức năng phù hợp với vai trò), đồng thời tránh nguy cơ sinh viên vô tình hoặc cố ý thay đổi ngân hàng câu hỏi.
+
+\subsection{Kết quả khảo sát}
+
+Khảo sát giúp nhóm xác định được:
+
+\begin{itemize}[leftmargin=*]
+    \item 5 nhóm yêu cầu chức năng chính, tương ứng bốn module \texttt{QuestionBank}, \texttt{Exam}, \texttt{History} và \texttt{Menu} đã giới thiệu ở Chương~\ref{chap:lythuyet} (trình bày chi tiết tại Mục~\ref{sec:ycchucnang}).
+    \item Các yêu cầu phi chức năng bắt buộc do đặc thù môn học và mục tiêu sản phẩm đặt ra (trình bày tại Mục~\ref{sec:ycphichucnang}).
+    \item Một ràng buộc nghiệp vụ quan trọng cần được làm rõ ngay từ giai đoạn phân tích: đề thi phải được sinh theo tỉ lệ độ khó cố định (40\% Dễ -- 40\% Trung bình -- 20\% Khó) thay vì bốc ngẫu nhiên hoàn toàn, nhằm đảm bảo tính công bằng về độ khó giữa các đề thi khác nhau của cùng một môn học.
+\end{itemize}
 
 \section{Yêu cầu chức năng}
+\label{sec:ycchucnang}
+
+Dựa trên kết quả khảo sát, nhóm đặc tả các yêu cầu chức năng - mô tả \textit{hệ thống phải làm gì} - thành 5 nhóm chính, được mã hoá từ FR-01 đến FR-12 và tóm tắt tại Bảng~\ref{tab:fr_overview}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|l|} \hline
+        \textbf{Mã} & \textbf{Tên yêu cầu} & \textbf{Tác nhân} \\ \hline
+        FR-01 & Đăng nhập và phân quyền Admin / Sinh viên & Admin, Sinh viên \\ \hline
+        FR-02 & Thêm câu hỏi mới vào ngân hàng & Admin \\ \hline
+        FR-03 & Xoá câu hỏi theo ID & Admin \\ \hline
+        FR-04 & Xem danh sách câu hỏi (toàn bộ / theo môn học) & Admin \\ \hline
+        FR-05 & Lưu trữ ngân hàng câu hỏi trên file & Admin, Hệ thống \\ \hline
+        FR-06 & Chọn môn học và cấu hình đề thi (số câu, thời gian) & Sinh viên \\ \hline
+        FR-07 & Sinh đề thi theo tỉ lệ độ khó 40-40-20 và xáo trộn & Hệ thống \\ \hline
+        FR-08 & Làm bài thi tuần tự có đếm giờ thời gian thực & Sinh viên \\ \hline
+        FR-09 & Nộp bài (chủ động hoặc tự động khi hết giờ) & Sinh viên, Hệ thống \\ \hline
+        FR-10 & Chấm điểm tự động theo thang 10 & Hệ thống \\ \hline
+        FR-11 & Hiển thị kết quả sau khi nộp bài & Hệ thống \\ \hline
+        FR-12 & Lưu và truy xuất lịch sử thi & Admin, Sinh viên \\ \hline
+    \end{tabularx}
+    \caption{Tổng hợp các yêu cầu chức năng của hệ thống}
+    \label{tab:fr_overview}
+\end{table}
+
+FR-01 (đăng nhập, phân quyền) đã được mô tả tại Mục~\ref{sec:khaosat}; các mục tiếp theo trình bày chi tiết FR-02 đến FR-12, gom theo 5 nhóm chức năng.
+
 \subsection{Quản lý ngân hàng câu hỏi}
+
+\subsubsection{Mô tả chức năng}
+
+Nhóm chức năng này cho phép Admin duy trì hệ thống thông qua ba nghiệp vụ: thêm câu hỏi (FR-02), xoá câu hỏi (FR-03) và xem danh sách câu hỏi (FR-04); toàn bộ thay đổi phải được đồng bộ ngay xuống file \texttt{questions.txt} (FR-05) để không mất dữ liệu khi tắt chương trình.
+
+\subsubsection{Đặc tả dữ liệu câu hỏi}
+
+Mỗi câu hỏi được mô hình hoá bởi cấu trúc \texttt{Question} với các ràng buộc hợp lệ liệt kê tại Bảng~\ref{tab:question_fields}. Các ràng buộc này được kiểm tra ngay tại thời điểm Admin nhập liệu (qua \texttt{getValidString}, \texttt{getValidInt}) trước khi cho phép ghi vào ngân hàng.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|l|X|} \hline
+        \textbf{Trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc hợp lệ} \\ \hline
+        \texttt{id} & \texttt{int} & Số nguyên dương, \textit{duy nhất} trong toàn ngân hàng \\ \hline
+        \texttt{subject} & \texttt{string} & Không được để trống \\ \hline
+        \texttt{difficulty} & \texttt{string} & Chỉ nhận một trong ba giá trị: \texttt{Easy}, \texttt{Medium}, \texttt{Hard} \\ \hline
+        \texttt{content} & \texttt{string} & Không được để trống \\ \hline
+        \texttt{answers[0..3]} & \texttt{string} & Đủ bốn đáp án A, B, C, D, không trống \\ \hline
+        \texttt{correct} & \texttt{char} & Chỉ nhận một trong bốn giá trị: \texttt{A}, \texttt{B}, \texttt{C}, \texttt{D} \\ \hline
+    \end{tabularx}
+    \caption{Đặc tả ràng buộc dữ liệu của một câu hỏi}
+    \label{tab:question_fields}
+\end{table}
+
+\subsubsection{Quy tắc nghiệp vụ}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Thêm câu hỏi (FR-02):} hệ thống kiểm tra ID nhập vào đã tồn tại hay chưa trước khi cho nhập các trường còn lại; nếu trùng, yêu cầu nhập lại ID khác. Sau khi nhập đủ thông tin hợp lệ, câu hỏi được nối vào cuối danh sách và file \texttt{questions.txt} được ghi đè lại toàn bộ.
+    \item \textbf{Xoá câu hỏi (FR-03):} Admin nhập ID cần xoá; hệ thống xử lý ba tình huống  (danh sách rỗng, ID là câu hỏi đầu danh sách, ID nằm giữa/cuối danh sách) và báo lỗi rõ ràng nếu không tìm thấy ID.
+    \item \textbf{Xem danh sách (FR-04):} hệ thống liệt kê trước danh sách các môn học hiện có (không lặp môn) để Admin lựa chọn xem theo môn cụ thể hoặc xem toàn bộ (nhập \texttt{ALL}); nếu môn nhập vào không tồn tại, yêu cầu nhập lại.
+    \item \textbf{Lưu trữ danh sách câu hỏi (FR-05):} ngân hàng câu hỏi được nạp từ file ngay khi vào Menu Admin và được ghi lại file ngay sau mỗi thao tác thêm/xoá thành công, đảm bảo dữ liệu trong bộ nhớ và trên đĩa luôn đồng bộ.
+\end{itemize}
+
 \subsection{Cấu hình và sinh đề thi}
+
+\subsubsection{Mô tả chức năng}
+
+Trước khi vào thi, sinh viên cần chọn môn học và cấu hình đề thi theo nhu cầu cá nhân (FR-06); hệ thống chịu trách nhiệm sinh đề tự động đúng tỉ lệ độ khó đã quy định và xáo trộn để đảm bảo công bằng (FR-07).
+
+\subsubsection{Luồng xử lý}
+
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item Hệ thống nạp ngân hàng câu hỏi từ file và liệt kê các môn học khác nhau hiện có để sinh viên lựa chọn.
+    \item Hệ thống đếm số câu hỏi của môn đã chọn theo từng mức độ ($n_{Easy}$, $n_{Medium}$, $n_{Hard}$).
+    \item Hệ thống tính số câu hỏi \textit{tối đa} có thể tổ chức thi mà vẫn giữ đúng tỉ lệ 40-40-20 (xem Bảng~\ref{tab:ratio}), gọi là $N_{\max}$.
+    \item Sinh viên nhập số câu muốn thi trong khoảng $[1, N_{\max}]$ và thời gian làm bài (giây, tối thiểu 10 giây, tối đa 36\,000 giây).
+    \item Sinh viên xác nhận bắt đầu thi (Y/N); nếu chọn N, huỷ và quay lại Menu Sinh viên.
+    \item Hệ thống trích đúng số câu Easy/Medium/Hard theo tỉ lệ, xáo trộn ngẫu nhiên trong từng nhóm bằng thuật toán Fisher-Yates trước khi chọn, sau đó trộn lẫn thứ tự xuất hiện giữa ba nhóm.
+\end{enumerate}
+
+\subsubsection{Quy tắc nghiệp vụ}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|c|X|} \hline
+        \textbf{Mức độ} & \textbf{Tỉ lệ} & \textbf{Cách tính số câu cần} \\ \hline
+        Dễ (Easy) & 40\% & $\lfloor N \times 40 / 100 \rfloor$ \\ \hline
+        Trung bình (Medium) & 40\% & $\lfloor N \times 40 / 100 \rfloor$ \\ \hline
+        Khó (Hard) & 20\% & $N - n_{Easy} - n_{Medium}$ (phần còn lại) \\ \hline
+    \end{tabularx}
+    \caption{Quy tắc tính số câu hỏi theo tỉ lệ độ khó 40-40-20}
+    \label{tab:ratio}
+\end{table}
+
+Số câu khó được tính bằng phần còn lại (không chia trực tiếp $N \times 20/100$) để đảm bảo tổng luôn đúng bằng $N$ dù phép chia lấy phần nguyên có làm tròn xuống ở hai nhóm trước. Nếu ngân hàng câu hỏi của môn đã chọn không đủ số câu cần theo bất kỳ mức độ nào trong tỉ lệ trên, hệ thống phải từ chối sinh đề và thông báo lỗi cụ thể theo môn học, tuyệt đối không sinh đề thiếu câu hoặc sai tỉ lệ.
+
 \subsection{Tiến hành thi và đếm giờ thời gian thực}
+
+\subsubsection{Mô tả chức năng}
+
+Chức năng này (FR-08, FR-09) mô phỏng lại một buổi thi thật: hiển thị câu hỏi tuần tự, tiếp nhận đáp án, đồng thời theo dõi thời gian làm bài còn lại theo thời gian thực và tự động thu bài khi cần.
+
+\subsubsection{Luồng xử lý}
+
+\begin{itemize}[leftmargin=*]
+    \item Trước khi hiển thị mỗi câu hỏi, hệ thống tính thời gian còn lại dựa trên mốc thời gian bắt đầu thi; nếu thời gian đã hết, lập tức dừng và thu bài, không hiển thị thêm câu hỏi nào nữa.
+    \item Với mỗi câu hỏi, hệ thống hiển thị nội dung và bốn đáp án A/B/C/D, kèm dòng thông báo thời gian còn lại.
+    \item Sinh viên nhập một trong các ký tự A, B, C, D để chọn đáp án, hoặc nhập S để nộp bài sớm ngay tại câu đang làm; mọi ký tự khác bị từ chối và yêu cầu nhập lại.
+    \item Ngay sau khi sinh viên nhập xong đáp án cho một câu, hệ thống kiểm tra lại thời gian còn lại lần thứ hai, phòng trường hợp sinh viên cố tình kéo dài thời gian suy nghĩ để ``lách'' giới hạn ở câu cuối cùng.
+    \item Bài thi kết thúc khi xảy ra một trong hai điều kiện: sinh viên đã trả lời (hoặc bỏ qua) hết toàn bộ số câu, hoặc thời gian làm bài đã hết / sinh viên chủ động nộp bài sớm.
+\end{itemize}
+
+\subsubsection{Quy tắc nghiệp vụ}
+
+Câu hỏi chưa được trả lời tại thời điểm nộp bài (do hết giờ hoặc nộp sớm) được ghi nhận ở trạng thái riêng (\textit{chưa trả lời}), tách biệt với trạng thái \textit{trả lời sai}, để phản ánh đúng tình huống thực tế khi tổng hợp kết quả ở Mục~\ref{sec:fr_diem}.
+
 \subsection{Chấm điểm tự động và hiển thị kết quả}
+\label{sec:fr_diem}
+
+\subsubsection{Mô tả chức năng}
+
+Ngay sau khi bài thi kết thúc (FR-09), hệ thống phải tự động chấm điểm (FR-10) và hiển thị kết quả chi tiết (FR-11) mà không cần sự can thiệp của Admin hay bất kỳ thao tác thủ công nào.
+
+\subsubsection{Quy tắc nghiệp vụ}
+
+\begin{itemize}[leftmargin=*]
+    \item Điểm số được tính theo thang điểm 10, theo công thức:
+    $$ \text{Điểm} = \frac{\text{Số câu đúng}}{\text{Tổng số câu}} \times 10 $$
+    Trường hợp đề thi không có câu hỏi nào (tổng số câu bằng 0), điểm số được quy định bằng 0 để tránh lỗi chia cho 0.
+    \item Bảng tổng kết cuối bài hiển thị: tổng số câu đúng trên tổng số câu, điểm số (định dạng hai chữ số sau dấu phẩy) và thời điểm nộp bài (timestamp dạng \texttt{YYYY-MM-DD HH:MM:SS}).
+\end{itemize}
+
 \subsection{Xem lịch sử thi}
 
-\section{Yêu cầu phi chức năng}
-\section{Mô tả luồng hoạt động của chương trình}
+\subsubsection{Mô tả chức năng}
 
+Chức năng này (FR-12) đảm bảo kết quả mỗi lần thi được lưu trữ lâu dài và có thể truy xuất lại sau, phục vụ cả nhu cầu của sinh viên (theo dõi tiến độ cá nhân) và Admin (theo dõi tổng quan lớp học).
+
+\subsubsection{Quy tắc nghiệp vụ}
+
+\begin{itemize}[leftmargin=*]
+    \item Ngay sau khi một sinh viên hoàn thành bài thi, hệ thống tạo một bản ghi lịch sử gồm: tên sinh viên, môn học, số câu đúng, tổng số câu, điểm số và thời gian thi, rồi nối thêm (không ghi đè) bản ghi này vào file lịch sử.
+    \item Sinh viên chỉ được xem lịch sử thi của \textit{chính mình}, xác định theo tên đăng nhập hiện tại; nếu chưa từng thi lần nào, hệ thống thông báo rõ thay vì hiển thị danh sách trống không lời giải thích.
+    \item Admin được xem lịch sử thi của \textit{toàn bộ} sinh viên, không giới hạn theo tên đăng nhập, nhằm phục vụ mục đích theo dõi tổng thể.
+\end{itemize}
+
+\section{Yêu cầu phi chức năng}
+\label{sec:ycphichucnang}
+
+Bên cạnh các yêu cầu chức năng, hệ thống còn phải thoả mãn các yêu cầu phi chức năng - mô tả \textit{hệ thống phải hoạt động như thế nào}, thường liên quan đến chất lượng, hiệu năng và các ràng buộc kỹ thuật. Bảng~\ref{tab:nfr} tổng hợp các yêu cầu phi chức năng được nhóm xác định cho dự án.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Tiêu chí} & \textbf{Mô tả yêu cầu} \\ \hline
+        Hiệu năng & Mọi thao tác (thêm/xoá câu hỏi, sinh đề, chấm điểm) phải phản hồi gần như tức thì trên Terminal với ngân hàng câu hỏi cỡ vài trăm đến vài nghìn câu, phù hợp với độ phức tạp $O(n)$ của các thao tác trên danh sách liên kết đơn. \\ \hline
+        Độ tin cậy & Chương trình không được crash với bất kỳ đầu vào không hợp lệ nào từ người dùng (chuỗi rỗng, ký tự không phải số, giá trị ngoài khoảng cho phép,..); mọi lỗi phải được bẫy và yêu cầu nhập lại. \\ \hline
+        Tính khả chuyển & Chương trình phải biên dịch và chạy được trên cả Windows (MinGW g++) và Linux/macOS (g++), chỉ sử dụng các thư viện chuẩn của C++17. \\ \hline
+        Tính bảo trì & Mã nguồn được tổ chức theo 4 module độc lập (\texttt{QuestionBank}, \texttt{Exam}, \texttt{History}, \texttt{Menu}), tách riêng header/source, cho phép sửa đổi một module mà không ảnh hưởng các module còn lại. \\ \hline
+        An toàn bộ nhớ & Không phát sinh rò rỉ bộ nhớ (memory leak) trong toàn bộ thời gian chạy chương trình; mọi vùng nhớ cấp phát động bằng \texttt{new}/\texttt{new[]} phải được giải phóng tương ứng. \\ \hline
+        Tính bền dữ liệu & Ngân hàng câu hỏi và lịch sử thi phải tồn tại bền vững trên file văn bản, không mất dữ liệu khi tắt và mở lại chương trình; riêng lịch sử thi không bị ghi đè giữa các lần thi khác nhau. \\ \hline
+        Tính khả dụng & Giao diện Terminal phải rõ ràng, có phân biệt màu sắc giữa thông báo thành công/cảnh báo/lỗi, có tạm dừng màn hình hợp lý giữa các bước để người dùng đọc kết quả. \\ \hline
+        Tính an toàn & Cơ chế xác thực đơn giản (không mã hoá mật khẩu) chỉ phục vụ mục đích minh hoạ học thuật trong phạm vi bài tập lớn. \\ \hline
+        Tính nhất quán dữ liệu & Dữ liệu trong bộ nhớ (danh sách liên kết) và dữ liệu trên file phải luôn đồng bộ ngay sau mỗi thao tác làm thay đổi ngân hàng câu hỏi. \\ \hline
+    \end{tabularx}
+    \caption{Tổng hợp các yêu cầu phi chức năng của hệ thống}
+    \label{tab:nfr}
+\end{table}
+
+\section{Mô tả luồng hoạt động của chương trình}
+\label{sec:luonghoatdong}
+
+Mục này mô tả luồng hoạt động ở mức tổng quan (góc nhìn người dùng), làm cơ sở cho việc thiết kế kiến trúc chi tiết ở Chương~\ref{chap:thietke}.
+
+\subsection*{Luồng tổng thể}
+
+\begin{verbatim}
+main()
+  |-- showWelcomeBanner()                  // Man hinh chao mung
+  |-- Vong lap chinh (while appRunning):
+  |     |-- showLoginScreen()
+  |     |     |-- Nhap "exit"      --> LoginResult::Exit
+  |     |     |-- Sai thong tin    --> LoginResult::InvalidCredentials (nhap lai)
+  |     |     `-- Dung thong tin   --> LoginResult::Success
+  |     |-- Neu Success:
+  |     |     |-- isAdmin = true   --> showAdminMenu()
+  |     |     `-- isAdmin = false  --> showStudentMenu()
+  |     `-- Neu Exit --> appRunning = false, thoat vong lap
+  `-- Man hinh tam biet
+\end{verbatim}
+
+Thiết kế vòng lặp đăng nhập tại \texttt{main()} (thay vì xử lý một lần) cho phép nhiều người dùng đăng nhập, đăng xuất kế tiếp nhau trong cùng một lần chạy chương trình, không cần khởi động lại mỗi khi đổi tài khoản.
+
+\subsection*{Luồng Admin}
+
+Sau khi đăng nhập thành công với quyền Admin, người dùng được đưa vào một vòng lặp menu lặp lại cho đến khi chọn đăng xuất:
+
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item Hệ thống nạp ngân hàng câu hỏi từ \texttt{questions.txt} ngay khi vào Menu Admin.
+    \item Admin chọn một trong các chức năng: xem danh sách câu hỏi, thêm câu hỏi, xoá câu hỏi theo ID, xem lịch sử thi của tất cả sinh viên, hoặc đăng xuất.
+    \item Với các chức năng làm thay đổi dữ liệu (thêm/xoá), hệ thống ghi lại file \texttt{questions.txt} ngay sau khi thao tác thành công.
+    \item Khi Admin chọn đăng xuất, vòng lặp Menu Admin kết thúc và chương trình quay lại màn hình đăng nhập tại \texttt{main()}.
+\end{enumerate}
+
+\subsection*{Luồng Sinh viên}
+
+Tương tự, sau khi đăng nhập với quyền sinh viên, người dùng được đưa vào vòng lặp Menu sinh viên với ba lựa chọn: bắt đầu làm bài thi, xem lịch sử thi cá nhân, hoặc đăng xuất. Luồng Bắt đầu làm bài thi - luồng nghiệp vụ phức tạp nhất của chương trình được mô tả chi tiết qua các bước sau:
+
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item Nạp ngân hàng câu hỏi từ file; nếu ngân hàng rỗng, thông báo lỗi và quay lại Menu.
+    \item Liệt kê các môn học hiện có; sinh viên chọn một môn để thi (theo Mục~\ref{sec:ycchucnang}, FR-06).
+    \item Tính số câu hỏi tối đa hợp lệ theo tỉ lệ 40-40-20 cho môn đã chọn; nếu không có $N$ hợp lệ nào (thiếu hẳn một mức độ), thông báo lỗi và quay lại Menu.
+    \item Sinh viên nhập số câu muốn thi và thời gian làm bài; xác nhận bắt đầu.
+    \item Hệ thống sinh đề theo tỉ lệ độ khó, xáo trộn câu hỏi và đáp án (FR-07).
+    \item Sinh viên làm bài với đếm giờ thời gian thực (FR-08, FR-09).
+    \item Hệ thống chấm điểm và hiển thị kết quả (FR-10, FR-11).
+    \item Hệ thống lưu kết quả vào lịch sử thi (FR-12); sinh viên quay lại Menu Sinh viên.
+\end{enumerate}
+
+Hai luồng Admin và Sinh viên được cài đặt độc lập trong hai hàm riêng (\texttt{showAdminMenu}, \texttt{showStudentMenu}), nhưng đều tuân theo cùng một khuôn mẫu thiết kế: vòng lặp \texttt{while} kết hợp \texttt{switch-case}, giúp dễ dàng mở rộng thêm chức năng mới ở các phiên bản sau mà không ảnh hưởng tới luồng đã có, nội dung này được trình bày chi tiết hơn dưới góc độ kiến trúc tại Chương~\ref{chap:thietke}.
+
+% ============================================================
+% CHƯƠNG 4: THIẾT KẾ HỆ THỐNG
 % ============================================================
 \chapter{Thiết kế hệ thống}
 \label{chap:thietke}
 
+Dựa trên các yêu cầu chức năng và phi chức năng đã đặc tả ở Chương~\ref{chap:phantich}, chương này trình bày thiết kế cụ thể của hệ thống: kiến trúc tổng thể và sự phân chia module, cấu trúc dữ liệu lưu trữ trên file, và thiết kế chi tiết của từng module chức năng (\texttt{Menu}, \texttt{QuestionBank}, \texttt{Exam}, \texttt{History}) cùng hàm \texttt{main()} đóng vai trò điều phối. Thiết kế ở chương này là cơ sở trực tiếp để cài đặt mã nguồn được trình bày tại Chương~\ref{chap:caidat}.
+
 \section{Kiến trúc tổng thể chương trình}
+
 \subsection{Sơ đồ phân chia module}
+
+Theo nguyên lý module hoá đã trình bày ở Mục~\ref{chap:lythuyet}~\cite{nam2022}, chương trình được tổ chức thành bốn module độc lập, mỗi module đảm nhiệm một nhóm nghiệp vụ rõ ràng và không chồng chéo trách nhiệm:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{QuestionBank} -- quản lý ngân hàng câu hỏi: lưu trữ, thêm, xoá, tìm kiếm và đọc/ghi file \texttt{questions.txt}.
+    \item \textbf{Exam} -- logic của một lượt thi: sinh đề theo tỉ lệ độ khó, xáo trộn Fisher-Yates, đếm giờ thời gian thực và chấm điểm.
+    \item \textbf{History} -- quản lý lịch sử thi: lưu trữ và truy vấn các bản ghi \texttt{TestRecord}, đọc/ghi file \texttt{history.txt}.
+    \item \textbf{Menu} -- giao diện Terminal và điều hướng: đăng nhập, menu Admin, menu sinh viên, các hàm validate input.
+\end{itemize}
+
+Quan hệ phụ thuộc giữa các module được thể hiện qua khai báo \texttt{\#include}: \texttt{Exam.h} bao gồm trực tiếp \texttt{QuestionBank.h} (vì \texttt{generateExamFromBank} nhận tham số \texttt{QuestionBank\&}) và \texttt{History.h} (vì \texttt{startExam} trả về \texttt{TestRecord}); \texttt{Menu.cpp} bao gồm cả ba header còn lại để điều phối luồng nghiệp vụ. Ngược lại, \texttt{QuestionBank} và \texttt{History} hoàn toàn độc lập với hai module kia, đây là minh chứng cho việc tách bạch lớp dữ liệu khỏi lớp logic nghiệp vụ và lớp giao diện, giúp có thể kiểm thử \texttt{QuestionBank}/\texttt{History} riêng biệt mà không cần khởi tạo \texttt{Exam} hay \texttt{Menu}.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        box/.style={draw, rounded corners, minimum width=3.1cm, minimum height=0.9cm, align=center, font=\small},
+        arr/.style={-{Stealth[length=2.5mm]}, thick}
+        ]
+        \node[box, fill=gray!15] (main) {main.cpp};
+        \node[box, fill=blue!10, below=1.1cm of main] (menu) {Menu\\ \tiny (Menu.h / .cpp)};
+        \node[box, fill=green!10, below left=1.4cm and 1.7cm of menu] (qb) {QuestionBank\\ \tiny (QuestionBank.h / .cpp)};
+        \node[box, fill=orange!10, below=1.4cm of menu] (exam) {Exam\\ \tiny (Exam.h / .cpp)};
+        \node[box, fill=red!10, below right=1.4cm and 1.7cm of menu] (hist) {History\\ \tiny (History.h / .cpp)};
+
+        \draw[arr] (main) -- (menu);
+        \draw[arr] (menu) -- (qb);
+        \draw[arr] (menu) -- (exam);
+        \draw[arr] (menu) -- (hist);
+        \draw[arr] (exam) -- (qb);
+        \draw[arr] (exam) -- (hist);
+    \end{tikzpicture}
+    \caption{Sơ đồ phân chia module và quan hệ phụ thuộc (mũi tên: ``sử dụng/include'')}
+    \label{fig:module_arch}
+\end{figure}
+
+Như Hình~\ref{fig:module_arch} thể hiện, \texttt{main.cpp} không gọi trực tiếp \texttt{QuestionBank}, \texttt{Exam} hay \texttt{History}, toàn bộ nghiệp vụ được uỷ quyền cho \texttt{Menu}, giúp \texttt{main.cpp} chỉ còn đóng vai trò ``điểm vào'' cực ngắn, đúng tư tưởng thiết kế top-down đã trình bày ở Chương~\ref{chap:lythuyet}.
+
 \subsection{Luồng dữ liệu giữa các module}
+
+Dữ liệu trong hệ thống di chuyển theo hai luồng chính, tương ứng với hai tác nhân Admin và sinh viên. Bảng~\ref{tab:dataflow} tóm tắt luồng dữ liệu giữa các module ứng với từng chức năng.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|} \hline
+        \textbf{Bước} & \textbf{Luồng dữ liệu} \\ \hline
+        1 & \texttt{Menu} gọi \texttt{QuestionBank::loadFromFile("data/questions.txt")} để nạp toàn bộ câu hỏi vào danh sách liên kết đơn trong bộ nhớ. \\ \hline
+        2 & (Admin) \texttt{Menu} nhận \texttt{Question} mới từ người dùng qua \texttt{getValidString}/\texttt{getValidInt}, gọi \texttt{QuestionBank::addQuestion()} rồi \texttt{saveToFile()} để đồng bộ lại file. \\ \hline
+        3 & (Sinh viên) \texttt{Menu} khởi tạo đối tượng \texttt{Exam}, truyền tham chiếu \texttt{QuestionBank\&} cho \texttt{generateExamFromBank()}; \texttt{Exam} gọi ngược lại \texttt{QuestionBank::getQuestionsBySubjectAndDifficulty()} để lấy ba mảng câu hỏi Easy/Medium/Hard. \\ \hline
+        4 & \texttt{Exam} tự xáo trộn nội bộ (Fisher-Yates) và trả quyền điều khiển lại cho \texttt{Menu} thông qua \texttt{startExam()}, hàm này trả về một đối tượng \texttt{TestRecord} (định nghĩa trong \texttt{History.h}). \\ \hline
+        5 & \texttt{Menu} nhận \texttt{TestRecord}, gọi \texttt{HistoryManager::addRecord()} rồi \texttt{saveToFile()} (chế độ \texttt{append}) để ghi nối vào \texttt{data/history.txt}. \\ \hline
+        6 & Khi xem lịch sử, \texttt{Menu} gọi \texttt{HistoryManager::loadFromFile()} để nạp lại toàn bộ lịch sử từ file, sau đó gọi \texttt{printAll()} (Admin) hoặc \texttt{printByUser()} (Sinh viên). \\ \hline
+    \end{tabularx}
+    \caption{Luồng dữ liệu giữa các module ứng với từng bước nghiệp vụ}
+    \label{tab:dataflow}
+\end{table}
+
+Một điểm thiết kế quan trọng cần lưu ý: \texttt{QuestionBank} và \texttt{HistoryManager} \textit{không} được giữ lại như biến toàn cục; mỗi lần vào một màn hình Menu, đối tượng tương ứng được khai báo cục bộ và nạp lại từ file. Cách thiết kế này (đánh đổi một phần hiệu năng I/O) giúp đảm bảo dữ liệu trong bộ nhớ luôn phản ánh đúng trạng thái mới nhất, đặc biệt quan trọng khi nhiều lượt đăng nhập Admin/sinh viên có thể nối tiếp nhau trong cùng một lần chạy chương trình (Mục~\ref{sec:luonghoatdong}).
+
 \subsection{Sơ đồ luồng điều hướng Menu}
 
+Luồng điều hướng được thiết kế theo mô hình ``vòng lặp đăng nhập tại \texttt{main()}'' kết hợp với hai vòng lặp Menu con (Admin/Sinh viên) độc lập, mỗi vòng lặp dùng cấu trúc \texttt{switch-case} trên lựa chọn của người dùng. Sơ đồ tổng quát:
+
+\begin{verbatim}
+main()
+ |-- show WelcomeBanner()
+ |-- while (appRunning):
+ |     |-- showLoginScreen(session)
+ |     |     |-- "exit"            -> LoginResult::Exit
+ |     |     |-- sai user/pass     -> LoginResult::InvalidCredentials (nhap lai)
+ |     |     `-- dung user/pass    -> LoginResult::Success
+ |     |-- switch(result):
+ |     |     |-- Success & isAdmin=true   -> showAdminMenu(session)
+ |     |     |-- Success & isAdmin=false  -> showStudentMenu(session)
+ |     |     |-- InvalidCredentials       -> (lap lai showLoginScreen)
+ |     |     `-- Exit                    -> appRunning = false
+ `-- Man hinh tam biet, return 0
+\end{verbatim}
+
+Bên trong \texttt{showAdminMenu}, vòng lặp \texttt{while(running)} hiển thị 5 lựa chọn (xem Bảng~\ref{tab:adminflow}); bên trong \texttt{showStudentMenu}, vòng lặp tương tự hiển thị 3 lựa chọn (xem Bảng~\ref{tab:studentflow}). Cả hai đều thoát vòng lặp bằng cách đặt \texttt{running = false} khi người dùng chọn ``Đăng xuất'', trả luồng điều khiển về lại vòng lặp đăng nhập tại \texttt{main()}, đây chính là cơ chế cho phép đổi tài khoản liên tục mà không cần khởi động lại chương trình.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|c|X|} \hline
+        \textbf{Lựa chọn} & \textbf{Hành động} \\ \hline
+        1 & Xem danh sách câu hỏi (chọn môn cụ thể hoặc nhập \texttt{ALL} để xem toàn bộ) \\ \hline
+        2 & Thêm câu hỏi mới (validate ID, môn học, độ khó, nội dung, 4 đáp án, đáp án đúng) \\ \hline
+        3 & Xoá câu hỏi theo ID \\ \hline
+        4 & Xem lịch sử thi của toàn bộ sinh viên \\ \hline
+        5 & Đăng xuất \\ \hline
+    \end{tabularx}
+    \caption{Các lựa chọn trong showAdminMenu}
+    \label{tab:adminflow}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|c|X|} \hline
+        \textbf{Lựa chọn} & \textbf{Hành động} \\ \hline
+        1 & Bắt đầu làm bài thi (chọn môn $\to$ nhập số câu/thời gian $\to$ xác nhận $\to$ sinh đề $\to$ làm bài $\to$ lưu lịch sử) \\ \hline
+        2 & Xem lịch sử thi của riêng bản thân  \\ \hline
+        3 & Đăng xuất \\ \hline
+    \end{tabularx}
+    \caption{Các lựa chọn trong showStudentMenu}
+    \label{tab:studentflow}
+\end{table}
+
 \section{Thiết kế cấu trúc dữ liệu}
+
+Toàn bộ dữ liệu bền vững của hệ thống được lưu trên hai file văn bản phẳng, dùng ký tự \texttt{|} làm dấu phân tách trường đúng như định hướng đã trình bày tại Mục~\ref{chap:lythuyet}. Phần này mô tả chính xác định dạng đang được cài đặt trong \texttt{QuestionBank.cpp} và \texttt{History.cpp}.
+
 \subsection{Cấu trúc file questions.txt}
+
+Mỗi dòng trong \texttt{questions.txt} gồm đúng 9 trường, tương ứng 1-1 với các thuộc tính của \texttt{struct Question} trong \texttt{QuestionBank.h}:
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|c|l|X|} \hline
+        \textbf{Thứ tự} & \textbf{Trường} & \textbf{Ý nghĩa} \\ \hline
+        1 & \texttt{id} & Mã câu hỏi, số nguyên dương, duy nhất \\ \hline
+        2 & \texttt{subject} & Tên môn học (ví dụ: \texttt{TA10}, \texttt{TA12}) \\ \hline
+        3 & \texttt{difficulty} & Mức độ: \texttt{Easy} / \texttt{Medium} / \texttt{Hard} \\ \hline
+        4 & \texttt{content} & Nội dung câu hỏi \\ \hline
+        5--8 & \texttt{answers[0..3]} & Bốn đáp án tương ứng A, B, C, D \\ \hline
+        9 & \texttt{correct} & Ký tự đáp án đúng (\texttt{A}/\texttt{B}/\texttt{C}/\texttt{D}) \\ \hline
+    \end{tabularx}
+    \caption{Cấu trúc 9 trường của một dòng trong questions.txt}
+    \label{tab:questions_format}
+\end{table}
+
+Ví dụ một dòng dữ liệu hợp lệ:
+\begin{verbatim}
+12|TA10|Medium|Choose the correct form: She ___ to school.|go|goes|going|went|B
+\end{verbatim}
+
+Các dòng trống hoặc dòng bắt đầu bằng ký tự \texttt{\#} được \texttt{loadFromFile} bỏ qua một cách an toàn, cho phép Admin chèn chú thích trực tiếp vào file dữ liệu khi cần.
+
 \subsection{Cấu trúc file history.txt}
+
+Tương tự, file \texttt{history.txt} lưu mỗi lần thi trên một dòng gồm 6 trường, tương ứng các thuộc tính của \texttt{struct TestRecord} trong \texttt{History.h}:
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|c|l|X|} \hline
+        \textbf{Thứ tự} & \textbf{Trường} & \textbf{Ý nghĩa} \\ \hline
+        1 & \texttt{studentName} & Tên đăng nhập của sinh viên \\ \hline
+        2 & \texttt{subject} & Môn học đã thi \\ \hline
+        3 & \texttt{correctCount} & Số câu trả lời đúng \\ \hline
+        4 & \texttt{totalCount} & Tổng số câu của đề thi \\ \hline
+        5 & \texttt{score} & Điểm số trên thang 10 (kiểu \texttt{double}) \\ \hline
+        6 & \texttt{datetime} & Thời điểm nộp bài, dạng chuỗi \texttt{YYYY-MM-DD HH:MM:SS} \\ \hline
+    \end{tabularx}
+    \caption{Cấu trúc 6 trường của một dòng trong history.txt}
+    \label{tab:history_format}
+\end{table}
+
+Ví dụ một dòng dữ liệu hợp lệ:
+\begin{verbatim}
+hung|TA10|7|10|7|2026-06-15 21:40:12
+\end{verbatim}
+
 \subsection{Quy tắc định dạng và tách trường dữ liệu}
 
+Cả hai file đều tuân theo các quy tắc tách trường thống nhất sau:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Dấu phân tách:} ký tự \texttt{|} được chọn vì gần như không xuất hiện trong nội dung câu hỏi hay đáp án tiếng Anh thông thường, giảm thiểu rủi ro xung đột với dữ liệu thật.
+    \item \textbf{Đọc tuần tự bằng \texttt{istringstream}:} mỗi dòng được nạp vào một \texttt{istringstream}, sau đó dùng \texttt{getline(ss, token, '|')} liên tiếp để tách từng trường theo đúng thứ tự đã định nghĩa ở Bảng~\ref{tab:questions_format} / \ref{tab:history_format}.
+    \item \textbf{Bẫy lỗi theo từng dòng:} nếu một dòng trong \texttt{questions.txt} thiếu trường, sai kiểu số (\texttt{id}), hoặc có \texttt{correct} nằm ngoài \texttt{A-D}, \texttt{loadFromFile} chỉ in cảnh báo kèm số dòng cụ thể và \texttt{continue} sang dòng kế tiếp, không làm crash hay dừng việc nạp toàn bộ ngân hàng.
+    \item \textbf{Ghi đè với questions.txt:} \texttt{QuestionBank::saveToFile} dùng \texttt{ofstream} mặc định (ghi đè), vì mục tiêu là phản ánh đúng trạng thái hiện tại của ngân hàng câu hỏi sau khi thêm/xoá.
+    \item \textbf{Ghi nối với history.txt:} \texttt{HistoryManager::saveToFile} mở file ở chế độ \texttt{ios::app}, vì mục tiêu là tích lũy lịch sử qua nhiều lần thi của nhiều sinh viên khác nhau -- nếu dùng chế độ ghi đè mặc định sẽ làm mất toàn bộ lịch sử của các lượt thi trước đó.
+\end{itemize}
+
 \section{Thiết kế các module chức năng}
+
 \subsection{Module Menu}
+
 \subsubsection{Giao diện đăng nhập và xác thực người dùng}
+
+Trạng thái đăng nhập được đóng gói trong struct \texttt{LoginSession} (gồm \texttt{username} và cờ \texttt{isAdmin}), còn kết quả của một lần thử đăng nhập được biểu diễn bằng \texttt{enum class LoginResult} với ba giá trị \texttt{Success}, \texttt{InvalidCredentials}, \texttt{Exit}. Việc dùng \texttt{enum class} (thay vì mã lỗi số nguyên) giúp \texttt{main()} xử lý từng trường hợp bằng \texttt{switch} rõ nghĩa, tránh nhầm lẫn giữa các mã trả về.
+
+Hàm \texttt{showLoginScreen} được thiết kế với ba nhánh xác thực theo đúng thứ tự kiểm tra:
+
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item Nếu tên đăng nhập (chuyển về chữ thường) là \texttt{"exit"} $\to$ trả về \texttt{LoginResult::Exit} ngay, không yêu cầu nhập mật khẩu.
+    \item Nếu \texttt{username == "admin"} và \texttt{password == "admin123"} $\to$ \texttt{isAdmin = true}, trả về \texttt{Success}.
+    \item Nếu \texttt{password == "sv" + username} (quy ước mật khẩu sinh viên) $\to$ \texttt{isAdmin = false}, trả về \texttt{Success}.
+    \item Ngược lại $\to$ in lỗi và trả về \texttt{InvalidCredentials}.
+\end{enumerate}
+
+Thiết kế quy ước mật khẩu sinh viên theo công thức phù hợp với giới hạn ``xác thực đơn giản, không mã hoá'' đã nêu tại yêu cầu phi chức năng (Bảng~\ref{tab:nfr}).
+
 \subsubsection{Menu Admin: quản lý câu hỏi, xem thống kê}
+
+\texttt{showAdminMenu} nạp \texttt{QuestionBank} từ \texttt{data/questions.txt} ngay khi vào menu, sau đó lặp với 5 lựa chọn đã liệt kê ở Bảng~\ref{tab:adminflow}. Hai điểm thiết kế đáng chú ý:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Xem theo môn học:} trước khi cho nhập tên môn, hệ thống liệt kê sẵn danh sách các môn học hiện có (qua \texttt{getDistinctSubjects}) để Admin không phải đoán tên môn; nếu môn nhập vào không khớp danh sách, vòng lặp yêu cầu nhập lại thay vì chấp nhận lệch chính tả gây hiểu nhầm ``không có câu hỏi''.
+    \item \textbf{Đồng bộ tức thời:} ngay sau khi thêm hoặc xoá câu hỏi thành công, \texttt{saveToFile} được gọi lại lập tức, bảo đảm yêu cầu phi chức năng về tính nhất quán dữ liệu.
+\end{itemize}
+
 \subsubsection{Menu Sinh viên: vào thi, xem lịch sử}
+
+\texttt{showStudentMenu} không nạp \texttt{QuestionBank} ngay khi vào menu, mà chỉ nạp khi sinh viên thực sự chọn ``Bắt đầu làm bài thi'' - tránh I/O không cần thiết nếu sinh viên chỉ vào xem lịch sử. Luồng làm bài thi được thiết kế theo trình tự:
+
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item Nạp ngân hàng câu hỏi; nếu rỗng, báo lỗi và quay lại menu.
+    \item Liệt kê các môn học khác nhau (\texttt{getDistinctSubjects}) để sinh viên chọn theo số thứ tự.
+    \item Đếm số câu Easy/Medium/Hard của riêng môn đã chọn, gọi \texttt{getMaxNumberQuest} để xác định $N_{\max}$ hợp lệ theo tỉ lệ 40-40-20.
+    \item Nếu $N_{\max} < 1$ (thiếu hẳn một mức độ) $\to$ báo lỗi, không cho thi.
+    \item Sinh viên nhập số câu (trong $[1, N_{\max}]$) và thời gian làm bài (trong $[10, 36000]$ giây), xác nhận Y/N.
+    \item Khởi tạo đối tượng \texttt{Exam}, gọi \texttt{generateExamFromBank} rồi \texttt{shuffleExam}, sau đó \texttt{startExam} để tiến hành thi.
+    \item Gán \texttt{record.subject}, hiển thị kết quả, lưu vào \texttt{HistoryManager} rồi ghi file.
+\end{enumerate}
+
 \subsubsection{Cơ chế validate input và bẫy lỗi}
 
+Ba hàm tiện ích dùng chung cho cả hai menu được thiết kế theo nguyên tắc ``không bao giờ thoát chương trình do lỗi nhập liệu, chỉ thoát do hết dữ liệu đầu vào hoặc người dùng chủ động'':
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{getValidInt(prompt, minVal, maxVal)}: lặp vô hạn đến khi \texttt{cin} đọc được một số nguyên hợp lệ \textit{và} nằm trong đoạn cho phép; nếu \texttt{cin} ở trạng thái lỗi (nhập chữ), gọi \texttt{cin.clear()} để xoá cờ lỗi rồi \texttt{cin.ignore()} để loại bỏ phần dữ liệu rác còn sót trong buffer trước khi yêu cầu nhập lại.
+    \item \texttt{getValidString(prompt, maxLen)}: dùng \texttt{getline} để cho phép chuỗi có khoảng trắng, từ chối chuỗi rỗng hoặc vượt quá độ dài tối đa.
+    \item \texttt{getYesNo(prompt)}: chỉ chấp nhận ký tự đầu tiên là \texttt{Y} hoặc \texttt{N} (không phân biệt hoa/thường), mọi đầu vào khác bị từ chối và hỏi lại.
+\end{itemize}
+
+Cả ba hàm đều kiểm tra \texttt{cin.eof()} hoặc thất bại của \texttt{getline} để gọi \texttt{exit(0)} một cách có kiểm soát khi luồng nhập liệu kết thúc bất ngờ (ví dụ khi chạy chương trình với input redirect từ file trong kiểm thử tự động), tránh rơi vào vòng lặp vô hạn.
+
 \subsection{Module Ngân hàng câu hỏi}
+
 \subsubsection{Struct Question và các thuộc tính}
+
+\texttt{struct Question} được thiết kế không dùng con trỏ hay container động bên trong, để có thể gán (\texttt{=}) và sao chép (\texttt{copy}) trực tiếp giữa các mảng \texttt{Question[]} mà không cần cài đặt thêm copy constructor:
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|l|X|} \hline
+        \textbf{Thuộc tính} & \textbf{Kiểu} & \textbf{Ghi chú thiết kế} \\ \hline
+        \texttt{id} & \texttt{int} & Khoá định danh duy nhất, kiểm tra trùng qua \texttt{isIdExists} trước khi thêm \\ \hline
+        \texttt{subject} & \texttt{string} & Dùng để gom nhóm câu hỏi theo môn khi sinh đề \\ \hline
+        \texttt{difficulty} & \texttt{string} & Một trong \texttt{Easy}/\texttt{Medium}/\texttt{Hard}, dùng cho tỉ lệ 40-40-20 \\ \hline
+        \texttt{content} & \texttt{string} & Nội dung câu hỏi \\ \hline
+        \texttt{answers[4]} & \texttt{string[]} & Mảng tĩnh 4 phần tử -- cố định số lượng đáp án theo đặc tả bài toán (Mục~\ref{chap:phantich}) \\ \hline
+        \texttt{correct} & \texttt{char} & Ký tự \texttt{A}--\texttt{D}; được cập nhật lại mỗi khi đáp án bị xáo trộn \\ \hline
+    \end{tabularx}
+    \caption{Thiết kế thuộc tính của struct Question}
+    \label{tab:question_struct_design}
+\end{table}
+
+Quyết định dùng mảng tĩnh \texttt{answers[4]} thay vì 4 biến \texttt{string} rời hoặc mảng động phản ánh đúng ràng buộc nghiệp vụ ``luôn đúng 4 lựa chọn A/B/C/D'', đồng thời cho phép duyệt vòng \texttt{for} khi xáo trộn và in ấn, thay vì phải lặp lại code 4 lần cho từng đáp án.
+
 \subsubsection{Danh sách liên kết đơn lưu câu hỏi}
+
+\texttt{QuestionBank} quản lý các \texttt{QuestionNode} qua hai con trỏ \texttt{head} và \texttt{tail} (private). Việc giữ thêm con trỏ \texttt{tail} dù tốn 8 byte bộ nhớ là một quyết định thiết kế có chủ đích: nó cho phép \texttt{addQuestion} chèn vào cuối danh sách với độ phức tạp $O(1)$ thay vì phải duyệt từ \texttt{head} đến cuối mỗi lần thêm ($O(n)$), điều quan trọng khi ngân hàng có thể lên đến hàng nghìn câu hỏi (yêu cầu phi chức năng về hiệu năng, Bảng~\ref{tab:nfr}). Việc cập nhật \texttt{tail} khi xoá node cuối (trong \texttt{removeQuestion}) được xử lý cẩn thận để tránh con trỏ \texttt{tail} trỏ vào vùng nhớ đã \texttt{delete}.
+
 \subsubsection{Đọc/ghi file questions.txt}
+
+\texttt{loadFromFile} và \texttt{saveToFile} được thiết kế đối xứng với định dạng 9 trường ở Bảng~\ref{tab:questions_format}, tuân theo các quy tắc bẫy lỗi đã trình bày ở Mục~\ref{chap:lythuyet}: mỗi dòng được xử lý độc lập, lỗi ở một dòng không ảnh hưởng các dòng khác, và \texttt{addQuestion} được tái sử dụng trong \texttt{loadFromFile} để đảm bảo ràng buộc ``ID duy nhất'' luôn được áp dụng nhất quán cho cả dữ liệu nhập tay (qua Menu) và dữ liệu nạp từ file.
+
 \subsubsection{Thêm, sửa, xoá câu hỏi}
 
+Phiên bản hiện tại cài đặt đầy đủ hai nghiệp vụ thêm (\texttt{addQuestion}, có kiểm tra trùng ID qua \texttt{isIdExists}) và xoá (\texttt{removeQuestion}, xử lý đủ 4 trường hợp: danh sách rỗng, xoá HEAD, xoá giữa/cuối, không tìm thấy ID). Riêng nghiệp vụ sửa câu hỏi chưa được cài đặt trong giao diện Menu hiện tại; để cập nhật nội dung một câu hỏi, Admin phải xoá rồi thêm lại với cùng ID. Đây là một hạn chế đã được nhóm ghi nhận và được đề xuất là một hướng phát triển ở Chương~\ref{ketluan} (bổ sung hàm \texttt{updateQuestion(int id, Question newData)} duyệt danh sách liên kết tìm node theo \texttt{id} rồi ghi đè trực tiếp \texttt{node->data}, không cần xoá/thêm lại node).
+
 \subsection{Module Thi}
+
 \subsubsection{Thuật toán sinh đề: xáo trộn Fisher-Yates}
+
+Việc sinh đề được tách thành hai giai đoạn rõ ràng trong \texttt{generateExamFromBank}: \\
+(1) Trích xuất đúng số lượng câu hỏi theo từng mức độ từ \texttt{QuestionBank} bằng \\\texttt{getQuestionsBySubjectAndDifficulty}\\
+(2) Xáo trộn bằng Fisher-Yates ở hai cấp độ: xáo trộn nội bộ từng nhóm Easy/Medium/Hard trước khi cắt lấy $N$ câu đầu của mỗi nhóm, rồi xáo trộn tiếp toàn bộ $N$ câu đã ghép để tránh tình trạng đề luôn hiển thị theo thứ tự Easy $\to$ Medium $\to$ Hard. 
+
+Thiết kế này đảm bảo: nếu ngân hàng có nhiều hơn số câu cần ở một mức độ, mỗi sinh viên có xác suất nhận tổ hợp câu hỏi khác nhau dù cùng tỉ lệ độ khó -- đúng mục tiêu công bằng đã đặt ra ở yêu cầu FR-07.
+
+Một quyết định thiết kế quan trọng về quyền sở hữu bộ nhớ: ba mảng \texttt{easyQuestions}, \texttt{mediumQuestions}, \texttt{hardQuestions} được \texttt{QuestionBank} cấp phát động (\texttt{new[]}) và trả về cho \texttt{Exam}; theo quy ước đã nêu ở Mục~\ref{chap:caidat}, bên gọi (\texttt{Exam}) chịu trách nhiệm \texttt{delete[]} các mảng này được thực hiện ở cả hai nhánh thành công và thất bại của \texttt{generateExamFromBank}, tránh rò rỉ bộ nhớ ngay cả khi hàm trả về \texttt{false} sớm.
+
 \subsubsection{Xáo trộn thứ tự đáp án A/B/C/D}
+\label{sec:shuffle_answer}
+
+Thiết kế của \texttt{shuffleExam} tách bạch hai bước cho mỗi câu hỏi: trước khi gọi \texttt{shuffleAnswers} (Fisher-Yates trên mảng \texttt{string[4]}), hệ thống ghi nhớ lại nội dung văn bản của đáp án đúng (không ghi nhớ chỉ số); sau khi xáo trộn, hệ thống duyệt lại 4 đáp án để tìm vị trí mới của đúng nội dung đó và gán lại \texttt{q.correct}. Lý do thiết kế theo nội dung văn bản chứ không theo chỉ số là vì chỉ số ban đầu sẽ không còn ý nghĩa sau khi mảng bị hoán đổi vị trí ngẫu nhiên, so sánh theo nội dung là cách duy nhất để xác định đúng đáp án đúng đã ``di chuyển'' đến đâu.
+
 \subsubsection{Module đếm giờ đếm ngược thời gian thực}
+
+Đếm giờ được thiết kế dựa trên đồng hồ hệ thống (\texttt{time(nullptr)}, \texttt{difftime}) thay vì đếm số vòng lặp hay \texttt{sleep}, để không bị lệch thời gian thực khi người dùng dừng lại suy nghĩ lâu ở một câu. \texttt{startExam} lưu \texttt{startTime} một lần duy nhất trước khi vào vòng lặp câu hỏi, sau đó tính \texttt{remaining = timeLimitSec\_ - elapsed} tại hai thời điểm trong mỗi lượt câu hỏi: ngay trước khi hiển thị câu hỏi, và ngay sau khi người dùng nhập xong đáp án. Thiết kế kiểm tra hai lần là để xử lý đúng tình huống biên: sinh viên có thể đọc câu hỏi rất nhanh nhưng nhập đáp án rất chậm, khiến thời gian hết ngay trong lúc đang nhập nếu chỉ kiểm tra trước khi hiển thị, hệ thống sẽ vô tình cho phép làm bài quá giờ quy định.
+
 \subsubsection{Thu bài tự động khi hết giờ}
+
+Việc thu bài được thống nhất qua một biến cờ duy nhất \texttt{submitted}, giúp vòng lặp chính của \texttt{startExam} có một điều kiện dừng nhất quán (\texttt{for (...; !submitted; ...)}) bất kể nguyên nhân thu bài là gì. Khi \texttt{submitted} được đặt \texttt{true} ở bất kỳ một trong ba điểm kiểm tra (trước hiển thị, trong khi nhập, sau khi nhập), vòng lặp \texttt{break} ngay, và các câu hỏi chưa kịp duyệt tới vẫn giữ giá trị khởi tạo \texttt{userAnswers[i] = '-'}, được module chấm điểm hiểu là trạng thái ``chưa trả lời'' (phân biệt rõ với ``trả lời sai'') -- đúng quy tắc nghiệp vụ đã đặt ra.
+
 \subsubsection{Logic tính điểm và tổng hợp kết quả}
 
+Điểm số được tính theo công thức $\text{Điểm} = \dfrac{\text{correctCount}}{\text{totalCount}} \times 10$, với điều kiện bảo vệ \texttt{totalCount > 0} để trả về \texttt{0.0} thay vì gây lỗi chia cho 0 trong trường hợp biên đề thi rỗng. 
+
 \subsection{Module Lịch sử thi}
+
 \subsubsection{Struct TestRecord và các thuộc tính}
+
+\texttt{TestRecord} đóng vai trò lưu trữ giữa module \texttt{Exam} (nơi sinh ra bản ghi) và module \texttt{History} (nơi lưu trữ bản ghi); \texttt{TestRecord} được khai báo trong \texttt{History.h} nhưng lại được \texttt{Exam.h} \texttt{\#include} và sử dụng làm kiểu trả về của \texttt{startExam}. Bảng~\ref{tab:history_format} đã liệt kê đầy đủ 6 thuộc tính; trong đó trường \texttt{subject} không được \texttt{Exam::startExam} điền sẵn, mà được \texttt{Menu} gán bổ sung ngay sau khi nhận \texttt{TestRecord} trả về - một ví dụ cụ thể cho việc phân chia trách nhiệm: \texttt{Exam} chỉ biết về nội dung bài thi, còn môn học do \texttt{Menu} quản lý.
+
 \subsubsection{Danh sách liên kết đơn lưu lịch sử}
+
+Tương tự thiết kế của \texttt{QuestionBank}, \texttt{HistoryManager} dùng cặp con trỏ \texttt{head}/\texttt{tail} để thêm bản ghi mới vào cuối với độ phức tạp $O(1)$. Khác với \texttt{QuestionBank}, \texttt{HistoryManager} không cần nghiệp vụ xoá bản ghi hay kiểm tra trùng khoá, lịch sử thi mang tính chất ``chỉ ghi thêm, không chỉnh sửa'', phản ánh đúng bản chất một bản ghi lịch sử không nên bị thay đổi sau khi đã phát sinh.
+
 \subsubsection{Ghi kết quả vào file history.txt}
+
+Như đã phân tích ở Mục~\ref{chap:lythuyet}, thiết kế ghi nối đảm bảo lịch sử của các sinh viên khác không bị mất khi một sinh viên mới hoàn thành bài thi. Một lưu ý thiết kế khác: mỗi lần gọi \texttt{saveToFile}, \texttt{HistoryManager} chỉ chứa bản ghi vừa thêm trong phiên hiện tại, nhờ vậy việc ghi nối hoạt động đúng mà không cần đọc lại toàn bộ file lịch sử cũ trước khi ghi.
+
 \subsubsection{Truy vấn và hiển thị lịch sử theo username}
 
+\texttt{printByUser} thiết kế theo nguyên tắc duyệt tuyến tính toàn bộ danh sách liên kết, chỉ in các bản ghi có \texttt{studentName == username}, kết hợp một biến cờ \texttt{found} để phân biệt rõ hai tình huống đầu ra: ``không có lịch sử nào của riêng người này'' và ``ngân hàng lịch sử rỗng hoàn toàn'', tránh hiển thị một màn hình trống không lời giải thích, đúng yêu cầu nghiệp vụ về tính khả dụng (Bảng~\ref{tab:nfr}). Việc tách \texttt{printAll} (dành cho Admin, không lọc) và \texttt{printByUser} (dành cho Sinh viên, lọc theo người dùng hiện tại) thành hai hàm riêng -- thay vì một hàm chung với tham số lọc tuỳ chọn -- giúp mỗi hàm có một mục đích duy nhất, dễ đọc và khớp đúng với phân quyền của từng tác nhân đã mô tả ở Bảng~\ref{tab:actor}.
+
 \subsection{Hàm main}
+
+\texttt{main()} được thiết kế tối giản, chỉ làm ba việc: 
+(1) khởi tạo bộ sinh số ngẫu nhiên bằng \texttt{srand(time(nullptr))} -- bắt buộc gọi đúng một lần ở điểm vào chương trình để các lần xáo trộn Fisher-Yates trong \texttt{Exam} cho ra kết quả khác nhau giữa các lần chạy; \\
+(2) duy trì vòng lặp đăng nhập chính (\texttt{while (appRunning)}) và \texttt{switch} điều hướng sang \texttt{showAdminMenu}/\texttt{showStudentMenu} dựa trên \texttt{LoginResult}; \\
+(3) hiển thị màn hình tạm biệt và \texttt{return 0} khi người dùng chọn thoát. 
+
+Việc không đặt bất kỳ logic nghiệp vụ nào trực tiếp trong \texttt{main()}, toàn bộ được uỷ quyền cho \texttt{Menu}, là hệ quả trực tiếp của kiến trúc phân tầng đã trình bày tại Mục~\ref{fig:module_arch} -- giúp \texttt{main.cpp} đóng vai trò thuần tuý là điểm khởi đầu, dễ đọc và dễ trình bày.
+
 
 % ============================================================
 \chapter{Cài đặt và xây dựng chương trình}
