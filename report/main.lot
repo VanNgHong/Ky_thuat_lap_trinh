@@ -1,31 +1,41 @@
 \babel@toc {vietnamese}{}\relax 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1.1}{\ignorespaces Công nghệ và công cụ sử dụng trong dự án}}{9}{table.caption.15}%
-\contentsline {table}{\numberline {1.2}{\ignorespaces Danh sách thành viên nhóm}}{9}{table.caption.18}%
-\contentsline {table}{\numberline {1.3}{\ignorespaces Phân công nhiệm vụ giữa các thành viên}}{10}{table.caption.20}%
+\contentsline {table}{\numberline {1.1}{\ignorespaces Công nghệ và công cụ sử dụng trong dự án}}{10}{table.caption.15}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Danh sách thành viên nhóm}}{10}{table.caption.18}%
+\contentsline {table}{\numberline {1.3}{\ignorespaces Phân công nhiệm vụ giữa các thành viên}}{11}{table.caption.20}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Các thao tác trên danh sách liên kết đơn QuestionBank}}{14}{table.caption.75}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Cấu trúc header/source của các module trong dự án}}{16}{table.caption.148}%
-\contentsline {table}{\numberline {2.3}{\ignorespaces Tổng kết liên hệ lý thuyết và cài đặt trong dự án}}{17}{table.caption.151}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Các thao tác trên danh sách liên kết đơn QuestionBank}}{15}{table.caption.75}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Cấu trúc header/source của các module trong dự án}}{17}{table.caption.148}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Tổng kết liên hệ lý thuyết và cài đặt trong dự án}}{18}{table.caption.151}%
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Tác nhân và quyền hạn trong hệ thống}}{19}{table.caption.156}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Tổng hợp các yêu cầu chức năng của hệ thống}}{20}{table.caption.159}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Đặc tả ràng buộc dữ liệu của một câu hỏi}}{21}{table.caption.163}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Quy tắc tính số câu hỏi theo tỉ lệ độ khó 40-40-20}}{22}{table.caption.175}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Tổng hợp các yêu cầu phi chức năng của hệ thống}}{24}{table.caption.187}%
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Test Case-01}}{28}{table.caption.433}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Test Case-02}}{28}{table.caption.435}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces Test Case-03}}{29}{table.caption.437}%
-\contentsline {table}{\numberline {6.4}{\ignorespaces Test Case-04}}{29}{table.caption.439}%
-\contentsline {table}{\numberline {6.5}{\ignorespaces Test Case-05}}{29}{table.caption.441}%
-\contentsline {table}{\numberline {6.6}{\ignorespaces Test Case-06}}{30}{table.caption.443}%
-\contentsline {table}{\numberline {6.7}{\ignorespaces Test Case-07}}{30}{table.caption.445}%
-\contentsline {table}{\numberline {6.8}{\ignorespaces Test Case-08}}{30}{table.caption.447}%
-\contentsline {table}{\numberline {6.9}{\ignorespaces Test Case-09}}{30}{table.caption.449}%
-\contentsline {table}{\numberline {6.10}{\ignorespaces Test Case-10}}{31}{table.caption.451}%
-\contentsline {table}{\numberline {6.11}{\ignorespaces Tổng hợp kết quả 10 Test Case}}{32}{table.caption.458}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Luồng dữ liệu giữa các module ứng với từng bước nghiệp vụ}}{27}{table.caption.209}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Các lựa chọn trong showAdminMenu}}{28}{table.caption.211}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Các lựa chọn trong showStudentMenu}}{28}{table.caption.212}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Cấu trúc 9 trường của một dòng trong questions.txt}}{29}{table.caption.215}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Cấu trúc 6 trường của một dòng trong history.txt}}{29}{table.caption.217}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Thiết kế thuộc tính của struct Question}}{31}{table.caption.238}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Test Case-01}}{42}{table.caption.495}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Test Case-02}}{43}{table.caption.498}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces Test Case-02}}{44}{table.caption.501}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces Test Case-04}}{44}{table.caption.504}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces Test Case-05}}{45}{table.caption.508}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces Test Case-06}}{46}{table.caption.512}%
+\contentsline {table}{\numberline {6.7}{\ignorespaces Test Case-07}}{47}{table.caption.515}%
+\contentsline {table}{\numberline {6.8}{\ignorespaces Test Case-08}}{48}{table.caption.518}%
+\contentsline {table}{\numberline {6.9}{\ignorespaces Test Case-09}}{48}{table.caption.521}%
+\contentsline {table}{\numberline {6.10}{\ignorespaces Test Case-10}}{49}{table.caption.524}%
+\contentsline {table}{\numberline {6.11}{\ignorespaces Tổng hợp kết quả 10 Test Case}}{56}{table.caption.543}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Tổng hợp các hàm xử lý chính theo từng module}}{43}{table.caption.535}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {D.1}{\ignorespaces Tài khoản mặc định để đăng nhập chương trình}}{73}{table.caption.2264}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {D.1}{\ignorespaces Tài khoản mặc định để đăng nhập chương trình}}{96}{table.caption.2352}%

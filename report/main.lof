@@ -3,8 +3,32 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Sơ đồ phân chia module và quan hệ phụ thuộc (mũi tên: ``sử dụng/include'')}}{27}{figure.caption.207}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Test Case-01}}{43}{figure.caption.496}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Test Case-01}}{43}{figure.caption.499}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Test Case-02}}{44}{figure.caption.502}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Test Case-04}}{45}{figure.caption.505}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Test Case-04 (Kiểm thử biên bổ sung)}}{45}{figure.caption.506}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Test Case-05 (Sinh đề lần 1)}}{46}{figure.caption.509}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Test Case-05 (Sinh đề lần 2)}}{46}{figure.caption.510}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Test Case-06}}{47}{figure.caption.513}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Test Case-07}}{47}{figure.caption.516}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Test Case-08}}{48}{figure.caption.519}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Test Case-09}}{49}{figure.caption.522}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Test Case-010}}{49}{figure.caption.525}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Khởi động chương trình và đăng nhập}}{50}{figure.caption.528}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Đăng nhập thành công với tài khoản Admin}}{51}{figure.caption.530}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Chức năng 1 – Xem danh sách câu hỏi}}{51}{figure.caption.531}%
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Chức năng 2 – Thêm câu hỏi mới}}{52}{figure.caption.532}%
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Chức năng 3 – Xoá câu hỏi theo ID}}{52}{figure.caption.533}%
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Chức năng 4 – Xem lịch sử làm bài của tất cả sinh viên}}{53}{figure.caption.534}%
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Chức năng 5 – Đăng xuất}}{53}{figure.caption.535}%
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Đăng nhập thành công với tài khoảng Sinh viên}}{54}{figure.caption.537}%
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Chức năng 1 – Bắt đầu làm bài thi}}{54}{figure.caption.538}%
+\contentsline {figure}{\numberline {6.22}{\ignorespaces Chức năng 2 – Xem lịch sử làm bài của bản thân}}{55}{figure.caption.539}%
+\contentsline {figure}{\numberline {6.23}{\ignorespaces Chức năng 3 – Đăng xuất}}{55}{figure.caption.540}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

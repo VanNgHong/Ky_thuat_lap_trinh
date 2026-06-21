@@ -1,20 +1,37 @@
 # Fdb version 4
-["bibtex main"] 1781986204.33351 "main.aux" "main.bbl" "main" 1781986218.4703 0
-  "./references.bib" 1781964401 3578 14063946d4395339d14b1becaf4c283c ""
+["bibtex main"] 1782062624.93435 "main.aux" "main.bbl" "main" 1782062776.57346 0
+  "./references.bib" 1782053932 3554 eb474291068f4564427c935efa88dd34 ""
   "c:/texlive/2026/texmf-dist/bibtex/bst/base/ieeetr.bst" 1780666449 18361 1a00e58565e7f19bf2b3e1bfb82254ae ""
-  "main.aux" 1781986212 37070 88bf9ed00bb3ec19ec3de05cda4d8d48 "xelatex"
+  "main.aux" 1782062758 49060 58f73550eacdf94a9f6a1f26f8f8fd39 "xelatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["xdvipdfmx"] 1781986214.80987 "main.xdv" "main.pdf" "main" 1781986218.48546 0
-  "main.xdv" 1781986212 2854116 ae0f661bf4e7e089926459935092a38a "xelatex"
+["xdvipdfmx"] 1782062759.8094 "main.xdv" "main.pdf" "main" 1782062776.58262 0
+  "main.xdv" 1782062758 3294760 02694592167da581887756b4d7ffa2a9 "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1781986205.28214 "c:/Users/nguye/.vscode/Projects/designing a multiple-choice test program/Ky_thuat_lap_trinh/report/main.tex" "main.xdv" "main" 1781986218.47094 0
+["xelatex"] 1782062752.84404 "c:/Users/nguye/.vscode/Projects/designing a multiple-choice test program/Ky_thuat_lap_trinh/report/main.tex" "main.xdv" "main" 1782062776.57378 0
   "LogoHUST.png" 1780743458 216255 8ac965c618d5c711c7e64885a30ae9fc ""
-  "c:/Users/nguye/.vscode/Projects/designing a multiple-choice test program/Ky_thuat_lap_trinh/report/main.tex" 1781986193 164928 8ef7fc1ff110b4513c37ddab607c786c ""
+  "TC-01.png" 1782056609 102796 366eb18cb21d83f6f65033ce072ffec6 ""
+  "TC-02.png" 1782056730 79377 46e16cc17872c0d977156657574cbd9f ""
+  "TC-03.png" 1782056781 93880 db400c745ab0549db1d0b874c8c45f29 ""
+  "TC-04-1.png" 1782057199 80421 08a3d57cc17d9bdc5ae4706f0d40b9b4 ""
+  "TC-04.png" 1782057078 195717 b6fc93ba1e6f8ef00a7752369c4130dd ""
+  "TC-05a.png" 1782057957 149091 fa7a455754a9ab2ec4dd61fa0583d8bc ""
+  "TC-05b.png" 1782058098 138673 344686b47db05aa20349a1e0eebf101b ""
+  "TC-06.png" 1782058558 113538 a7027cb2c62b84648d3e1be877b7a6a6 ""
+  "TC-07.png" 1782058677 113113 477b080254c17f8b7b663e7fec39c996 ""
+  "TC-08.png" 1782058948 141937 0cbceb8591bb96a505e34803f5ab6e9d ""
+  "TC-09.png" 1782059338 125108 28667b9056becf5fedbf2fb2398c934c ""
+  "TC-10.png" 1782060985 186581 9d84f8036318bb8164935fa32946d4a8 ""
+  "ad-01.png" 1782061537 150463 26724b4121b1bfb1617dd11d4a01b1a1 ""
+  "ad-02.png" 1782061758 217210 baa9502fb73fcbbd89ea422edb56e50e ""
+  "ad-03.png" 1782061917 154305 d607b2e72df334c416d06a099a658a48 ""
+  "ad-04.png" 1782062010 139441 c515826c8b25f9c7ae79fda9c5d53bed ""
+  "ad-05.png" 1782062057 55610 0b5bf5c78f8ba19cf57fcf37f203b35f ""
+  "c:/Users/nguye/.vscode/Projects/designing a multiple-choice test program/Ky_thuat_lap_trinh/report/main.tex" 1782062751 222241 2d8a44f38cfd743ecdfb3b69dce99cf3 ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1780669088 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1780677460 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1780665645 1004 54797486969f23fa377b128694d548df ""
@@ -64,8 +81,10 @@
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex" 1780673117 22012 81b34a0aa8fa1a6158cc6220b00e4f10 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex" 1780673117 8893 e851de2175338fdf7c17f3e091d94618 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfadings.code.tex" 1780673117 1179 5483d86c1582c569e665c74efab6281f ""
+  "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex" 1780673117 3937 3f208572dd82c71103831da976d74f1a ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex" 1780673117 11518 738408f795261b70ce8dd47459171309 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex" 1780673117 186859 0445d9a41a87648b4723e04765409541 ""
+  "c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex" 1780673117 58801 1e750fb0692eb99aaac45698bbec96b1 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex" 1780673117 2563 d5b174eb7709fd6bdcc2f70953dbdf8e ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex" 1780673117 32995 ac577023e12c0e4bd8aa420b2e852d1a ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfint.code.tex" 1780673117 3063 8c415c68a0f3394e45cfeca0b65f6ee6 ""
@@ -192,13 +211,15 @@
   "c:/texlive/2026/texmf-dist/web2c/texmf.cnf" 1780665417 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt" 1780677794 5961649 1708c2d442e21226d87cf3511edbc511 ""
   "c:/texlive/2026/texmf.cnf" 1780677510 713 e69b156964470283e0530f5060668171 ""
-  "main.aux" 1781986212 37070 88bf9ed00bb3ec19ec3de05cda4d8d48 "xelatex"
-  "main.bbl" 1781986205 2606 261f609363ead7c1687933520fc415f9 "bibtex main"
-  "main.lof" 1781986212 253 e19474cd2068e1ed7d3d053b98f45816 "xelatex"
-  "main.lot" 1781986212 2384 c86bcf4a4f9d1bfee4805174656531a2 "xelatex"
-  "main.out" 1781986212 30031 a9a21ff4875fe249d0441e5622620a90 "xelatex"
-  "main.tex" 1781986193 164928 8ef7fc1ff110b4513c37ddab607c786c ""
-  "main.toc" 1781986212 15006 006afd8e36c335b5c7c43faf046d35ad "xelatex"
+  "khoidong.png" 1782061315 94326 8304c0ef61397d67ea0eb795de3b3df0 ""
+  "main.aux" 1782062758 49060 58f73550eacdf94a9f6a1f26f8f8fd39 "xelatex"
+  "main.bbl" 1782062625 2281 096084a8dcca8f71e8b03f5cac173e0f "bibtex main"
+  "main.lof" 1782062758 3095 584a5ce6534caf018a8f3c0cc749a3d5 "xelatex"
+  "main.lot" 1782062758 3758 9ad0b634ca87c86baa106d82c710fd18 "xelatex"
+  "main.out" 1782062758 31176 11b67653025965938da6ddbfa1771402 "xelatex"
+  "main.tex" 1782062751 222241 2d8a44f38cfd743ecdfb3b69dce99cf3 ""
+  "main.toc" 1782062758 16607 4f94b0e212df43fda89567952a2827f8 "xelatex"
+  "sv-01.png" 1782062443 181168 209caa92f148f3cc5c32c2d169a520fc ""
   (generated)
   "main.aux"
   "main.lof"

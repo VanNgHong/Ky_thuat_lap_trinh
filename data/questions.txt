@@ -298,3 +298,4 @@
 298|TA12|Hard|Despite the unexpected failure of the quantum computing project, she kept her _______ up and tried again.|chin|head|mind|face|A
 299|TA12|Hard|If the administrator had checked the system logs yesterday, the server error _______ resolved by now.|would be|would have been|is|will be|A
 300|TA12|Hard|Developing high _______ flexibility is essential for individuals to thrive in the changing world of work.|cognitive|physical|manual|material|A
+301|TA12|Medium|By the time the manager arrives tomorrow, we _____ the project proposal.|will review|will have reviewed|reviewed|are reviewing|B
