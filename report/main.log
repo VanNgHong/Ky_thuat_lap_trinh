@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.5)  22 JUN 2026 00:39
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.5)  22 JUN 2026 11:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -907,7 +907,12 @@ Chương 1.
 [8
 
 
-] [9] [10] [11]
+] [9] [10]
+Overfull \hbox (1.28941pt too wide) in paragraph at lines 304--305
+\TU/lmr/m/n/10.95 Quá trình phối hợp được thực hiện qua \TU/lmr/bx/n/10.95 GitHub [][]$[][][][][] [] [] [] [][][][][][] [] [][][] [] [][][][][][][][][] [] [][] [] [][][][][] []
+ []
+
+[11]
 Chương 2.
 [12
 
@@ -1024,12 +1029,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 7B1D95C43D807BB48AE7DBA3370DF659;31051.
  ) 
 Here is how much of TeX's memory you used:
- 33901 strings out of 467813
- 719866 string characters out of 5427156
- 2070804 words of memory out of 5000000
- 62423 multiletter control sequences out of 15000+600000
+ 33902 strings out of 467813
+ 719883 string characters out of 5427156
+ 2070859 words of memory out of 5000000
+ 62424 multiletter control sequences out of 15000+600000
  631790 words of font info for 90 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 102i,13n,107p,1396b,1814s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,13n,107p,1393b,1814s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (96 pages, 3277236 bytes).
+Output written on main.xdv (96 pages, 3279348 bytes).
